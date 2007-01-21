@@ -1,0 +1,30 @@
+The simplest way to compile xFarDic is:
+
+  1. `cd' to the directory containing the package's source code and type
+     `./configure --prefix=/usr' to configure the package for your system.  
+     If you're using `csh' on an old version of System V, you might need 
+     to type `sh ./configure --prefix=/usr' instead to prevent `csh' from 
+     trying to execute `configure' itself.
+
+     Running `configure' takes awhile.  While running, it prints some
+     messages telling which features it is checking for.
+
+  2. Type `make' to compile xFarDic .
+
+  3. Type `make install' as root user to install xFarDic.
+  
+Pre-requests
+=====================
+You should have wxGTK 2.5.x or 2.6.x devel files installed before
+compiling xFarDic. Get it from http://www.wxwidgets.org.
+
+Other neede packages are:
+
+1. aspell-dev
+2. libxml2-dev
+3. libgnome-desktop-dev
+4. libnotify-dev
+
+On Debian/Ubuntu issue following command to install required libs:
+
+# apt-get install libwxgtk2.6-dev libaspell-dev libxml2-dev libgnome-desktop-dev libnotify-dev

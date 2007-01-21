@@ -1,0 +1,11 @@
+To generate new pot file from source code:
+
+$ xgettext --language=C++ ../*.h ../*.cpp -o xfardic.pot
+
+To update existing translations with new pot file:
+
+$ msgmerge -U fa_IR/xfardic.po xfardic.pot
+
+To compile po files:
+
+$ msgfmt xfardic.po -o xfardic.mo

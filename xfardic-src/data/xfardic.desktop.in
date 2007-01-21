@@ -1,0 +1,10 @@
+[Desktop Entry]
+_Name=xFarDic
+_GenericName=xFarDic
+_Comment=xFarDic Multilingual Dictionary
+Exec=xfardic
+Icon=xfardic-logo.svg
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Application;Utility;

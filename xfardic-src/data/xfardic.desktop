@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=xFarDic
+Name[fa]=واژه‌نامه ایکس‌فردیک
+GenericName=xFarDic
+GenericName[fa]=واژه‌نامه ایکس‌فردیک
+Comment=xFarDic Multilingual Dictionary
+Comment[fa]=واژه‌نامه چند زبانه ایکس‌فردیک
+Exec=xfardic
+Icon=xfardic-logo.svg
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Application;Utility;

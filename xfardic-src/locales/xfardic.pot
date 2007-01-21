@@ -1,0 +1,556 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-01-19 14:47+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: about.cpp:77
+msgid "&Close"
+msgstr ""
+
+#: about.cpp:84
+msgid ""
+"Alan Baghumian <alan@technotux.org>\n"
+"\n"
+"Armen Baghumian <armen@opensourceclub.org>"
+msgstr ""
+
+#: about.cpp:87
+msgid "xFarDic "
+msgstr ""
+
+#: about.cpp:90
+msgid ""
+"Latest News and Updates: http://www.xfardic.org\n"
+"\n"
+"Bug Report/Feature Request: alan@technotux.org\n"
+"\n"
+"IMPORTANT NOTICE:\n"
+"You can get required XDB word databases from project home page at http://sf."
+"net/projects/xfardic. Without word databases, xFarDic *will not* work."
+msgstr ""
+
+#: about.cpp:92
+msgid ""
+"xFarDic is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
+"\n"
+"xFarDic is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE. See the GNU General Public License for more "
+"details."
+msgstr ""
+
+#: about.cpp:106
+msgid "Information"
+msgstr ""
+
+#: about.cpp:107
+msgid "License"
+msgstr ""
+
+#: about.cpp:108
+msgid "Authors"
+msgstr ""
+
+#: settings.cpp:78
+msgid "Persian"
+msgstr ""
+
+#: settings.cpp:79
+msgid "English (U.S)"
+msgstr ""
+
+#: settings.cpp:80
+msgid "System default"
+msgstr ""
+
+#: settings.cpp:91
+msgid "&OK"
+msgstr ""
+
+#: settings.cpp:92
+msgid "&Apply"
+msgstr ""
+
+#: settings.cpp:93
+msgid "&Cancel"
+msgstr ""
+
+#: settings.cpp:95
+msgid "Enable Auto &Select Word After Translation"
+msgstr ""
+
+#: settings.cpp:96
+msgid "&Hide On Window Minimize and close"
+msgstr ""
+
+#: settings.cpp:97
+msgid "Enable Inexact &Reverse Searching"
+msgstr ""
+
+#: settings.cpp:98
+msgid "Save Program Window P&ositions"
+msgstr ""
+
+#: settings.cpp:99
+msgid "Save Wor&d Cache On Exit"
+msgstr ""
+
+#: settings.cpp:100
+msgid "Enable Clipboard &Watcher"
+msgstr ""
+
+#: settings.cpp:101
+msgid "Enable Clipboard Sca&nner"
+msgstr ""
+
+#: settings.cpp:102
+msgid "Return Si&milar Words"
+msgstr ""
+
+#: settings.cpp:103
+msgid "Enable S&pell Checker"
+msgstr ""
+
+#: settings.cpp:181
+msgid ""
+"Here you can configure your desired options. Changes will take effect after "
+"xFarDic restart."
+msgstr ""
+
+#: settings.cpp:184
+msgid "Choose default &language:"
+msgstr ""
+
+#: settings.cpp:191
+msgid "Number of Entries in History Box:"
+msgstr ""
+
+#: settings.cpp:194
+msgid "Scan window timeout (Sec):"
+msgstr ""
+
+#: settings.cpp:239
+msgid "Ctrl+Click to enable or disable available database(s)."
+msgstr ""
+
+#: settings.cpp:248
+msgid "XML DB Path:"
+msgstr ""
+
+#: settings.cpp:250
+msgid "Add"
+msgstr ""
+
+#: settings.cpp:251
+msgid "DB info"
+msgstr ""
+
+#: settings.cpp:257
+msgid "Options"
+msgstr ""
+
+#: settings.cpp:258
+msgid "Databases"
+msgstr ""
+
+#: settings.cpp:291 settings.cpp:399
+msgid ""
+"XML DB path is empty.\n"
+"xFarDic will now work without a valid database."
+msgstr ""
+
+#: settings.cpp:292 settings.cpp:400
+msgid "Warning"
+msgstr ""
+
+#: settings.cpp:488
+msgid "Choose a XML DataBase"
+msgstr ""
+
+#: settings.cpp:488
+msgid "XML DataBase files (*.xdb)|*.xdb"
+msgstr ""
+
+#: settings.cpp:559
+msgid "DB Name  : "
+msgstr ""
+
+#: settings.cpp:560
+msgid "DB Author : "
+msgstr ""
+
+#: settings.cpp:561
+msgid "DB Version: "
+msgstr ""
+
+#: settings.cpp:562
+msgid "Input Lang: "
+msgstr ""
+
+#: settings.cpp:564
+msgid "No information found."
+msgstr ""
+
+#: settings.cpp:568
+msgid "No information found or no databse is selected."
+msgstr ""
+
+#: settings.cpp:570
+msgid "XML Database information"
+msgstr ""
+
+#: settings.cpp:612
+msgid "Parse Error. Invalid Document.\n"
+msgstr ""
+
+#: xfardic_app.cpp:163
+msgid "&About...\tF1"
+msgstr ""
+
+#: xfardic_app.cpp:163
+msgid "Show about dialog"
+msgstr ""
+
+#: xfardic_app.cpp:168
+msgid "View Toolbar\tCtrl-T"
+msgstr ""
+
+#: xfardic_app.cpp:168
+msgid "Toggle toolbar On/Off"
+msgstr ""
+
+#: xfardic_app.cpp:170
+msgid "Translate\tAlt-T"
+msgstr ""
+
+#: xfardic_app.cpp:170
+msgid "Translate word"
+msgstr ""
+
+#: xfardic_app.cpp:175 xfardic_app.cpp:1006
+msgid "&Quit\tCtrl+Q"
+msgstr ""
+
+#: xfardic_app.cpp:175
+msgid "Quit this program"
+msgstr ""
+
+#: xfardic_app.cpp:181
+msgid "For&ward\tAlt-W"
+msgstr ""
+
+#: xfardic_app.cpp:181
+msgid "Next word"
+msgstr ""
+
+#: xfardic_app.cpp:185
+msgid "&Back\tAlt-B"
+msgstr ""
+
+#: xfardic_app.cpp:185
+msgid "Previous word"
+msgstr ""
+
+#: xfardic_app.cpp:191
+msgid "Fi&rst Word\tAlt+R"
+msgstr ""
+
+#: xfardic_app.cpp:191
+msgid "First word"
+msgstr ""
+
+#: xfardic_app.cpp:195
+msgid "&Last Word\tAlt+L"
+msgstr ""
+
+#: xfardic_app.cpp:195
+msgid "Last word"
+msgstr ""
+
+#: xfardic_app.cpp:205
+msgid "Auto &Select\tAlt-S"
+msgstr ""
+
+#: xfardic_app.cpp:205
+msgid "Auto select word"
+msgstr ""
+
+#: xfardic_app.cpp:206
+msgid "Enable Clipboard &Watcher\tCtrl-W"
+msgstr ""
+
+#: xfardic_app.cpp:206
+msgid "Enable clipboard watcher"
+msgstr ""
+
+#: xfardic_app.cpp:207
+msgid "Enable Selection Sca&nner\tCtrl-N"
+msgstr ""
+
+#: xfardic_app.cpp:207
+msgid "Enable selection scanner"
+msgstr ""
+
+#: xfardic_app.cpp:208
+msgid "Return Similar Words\tCtrl-S"
+msgstr ""
+
+#: xfardic_app.cpp:208 xfardic_app.cpp:1116
+msgid "Return similar words"
+msgstr ""
+
+#: xfardic_app.cpp:209
+msgid "Enable &Hide On Minimize and Close\tCtrl-H"
+msgstr ""
+
+#: xfardic_app.cpp:209
+msgid "Enable hide on minimize and close"
+msgstr ""
+
+#: xfardic_app.cpp:210
+msgid "Enable S&pell Checking\tCtrl-P"
+msgstr ""
+
+#: xfardic_app.cpp:210
+msgid "Enable spell checking"
+msgstr ""
+
+#: xfardic_app.cpp:211
+msgid "Enable Inexact &Reverse Searching\tCtrl-R"
+msgstr ""
+
+#: xfardic_app.cpp:211
+msgid "Enable inexact reverse searchning"
+msgstr ""
+
+#: xfardic_app.cpp:215
+msgid "Set Result Box Font\tCtrl-F"
+msgstr ""
+
+#: xfardic_app.cpp:215
+msgid "Set result box font"
+msgstr ""
+
+#: xfardic_app.cpp:219
+msgid "Setti&ngs\tAlt-N"
+msgstr ""
+
+#: xfardic_app.cpp:219
+msgid "Configure settings"
+msgstr ""
+
+#: xfardic_app.cpp:225
+msgid "C&ut\tCtrl-X"
+msgstr ""
+
+#: xfardic_app.cpp:225
+msgid "Cut input text"
+msgstr ""
+
+#: xfardic_app.cpp:229
+msgid "&Copy\tCtrl-C"
+msgstr ""
+
+#: xfardic_app.cpp:229
+msgid "Copy result to clipboard"
+msgstr ""
+
+#: xfardic_app.cpp:233 xfardic_app.cpp:988
+msgid "&Paste and Translate\tCtrl-V"
+msgstr ""
+
+#: xfardic_app.cpp:233
+msgid "Paste from clipboard"
+msgstr ""
+
+#: xfardic_app.cpp:238
+msgid "Clear History\tCtrl-D"
+msgstr ""
+
+#: xfardic_app.cpp:238
+msgid "Clear history"
+msgstr ""
+
+#: xfardic_app.cpp:245
+msgid "&File"
+msgstr ""
+
+#: xfardic_app.cpp:246
+msgid "&Edit"
+msgstr ""
+
+#: xfardic_app.cpp:247
+msgid "&View"
+msgstr ""
+
+#: xfardic_app.cpp:248
+msgid "Nav&igate"
+msgstr ""
+
+#: xfardic_app.cpp:249
+msgid "&Options"
+msgstr ""
+
+#: xfardic_app.cpp:250
+msgid "&Help"
+msgstr ""
+
+#: xfardic_app.cpp:899
+msgid "Input text is too long.\n"
+msgstr ""
+
+#: xfardic_app.cpp:992
+msgid "Set Result Box Font\tCtrl+F"
+msgstr ""
+
+#: xfardic_app.cpp:996
+msgid "Open Setti&ngs\tAlt+N"
+msgstr ""
+
+#: xfardic_app.cpp:1001
+msgid "&About xFarDic\tF1"
+msgstr ""
+
+#: xfardic_app.cpp:1105
+msgid "Back"
+msgstr ""
+
+#: xfardic_app.cpp:1105
+msgid "Previous Word"
+msgstr ""
+
+#: xfardic_app.cpp:1106
+msgid "Fwd"
+msgstr ""
+
+#: xfardic_app.cpp:1106
+msgid "Next Word"
+msgstr ""
+
+#: xfardic_app.cpp:1108
+msgid "Cut"
+msgstr ""
+
+#: xfardic_app.cpp:1109
+msgid "Copy"
+msgstr ""
+
+#: xfardic_app.cpp:1109
+msgid "Copy Result"
+msgstr ""
+
+#: xfardic_app.cpp:1110
+msgid "Paste"
+msgstr ""
+
+#: xfardic_app.cpp:1110
+msgid "Paste and Translate"
+msgstr ""
+
+#: xfardic_app.cpp:1111
+msgid "Trash"
+msgstr ""
+
+#: xfardic_app.cpp:1111
+msgid "Clear History"
+msgstr ""
+
+#: xfardic_app.cpp:1113
+msgid "Select"
+msgstr ""
+
+#: xfardic_app.cpp:1113
+msgid "Auto Select Text"
+msgstr ""
+
+#: xfardic_app.cpp:1114
+msgid "Spell"
+msgstr ""
+
+#: xfardic_app.cpp:1114
+msgid "Spell Checking"
+msgstr ""
+
+#: xfardic_app.cpp:1115
+msgid "RevSrch"
+msgstr ""
+
+#: xfardic_app.cpp:1115
+msgid "Reverse Search"
+msgstr ""
+
+#: xfardic_app.cpp:1116
+msgid "Similar"
+msgstr ""
+
+#: xfardic_app.cpp:1118
+msgid "Settings"
+msgstr ""
+
+#: xfardic_app.cpp:1119
+msgid "Quit"
+msgstr ""
+
+#: xfardic_app.cpp:1194
+msgid "Please enter clause.\n"
+msgstr ""
+
+#: xfardic_app.cpp:1208 xfardic_app.cpp:1281
+msgid "Please wait..."
+msgstr ""
+
+#: xfardic_app.cpp:1231 xfardic_app.cpp:1272 xfardic_app.cpp:1304
+#: xfardic_app.cpp:1351
+msgid "Phrase not found."
+msgstr ""
+
+#: xfardic_app.cpp:1397
+msgid ""
+"xFarDic spell checker found error(s) on your typed word.\n"
+" Please choose correct word from list and then click OK."
+msgstr ""
+
+#: xfardic_app.cpp:1398
+msgid "xFarDic Spell Checker"
+msgstr ""
+
+#: xfardic_app.cpp:1434
+msgid "xFarDic Settings"
+msgstr ""
+
+#: xfardic_app.cpp:1461
+msgid "About xFarDic"
+msgstr ""
+
+#: xfardic_app.cpp:1622
+msgid ""
+"It seems that Aspell is not installed.\n"
+"xFarDic will not work correctly."
+msgstr ""
+
+#: xfardic_app.cpp:1687
+msgid ""
+"Parse Error. Invalid Document.\n"
+" It is possible that XML-DB is not installed.\n"
+" Set XML DB path in settings window."
+msgstr ""
+
+#: xfardic.cpp:59
+msgid "Another program instance is already running, aborting."
+msgstr ""
