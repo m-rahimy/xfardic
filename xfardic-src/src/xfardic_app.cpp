@@ -1,6 +1,6 @@
 // +-------------------------------------------------------------------------+
 // | xFarDic Multilingual Dictionary                                         |
-// | Copyright (C) 2004-2006 by the xFarDic Development Team.                |
+// | Copyright (C) 2004-2007 by the xFarDic Development Team.                |
 // | http://www.xfardic.org/                                                 |
 // +-------------------------------------------------------------------------+
 // | License:                                                                |
@@ -19,8 +19,6 @@
 // | along with xFarDic; if not, write to the Free Software                  |
 // | Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA|
 // |                                                                         |
-// +-------------------------------------------------------------------------+
-// | Created: 03/26/2004                                                     |
 // +-------------------------------------------------------------------------+
 // | Authors: Alan Baghumian <alan@technotux.org                             |
 // |          Armen Baghumian <armen@OpenSourceClub.org>                     |
