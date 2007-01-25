@@ -66,8 +66,10 @@ public:
     bool DB(const char *filename);
     /// Submits configuration changes to the config file
     void SubmitChanges();
+    /// Checks DB path
+    bool CheckPath(wxString dbpath);
     
-     bool exist;
+    bool exist;
     /// constructor
     ~xFarDicSettings();    
 

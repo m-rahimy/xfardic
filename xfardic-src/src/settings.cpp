@@ -208,22 +208,30 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 		if(x == 0){
 			tmppath = path.Mid(0,seppos[x]);
 			if(tmppath.Len()!=0){
-				dbs.Add(path.Mid(0,seppos[x]));
+				if(CheckPath(path.Mid(0,seppos[x]))){
+					dbs.Add(path.Mid(0,seppos[x]));
+				}
 			}
 		}else if(x == seppos.GetCount()){
 			tmppath = path.Mid(seppos[x-1]+1,path.Len());
 			if(tmppath.Len()!=0){
-				dbs.Add(path.Mid(seppos[x-1]+1,path.Len()));
+				if(CheckPath(path.Mid(seppos[x-1]+1,path.Len()))){
+					dbs.Add(path.Mid(seppos[x-1]+1,path.Len()));
+				}
 			}
 		}else{
 			tmppath = path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1);
 			if(tmppath.Len()!=0){
-				dbs.Add(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1));
+				if(CheckPath(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1))){
+					dbs.Add(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1));
+				}
 			}
 		}
 	    }	  
      }else{
-	dbs.Add(path);
+	if(CheckPath(path)){
+		dbs.Add(path);
+	}
      }	
    }
 
@@ -238,8 +246,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 
     if(path.Len()!=0){
 	for(int x=0; x < dbs.GetCount(); x++){
-			dbpath->SetSelection(x);	
-		}
+		dbpath->SetSelection(x);	
+	}
     }        
            
     wxStaticText *dbtext;
@@ -521,6 +529,18 @@ bool xFarDicSettings::DB(const char *filename) {
    	msg.Printf( _("Parse Error. Invalid Document.\n"));
 	//fprintf(stderr, "Unable to open %s\n", filename);
 	wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_STOP, this);
+	return false;
+    }
+}
+
+bool xFarDicSettings::CheckPath(wxString dbpath)
+{
+    wxFile xmldb;
+    
+    // Check if xdb file exists before parsing
+    if(xmldb.Exists(dbpath)){
+	return true;
+    }else{
 	return false;
     }
 }
