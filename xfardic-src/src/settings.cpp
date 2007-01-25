@@ -72,6 +72,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     setpanel =  new wxPanel(layout);
     dbpanel =  new wxPanel(layout);
 
+    submit = false;
+
      size_t copies =1;
      langlist.Add(_("Persian"), copies);
      langlist.Add(_("English (U.S)"),copies);
@@ -210,6 +212,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 			if(tmppath.Len()!=0){
 				if(CheckPath(path.Mid(0,seppos[x]))){
 					dbs.Add(path.Mid(0,seppos[x]));
+				}else{
+					submit = true;
 				}
 			}
 		}else if(x == seppos.GetCount()){
@@ -217,6 +221,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 			if(tmppath.Len()!=0){
 				if(CheckPath(path.Mid(seppos[x-1]+1,path.Len()))){
 					dbs.Add(path.Mid(seppos[x-1]+1,path.Len()));
+				}else{
+					submit = true;
 				}
 			}
 		}else{
@@ -224,6 +230,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 			if(tmppath.Len()!=0){
 				if(CheckPath(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1))){
 					dbs.Add(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1));
+				}else{
+					submit = true;
 				}
 			}
 		}
@@ -231,6 +239,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
      }else{
 	if(CheckPath(path)){
 		dbs.Add(path);
+	}else{
+		submit = true;
 	}
      }	
    }
@@ -261,7 +271,12 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     }
 
     layout->AddPage(setpanel, _("Options"));    
-    layout->AddPage(dbpanel, _("Databases"));    
+    layout->AddPage(dbpanel, _("Databases")); 
+
+    //if there are changes on DBs, auto-submit changes
+    if(submit == true){
+	SubmitChanges();
+    }    
 }
 
 /// Settings window destructor.

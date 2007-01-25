@@ -69,7 +69,8 @@ public:
     /// Checks DB path
     bool CheckPath(wxString dbpath);
     
-    bool exist;
+    bool exist,
+	 submit;
     /// constructor
     ~xFarDicSettings();    
 

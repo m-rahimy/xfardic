@@ -1568,8 +1568,7 @@ void xFarDicApp::OnTrash(wxCommandEvent& WXUNUSED(event))
 
     //delete all entries from file      	
 	pConfig->SetPath(_T("/"));
-	pConfig->DeleteGroup(_T("Cache"));	
-	
+	pConfig->DeleteGroup(_T("Cache"));
 
     delete wxConfigBase::Set((wxConfigBase *) NULL);   
     m_text->Clear();
@@ -1651,11 +1650,13 @@ bool xFarDicApp::CheckSpell(wxString chkStr, bool suggest)
 
 bool xFarDicApp::initDB(const char *filename) {    
     int ret, counter;
-    wxString tmpstr;
+    wxString tmpstr, path;
     wxFile xmldb;
     
     // Check if xdb file exists before parsing
     if(!xmldb.Exists(UTF8_STR(filename))){
+	// DEBUGGING
+	// fprintf(stderr, "%s\n", filename);
 	return false;
     }
    
