@@ -10,16 +10,16 @@ msgstr ""
 "Project-Id-Version: xFarDic 0.8.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-01-19 14:47+0330\n"
-"PO-Revision-Date: 2006-12-07 08:03+0330\n"
+"PO-Revision-Date: 2007-01-25 16:30+0330\n"
 "Last-Translator: Navid Abdi <navid@gnuiran.org>\n"
 "Language-Team: az_AZ <navid@gnuiran.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: about.cpp:77
 msgid "&Close"
-msgstr ""
+msgstr "Bağla"
 
 #: about.cpp:84
 msgid ""
@@ -36,7 +36,6 @@ msgid "xFarDic "
 msgstr "xFarDic "
 
 #: about.cpp:90
-#, fuzzy
 msgid ""
 "Latest News and Updates: http://www.xfardic.org\n"
 "\n"
@@ -46,15 +45,13 @@ msgid ""
 "You can get required XDB word databases from project home page at http://sf."
 "net/projects/xfardic. Without word databases, xFarDic *will not* work."
 msgstr ""
-"\n"
-"\n"
 "Proqrəmi yazanlar:\n"
 "Alen Baqumıan <alan@technotux.org>\n"
 "Armen baqumıan <armen@opensourceclub.org>\n"
 "xFarDic Sərbəst yazilim, GNU/GPL lisansli bir yazilimdir.\n"
 "\n"
 "Son xəbərlər və yenilənmələr: http://www.xfardic.org\n"
-"Xəta raportları göndərmək  / Yeni İmkan istəmək : alan@technotux.org\n"
+"Xəta·Bildirmələri göndərmək  / Yeni İmkan istəmək : alan@technotux.org\n"
 "\n"
 "Mühüm ixtar:\n"
 "Bir sira Lisans problemlərile qarşılaşmaq üşün, \n"
@@ -74,28 +71,27 @@ msgid ""
 "FOR A PARTICULAR PURPOSE. See the GNU General Public License for more "
 "details."
 msgstr ""
-"xFarDic·is·free·software;·you·can·redistribute·it·and/"
-"or·modify·it·under·the·terms·of·the·GNU·General·Public·License·as·published·by·the·Free·Software·Foundation;"
-"·either·version·2·of·the·License,·or·(at·your·option)·any·later·version.\n"
+"xFarDic·is·free·software;·you·can·redistribute·it·and/or·modify·it·under·the·"
+"terms·of·the·GNU·General·Public·License·as·published·by·the·Free·Software·"
+"Foundation;·either·version·2·of·the·License,·or·(at·your·option)·any·later·"
+"version.\n"
 "\n"
-"xFarDic·is·distributed·in·the·hope·that·it·will·be·useful,"
-"·but·WITHOUT·ANY·WARRANTY;"
-"·without·even·the·implied·warranty·of·MERCHANTABILITY·or·FITNESS·FOR·A·PARTICULAR·PURPOSE."
-"·See·the·GNU·General·Public·License·for·more·details."
+"xFarDic·is·distributed·in·the·hope·that·it·will·be·useful,·but·WITHOUT·ANY·"
+"WARRANTY;·without·even·the·implied·warranty·of·MERCHANTABILITY·or·FITNESS·"
+"FOR·A·PARTICULAR·PURPOSE.·See·the·GNU·General·Public·License·for·more·"
+"details."
 
 #: about.cpp:106
-#, fuzzy
 msgid "Information"
-msgstr "Heç bilgi tapılmadı."
+msgstr "mə'lumatı"
 
 #: about.cpp:107
 msgid "License"
 msgstr "Lisenziya"
 
 #: about.cpp:108
-#, fuzzy
 msgid "Authors"
-msgstr "VB yazıçısı :"
+msgstr "·Verilənlər bazalarının yazırı :"
 
 #: settings.cpp:78
 msgid "Persian"
@@ -119,16 +115,15 @@ msgstr "Tətbiq Et"
 
 #: settings.cpp:93
 msgid "&Cancel"
-msgstr "&Ləğv et"
+msgstr "&Ləğv Et"
 
 #: settings.cpp:95
 msgid "Enable Auto &Select Word After Translation"
-msgstr "Tərcümə etmədən sonra avtomatik olaraq seç"
+msgstr "Tərcümə Etmədən sonra avtomatik olaraq seç"
 
 #: settings.cpp:96
-#, fuzzy
 msgid "&Hide On Window Minimize and close"
-msgstr "Pəncərəni kiçildəndə gizləd"
+msgstr "Pəncərəni kiçildəndə gizlə"
 
 #: settings.cpp:97
 msgid "Enable Inexact &Reverse Searching"
@@ -136,31 +131,27 @@ msgstr "Qarşı qeyri-dəqiq Axtarış"
 
 #: settings.cpp:98
 msgid "Save Program Window P&ositions"
-msgstr "Pəncərə yerini yadda saxla"
+msgstr "Pəncərə mövqeyini yadda saxla"
 
 #: settings.cpp:99
-#, fuzzy
 msgid "Save Wor&d Cache On Exit"
 msgstr "Çıxşda Keçmişi qeyd et"
 
 #: settings.cpp:100
-#, fuzzy
 msgid "Enable Clipboard &Watcher"
-msgstr "Buferin sensörün aktiv et"
+msgstr "Ara yaddaşdakı· sensörün dəstəyi"
 
 #: settings.cpp:101
-#, fuzzy
 msgid "Enable Clipboard Sca&nner"
-msgstr "Buferin sensörün aktiv et"
+msgstr "Ara yaddaşdakı Scanneri fəallaşdır"
 
 #: settings.cpp:102
-#, fuzzy
 msgid "Return Si&milar Words"
-msgstr "Bənzər kəlmələri qaytar"
+msgstr "Bənzər kəlmələri göstər"
 
 #: settings.cpp:103
 msgid "Enable S&pell Checker"
-msgstr "İmlanı yoxla"
+msgstr "İmlanı yoxlaması"
 
 #: settings.cpp:181
 msgid ""
@@ -180,11 +171,11 @@ msgstr "Keçmiş qutusunda :"
 
 #: settings.cpp:194
 msgid "Scan window timeout (Sec):"
-msgstr "Yoxlama Pəncərəsinin göstəriş zamani (San):"
+msgstr "Yoxlama Pəncərəsinin göstəriş zamani (San.):"
 
 #: settings.cpp:239
 msgid "Ctrl+Click to enable or disable available database(s)."
-msgstr ""
+msgstr "·Verilənlər·bazalarıni İstifadə etmə/ İstifadə etməməsinə  Ctrl+Click "
 
 #: settings.cpp:248
 msgid "XML DB Path:"
@@ -192,20 +183,19 @@ msgstr "XML VB Adresi:"
 
 #: settings.cpp:250
 msgid "Add"
-msgstr ""
+msgstr " Əlavə Et"
 
 #: settings.cpp:251
 msgid "DB info"
 msgstr "VB bilgiləri"
 
 #: settings.cpp:257
-#, fuzzy
 msgid "Options"
 msgstr "Seçimlər"
 
 #: settings.cpp:258
 msgid "Databases"
-msgstr ""
+msgstr " Verilənlər bazaları"
 
 #: settings.cpp:291 settings.cpp:399
 msgid ""
@@ -217,11 +207,11 @@ msgstr ""
 
 #: settings.cpp:292 settings.cpp:400
 msgid "Warning"
-msgstr "Diqqət"
+msgstr "Xəbərdarlıq"
 
 #: settings.cpp:488
 msgid "Choose a XML DataBase"
-msgstr "XML VB seç"
+msgstr "Bir XML VB seç"
 
 #: settings.cpp:488
 msgid "XML DataBase files (*.xdb)|*.xdb"
@@ -248,16 +238,14 @@ msgid "No information found."
 msgstr "Heç bilgi tapılmadı."
 
 #: settings.cpp:568
-#, fuzzy
 msgid "No information found or no databse is selected."
-msgstr "Heç bilgi tapılmadı."
+msgstr "Heç mə'lumat tapılmadı."
 
 #: settings.cpp:570
 msgid "XML Database information"
-msgstr "XML VB'nin bilgiləri"
+msgstr "XML VB'nin mə'lumati"
 
 #: settings.cpp:612
-#, fuzzy
 msgid "Parse Error. Invalid Document.\n"
 msgstr "Xəta : Verilənlər Bazasi Boşdur.\n"
 
@@ -286,7 +274,6 @@ msgid "Translate word"
 msgstr "Kəlməni çevir"
 
 #: xfardic_app.cpp:175 xfardic_app.cpp:1006
-#, fuzzy
 msgid "&Quit\tCtrl+Q"
 msgstr "Kəs\tCtrl-X"
 
@@ -315,18 +302,16 @@ msgid "Fi&rst Word\tAlt+R"
 msgstr "Bi&rinci Kəlmə\tAlt+R"
 
 #: xfardic_app.cpp:191
-#, fuzzy
 msgid "First word"
-msgstr "Kəlməni çevir"
+msgstr "İlk Kəlmə"
 
 #: xfardic_app.cpp:195
 msgid "&Last Word\tAlt+L"
 msgstr "&Sonuncu kəlmə\tAlt+L"
 
 #: xfardic_app.cpp:195
-#, fuzzy
 msgid "Last word"
-msgstr "Kəlməni çevir"
+msgstr "Son Kəlmə"
 
 #: xfardic_app.cpp:205
 msgid "Auto &Select\tAlt-S"
@@ -334,27 +319,23 @@ msgstr "Avtomatik seçilim\tAlt-S"
 
 #: xfardic_app.cpp:205
 msgid "Auto select word"
-msgstr "Avtomatik kəlmə seç"
+msgstr "Avtomatik kəlmə seçmə"
 
 #: xfardic_app.cpp:206
-#, fuzzy
 msgid "Enable Clipboard &Watcher\tCtrl-W"
-msgstr "Buferin sensörün aktiv et\tCtrl-W"
+msgstr "Ara yaddaşdakı sensörü fəallaşdır\tCtrl-W"
 
 #: xfardic_app.cpp:206
-#, fuzzy
 msgid "Enable clipboard watcher"
-msgstr "Buferin sensörün aktiv et"
+msgstr "Ara yaddaşdakı sensörün fəallaşdır"
 
 #: xfardic_app.cpp:207
-#, fuzzy
 msgid "Enable Selection Sca&nner\tCtrl-N"
-msgstr "Buferin sensörün aktiv et\tCtrl-W"
+msgstr "Ara yaddaşdakı sensörün fəallaşdır\tCtrl-W"
 
 #: xfardic_app.cpp:207
-#, fuzzy
 msgid "Enable selection scanner"
-msgstr "Buferin sensörün aktiv et"
+msgstr "Selection Scanneri fəallaşdır"
 
 #: xfardic_app.cpp:208
 msgid "Return Similar Words\tCtrl-S"
@@ -365,14 +346,12 @@ msgid "Return similar words"
 msgstr "Bənzər kəlmələri qaytar"
 
 #: xfardic_app.cpp:209
-#, fuzzy
 msgid "Enable &Hide On Minimize and Close\tCtrl-H"
-msgstr "Pəncərəni kiçildəndə gizləd\tCtrl-H"
+msgstr "Pəncərəni kiçildəndə gizlə\tCtrl-H"
 
 #: xfardic_app.cpp:209
-#, fuzzy
 msgid "Enable hide on minimize and close"
-msgstr "Pəncərəni kiçildəndə gizləd"
+msgstr "Pəncərəni kiçildəndə gizlə"
 
 #: xfardic_app.cpp:210
 msgid "Enable S&pell Checking\tCtrl-P"
@@ -380,14 +359,13 @@ msgstr "İmlani yoxla\tCtrl-P"
 
 #: xfardic_app.cpp:210
 msgid "Enable spell checking"
-msgstr "İmlanı yoxla"
+msgstr "İmla yoxlamasını fəallaçtir"
 
 #: xfardic_app.cpp:211
 msgid "Enable Inexact &Reverse Searching\tCtrl-R"
 msgstr "Qarşı qeyri-dəqiq Axtarış\tCtrl-R"
 
 #: xfardic_app.cpp:211
-#, fuzzy
 msgid "Enable inexact reverse searchning"
 msgstr "Qarşı qeyri-dəqiq Axtarış"
 
@@ -421,7 +399,7 @@ msgstr "Köçür\tCtrl-C"
 
 #: xfardic_app.cpp:229
 msgid "Copy result to clipboard"
-msgstr "Klipborda köçür"
+msgstr "Ara yaddaşda köçür"
 
 #: xfardic_app.cpp:233 xfardic_app.cpp:988
 msgid "&Paste and Translate\tCtrl-V"
@@ -429,7 +407,7 @@ msgstr "Yapışdır və tərcümə et\tCtrl-V"
 
 #: xfardic_app.cpp:233
 msgid "Paste from clipboard"
-msgstr "Buferin məzmununu yapışdır"
+msgstr "Ara yaddaşdan yapışdır"
 
 #: xfardic_app.cpp:238
 msgid "Clear History\tCtrl-D"
@@ -465,7 +443,7 @@ msgstr "Yardım"
 
 #: xfardic_app.cpp:899
 msgid "Input text is too long.\n"
-msgstr ""
+msgstr "Verilən mətn çox.\n"
 
 #: xfardic_app.cpp:992
 msgid "Set Result Box Font\tCtrl+F"
@@ -509,15 +487,15 @@ msgstr "Nəticəni köçür"
 
 #: xfardic_app.cpp:1110
 msgid "Paste"
-msgstr "Yapıştır"
+msgstr "Yapışdır"
 
 #: xfardic_app.cpp:1110
 msgid "Paste and Translate"
-msgstr "Yapıştır və tərcümə et"
+msgstr "Yapışdır və tərcümə et"
 
 #: xfardic_app.cpp:1111
 msgid "Trash"
-msgstr "Keçmişi sil"
+msgstr "Zibil·Qutus"
 
 #: xfardic_app.cpp:1111
 msgid "Clear History"
@@ -553,7 +531,7 @@ msgstr "Oxşar"
 
 #: xfardic_app.cpp:1118
 msgid "Settings"
-msgstr "İmla yoxlama"
+msgstr "İmla yoxlaması"
 
 #: xfardic_app.cpp:1119
 msgid "Quit"
@@ -577,8 +555,8 @@ msgid ""
 "xFarDic spell checker found error(s) on your typed word.\n"
 " Please choose correct word from list and then click OK."
 msgstr ""
-"xFarDic İmla yoxluyucusu verdiyiniz kəlmədə yanlış(lar) yaptı.\n"
-" Düzgün kəlməni yazın."
+"xFarDic İmla yoxlayıcisinin verdiyiniz kəlmədə yanlış(lar) tapdı.\n"
+"Zəhmət olmasa kəlməni düzgün ifadə ilə yazın."
 
 #: xfardic_app.cpp:1398
 msgid "xFarDic Spell Checker"
@@ -586,11 +564,11 @@ msgstr "xFarDic İmla yoxlanicisi"
 
 #: xfardic_app.cpp:1434
 msgid "xFarDic Settings"
-msgstr "xFarDic seçimləri"
+msgstr "xFarDic Seçimləri"
 
 #: xfardic_app.cpp:1461
 msgid "About xFarDic"
-msgstr "xFarDic haqında"
+msgstr "xFarDic Haqqında"
 
 #: xfardic_app.cpp:1622
 msgid ""
@@ -613,3 +591,4 @@ msgstr ""
 #: xfardic.cpp:59
 msgid "Another program instance is already running, aborting."
 msgstr "Bu proqram bir dəfə açilib və indiysə fəaldır."
+
