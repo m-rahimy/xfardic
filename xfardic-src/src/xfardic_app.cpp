@@ -1652,6 +1652,12 @@ bool xFarDicApp::CheckSpell(wxString chkStr, bool suggest)
 bool xFarDicApp::initDB(const char *filename) {    
     int ret, counter;
     wxString tmpstr;
+    wxFile xmldb;
+    
+    // Check if xdb file exists before parsing
+    if(!xmldb.Exists(UTF8_STR(filename))){
+	return false;
+    }
    
     counter =0;          
 
