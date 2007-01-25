@@ -233,7 +233,8 @@ Updated xFarDic logo.
 Updated notification window system to prevent opening more than one window at the same time.
 Applied 16x16 icons for menus and pop-up menu.
 //////////////////////////////////////////////////////////////////////////////////////
-0.8.4    -- 2007-01-25
+0.8.4    -- 2007-01-26
 Updated Makefiles to install svg logo in /usr/share/pixmaps/
 Added 'ment' and 'er' support to the ProcessWord function.
 Added separate option to enable/disable selection scanner.
+Added exist check before parsing XDB databases.
