@@ -237,4 +237,5 @@ Applied 16x16 icons for menus and pop-up menu.
 Updated Makefiles to install svg logo in /usr/share/pixmaps/
 Added 'ment' and 'er' support to the ProcessWord function.
 Added separate option to enable/disable selection scanner.
-Added exist check before parsing XDB databases.
+Added 'exist check' before parsing XDB databases.
+Added missing XDBs 'auto remove' feature.
