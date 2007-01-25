@@ -266,14 +266,27 @@ xFarDicSettings::~xFarDicSettings()
 /// OK button click event handler.
 void xFarDicSettings::OnOK(wxCommandEvent& WXUNUSED(event))
 {
-      wxConfigBase *pConfig = wxConfigBase::Get();
-      if ( pConfig == NULL )
-      return;
+    SubmitChanges();  
+    Close(TRUE);
+}
 
+/// Cancel button click handler
+void xFarDicSettings::OnCancel(wxCommandEvent& WXUNUSED(event))
+{
+     Close(TRUE);
+}
+
+/// Submit config changes to the config file
+void xFarDicSettings::SubmitChanges()
+{
+     wxConfigBase *pConfig = wxConfigBase::Get();
+     if ( pConfig == NULL )
+     	return;
+	
      wxString path,att;
      dbpath->GetSelections(dbcount);
      
-      if(dbcount.GetCount()>0){      	
+     if(dbcount.GetCount()>0){      	
 		for(int x=0; x < dbcount.GetCount(); x++){
 			if(path.Len()==0){att = _T(";");}
 			if(x+1 < dbcount.GetCount()){
@@ -289,118 +302,10 @@ void xFarDicSettings::OnOK(wxCommandEvent& WXUNUSED(event))
 	msg = _("XML DB path is empty.\nxFarDic will now work without a valid database.");
          wxMessageBox(msg, _("Warning"), wxOK | wxICON_WARNING, this);
      }
-           
+      
       pConfig->SetPath(_T("/"));
 
       // save the control's values to the config
-      if(chk_select->GetValue()){
-          pConfig->Write(_T("/Options/Auto-Select"), 1);
-      }else{
-          pConfig->Write(_T("/Options/Auto-Select"), 0);
-      }
-      
-      if(chk_srchsim->GetValue()){
-          pConfig->Write(_T("/Options/Auto-Srch"), 1);
-      }else{
-          pConfig->Write(_T("/Options/Auto-Srch"), 0);
-      }
-
-      if(chk_spell->GetValue()){
-          pConfig->Write(_T("/Options/Spell"), 1);
-      }else{
-          pConfig->Write(_T("/Options/Spell"), 0);
-      }
-
-      if(chk_hide->GetValue()){
-          pConfig->Write(_T("/Options/Hide"), 1);
-      }else{
-          pConfig->Write(_T("/Options/Hide"), 0);
-      }
-
-      if(chk_revsrch->GetValue()){
-          pConfig->Write(_T("/Options/RevSrch"), 1);
-      }else{
-          pConfig->Write(_T("/Options/RevSrch"), 0);
-      }
-
-      if(chk_watcher->GetValue()){
-          pConfig->Write(_T("/Options/Watcher"), 1);
-      }else{
-          pConfig->Write(_T("/Options/Watcher"), 0);
-      }
-
-      if(chk_scanner->GetValue()){
-          pConfig->Write(_T("/Options/Scanner"), 1);
-      }else{
-          pConfig->Write(_T("/Options/Scanner"), 0);
-      }
-
-      if(chk_cache->GetValue()){
-          pConfig->Write(_T("/Options/Save-Cache"), 1);
-      }else{
-          pConfig->Write(_T("/Options/Save-Cache"), 0);
-      }
-
-      if(chk_winpos->GetValue()){
-          pConfig->Write(_T("/Options/Win-Pos"), 1);
-          int x, y;
-          GetPosition(&x, &y);
-          pConfig->Write(_T("/Options/x"), (long) x);
-          pConfig->Write(_T("/Options/y"), (long) y);
-      }else{
-          pConfig->Write(_T("/Options/Win-Pos"), 0);
-          pConfig->Write(_T("/Options/x"), 0);
-          pConfig->Write(_T("/Options/y"), 0);
-      }
-
-    pConfig->Write(_T("/Options/Num-Entries"), numEntry->GetValue()); 
-
-    pConfig->Write(_T("/Options/Scan-Timeout"), scantimeout->GetValue()); 
-
-    pConfig->Write(_T("/Options/GUI-Lang"), lang->GetSelection()); 
-          
-    pConfig->Write(_T("/Options/DB-Path"), path);        
-      
-    delete wxConfigBase::Set((wxConfigBase *) NULL);      
-    Close(TRUE);
-}
-
-/// Cancel button click handler
-void xFarDicSettings::OnCancel(wxCommandEvent& WXUNUSED(event))
-{
-     Close(TRUE);
-}
-
-/// Apply button click handler
-void xFarDicSettings::OnApply(wxCommandEvent& WXUNUSED(event))
-{
-     wxConfigBase *pConfig = wxConfigBase::Get();
-     if ( pConfig == NULL )
-     	return;
-	
-     wxString path,att;
-     dbpath->GetSelections(dbcount);
-     
-     if(dbcount.GetCount()>0){      	
-		for(int x=0; x < dbcount.GetCount(); x++){
-				if(path.Len()==0){att = _T(";");}
-				if(x+1 < dbcount.GetCount()){
-					path = path + dbpath->GetString(dbcount[x]) + att;
-				}else{
-					path = path + dbpath->GetString(dbcount[x]);
-				}
-		}
-      }
-
-     if(path.Len()==0){
-	wxString msg;
-	msg = _("XML DB path is empty.\nxFarDic will now work without a valid database.");
-         wxMessageBox(msg, _("Warning"), wxOK | wxICON_WARNING, this);
-     }
-      
-      pConfig->SetPath(_T("/"));
-
-  // save the control's values to the config
       if(chk_select->GetValue()){
           pConfig->Write(_T("/Options/Auto-Select"), 1);
       }else{
@@ -470,6 +375,12 @@ void xFarDicSettings::OnApply(wxCommandEvent& WXUNUSED(event))
       pConfig->Write(_T("/Options/DB-Path"), path);     
       
       delete wxConfigBase::Set((wxConfigBase *) NULL);
+}
+
+/// Apply button click handler
+void xFarDicSettings::OnApply(wxCommandEvent& WXUNUSED(event))
+{
+      SubmitChanges();
       m_apply->Enable(FALSE);     
 }
 
@@ -608,8 +519,8 @@ bool xFarDicSettings::DB(const char *filename) {
     } else {
 	wxString msg;
    	msg.Printf( _("Parse Error. Invalid Document.\n"));
+	//fprintf(stderr, "Unable to open %s\n", filename);
 	wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_STOP, this);
 	return false;
-        fprintf(stderr, "Unable to open %s\n", filename);
     }
 }

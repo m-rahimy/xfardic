@@ -63,7 +63,9 @@ public:
     /// Process path update event
     void OnPathUpdate(wxCommandEvent& event);  
     /// Checks XML DB validation
-    bool DB(const char *filename); 
+    bool DB(const char *filename);
+    /// Submits configuration changes to the config file
+    void SubmitChanges();
     
      bool exist;
     /// constructor
