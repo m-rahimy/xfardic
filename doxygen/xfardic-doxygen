@@ -82,7 +82,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = /home/alan/svn/xfardic/xfardic-src
+INPUT                  = /home/alan/svn/xfardic/trunk/xfardic-src
 FILE_PATTERNS          = *.c \
                          *.cc \
                          *.cxx \
