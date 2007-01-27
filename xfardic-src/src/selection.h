@@ -23,6 +23,7 @@
 // | Authors: Alan Baghumian  <alan@technotux.org                            |
 // |          Armen Baghumian <armen@OpenSourceClub.org>                     |
 // +-------------------------------------------------------------------------+
+// This code is based on StarDic's selection system.
 #ifndef __SD_SELECTION_H__
 #define __SD_SELECTION_H__
 

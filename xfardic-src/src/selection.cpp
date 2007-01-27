@@ -23,6 +23,7 @@
 // | Authors: Alan Baghumian <alan@technotux.org                             |
 // |          Armen Baghumian <armen@OpenSourceClub.org>                     |
 // +-------------------------------------------------------------------------+
+// This code is based on StarDic's selection system.
 #ifdef HAVE_CONFIG_H
 #  include "config.h"
 #endif
