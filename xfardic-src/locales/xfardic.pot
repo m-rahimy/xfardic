@@ -568,10 +568,6 @@ msgid "Spell Checking"
 msgstr ""
 
 #: ../src/xfardic_app.cpp:1136
-msgid "RevSrch"
-msgstr ""
-
-#: ../src/xfardic_app.cpp:1136
 msgid "Reverse Search"
 msgstr ""
 

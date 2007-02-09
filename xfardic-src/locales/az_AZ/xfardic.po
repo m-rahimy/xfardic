@@ -7,7 +7,7 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: xFarDic 0.8.2\n"
+"Project-Id-Version: xFarDic 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-02-09 13:34+0330\n"
 "PO-Revision-Date: 2007-01-25 16:30+0330\n"
@@ -597,10 +597,6 @@ msgstr "İmla yoxlama"
 #: ../src/xfardic_app.cpp:1135
 msgid "Spell Checking"
 msgstr "İmla yoxlama"
-
-#: ../src/xfardic_app.cpp:1136
-msgid "RevSrch"
-msgstr "GeriAxtar"
 
 #: ../src/xfardic_app.cpp:1136
 msgid "Reverse Search"
