@@ -1133,7 +1133,7 @@ void xFarDicApp::RecreateToolbar(bool activate)
 	    toolBar->AddSeparator();
 	    toolBar->AddTool(ID_SELECT, _("Select"), toolBarBitmaps[4], _("Auto Select Text"), wxITEM_CHECK);
 	    toolBar->AddTool(ID_SPELL, _("Spell"), toolBarBitmaps[10], _("Spell Checking"), wxITEM_CHECK);
-	    toolBar->AddTool(ID_REVSRCH, _("RevSrch"), toolBarBitmaps[11], _("Reverse Search"), wxITEM_CHECK);
+	    toolBar->AddTool(ID_REVSRCH, wxT("RevSrch"), toolBarBitmaps[11], _("Reverse Search"), wxITEM_CHECK);
 	    toolBar->AddTool(ID_SRCH, _("Similar"), toolBarBitmaps[2], _("Return similar words"), wxITEM_CHECK);
 	    toolBar->AddSeparator();
 	    toolBar->AddTool(ID_SETTINGS, _("Settings"), toolBarBitmaps[5], _("Settings"));
