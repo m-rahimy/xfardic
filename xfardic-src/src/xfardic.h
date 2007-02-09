@@ -42,7 +42,7 @@ using namespace std;
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 #include <libxml/xmlreader.h>
-#include <wx/string.h>
+#include "wx/string.h"
 #include "wx/config.h"
 #include "wx/choice.h"
 #include "wx/clipbrd.h"
@@ -63,13 +63,14 @@ using namespace std;
 #include "wx/choicdlg.h"
 #include "wx/listbox.h"
 #include "wx/notebook.h"
+#include "wx/msgdlg.h"
 #include "aspell.h"
 #include "wx/dynarray.h"
 #include "wx/progdlg.h"
 #include "wx/bmpbuttn.h"
 #include "wx/artprov.h"
 #include "wx/snglinst.h"
-#include <wx/filesys.h>
+#include "wx/filesys.h"
 #include <libnotify/notify.h>
 #include <gtk/gtk.h>
 #include <cstring>

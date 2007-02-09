@@ -1,6 +1,8 @@
 To generate new pot file from source code:
 
-$ xgettext --language=C++ ../*.h ../*.cpp -o xfardic.pot
+$ cd locales
+
+$ xgettext --language=C++ --keyword=_ ../src/*.h ../src/*.cpp -o xfardic.pot
 
 To update existing translations with new pot file:
 

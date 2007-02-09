@@ -31,7 +31,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-#define XVERSION  _T("0.8.4")
+#define XVERSION  _T("0.8.99.2")
 
 // IDs for the controls and the menu commands
 enum
@@ -61,6 +61,7 @@ enum
     xFarDic_SOT,
     xFarDic_RevSrch,
     xFarDic_ChangeTab,
+    xFarDic_Leitner,
 
     // it is important for the id corresponding to the "About" command to have
     // this standard value as otherwise it won't be handled properly under Mac
@@ -125,4 +126,28 @@ const int  ID_SOT	         = 141;
 const int  ID_REVSRCH         	 = 142;
 const int  ID_CHK_REVSRCH 	 = 143;
 const int  ID_SPIN_TIMEOUT 	 = 144;
+const int  ID_LTBOX_A		 = 145;
+const int  ID_LTBOX_B		 = 146;
+const int  ID_LTBOX_C		 = 147;
+const int  ID_LTBOX_D		 = 148;
+const int  ID_LTBOX_E		 = 149;
+const int  ID_LTBOX		 = 150;
+const int  ID_BTN_NEXT_A	 = 151;
+const int  ID_BTN_NEXT_B	 = 152;
+const int  ID_BTN_NEXT_C	 = 153;
+const int  ID_BTN_NEXT_D	 = 154;
+const int  ID_BTN_BACK_B	 = 155;
+const int  ID_BTN_BACK_C	 = 156;
+const int  ID_BTN_BACK_D	 = 157;
+const int  ID_BTN_BACK_E	 = 158;
+const int  ID_BTN_LT		 = 159;
+const int  ID_TOOL_LT		 = 160;
+const int  ID_BTN_TRANS_B	 = 161;
+const int  ID_BTN_TRANS_C	 = 162;
+const int  ID_BTN_TRANS_D	 = 163;
+const int  ID_BTN_TRANS_E	 = 164;
+const int  ID_BTN_TRANS_A	 = 165;
+const int  ID_BTN_REMOVE	 = 166;
+const int  ID_SPIN_LEITNER	 = 167;
+const int  ID_BTN_CONFIRM	 = 168;
 #endif

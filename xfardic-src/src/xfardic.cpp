@@ -85,14 +85,14 @@ bool MyApp::OnInit()
     wxCOMPILE_TIME_ASSERT( WXSIZEOF(langNames) == WXSIZEOF(langIds),
                                LangArraysMismatch );
 
-    pConfig->SetPath(_T("/Options"));
+    pConfig->SetPath(wxT("/Options"));
     m_locale.Init(langIds[pConfig->Read(_T("GUI-Lang"), 2)]);  
     
     //    m_locale.Init(langIds[1]);
 
     // Initialize the catalogs we'll be using
-    m_locale.AddCatalogLookupPathPrefix(_T("/usr/share/locale/"));
-    m_locale.AddCatalogLookupPathPrefix(_T("/usr/local/share/locale/"));
+    m_locale.AddCatalogLookupPathPrefix(wxT("/usr/share/locale/"));
+    m_locale.AddCatalogLookupPathPrefix(wxT("/usr/local/share/locale/"));
     m_locale.AddCatalog(_T("xfardic"));
 
     // this catalog is installed in standard location on Linux systems and
@@ -133,7 +133,7 @@ bool MyApp::OnInit()
     if(saved != 0){
        wxString str;
        long dummy;
-       pConfig->SetPath(_T("/Cache"));
+       pConfig->SetPath(wxT("/Cache"));
        bool bCont = pConfig->GetFirstEntry(str, dummy);
        if(bCont){
       	  frame->translate();

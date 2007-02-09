@@ -54,10 +54,8 @@ public:
     void OnChkWinPos(wxCommandEvent& event);
     /// History check box event handler 
     void OnChkCache(wxCommandEvent& event); 
-    /// History qty spin box event handler
-    void OnNumEntry(wxSpinEvent& event); 
-    /// Scan timeout spin box event handler
-    void OnScanTimeOut(wxSpinEvent& event); 
+    /// Spin controls event handler
+    void EnableSpApply(wxSpinEvent& event); 
     /// Enables Apply button
     void EnableApply(wxCommandEvent& event);
     /// Process path update event
@@ -95,8 +93,9 @@ private:
 		*chk_scanner;
     wxChoice	*lang;
     wxArrayString langlist;
-    wxSpinCtrl  *numEntry;
-    wxSpinCtrl  *scantimeout;
+    wxSpinCtrl  *numEntry,
+    		*scantimeout,
+		*leitner;
     wxButton    *dbinfo;
     wxButton    *dbdir;
     wxListBox   *dbpath;

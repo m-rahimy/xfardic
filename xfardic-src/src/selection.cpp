@@ -164,8 +164,8 @@ void Selection::SelectionReceived(char* sToken)
      if (LastClipWord != sToken){
 	LastClipWord = sToken;
 	wxConfigBase *pConfig = wxConfigBase::Get();
-	pConfig->SetPath(_T("/"));
-	pConfig->Write(_T("/Options/Temp-String"), UTF8_STR(sToken));
+	pConfig->SetPath(wxT("/"));
+	pConfig->Write(wxT("/Options/Temp-String"), UTF8_STR(sToken));
 	delete wxConfigBase::Set((wxConfigBase *) NULL);
 	//DEBUGGING
 	//fprintf(stderr, "Selection Received:%s\n", compStr);	

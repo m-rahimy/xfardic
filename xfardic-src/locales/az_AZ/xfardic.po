@@ -9,19 +9,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xFarDic 0.8.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-19 14:47+0330\n"
+"POT-Creation-Date: 2007-02-09 13:34+0330\n"
 "PO-Revision-Date: 2007-01-25 16:30+0330\n"
 "Last-Translator: Navid Abdi <navid@gnuiran.org>\n"
 "Language-Team: az_AZ <navid@gnuiran.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: about.cpp:77
+#: ../src/about.cpp:75
 msgid "&Close"
 msgstr "Bağla"
 
-#: about.cpp:84
+#: ../src/about.cpp:82
 msgid ""
 "Alan Baghumian <alan@technotux.org>\n"
 "\n"
@@ -31,11 +31,11 @@ msgstr ""
 "\n"
 "Armen·Baghumian·<armen@opensourceclub.org>"
 
-#: about.cpp:87
+#: ../src/about.cpp:85
 msgid "xFarDic "
 msgstr "xFarDic "
 
-#: about.cpp:90
+#: ../src/about.cpp:88
 msgid ""
 "Latest News and Updates: http://www.xfardic.org\n"
 "\n"
@@ -59,7 +59,7 @@ msgstr ""
 "Proqrəmin lazım olan VB'lərini http://www.xfardic.org dan almalısınız."
 "Verilərin bazası olmayaraq xFarDic  *Çalışmaz*.."
 
-#: about.cpp:92
+#: ../src/about.cpp:90
 msgid ""
 "xFarDic is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -71,89 +71,154 @@ msgid ""
 "FOR A PARTICULAR PURPOSE. See the GNU General Public License for more "
 "details."
 msgstr ""
-"xFarDic·is·free·software;·you·can·redistribute·it·and/or·modify·it·under·the·"
-"terms·of·the·GNU·General·Public·License·as·published·by·the·Free·Software·"
-"Foundation;·either·version·2·of·the·License,·or·(at·your·option)·any·later·"
-"version.\n"
+"xFarDic·is·free·software;·you·can·redistribute·it·and/"
+"or·modify·it·under·the·terms·of·the·GNU·General·Public·License·as·published·by·the·Free·Software·Foundation;"
+"·either·version·2·of·the·License,·or·(at·your·option)·any·later·version.\n"
 "\n"
-"xFarDic·is·distributed·in·the·hope·that·it·will·be·useful,·but·WITHOUT·ANY·"
-"WARRANTY;·without·even·the·implied·warranty·of·MERCHANTABILITY·or·FITNESS·"
-"FOR·A·PARTICULAR·PURPOSE.·See·the·GNU·General·Public·License·for·more·"
-"details."
+"xFarDic·is·distributed·in·the·hope·that·it·will·be·useful,"
+"·but·WITHOUT·ANY·WARRANTY;"
+"·without·even·the·implied·warranty·of·MERCHANTABILITY·or·FITNESS·FOR·A·PARTICULAR·PURPOSE."
+"·See·the·GNU·General·Public·License·for·more·details."
 
-#: about.cpp:106
+#: ../src/about.cpp:104
 msgid "Information"
 msgstr "mə'lumatı"
 
-#: about.cpp:107
+#: ../src/about.cpp:105
 msgid "License"
 msgstr "Lisenziya"
 
-#: about.cpp:108
+#: ../src/about.cpp:106
 msgid "Authors"
 msgstr "·Verilənlər bazalarının yazırı :"
 
-#: settings.cpp:78
-msgid "Persian"
-msgstr "Farsca"
-
-#: settings.cpp:79
-msgid "English (U.S)"
-msgstr "İngilizcə"
-
-#: settings.cpp:80
-msgid "System default"
-msgstr "On gurğulu sistem"
-
-#: settings.cpp:91
+#: ../src/leitner.cpp:96 ../src/settings.cpp:92
 msgid "&OK"
 msgstr "&Oldu"
 
-#: settings.cpp:92
+#: ../src/leitner.cpp:97
+#, fuzzy
+msgid "&Clear"
+msgstr "Bağla"
+
+#: ../src/leitner.cpp:103
+msgid ""
+"Leitner box can be used to support memorization by way of spaced repetition. "
+"This is how it works: you try to recall the meaning of a word. If you "
+"succeed, you send the word to the next box. But if you fail, you send it "
+"back to the first box."
+msgstr ""
+
+#: ../src/leitner.cpp:172
+msgid "Box A"
+msgstr ""
+
+#: ../src/leitner.cpp:173
+msgid "Box B"
+msgstr ""
+
+#: ../src/leitner.cpp:174
+msgid "Box C"
+msgstr ""
+
+#: ../src/leitner.cpp:175
+msgid "Box D"
+msgstr ""
+
+#: ../src/leitner.cpp:176
+msgid "Box E"
+msgstr ""
+
+#: ../src/leitner.cpp:347 ../src/leitner.cpp:380 ../src/leitner.cpp:401
+#: ../src/leitner.cpp:442 ../src/leitner.cpp:475 ../src/leitner.cpp:508
+#: ../src/leitner.cpp:541 ../src/leitner.cpp:574 ../src/leitner.cpp:607
+#: ../src/leitner.cpp:640
+#, fuzzy
+msgid "Please select a word.\n"
+msgstr "Avtomatik kəlmə seçmə"
+
+#: ../src/leitner.cpp:364
+msgid "Box B is full.\n"
+msgstr ""
+
+#: ../src/leitner.cpp:417
+msgid "Are you sure that you want to clear the box contents?\n"
+msgstr ""
+
+#: ../src/leitner.cpp:459 ../src/leitner.cpp:525 ../src/leitner.cpp:591
+#: ../src/leitner.cpp:657
+msgid "Box A is full.\n"
+msgstr ""
+
+#: ../src/leitner.cpp:492
+msgid "Box C is full.\n"
+msgstr ""
+
+#: ../src/leitner.cpp:558
+msgid "Box D is full.\n"
+msgstr ""
+
+#: ../src/leitner.cpp:624
+msgid "Box E is full.\n"
+msgstr ""
+
+#: ../src/settings.cpp:79
+msgid "Persian"
+msgstr "Farsca"
+
+#: ../src/settings.cpp:80
+msgid "English (U.S)"
+msgstr "İngilizcə"
+
+#: ../src/settings.cpp:81
+msgid "System default"
+msgstr "On gurğulu sistem"
+
+#: ../src/settings.cpp:93
 msgid "&Apply"
 msgstr "Tətbiq Et"
 
-#: settings.cpp:93
+#: ../src/settings.cpp:94
 msgid "&Cancel"
 msgstr "&Ləğv Et"
 
-#: settings.cpp:95
+#: ../src/settings.cpp:96
 msgid "Enable Auto &Select Word After Translation"
 msgstr "Tərcümə Etmədən sonra avtomatik olaraq seç"
 
-#: settings.cpp:96
+#: ../src/settings.cpp:97
 msgid "&Hide On Window Minimize and close"
 msgstr "Pəncərəni kiçildəndə gizlə"
 
-#: settings.cpp:97
+#: ../src/settings.cpp:98
 msgid "Enable Inexact &Reverse Searching"
 msgstr "Qarşı qeyri-dəqiq Axtarış"
 
-#: settings.cpp:98
+#: ../src/settings.cpp:99
 msgid "Save Program Window P&ositions"
 msgstr "Pəncərə mövqeyini yadda saxla"
 
-#: settings.cpp:99
+#: ../src/settings.cpp:100
 msgid "Save Wor&d Cache On Exit"
 msgstr "Çıxşda Keçmişi qeyd et"
 
-#: settings.cpp:100
+#: ../src/settings.cpp:101
 msgid "Enable Clipboard &Watcher"
 msgstr "Ara yaddaşdakı· sensörün dəstəyi"
 
-#: settings.cpp:101
+#: ../src/settings.cpp:102
 msgid "Enable Clipboard Sca&nner"
 msgstr "Ara yaddaşdakı Scanneri fəallaşdır"
 
-#: settings.cpp:102
+#: ../src/settings.cpp:103
 msgid "Return Si&milar Words"
 msgstr "Bənzər kəlmələri göstər"
 
-#: settings.cpp:103
+#: ../src/settings.cpp:104
 msgid "Enable S&pell Checker"
 msgstr "İmlanı yoxlaması"
 
-#: settings.cpp:181
+#: ../src/settings.cpp:188
 msgid ""
 "Here you can configure your desired options. Changes will take effect after "
 "xFarDic restart."
@@ -161,43 +226,47 @@ msgstr ""
 "Bu pəncərədə proqrəminizin artıq seçimlərini qura bilərsiniz. dəyiştirilən "
 "seçimlər gələn dəfə proqrəmi çalışdıranda aktiv ediləcək"
 
-#: settings.cpp:184
+#: ../src/settings.cpp:191
 msgid "Choose default &language:"
 msgstr "Ön qurğu&lu dil :"
 
-#: settings.cpp:191
+#: ../src/settings.cpp:198
 msgid "Number of Entries in History Box:"
 msgstr "Keçmiş qutusunda :"
 
-#: settings.cpp:194
+#: ../src/settings.cpp:201
 msgid "Scan window timeout (Sec):"
 msgstr "Yoxlama Pəncərəsinin göstəriş zamani (San.):"
 
-#: settings.cpp:239
+#: ../src/settings.cpp:204
+msgid "Leitner box base capacity:"
+msgstr ""
+
+#: ../src/settings.cpp:265
 msgid "Ctrl+Click to enable or disable available database(s)."
 msgstr "·Verilənlər·bazalarıni İstifadə etmə/ İstifadə etməməsinə  Ctrl+Click "
 
-#: settings.cpp:248
+#: ../src/settings.cpp:274
 msgid "XML DB Path:"
 msgstr "XML VB Adresi:"
 
-#: settings.cpp:250
+#: ../src/settings.cpp:276
 msgid "Add"
 msgstr " Əlavə Et"
 
-#: settings.cpp:251
+#: ../src/settings.cpp:277
 msgid "DB info"
 msgstr "VB bilgiləri"
 
-#: settings.cpp:257
+#: ../src/settings.cpp:283
 msgid "Options"
 msgstr "Seçimlər"
 
-#: settings.cpp:258
+#: ../src/settings.cpp:284
 msgid "Databases"
 msgstr " Verilənlər bazaları"
 
-#: settings.cpp:291 settings.cpp:399
+#: ../src/settings.cpp:335
 msgid ""
 "XML DB path is empty.\n"
 "xFarDic will now work without a valid database."
@@ -205,352 +274,364 @@ msgstr ""
 "XML VB adresi yox.\n"
 "İtibarlı  bir VB olmasa   xFarDic çalışmaz"
 
-#: settings.cpp:292 settings.cpp:400
+#: ../src/settings.cpp:336
 msgid "Warning"
 msgstr "Xəbərdarlıq"
 
-#: settings.cpp:488
+#: ../src/settings.cpp:432
 msgid "Choose a XML DataBase"
 msgstr "Bir XML VB seç"
 
-#: settings.cpp:488
+#: ../src/settings.cpp:432
 msgid "XML DataBase files (*.xdb)|*.xdb"
 msgstr "XML VB fayları  (*.xdb)|*.xdb"
 
-#: settings.cpp:559
+#: ../src/settings.cpp:498
 msgid "DB Name  : "
 msgstr "VB Adı   :"
 
-#: settings.cpp:560
+#: ../src/settings.cpp:499
 msgid "DB Author : "
 msgstr "VB yazıçısı :"
 
-#: settings.cpp:561
+#: ../src/settings.cpp:500
 msgid "DB Version: "
 msgstr "VB Versiyonü      :"
 
-#: settings.cpp:562
+#: ../src/settings.cpp:501
 msgid "Input Lang: "
 msgstr "VB dili    :"
 
-#: settings.cpp:564
+#: ../src/settings.cpp:503
 msgid "No information found."
 msgstr "Heç bilgi tapılmadı."
 
-#: settings.cpp:568
+#: ../src/settings.cpp:507
 msgid "No information found or no databse is selected."
 msgstr "Heç mə'lumat tapılmadı."
 
-#: settings.cpp:570
+#: ../src/settings.cpp:509
 msgid "XML Database information"
 msgstr "XML VB'nin mə'lumati"
 
-#: settings.cpp:612
+#: ../src/settings.cpp:551
 msgid "Parse Error. Invalid Document.\n"
 msgstr "Xəta : Verilənlər Bazasi Boşdur.\n"
 
-#: xfardic_app.cpp:163
+#: ../src/xfardic_app.cpp:169
 msgid "&About...\tF1"
 msgstr "H&aqqında...\tF1"
 
-#: xfardic_app.cpp:163
+#: ../src/xfardic_app.cpp:169
 msgid "Show about dialog"
 msgstr "Haqqinda pəncərəsini göstər"
 
-#: xfardic_app.cpp:168
+#: ../src/xfardic_app.cpp:175
+msgid "Leitner box\tCtrl+B"
+msgstr ""
+
+#: ../src/xfardic_app.cpp:175
+msgid "Show Leitner box"
+msgstr ""
+
+#: ../src/xfardic_app.cpp:180
 msgid "View Toolbar\tCtrl-T"
 msgstr "Vasitələr çobuğu\tCtrl-T"
 
-#: xfardic_app.cpp:168
+#: ../src/xfardic_app.cpp:180
 msgid "Toggle toolbar On/Off"
 msgstr "Vasitə çobuğu Aktiv/qeyri aktiv"
 
-#: xfardic_app.cpp:170
+#: ../src/xfardic_app.cpp:182
 msgid "Translate\tAlt-T"
 msgstr "Tərcumə et\tAlt-T"
 
-#: xfardic_app.cpp:170
+#: ../src/xfardic_app.cpp:182
 msgid "Translate word"
 msgstr "Kəlməni çevir"
 
-#: xfardic_app.cpp:175 xfardic_app.cpp:1006
+#: ../src/xfardic_app.cpp:187 ../src/xfardic_app.cpp:1024
 msgid "&Quit\tCtrl+Q"
 msgstr "Kəs\tCtrl-X"
 
-#: xfardic_app.cpp:175
+#: ../src/xfardic_app.cpp:187
 msgid "Quit this program"
 msgstr "Proqramdan çıx"
 
-#: xfardic_app.cpp:181
+#: ../src/xfardic_app.cpp:193
 msgid "For&ward\tAlt-W"
 msgstr "İrəli get\tAlt-W"
 
-#: xfardic_app.cpp:181
+#: ../src/xfardic_app.cpp:193
 msgid "Next word"
 msgstr "Sonrakı kəlmə"
 
-#: xfardic_app.cpp:185
+#: ../src/xfardic_app.cpp:197
 msgid "&Back\tAlt-B"
 msgstr "Geri get\tAlt-B"
 
-#: xfardic_app.cpp:185
+#: ../src/xfardic_app.cpp:197
 msgid "Previous word"
 msgstr "Öncəki kəlmə"
 
-#: xfardic_app.cpp:191
+#: ../src/xfardic_app.cpp:203
 msgid "Fi&rst Word\tAlt+R"
 msgstr "Bi&rinci Kəlmə\tAlt+R"
 
-#: xfardic_app.cpp:191
+#: ../src/xfardic_app.cpp:203
 msgid "First word"
 msgstr "İlk Kəlmə"
 
-#: xfardic_app.cpp:195
+#: ../src/xfardic_app.cpp:207
 msgid "&Last Word\tAlt+L"
 msgstr "&Sonuncu kəlmə\tAlt+L"
 
-#: xfardic_app.cpp:195
+#: ../src/xfardic_app.cpp:207
 msgid "Last word"
 msgstr "Son Kəlmə"
 
-#: xfardic_app.cpp:205
+#: ../src/xfardic_app.cpp:217
 msgid "Auto &Select\tAlt-S"
 msgstr "Avtomatik seçilim\tAlt-S"
 
-#: xfardic_app.cpp:205
+#: ../src/xfardic_app.cpp:217
 msgid "Auto select word"
 msgstr "Avtomatik kəlmə seçmə"
 
-#: xfardic_app.cpp:206
+#: ../src/xfardic_app.cpp:218
 msgid "Enable Clipboard &Watcher\tCtrl-W"
 msgstr "Ara yaddaşdakı sensörü fəallaşdır\tCtrl-W"
 
-#: xfardic_app.cpp:206
+#: ../src/xfardic_app.cpp:218
 msgid "Enable clipboard watcher"
 msgstr "Ara yaddaşdakı sensörün fəallaşdır"
 
-#: xfardic_app.cpp:207
+#: ../src/xfardic_app.cpp:219
 msgid "Enable Selection Sca&nner\tCtrl-N"
 msgstr "Ara yaddaşdakı sensörün fəallaşdır\tCtrl-W"
 
-#: xfardic_app.cpp:207
+#: ../src/xfardic_app.cpp:219
 msgid "Enable selection scanner"
 msgstr "Selection Scanneri fəallaşdır"
 
-#: xfardic_app.cpp:208
+#: ../src/xfardic_app.cpp:220
 msgid "Return Similar Words\tCtrl-S"
 msgstr "Bənzər kəlmələri qaytar\tCtrl-S"
 
-#: xfardic_app.cpp:208 xfardic_app.cpp:1116
+#: ../src/xfardic_app.cpp:220 ../src/xfardic_app.cpp:1137
 msgid "Return similar words"
 msgstr "Bənzər kəlmələri qaytar"
 
-#: xfardic_app.cpp:209
+#: ../src/xfardic_app.cpp:221
 msgid "Enable &Hide On Minimize and Close\tCtrl-H"
 msgstr "Pəncərəni kiçildəndə gizlə\tCtrl-H"
 
-#: xfardic_app.cpp:209
+#: ../src/xfardic_app.cpp:221
 msgid "Enable hide on minimize and close"
 msgstr "Pəncərəni kiçildəndə gizlə"
 
-#: xfardic_app.cpp:210
+#: ../src/xfardic_app.cpp:222
 msgid "Enable S&pell Checking\tCtrl-P"
 msgstr "İmlani yoxla\tCtrl-P"
 
-#: xfardic_app.cpp:210
+#: ../src/xfardic_app.cpp:222
 msgid "Enable spell checking"
 msgstr "İmla yoxlamasını fəallaçtir"
 
-#: xfardic_app.cpp:211
+#: ../src/xfardic_app.cpp:223
 msgid "Enable Inexact &Reverse Searching\tCtrl-R"
 msgstr "Qarşı qeyri-dəqiq Axtarış\tCtrl-R"
 
-#: xfardic_app.cpp:211
+#: ../src/xfardic_app.cpp:223
 msgid "Enable inexact reverse searchning"
 msgstr "Qarşı qeyri-dəqiq Axtarış"
 
-#: xfardic_app.cpp:215
+#: ../src/xfardic_app.cpp:227
 msgid "Set Result Box Font\tCtrl-F"
 msgstr "Yazı növü\tCtrl+F"
 
-#: xfardic_app.cpp:215
+#: ../src/xfardic_app.cpp:227
 msgid "Set result box font"
 msgstr "Yazı növü"
 
-#: xfardic_app.cpp:219
+#: ../src/xfardic_app.cpp:231
 msgid "Setti&ngs\tAlt-N"
 msgstr "Seçimlər\tAlt-N"
 
-#: xfardic_app.cpp:219
+#: ../src/xfardic_app.cpp:231
 msgid "Configure settings"
 msgstr "Qurğular"
 
-#: xfardic_app.cpp:225
+#: ../src/xfardic_app.cpp:237
 msgid "C&ut\tCtrl-X"
 msgstr "Kəs\tCtrl-X"
 
-#: xfardic_app.cpp:225
+#: ../src/xfardic_app.cpp:237
 msgid "Cut input text"
 msgstr "Verilən mətni kəs"
 
-#: xfardic_app.cpp:229
+#: ../src/xfardic_app.cpp:241
 msgid "&Copy\tCtrl-C"
 msgstr "Köçür\tCtrl-C"
 
-#: xfardic_app.cpp:229
+#: ../src/xfardic_app.cpp:241
 msgid "Copy result to clipboard"
 msgstr "Ara yaddaşda köçür"
 
-#: xfardic_app.cpp:233 xfardic_app.cpp:988
+#: ../src/xfardic_app.cpp:245 ../src/xfardic_app.cpp:1006
 msgid "&Paste and Translate\tCtrl-V"
 msgstr "Yapışdır və tərcümə et\tCtrl-V"
 
-#: xfardic_app.cpp:233
+#: ../src/xfardic_app.cpp:245
 msgid "Paste from clipboard"
 msgstr "Ara yaddaşdan yapışdır"
 
-#: xfardic_app.cpp:238
+#: ../src/xfardic_app.cpp:250
 msgid "Clear History\tCtrl-D"
 msgstr "Keçmişi sil\tCtrl-D"
 
-#: xfardic_app.cpp:238
+#: ../src/xfardic_app.cpp:250
 msgid "Clear history"
 msgstr "Keçmişi sil"
 
-#: xfardic_app.cpp:245
+#: ../src/xfardic_app.cpp:257
 msgid "&File"
 msgstr "&Fayl"
 
-#: xfardic_app.cpp:246
+#: ../src/xfardic_app.cpp:258
 msgid "&Edit"
 msgstr "Düzəlt"
 
-#: xfardic_app.cpp:247
+#: ../src/xfardic_app.cpp:259
 msgid "&View"
 msgstr "Görünüş"
 
-#: xfardic_app.cpp:248
+#: ../src/xfardic_app.cpp:260
 msgid "Nav&igate"
 msgstr "Get"
 
-#: xfardic_app.cpp:249
+#: ../src/xfardic_app.cpp:261
+msgid "Too&ls"
+msgstr ""
+
+#: ../src/xfardic_app.cpp:262
 msgid "&Options"
 msgstr "Seçimlər"
 
-#: xfardic_app.cpp:250
+#: ../src/xfardic_app.cpp:263
 msgid "&Help"
 msgstr "Yardım"
 
-#: xfardic_app.cpp:899
+#: ../src/xfardic_app.cpp:914
 msgid "Input text is too long.\n"
 msgstr "Verilən mətn çox.\n"
 
-#: xfardic_app.cpp:992
+#: ../src/xfardic_app.cpp:1010
 msgid "Set Result Box Font\tCtrl+F"
 msgstr "Yazı növü\tCtrl+F"
 
-#: xfardic_app.cpp:996
+#: ../src/xfardic_app.cpp:1014
 msgid "Open Setti&ngs\tAlt+N"
 msgstr "Seçimlər\tAlt+N"
 
-#: xfardic_app.cpp:1001
+#: ../src/xfardic_app.cpp:1019
 msgid "&About xFarDic\tF1"
 msgstr "xFarDic Haqqında\tF1"
 
-#: xfardic_app.cpp:1105
+#: ../src/xfardic_app.cpp:1125
 msgid "Back"
 msgstr "Geri"
 
-#: xfardic_app.cpp:1105
+#: ../src/xfardic_app.cpp:1125
 msgid "Previous Word"
 msgstr "Öncəki kəlmə"
 
-#: xfardic_app.cpp:1106
+#: ../src/xfardic_app.cpp:1126
 msgid "Fwd"
 msgstr "İrəli"
 
-#: xfardic_app.cpp:1106
+#: ../src/xfardic_app.cpp:1126
 msgid "Next Word"
 msgstr "Sonraki kəlmə"
 
-#: xfardic_app.cpp:1108
+#: ../src/xfardic_app.cpp:1128
 msgid "Cut"
 msgstr "kəs"
 
-#: xfardic_app.cpp:1109
+#: ../src/xfardic_app.cpp:1129
 msgid "Copy"
 msgstr "Köçür"
 
-#: xfardic_app.cpp:1109
+#: ../src/xfardic_app.cpp:1129
 msgid "Copy Result"
 msgstr "Nəticəni köçür"
 
-#: xfardic_app.cpp:1110
+#: ../src/xfardic_app.cpp:1130
 msgid "Paste"
 msgstr "Yapışdır"
 
-#: xfardic_app.cpp:1110
+#: ../src/xfardic_app.cpp:1130
 msgid "Paste and Translate"
 msgstr "Yapışdır və tərcümə et"
 
-#: xfardic_app.cpp:1111
+#: ../src/xfardic_app.cpp:1131
 msgid "Trash"
 msgstr "Zibil·Qutus"
 
-#: xfardic_app.cpp:1111
+#: ../src/xfardic_app.cpp:1131
 msgid "Clear History"
 msgstr "Keçmişi sil"
 
-#: xfardic_app.cpp:1113
+#: ../src/xfardic_app.cpp:1134
 msgid "Select"
 msgstr "Seç"
 
-#: xfardic_app.cpp:1113
+#: ../src/xfardic_app.cpp:1134
 msgid "Auto Select Text"
 msgstr "Avtomatik mətn seç"
 
-#: xfardic_app.cpp:1114
+#: ../src/xfardic_app.cpp:1135
 msgid "Spell"
 msgstr "İmla yoxlama"
 
-#: xfardic_app.cpp:1114
+#: ../src/xfardic_app.cpp:1135
 msgid "Spell Checking"
 msgstr "İmla yoxlama"
 
-#: xfardic_app.cpp:1115
+#: ../src/xfardic_app.cpp:1136
 msgid "RevSrch"
 msgstr "GeriAxtar"
 
-#: xfardic_app.cpp:1115
+#: ../src/xfardic_app.cpp:1136
 msgid "Reverse Search"
 msgstr "Geridə Axtar"
 
-#: xfardic_app.cpp:1116
+#: ../src/xfardic_app.cpp:1137
 msgid "Similar"
 msgstr "Oxşar"
 
-#: xfardic_app.cpp:1118
+#: ../src/xfardic_app.cpp:1139
 msgid "Settings"
 msgstr "İmla yoxlaması"
 
-#: xfardic_app.cpp:1119
+#: ../src/xfardic_app.cpp:1140
 msgid "Quit"
 msgstr "Çıx"
 
-#: xfardic_app.cpp:1194
+#: ../src/xfardic_app.cpp:1218
 msgid "Please enter clause.\n"
 msgstr "Lütfən bir kəlmə yazın.\n"
 
-#: xfardic_app.cpp:1208 xfardic_app.cpp:1281
+#: ../src/xfardic_app.cpp:1232 ../src/xfardic_app.cpp:1305
 msgid "Please wait..."
 msgstr "Lütfən Gözləyin"
 
-#: xfardic_app.cpp:1231 xfardic_app.cpp:1272 xfardic_app.cpp:1304
-#: xfardic_app.cpp:1351
+#: ../src/xfardic_app.cpp:1255 ../src/xfardic_app.cpp:1296
+#: ../src/xfardic_app.cpp:1328 ../src/xfardic_app.cpp:1375
 msgid "Phrase not found."
 msgstr "Kəlmə tapılmadı."
 
-#: xfardic_app.cpp:1397
+#: ../src/xfardic_app.cpp:1425
 msgid ""
 "xFarDic spell checker found error(s) on your typed word.\n"
 " Please choose correct word from list and then click OK."
@@ -558,19 +639,23 @@ msgstr ""
 "xFarDic İmla yoxlayıcisinin verdiyiniz kəlmədə yanlış(lar) tapdı.\n"
 "Zəhmət olmasa kəlməni düzgün ifadə ilə yazın."
 
-#: xfardic_app.cpp:1398
+#: ../src/xfardic_app.cpp:1426
 msgid "xFarDic Spell Checker"
 msgstr "xFarDic İmla yoxlanicisi"
 
-#: xfardic_app.cpp:1434
+#: ../src/xfardic_app.cpp:1462
 msgid "xFarDic Settings"
 msgstr "xFarDic Seçimləri"
 
-#: xfardic_app.cpp:1461
+#: ../src/xfardic_app.cpp:1489
 msgid "About xFarDic"
 msgstr "xFarDic Haqqında"
 
-#: xfardic_app.cpp:1622
+#: ../src/xfardic_app.cpp:1516
+msgid "xFarDic - Leitner Box"
+msgstr ""
+
+#: ../src/xfardic_app.cpp:1681
 msgid ""
 "It seems that Aspell is not installed.\n"
 "xFarDic will not work correctly."
@@ -578,7 +663,7 @@ msgstr ""
 "Görünür Aspell qurulmayıb.\n"
 "xFardic düzgün işləməyəcək."
 
-#: xfardic_app.cpp:1687
+#: ../src/xfardic_app.cpp:1754
 msgid ""
 "Parse Error. Invalid Document.\n"
 " It is possible that XML-DB is not installed.\n"
@@ -588,7 +673,16 @@ msgstr ""
 "Bəlkədə XML VB'sini qurmayıbsiniz.VB Adresini Seçimlər pəncərəsindən "
 "yoxlayın."
 
-#: xfardic.cpp:59
+#: ../src/xfardic_app.cpp:2062
+msgid ""
+"Selected word already exists in the box\n"
+"or not found in the installed database(s).\n"
+msgstr ""
+
+#: ../src/xfardic_app.cpp:2068
+msgid "The leitner box is full.\n"
+msgstr ""
+
+#: ../src/xfardic.cpp:57
 msgid "Another program instance is already running, aborting."
 msgstr "Bu proqram bir dəfə açilib və indiysə fəaldır."
-

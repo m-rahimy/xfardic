@@ -46,6 +46,7 @@ wxMBConv *CharsetConv = &wxConvUTF8;
 
 extern bool showAspell;
 extern bool showAbout;
+extern bool showLeitner;
 extern bool showSettings;
 
 BEGIN_EVENT_TABLE(xFarDicApp, wxFrame)    
@@ -70,7 +71,9 @@ BEGIN_EVENT_TABLE(xFarDicApp, wxFrame)
     EVT_MENU(xFarDic_Scanner, xFarDicApp::OnScanner)
     EVT_MENU(xFarDic_Hide, xFarDicApp::OnHide)
     EVT_MENU(xFarDic_ViewToolBar, xFarDicApp::ViewToolbar)
+    EVT_MENU(xFarDic_Leitner, xFarDicApp::OnLeitner)
     EVT_BUTTON(ID_BUTTON_TRANSLATE, xFarDicApp::OnTranslate)
+    EVT_BUTTON(ID_BTN_LT, xFarDicApp::OnLeitnerBox)
     EVT_TOOL(ID_SPELL, xFarDicApp::OnSpell)
     EVT_TOOL(ID_REVSRCH, xFarDicApp::OnRevSrch)
     EVT_TOOL(ID_SRCH, xFarDicApp::OnSrch)
@@ -83,8 +86,9 @@ BEGIN_EVENT_TABLE(xFarDicApp, wxFrame)
     EVT_TOOL(ID_CUT, xFarDicApp::OnCut)
     EVT_TOOL(ID_PASTE, xFarDicApp::OnPaste)
     EVT_TOOL(ID_TRASH, xFarDicApp::OnTrash)
+    EVT_TOOL(ID_TOOL_LT, xFarDicApp::OnLeitner)
     EVT_COMBOBOX(ID_COMBO, xFarDicApp::AutoTrans)
-    //EVT_TEXT(ID_COMBO, xFarDicApp::AutoTrans)
+    //EVT_TEXT(ID_COMBO, xFarDicApp::UpdateText)
     EVT_SET_FOCUS(xFarDicApp::OnFocus)
     EVT_ACTIVATE(xFarDicApp::OnActivate) 
     EVT_CLOSE(xFarDicApp::OnClose)        
@@ -97,10 +101,10 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
        : wxFrame(NULL, -1, title, pos, size, style), m_locale(locale), m_timer(this, ID_TIMER)
 {
     // set the frame icon    
-    wxBitmap  micon(_T("/usr/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
+    wxBitmap  micon(wxT("/usr/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
 
     if(!micon.Ok()){
-        micon.LoadFile(_T("/usr/local/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
+        micon.LoadFile(wxT("/usr/local/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
     }
 
     wxIcon wicon;
@@ -114,9 +118,12 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     n = NULL;
 
     // Starting main timer 
-    m_timer.Start(1000);       
+    m_timer.Start(500);       
 
     wxArtClient client;
+
+    //Load The leitner box content
+    LoadLeitnerBox();
 
     wxIcon taskicon = wxArtProvider::GetIcon(wxART_FIND, client, wxDefaultSize);
     ticon.SetIcon(taskicon, _T("xFarDic Multilingual Dictionary"));	
@@ -131,8 +138,8 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     wxBitmap  bcopy16 = wxArtProvider::GetBitmap(wxART_COPY, client, wxSize(16,16));
     wxBitmap  bsettings = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxDefaultSize);
     wxBitmap  bsettings16 = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxSize(16,16));
-    wxBitmap  btrash = wxArtProvider::GetBitmap(wxART_DELETE, client, wxDefaultSize);
-    wxBitmap  btrash16 = wxArtProvider::GetBitmap(wxART_DELETE, client, wxSize(16,16));
+    wxBitmap  btrash = wxArtProvider::GetBitmap(wxT("gtk-clear"), client, wxDefaultSize);
+    wxBitmap  btrash16 = wxArtProvider::GetBitmap(wxT("gtk-clear"), client, wxSize(16,16));
     wxBitmap  bselect = wxArtProvider::GetBitmap(wxART_REDO, client, wxDefaultSize);
     wxBitmap  btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
     wxBitmap  btranslate16 = wxArtProvider::GetBitmap(wxART_FIND, client, wxSize(16,16));
@@ -143,12 +150,13 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     wxBitmap  spellb = wxArtProvider::GetBitmap(wxT("gtk-spell-check"), client, wxDefaultSize);
     wxBitmap  bfont = wxArtProvider::GetBitmap(wxT("gtk-select-font"), client, wxSize(16,16));
     wxBitmap  babout = wxArtProvider::GetBitmap(wxT("gtk-about"), client, wxSize(16,16));
+    wxBitmap  bleitner = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxSize(16,16));
     wxBitmap  bfirst = wxArtProvider::GetBitmap(wxT("gtk-goto-first"), client, wxSize(16,16));
     wxBitmap  blast = wxArtProvider::GetBitmap(wxT("gtk-goto-last"), client, wxSize(16,16));
-    wxBitmap  bsplash(_T("/usr/share/xfardic/pixmaps/splash.png"), wxBITMAP_TYPE_PNG);
+    wxBitmap  bsplash(wxT("/usr/share/xfardic/pixmaps/splash.png"), wxBITMAP_TYPE_PNG);
 
     if(!bsplash.Ok()){
-        bsplash.LoadFile(_T("/usr/local/share/xfardic/pixmaps/splash.png"), wxBITMAP_TYPE_PNG);
+        bsplash.LoadFile(wxT("/usr/local/share/xfardic/pixmaps/splash.png"), wxBITMAP_TYPE_PNG);
     }
         
 #if wxUSE_MENUS
@@ -161,6 +169,12 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     wxMenuItem *about = new wxMenuItem(helpMenu,xFarDic_About, _("&About...\tF1"), _("Show about dialog"));
     about->SetBitmap(babout);
     helpMenu->Append(about);
+
+    toolsMenu = new wxMenu;
+
+    wxMenuItem *tools = new wxMenuItem(toolsMenu,xFarDic_Leitner, _("Leitner box\tCtrl+B"), _("Show Leitner box"));
+    tools->SetBitmap(bleitner);
+    toolsMenu->Append(tools);
 
     vimenu = new wxMenu;
     vimenu->Append(xFarDic_ViewToolBar, _("View Toolbar\tCtrl-T"), _("Toggle toolbar On/Off"), wxITEM_CHECK);        
@@ -244,6 +258,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     menuBar->Append(edmenu, _("&Edit"));
     menuBar->Append(vimenu, _("&View"));
     menuBar->Append(gomenu, _("Nav&igate"));
+    menuBar->Append(toolsMenu, _("Too&ls"));
     menuBar->Append(opmenu, _("&Options"));
     menuBar->Append(helpMenu, _("&Help"));    
 
@@ -263,7 +278,9 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     //Get Configuration From Config File
     wxConfigBase *pConfig = wxConfigBase::Get();
 
-    pConfig->SetPath(_T("/Options"));
+    pConfig->SetPath(wxT("/Options"));
+
+    ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
   
    if ( pConfig->Read(_T("View-Toolbar"), 1) == 0 ) { 	
 	RecreateToolbar(FALSE);	
@@ -360,7 +377,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
 	    tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
 	    tmpfname = tmpstr;
-	    tmpfname.Replace(wxGetHomeDir()+_T("/"), _T(""));
+	    tmpfname.Replace(wxGetHomeDir()+wxT("/"), _T(""));
 	    //DEBUGGING
 	    //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
@@ -374,7 +391,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 		while(tmpstr.Len() >0){
 			tmpstr = fs.FindNext();
    		        tmpfname = tmpstr;
-	   	        tmpfname.Replace(wxGetHomeDir()+_T("/"), _T(""));
+	   	        tmpfname.Replace(wxGetHomeDir()+wxT("/"), _T(""));
 	  	        //DEBUGGING
 	   	        //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
@@ -389,11 +406,11 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 		}
 	    }
 
-	    fs.ChangePathTo(_T("/usr/share/xfardic-xdb/"), true);
+	    fs.ChangePathTo(wxT("/usr/share/xfardic-xdb/"), true);
 
 	    tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
 	    tmpfname = tmpstr;
-	    tmpfname.Replace(_T("/usr/share/xfardic-xdb/"), _T(""));
+	    tmpfname.Replace(wxT("/usr/share/xfardic-xdb/"), _T(""));
 	    //DEBUGGING
 	    //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
@@ -407,7 +424,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 		while(tmpstr.Len() >0){
 			tmpstr = fs.FindNext();
    		        tmpfname = tmpstr;
-	   	        tmpfname.Replace(_T("/usr/share/xfardic-xdb/"), _T(""));
+	   	        tmpfname.Replace(wxT("/usr/share/xfardic-xdb/"), _T(""));
 			//DEBUGGING
 		        //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
@@ -422,11 +439,11 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 		}
 	    }
 
-            fs.ChangePathTo(_T("/usr/local/share/xfardic-xdb/"), true);
+            fs.ChangePathTo(wxT("/usr/local/share/xfardic-xdb/"), true);
 
 	    tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
 	    tmpfname = tmpstr;
-	    tmpfname.Replace(_T("/usr/local/share/xfardic-xdb/"), _T(""));
+	    tmpfname.Replace(wxT("/usr/local/share/xfardic-xdb/"), _T(""));
 	    //DEBUGGING
 	    //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
@@ -440,7 +457,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 		while(tmpstr.Len() >0){
 			tmpstr = fs.FindNext();
    		        tmpfname = tmpstr;
-	   	        tmpfname.Replace(_T("/usr/local/share/xfardic-xdb/"), _T(""));
+	   	        tmpfname.Replace(wxT("/usr/local/share/xfardic-xdb/"), _T(""));
 			//DEBUGGING
 		        //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
@@ -468,8 +485,8 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 		}		
 	   }
 	   // Write detected path to config file
-	   pConfig->SetPath(_T("/"));
-	   pConfig->Write(_T("/Options/DB-Path"), longpath);        
+	   pConfig->SetPath(wxT("/"));
+	   pConfig->Write(wxT("/Options/DB-Path"), longpath);        
 	   
 	   delete splash;
 	   wxYield();
@@ -480,7 +497,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         gomenu->Enable(xFarDic_Last, TRUE);
   }
 
-  if ( pConfig->Read(_T("Auto-Select"), 1) != 0 ) {
+  if ( pConfig->Read(wxT("Auto-Select"), 1) != 0 ) {
       select = true;
       opmenu->Check( xFarDic_Select, TRUE );
       if(vtool){
@@ -491,7 +508,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
       select = false;
     }
     
-    if ( pConfig->Read(_T("Spell"), 1) != 0 ) {
+    if ( pConfig->Read(wxT("Spell"), 1) != 0 ) {
       spell = true;      
       opmenu->Check( xFarDic_Spell, TRUE );      
       if(vtool){
@@ -502,7 +519,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
       spell = false;
     }   
 
-    if ( pConfig->Read(_T("RevSrch"), 0l) != 0 ) {
+    if ( pConfig->Read(wxT("RevSrch"), 0l) != 0 ) {
       revsrch = true;      
       opmenu->Check( xFarDic_RevSrch, TRUE );      
       if(vtool){
@@ -513,14 +530,14 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
       revsrch = false;
     }   
 
-   if ( pConfig->Read(_T("Watcher"), 1) != 0 ) {
+   if ( pConfig->Read(wxT("Watcher"), 1) != 0 ) {
       watcher = true;      
       opmenu->Check( xFarDic_Watcher, TRUE );  
     }else{
       watcher = false;
     }   
 
-    if ( pConfig->Read(_T("Scanner"), 1) != 0 ) {
+    if ( pConfig->Read(wxT("Scanner"), 1) != 0 ) {
       scanner = true;      
       opmenu->Check( xFarDic_Scanner, TRUE );
     
@@ -531,14 +548,14 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
       scanner = false;
     }   
 
-    if ( pConfig->Read(_T("Hide"), 0l) != 0 ) {
+    if ( pConfig->Read(wxT("Hide"), 0l) != 0 ) {
       hide = true;      
       opmenu->Check( xFarDic_Hide, TRUE );  
     }else{
       hide = false;
     }   
 
-    if ( pConfig->Read(_T("Srch-Similar"), 0l) != 0 ) {
+    if ( pConfig->Read(wxT("Srch-Similar"), 0l) != 0 ) {
       srch = true;      
       opmenu->Check( xFarDic_Srch, TRUE );      
       if(vtool){
@@ -550,12 +567,12 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     }   
     
     // restore frame position
-    int x = pConfig->Read(_T("x"), 0l);
-    int y = pConfig->Read(_T("y"), 0l);
+    int x = pConfig->Read(wxT("x"), 0l);
+    int y = pConfig->Read(wxT("y"), 0l);
 
     Move(x,y);
 
-    int save_cache = pConfig->Read(_T("Save-Cache"), 1);
+    int save_cache = pConfig->Read(wxT("Save-Cache"), 1);
 
     if( save_cache != 0){
       cache = true;
@@ -563,10 +580,10 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
       cache = false;
     }    
 
-    entryq = pConfig->Read(_T("Num-Entries"), 10);
+    entryq = pConfig->Read(wxT("Num-Entries"), 10);
     
     if(cache){
-      pConfig->SetPath(_T("../Cache"));
+      pConfig->SetPath(wxT("../Cache"));
       wxString str;
       long dummy;
     
@@ -583,7 +600,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         m_text->SetSelection(0,m_textVal.Length());
      } 
      
-     pConfig->SetPath(_T("/"));
+     pConfig->SetPath(wxT("/"));
 }
 
 xFarDicApp::~xFarDicApp()
@@ -619,7 +636,7 @@ void xFarDicApp::ViewToolbar(wxCommandEvent& WXUNUSED(event))
       if ( pConfig == NULL )
       return;
       
-      pConfig->SetPath(_T("/"));
+      pConfig->SetPath(wxT("/"));
 
     if ( !vtool )
     {
@@ -629,7 +646,7 @@ void xFarDicApp::ViewToolbar(wxCommandEvent& WXUNUSED(event))
 	vimenu->Check( xFarDic_ViewToolBar, TRUE );		
 	m_resbox->SetSize(4,43,511,160);
 	m_label->SetSize(12,50,493,145);	
-	pConfig->Write(_T("/Options/View-Toolbar"), 1);	
+	pConfig->Write(wxT("/Options/View-Toolbar"), 1);	
 	translate(m_text->GetValue());
     }
     else
@@ -641,7 +658,7 @@ void xFarDicApp::ViewToolbar(wxCommandEvent& WXUNUSED(event))
         SetToolBar(NULL);	
 	m_resbox->SetSize(4,43,511,160+y);
 	m_label->SetSize(12,50,493,145+y);
-	pConfig->Write(_T("/Options/View-Toolbar"), 0);		
+	pConfig->Write(wxT("/Options/View-Toolbar"), 0);		
     }
 }
 
@@ -672,7 +689,7 @@ void xFarDicApp::OnSelect(wxCommandEvent& WXUNUSED(event))
       if ( pConfig == NULL )
       return;
       
-      pConfig->SetPath(_T("/"));
+      pConfig->SetPath(wxT("/"));
 
   if ( select == true )
   {
@@ -684,7 +701,7 @@ void xFarDicApp::OnSelect(wxCommandEvent& WXUNUSED(event))
     opmenu->Check( xFarDic_Select, FALSE );
     wxString m_textVal;
     m_text->SetSelection(0,0);
-    pConfig->Write(_T("/Options/Auto-Select"), 0);
+    pConfig->Write(wxT("/Options/Auto-Select"), 0);
 
   }else{
     select = true;
@@ -695,7 +712,7 @@ void xFarDicApp::OnSelect(wxCommandEvent& WXUNUSED(event))
     opmenu->Check( xFarDic_Select, TRUE );    
     wxString m_textVal(m_text->GetValue());
     m_text->SetSelection(0,m_textVal.Length());
-    pConfig->Write(_T("/Options/Auto-Select"), 1);
+    pConfig->Write(wxT("/Options/Auto-Select"), 1);
   }
   delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
@@ -706,7 +723,7 @@ void xFarDicApp::OnSrch(wxCommandEvent& WXUNUSED(event))
       if ( pConfig == NULL )
       return;
       
-      pConfig->SetPath(_T("/"));
+      pConfig->SetPath(wxT("/"));
 
   if ( srch == true )
   {
@@ -714,14 +731,14 @@ void xFarDicApp::OnSrch(wxCommandEvent& WXUNUSED(event))
     wxToolBarBase *tb = GetToolBar();
     opmenu->Check( xFarDic_Srch, FALSE );
     tb->ToggleTool( ID_SRCH, FALSE );
-    pConfig->Write(_T("/Options/Srch-Similar"), 0);
+    pConfig->Write(wxT("/Options/Srch-Similar"), 0);
 
   }else{
     srch = true;
     wxToolBarBase *tb = GetToolBar();
     opmenu->Check( xFarDic_Srch, TRUE );
     tb->ToggleTool( ID_SRCH, TRUE );    
-    pConfig->Write(_T("/Options/Srch-Similar"), 1);
+    pConfig->Write(wxT("/Options/Srch-Similar"), 1);
   }
   delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
@@ -740,7 +757,7 @@ void xFarDicApp::DoOnSpell()
       if ( pConfig == NULL )
       return;
       
-      pConfig->SetPath(_T("/"));
+      pConfig->SetPath(wxT("/"));
 
   if ( spell == true )
   {
@@ -748,14 +765,14 @@ void xFarDicApp::DoOnSpell()
     wxToolBarBase *tb = GetToolBar();
     opmenu->Check( xFarDic_Spell, FALSE );
     tb->ToggleTool( ID_SPELL, FALSE );
-    pConfig->Write(_T("/Options/Spell"), 0);
+    pConfig->Write(wxT("/Options/Spell"), 0);
 
   }else{
     spell = true;
     wxToolBarBase *tb = GetToolBar();
     opmenu->Check( xFarDic_Spell, TRUE );
     tb->ToggleTool( ID_SPELL, TRUE );    
-    pConfig->Write(_T("/Options/Spell"), 1);
+    pConfig->Write(wxT("/Options/Spell"), 1);
   }
   delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
@@ -774,7 +791,7 @@ void xFarDicApp::DoOnRevSrch()
       if ( pConfig == NULL )
       return;
       
-      pConfig->SetPath(_T("/"));
+      pConfig->SetPath(wxT("/"));
 
   if ( revsrch == true )
   {
@@ -782,14 +799,14 @@ void xFarDicApp::DoOnRevSrch()
     wxToolBarBase *tb = GetToolBar();
     opmenu->Check( xFarDic_RevSrch, FALSE );
     tb->ToggleTool( ID_REVSRCH, FALSE );
-    pConfig->Write(_T("/Options/RevSrch"), 0);
+    pConfig->Write(wxT("/Options/RevSrch"), 0);
 
   }else{
     revsrch = true;
     wxToolBarBase *tb = GetToolBar();
     opmenu->Check( xFarDic_RevSrch, TRUE );
     tb->ToggleTool( ID_REVSRCH, TRUE );    
-    pConfig->Write(_T("/Options/RevSrch"), 1);
+    pConfig->Write(wxT("/Options/RevSrch"), 1);
   }
   delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
@@ -800,17 +817,17 @@ void xFarDicApp::OnWatcher(wxCommandEvent& WXUNUSED(event))
       if ( pConfig == NULL )
       return;
       
-      pConfig->SetPath(_T("/"));
+      pConfig->SetPath(wxT("/"));
 
   if ( watcher == true )
   {
     watcher = false;
     opmenu->Check( xFarDic_Watcher, FALSE );
-    pConfig->Write(_T("/Options/Watcher"), 0);
+    pConfig->Write(wxT("/Options/Watcher"), 0);
   }else{
     watcher = true;
     opmenu->Check( xFarDic_Watcher, TRUE );
-    pConfig->Write(_T("/Options/Watcher"), 1);
+    pConfig->Write(wxT("/Options/Watcher"), 1);
   }
   delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
@@ -821,17 +838,17 @@ void xFarDicApp::OnScanner(wxCommandEvent& WXUNUSED(event))
       if ( pConfig == NULL )
       return;
       
-      pConfig->SetPath(_T("/"));
+      pConfig->SetPath(wxT("/"));
 
   if ( scanner == true )
   {
     scanner = false;
     opmenu->Check( xFarDic_Scanner, FALSE );
-    pConfig->Write(_T("/Options/Scanner"), 0);
+    pConfig->Write(wxT("/Options/Scanner"), 0);
   }else{
     scanner = true;
     opmenu->Check( xFarDic_Scanner, TRUE );
-    pConfig->Write(_T("/Options/Scanner"), 1);
+    pConfig->Write(wxT("/Options/Scanner"), 1);
   }
   delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
@@ -842,17 +859,17 @@ void xFarDicApp::OnHide(wxCommandEvent& WXUNUSED(event))
       if ( pConfig == NULL )
       return;
       
-      pConfig->SetPath(_T("/"));
+      pConfig->SetPath(wxT("/"));
   
   if ( hide == true )
   {
     hide = false;
     opmenu->Check( xFarDic_Hide, FALSE );
-    pConfig->Write(_T("/Options/Hide"), 0);
+    pConfig->Write(wxT("/Options/Hide"), 0);
   }else{
     hide = true;
     opmenu->Check( xFarDic_Hide, TRUE );
-    pConfig->Write(_T("/Options/Hide"), 1);
+    pConfig->Write(wxT("/Options/Hide"), 1);
   }
   delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
@@ -909,6 +926,9 @@ void xFarDicApp::DoPaste()
 
 void xFarDicApp::Watcher(wxTimerEvent& event)
 {
+    // Update ltbox contents from config file
+    LoadLeitnerBoxContents();
+
     if(watcher){	     
             watcher_last = watcher_now.MakeLower();
 	    wxTextDataObject data;
@@ -936,7 +956,7 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
     if(scanner){
     	wxConfigBase *pConfig = wxConfigBase::Get();
         scanner_last = scanner_now.MakeLower();
-    	scanner_now = pConfig->Read(_T("/Options/Temp-String"), _T(""));
+    	scanner_now = pConfig->Read(wxT("/Options/Temp-String"), _T(""));
 
     	scanner_now.MakeLower();
     	scanner_now.Trim(TRUE);
@@ -1025,14 +1045,14 @@ void xFarDicApp::ShowSetFont()
         m_font = retData.GetChosenFont();        
  	m_label->SetFont(m_font);	
 	
-	pConfig->SetPath(_T("/"));
+	pConfig->SetPath(wxT("/"));
 	
-	pConfig->Write(_T("/Options/Font-Face"), m_font.GetFaceName());
-	pConfig->Write(_T("/Options/Font-Size"), m_font.GetPointSize());
-	pConfig->Write(_T("/Options/Font-Style"), m_font.GetStyle());
-	pConfig->Write(_T("/Options/Font-Family"), m_font.GetFamily());
-	pConfig->Write(_T("/Options/Font-Enc"), m_font.GetDefaultEncoding());
-	pConfig->Write(_T("/Options/Font-Wgt"), m_font.GetWeight());
+	pConfig->Write(wxT("/Options/Font-Face"), m_font.GetFaceName());
+	pConfig->Write(wxT("/Options/Font-Size"), m_font.GetPointSize());
+	pConfig->Write(wxT("/Options/Font-Style"), m_font.GetStyle());
+	pConfig->Write(wxT("/Options/Font-Family"), m_font.GetFamily());
+	pConfig->Write(wxT("/Options/Font-Enc"), m_font.GetDefaultEncoding());
+	pConfig->Write(wxT("/Options/Font-Wgt"), m_font.GetWeight());
 	
 	delete wxConfigBase::Set((wxConfigBase *) NULL);
     } 
@@ -1055,7 +1075,7 @@ void xFarDicApp::RecreateToolbar(bool activate)
 	    toolBar = CreateToolBar(style, ID_TOOLBAR);	    
 
 	    // Set up toolbar
-	    wxBitmap toolBarBitmaps[12];
+	    wxBitmap toolBarBitmaps[13];
 	    wxArtClient client;
 
 	    wxBitmap  cut = wxArtProvider::GetBitmap(wxART_CUT, client, wxDefaultSize);
@@ -1063,14 +1083,15 @@ void xFarDicApp::RecreateToolbar(bool activate)
 	    wxBitmap  paste = wxArtProvider::GetBitmap(wxART_PASTE, client, wxDefaultSize);
 	    wxBitmap  copy = wxArtProvider::GetBitmap(wxART_COPY, client, wxDefaultSize);
 	    wxBitmap  settings = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxDefaultSize);
-	    wxBitmap  trash = wxArtProvider::GetBitmap(wxART_DELETE, client, wxDefaultSize);
+	    wxBitmap  trash = wxArtProvider::GetBitmap(wxT("gtk-clear"), client, wxDefaultSize);
 	    wxBitmap  selectb = wxArtProvider::GetBitmap(wxART_REDO, client, wxDefaultSize);
 	    wxBitmap  btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
 	    wxBitmap  back = wxArtProvider::GetBitmap(wxART_GO_BACK, client, wxDefaultSize);
 	    wxBitmap  forward = wxArtProvider::GetBitmap(wxART_GO_FORWARD, client, wxDefaultSize);
 	    wxBitmap  spellb = wxArtProvider::GetBitmap(wxT("gtk-spell-check"), client, wxDefaultSize);
 	    wxBitmap  revsrchb = wxArtProvider::GetBitmap(wxART_UNDO, client, wxDefaultSize);
-	    wxBitmap  similar = wxArtProvider::GetBitmap(wxT("gtk-find-and-replace"), client, wxDefaultSize);	     
+	    wxBitmap  similar = wxArtProvider::GetBitmap(wxT("gtk-find-and-replace"), client, wxDefaultSize);
+	    wxBitmap  leitner = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);	     	     
 
 	    toolBarBitmaps[0]  = back;
 	    toolBarBitmaps[1]  = forward;
@@ -1084,6 +1105,7 @@ void xFarDicApp::RecreateToolbar(bool activate)
 	    toolBarBitmaps[9]  = trash;
 	    toolBarBitmaps[10] = spellb;
 	    toolBarBitmaps[11] = revsrchb;
+	    toolBarBitmaps[12] = leitner;
 
 	    if ( !m_smallToolbar )
 	    {
@@ -1106,7 +1128,8 @@ void xFarDicApp::RecreateToolbar(bool activate)
 	    toolBar->AddTool(ID_CUT, _("Cut"), toolBarBitmaps[7], _("Cut"));
 	    toolBar->AddTool(ID_COPY, _("Copy"), toolBarBitmaps[6], _("Copy Result"));
 	    toolBar->AddTool(ID_PASTE, _("Paste"), toolBarBitmaps[8], _("Paste and Translate"));
-	    toolBar->AddTool(ID_TRASH, _("Trash"), toolBarBitmaps[9], _("Clear History"));    
+	    toolBar->AddTool(ID_TRASH, _("Trash"), toolBarBitmaps[9], _("Clear History"));
+	    //toolBar->AddTool(ID_TOOL_LT, _("Leitner Box"), toolBarBitmaps[12], _("Open leitner box"));        
 	    toolBar->AddSeparator();
 	    toolBar->AddTool(ID_SELECT, _("Select"), toolBarBitmaps[4], _("Auto Select Text"), wxITEM_CHECK);
 	    toolBar->AddTool(ID_SPELL, _("Spell"), toolBarBitmaps[10], _("Spell Checking"), wxITEM_CHECK);
@@ -1147,14 +1170,16 @@ void xFarDicApp::RecreateTrToolbar()
 	                              wxPoint(0, 37), wxSize(520, 37),
 	                              wxTB_HORIZONTAL | wxTB_DOCKABLE);
 
-	m_text = new wxComboBox(t_tbar, ID_COMBO, _T(""), wxPoint(9, 8), wxSize(405, 30), 0, NULL, wxCB_DROPDOWN & wxPROCESS_ENTER);
+	m_text = new wxComboBox(t_tbar, ID_COMBO, _T(""), wxPoint(9, 8), wxSize(375, 30), 0, NULL, wxCB_DROPDOWN & wxPROCESS_ENTER);
 	m_text->SetFocus();
 
 	// Icon
         wxArtClient client;    
         wxBitmap  btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
+	wxBitmap  bltbox = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);
 
-	m_translate = new wxBitmapButton(t_tbar, ID_BUTTON_TRANSLATE, btranslate, wxPoint(415,4), wxSize(98,35));
+	m_translate = new wxBitmapButton(t_tbar, ID_BUTTON_TRANSLATE, btranslate, wxPoint(415,4), wxSize(65,36));
+	m_leitnerbox = new wxBitmapButton(t_tbar, ID_BTN_LT, bltbox, wxPoint(470,4), wxSize(65,36));
 
 	//Set Default button
 	m_translate->SetDefault();
@@ -1162,6 +1187,7 @@ void xFarDicApp::RecreateTrToolbar()
 	// Translation toolbar implementation 
 	t_tbar->AddControl(m_text);
 	t_tbar->AddControl(m_translate);
+	t_tbar->AddControl(m_leitnerbox);
 	t_tbar->Realize();
 	t_tbar->SetSize(0, 0, 520, 37);    
 }
@@ -1347,6 +1373,10 @@ if(srch && !revsrch){
 
   if(!found){
 	m_label->SetValue(_("Phrase not found."));	
+  }else{
+	if(ltbox.GetCount() < ltbaselimit){
+		m_leitnerbox->Enable(TRUE);
+  	}
   }
 
   if(notify){
@@ -1464,6 +1494,33 @@ void xFarDicApp::ShowAbout()
      }  
 }
 
+void xFarDicApp::ShowLeitner()
+{
+    if (showLeitner) {
+       // getting main window position
+       int pos_x, pos_y;
+       GetPosition(&pos_x, &pos_y);
+
+       // getting mainwindow size
+       int size_x, size_y;
+       GetSize(&size_x, &size_y);
+
+       // About window size
+       int const x = 350;
+       int const y = 350;
+
+       // About window position
+       int z = pos_x + (( size_x - x) / 2 );
+       int w = pos_y + (( size_y - y) / 2 );
+
+       ltframe = new xFarDicLeitner(this, _("xFarDic - Leitner Box"),
+                               wxPoint(z, w), wxSize(x, y), m_locale,wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR);
+      
+       ltframe->Show(TRUE);
+       showLeitner = false;
+     }  
+}
+
 /// Quit event handler
 void xFarDicApp::OnQuit(wxCommandEvent& WXUNUSED(event))
 {
@@ -1474,14 +1531,14 @@ void xFarDicApp::DoQuit()
 {
     // TRUE is to force the frame to close
     wxConfigBase *pConfig = wxConfigBase::Get();
-    pConfig->SetPath(_T("/"));
+    pConfig->SetPath(wxT("/"));
 
-    if ( pConfig->Read(_T("/Options/Save-Cache"), 1) != 0 ) {
+    if ( pConfig->Read(wxT("/Options/Save-Cache"), 1) != 0 ) {
        //delete all entries from file
-        int count = pConfig->Read(_T("/Options/Num-Entries"), 10);
+        int count = pConfig->Read(wxT("/Options/Num-Entries"), 10);
 	int textcount = m_text->GetCount();
 	
-	pConfig->SetPath(_T("/Cache"));	
+	pConfig->SetPath(wxT("/Cache"));	
 	wxString str;
       	long dummy;
       	int counter =0;
@@ -1506,21 +1563,21 @@ void xFarDicApp::DoQuit()
 	}	
     }else{
     	//delete all entries from file      
-	pConfig->SetPath(_T("/"));
-	pConfig->DeleteGroup(_T("Cache"));	
+	pConfig->SetPath(wxT("/"));
+	pConfig->DeleteGroup(wxT("Cache"));	
     }    
     
-    pConfig->SetPath(_T("/"));
+    pConfig->SetPath(wxT("/"));
 
-    if(pConfig->Read(_T("/Options/Win-Pos"), 0l) != 0 ){
+    if(pConfig->Read(wxT("/Options/Win-Pos"), 0l) != 0 ){
           int x, y;
           GetPosition(&x, &y);
-          pConfig->Write(_T("/Options/x"), (long) x);
-          pConfig->Write(_T("/Options/y"), (long) y);	  
+          pConfig->Write(wxT("/Options/x"), (long) x);
+          pConfig->Write(wxT("/Options/y"), (long) y);	  
       }else{
-          pConfig->Write(_T("/Options/Win-Pos"), 0);
-          pConfig->Write(_T("/Options/x"), 0);
-          pConfig->Write(_T("/Options/y"), 0);	  
+          pConfig->Write(wxT("/Options/Win-Pos"), 0);
+          pConfig->Write(wxT("/Options/x"), 0);
+          pConfig->Write(wxT("/Options/y"), 0);	  
       }
     
     delete wxConfigBase::Set((wxConfigBase *) NULL);
@@ -1567,8 +1624,8 @@ void xFarDicApp::OnTrash(wxCommandEvent& WXUNUSED(event))
     wxConfigBase *pConfig = wxConfigBase::Get();
 
     //delete all entries from file      	
-	pConfig->SetPath(_T("/"));
-	pConfig->DeleteGroup(_T("Cache"));
+	pConfig->SetPath(wxT("/"));
+	pConfig->DeleteGroup(wxT("Cache"));
 
     delete wxConfigBase::Set((wxConfigBase *) NULL);   
     m_text->Clear();
@@ -1577,6 +1634,11 @@ void xFarDicApp::OnTrash(wxCommandEvent& WXUNUSED(event))
 void xFarDicApp::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
     ShowAbout();
+}
+
+void xFarDicApp::OnLeitner(wxCommandEvent& WXUNUSED(event))
+{
+    ShowLeitner();
 }
 
 void xFarDicApp::Hide(wxIconizeEvent& event)
@@ -1702,8 +1764,8 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning){
     //Get Configuration From Config File
     wxConfigBase *pConfig = wxConfigBase::Get();
 
-    pConfig->SetPath(_T("/Options"));
-    int timeout = pConfig->Read(_T("/Options/Scan-Timeout"), 5);
+    pConfig->SetPath(wxT("/Options"));
+    int timeout = pConfig->Read(wxT("/Options/Scan-Timeout"), 5);
     
     if(timeout != 0){
        timeout = timeout*1000;
@@ -1747,6 +1809,11 @@ wxString xFarDicApp::ProcessWord(wxString word){
 
 	// DEBUGGING
 	// fprintf(stderr, "%s\n", (const char *)word.mb_str(wxConvUTF8));
+	
+	// Check last parentheses!	
+	if(LastChar.IsSameAs(_T(")"),FALSE)){
+		word = word.RemoveLast();
+	}
 			
 	// Check last point!	
 	if(LastChar.IsSameAs(_T("."),FALSE)){
@@ -1791,6 +1858,11 @@ wxString xFarDicApp::ProcessWord(wxString word){
 	// Check last star!
 	if(LastChar.IsSameAs(_T("*"),FALSE)){
 		word = word.RemoveLast();
+	}
+
+	// Check first parentheses!	
+	if(FirstChar.IsSameAs(_T("("),FALSE)){
+		word = word.Right(word.Len()-1);
 	}
 	
 	// Check first point!	
@@ -1865,6 +1937,13 @@ wxString xFarDicApp::ProcessWord(wxString word){
 		}
 	}
 
+	// Check for Last zation
+	if(word.Right(6) == _T("zation") && (wordList.Index(word,false) == wxNOT_FOUND)){
+		if(wordList.Index(word.Left(word.Len()-5)+_T("e"),false) != wxNOT_FOUND){
+			return word.Left(word.Len()-5)+_T("e");
+		}
+	}
+
 	// Check for Last ment
 	if(word.Right(4) == _T("ment") && (wordList.Index(word,false) == wxNOT_FOUND)){
 		if(wordList.Index(word.Left(word.Len()-4),false) != wxNOT_FOUND){
@@ -1911,4 +1990,148 @@ wxString xFarDicApp::ProcessWord(wxString word){
 	}
 
 	return word;
+}
+
+void xFarDicApp::LoadLeitnerBox()
+{
+   wxString tmpstr, ltboxstr; 
+   wxArrayInt position;
+
+   //Get Configuration From Config File
+   wxConfigBase *pConfig = wxConfigBase::Get();
+
+   pConfig->SetPath(wxT("/Options"));
+
+   ltboxstr = pConfig->Read(_T("LTBOX-A"), _T(""));
+   
+   ltboxstr = ltboxstr.Trim(TRUE);
+   ltboxstr = ltboxstr.Trim(FALSE);  
+
+  position.Empty();
+ 
+  if(ltboxstr.Len() > 0){
+     for(int x=1; x <= ltboxstr.Len(); x++){	
+        Part = ltboxstr.GetChar(x);
+	if(Part.CmpNoCase(_T(";"))==0){
+		position.Add(x);		
+        }
+      } // End For
+  }
+
+  if(position.GetCount()>0){    
+	   for(int x=0; x <= position.GetCount(); x++){
+		if(x == 0){
+			tmpstr = ltboxstr.Mid(0,position[x]);
+			if(tmpstr.Len()!=0){
+				ltbox.Add(ltboxstr.Mid(0,position[x]));
+			}
+		}else if(x == position.GetCount()){
+			tmpstr = ltboxstr.Mid(position[x-1]+1,ltboxstr.Len());
+			if(tmpstr.Len()!=0){
+				ltbox.Add(ltboxstr.Mid(position[x-1]+1,ltboxstr.Len()));
+			}
+		}else{
+			tmpstr = ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1);
+			if(tmpstr.Len()!=0){
+				ltbox.Add(ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1));
+			}
+		}
+	    }   	  
+  }else if(ltboxstr.Len() > 0){
+	ltbox.Add(ltboxstr);
+  }
+}
+
+void xFarDicApp::OnLeitnerBox(wxCommandEvent& event)
+{
+	wxString tmpstr, att, msg;	
+
+	//Get Configuration From Config File
+   	wxConfigBase *pConfig = wxConfigBase::Get();
+
+	pConfig->SetPath(wxT("/Options"));
+
+        ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
+
+	if(ltbox.GetCount() < ltbaselimit)
+	{
+		if(ltbox.Index(m_text->GetValue(),false) == wxNOT_FOUND && wordList.Index(m_text->GetValue(),false) != wxNOT_FOUND)
+		{
+			ltbox.Add(m_text->GetValue());
+		}else{
+			msg.Printf( _("Selected word already exists in the box\nor not found in the installed database(s).\n"));
+			wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+			m_text->SetFocus();
+			return;
+		}
+	}else{
+		msg.Printf( _("The leitner box is full.\n"));
+		wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+		m_text->SetFocus();
+		return;
+	}
+	
+	if(ltbox.GetCount()>0){      	
+		for(int x=0; x < ltbox.GetCount(); x++){
+			if(tmpstr.Len()==0){att = _T(";");}
+			if(x+1 < ltbox.GetCount()){
+				tmpstr = tmpstr + ltbox[x] + att;
+			}else{
+				tmpstr = tmpstr + ltbox[x];
+			}
+		}
+	}
+	pConfig->Write(wxT("/Options/LTBOX-A"), tmpstr);
+}
+
+void xFarDicApp::LoadLeitnerBoxContents()
+{
+   wxString tmpstr, ltboxstr, Part;
+   wxArrayInt position;
+   
+   //Get Configuration From Config File
+   wxConfigBase *pConfig = wxConfigBase::Get();
+
+   pConfig->SetPath(wxT("/Options"));
+
+   ltboxstr = pConfig->Read(_T("LTBOX-A"), _T(""));
+   
+   ltboxstr = ltboxstr.Trim(TRUE);
+   ltboxstr = ltboxstr.Trim(FALSE);
+
+  position.Empty();
+ 
+  if(ltboxstr.Len() > 0){
+     for(int x=1; x <= ltboxstr.Len(); x++){	
+        Part = ltboxstr.GetChar(x);
+	if(Part.CmpNoCase(_T(";"))==0){
+		position.Add(x);		
+        }
+      } // End For
+  }
+
+  ltbox.Empty();
+
+  if(position.GetCount()>0){    
+	   for(int x=0; x <= position.GetCount(); x++){
+		if(x == 0){
+			tmpstr = ltboxstr.Mid(0,position[x]);
+			if(tmpstr.Len()!=0){
+				ltbox.Add(ltboxstr.Mid(0,position[x]));
+			}
+		}else if(x == position.GetCount()){
+			tmpstr = ltboxstr.Mid(position[x-1]+1,ltboxstr.Len());
+			if(tmpstr.Len()!=0){
+				ltbox.Add(ltboxstr.Mid(position[x-1]+1,ltboxstr.Len()));
+			}
+		}else{
+			tmpstr = ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1);
+			if(tmpstr.Len()!=0){
+				ltbox.Add(ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1));
+			}
+		}
+	    }   	  
+  }else if(ltboxstr.Len() > 0){
+	ltbox.Add(ltboxstr);
+  }
 }

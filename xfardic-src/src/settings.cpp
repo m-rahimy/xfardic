@@ -44,8 +44,9 @@ BEGIN_EVENT_TABLE(xFarDicSettings, wxFrame)
     EVT_CHECKBOX(ID_CHK_SCANNER,  xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_HIDE,  xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_REVSRCH,  xFarDicSettings::EnableApply)
-    EVT_SPINCTRL(ID_SPIN_TIMEOUT,  xFarDicSettings::OnScanTimeOut)
-    EVT_SPINCTRL(ID_SPIN_ENTRY, xFarDicSettings::OnNumEntry)
+    EVT_SPINCTRL(ID_SPIN_TIMEOUT,  xFarDicSettings::EnableSpApply)
+    EVT_SPINCTRL(ID_SPIN_ENTRY, xFarDicSettings::EnableSpApply)
+    EVT_SPINCTRL(ID_SPIN_LEITNER, xFarDicSettings::EnableSpApply)
     EVT_CHOICE(ID_CHOICE, xFarDicSettings::EnableApply)
     EVT_LISTBOX(ID_DB_PATH, xFarDicSettings::OnPathUpdate)
 END_EVENT_TABLE()
@@ -57,10 +58,10 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
        : wxFrame(parent, -1, title, pos, size, style), m_locale(locale)
 {
     // set the frame icon    
-    wxBitmap  micon(_T("/usr/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
+    wxBitmap  micon(wxT("/usr/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
 
     if(!micon.Ok()){
-        micon.LoadFile(_T("/usr/local/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
+        micon.LoadFile(wxT("/usr/local/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
     }
 
     wxIcon wicon;
@@ -109,7 +110,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     wxConfigBase *pConfig = wxConfigBase::Get();
 
     // we could write Read("/Controls/Text") as well, it's just to show SetPath()
-    pConfig->SetPath(_T("/Options"));
+    pConfig->SetPath(wxT("/Options"));
 
     if ( pConfig->Read(_T("Auto-Select"), 1) != 0 ) {
       chk_select->SetValue(TRUE);
@@ -171,11 +172,17 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     int entry = pConfig->Read(_T("Num-Entries"), 10);  
     numEntry->SetValue(entry);
 
-    scantimeout = new wxSpinCtrl(setpanel, ID_SPIN_TIMEOUT, _T(""), wxPoint(300, 68), wxSize(50, 20) );      
+    scantimeout = new wxSpinCtrl(setpanel, ID_SPIN_TIMEOUT, _T(""), wxPoint(300, 64), wxSize(50, 20) );      
     scantimeout->SetRange(0,10);
 
     int timeout = pConfig->Read(_T("Scan-Timeout"), 5);  
     scantimeout->SetValue(timeout);
+
+    leitner = new wxSpinCtrl(setpanel, ID_SPIN_LEITNER, _T(""), wxPoint(300, 86), wxSize(50, 20) );      
+    leitner->SetRange(0,50);
+
+    int ltbasecap = pConfig->Read(_T("Leitner-Base"), 10);  
+    leitner->SetValue(ltbasecap);
     
     wxStaticText *effecttext;
     effecttext = new wxStaticText(this, -1, _("Here you can configure your desired options. Changes will take effect after xFarDic restart."), wxPoint(65, 16), wxSize(380, 80));
@@ -191,7 +198,10 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     settext = new wxStaticText(setpanel, -1, _("Number of Entries in History Box:"), wxPoint(5, 43), wxSize(218, 30));
 
     wxStaticText *timeouttext;
-    timeouttext = new wxStaticText(setpanel, -1, _("Scan window timeout (Sec):"), wxPoint(5, 72), wxSize(218, 30));
+    timeouttext = new wxStaticText(setpanel, -1, _("Scan window timeout (Sec):"), wxPoint(5, 67), wxSize(218, 30));
+
+    wxStaticText *leitnertext;
+    leitnertext = new wxStaticText(setpanel, -1, _("Leitner box base capacity:"), wxPoint(5, 91), wxSize(218, 30));
        
     wxString path = pConfig->Read(_T("DB-Path"), _T(""));    
    
@@ -326,76 +336,78 @@ void xFarDicSettings::SubmitChanges()
          wxMessageBox(msg, _("Warning"), wxOK | wxICON_WARNING, this);
      }
       
-      pConfig->SetPath(_T("/"));
+      pConfig->SetPath(wxT("/"));
 
       // save the control's values to the config
       if(chk_select->GetValue()){
-          pConfig->Write(_T("/Options/Auto-Select"), 1);
+          pConfig->Write(wxT("/Options/Auto-Select"), 1);
       }else{
-          pConfig->Write(_T("/Options/Auto-Select"), 0);
+          pConfig->Write(wxT("/Options/Auto-Select"), 0);
       }
       
       if(chk_srchsim->GetValue()){
-          pConfig->Write(_T("/Options/Auto-Srch"), 1);
+          pConfig->Write(wxT("/Options/Auto-Srch"), 1);
       }else{
-          pConfig->Write(_T("/Options/Auto-Srch"), 0);
+          pConfig->Write(wxT("/Options/Auto-Srch"), 0);
       }
 
       if(chk_spell->GetValue()){
-          pConfig->Write(_T("/Options/Spell"), 1);
+          pConfig->Write(wxT("/Options/Spell"), 1);
       }else{
-          pConfig->Write(_T("/Options/Spell"), 0);
+          pConfig->Write(wxT("/Options/Spell"), 0);
       }
 
       if(chk_watcher->GetValue()){
-          pConfig->Write(_T("/Options/Watcher"), 1);
+          pConfig->Write(wxT("/Options/Watcher"), 1);
       }else{
-          pConfig->Write(_T("/Options/Watcher"), 0);
+          pConfig->Write(wxT("/Options/Watcher"), 0);
       }
 
       if(chk_scanner->GetValue()){
-          pConfig->Write(_T("/Options/Scanner"), 1);
+          pConfig->Write(wxT("/Options/Scanner"), 1);
       }else{
-          pConfig->Write(_T("/Options/Scanner"), 0);
+          pConfig->Write(wxT("/Options/Scanner"), 0);
       }
 
       if(chk_hide->GetValue()){
-          pConfig->Write(_T("/Options/Hide"), 1);
+          pConfig->Write(wxT("/Options/Hide"), 1);
       }else{
-          pConfig->Write(_T("/Options/Hide"), 0);
+          pConfig->Write(wxT("/Options/Hide"), 0);
       }
 
       if(chk_revsrch->GetValue()){
-          pConfig->Write(_T("/Options/RevSrch"), 1);
+          pConfig->Write(wxT("/Options/RevSrch"), 1);
       }else{
-          pConfig->Write(_T("/Options/RevSrch"), 0);
+          pConfig->Write(wxT("/Options/RevSrch"), 0);
       }
 
       if(chk_cache->GetValue()){
-          pConfig->Write(_T("/Options/Save-Cache"), 1);
+          pConfig->Write(wxT("/Options/Save-Cache"), 1);
       }else{
-          pConfig->Write(_T("/Options/Save-Cache"), 0);
+          pConfig->Write(wxT("/Options/Save-Cache"), 0);
       }
 
       if(chk_winpos->GetValue()){
-          pConfig->Write(_T("/Options/Win-Pos"), 1);
+          pConfig->Write(wxT("/Options/Win-Pos"), 1);
           int x, y;
           GetPosition(&x, &y);
-          pConfig->Write(_T("/Options/x"), (long) x);
-          pConfig->Write(_T("/Options/y"), (long) y);
+          pConfig->Write(wxT("/Options/x"), (long) x);
+          pConfig->Write(wxT("/Options/y"), (long) y);
       }else{
-          pConfig->Write(_T("/Options/Win-Pos"), 0);
-          pConfig->Write(_T("/Options/x"), 0);
-          pConfig->Write(_T("/Options/y"), 0);
+          pConfig->Write(wxT("/Options/Win-Pos"), 0);
+          pConfig->Write(wxT("/Options/x"), 0);
+          pConfig->Write(wxT("/Options/y"), 0);
       }
 
-      pConfig->Write(_T("/Options/Num-Entries"), numEntry->GetValue());    
+      pConfig->Write(wxT("/Options/Num-Entries"), numEntry->GetValue());    
 
-      pConfig->Write(_T("/Options/Scan-Timeout"), scantimeout->GetValue()); 
+      pConfig->Write(wxT("/Options/Scan-Timeout"), scantimeout->GetValue()); 
 
-      pConfig->Write(_T("/Options/GUI-Lang"), lang->GetSelection());            
+      pConfig->Write(wxT("/Options/Leitner-Base"), leitner->GetValue());
+
+      pConfig->Write(wxT("/Options/GUI-Lang"), lang->GetSelection());            
               
-      pConfig->Write(_T("/Options/DB-Path"), path);     
+      pConfig->Write(wxT("/Options/DB-Path"), path);     
       
       delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
@@ -465,12 +477,7 @@ void xFarDicSettings::OnPathUpdate(wxCommandEvent& WXUNUSED(event))
      //fprintf(stderr, "%s\n", (const char *)path.mb_str(wxConvUTF8));
 }
 
-void xFarDicSettings::OnNumEntry(wxSpinEvent& WXUNUSED(event))
-{
-     m_apply->Enable(TRUE);
-}
-
-void xFarDicSettings::OnScanTimeOut(wxSpinEvent& WXUNUSED(event))
+void xFarDicSettings::EnableSpApply(wxSpinEvent& WXUNUSED(event))
 {
      m_apply->Enable(TRUE);
 }

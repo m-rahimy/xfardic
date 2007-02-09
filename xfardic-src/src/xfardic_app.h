@@ -31,6 +31,7 @@
 #include "about.h"
 #include "settings.h"
 #include "selection.h"
+#include "leitner.h"
 
 /// xFarDic Application Main Class
 class xFarDicApp : public wxFrame
@@ -46,8 +47,12 @@ public:
     void OnClose(wxCloseEvent& event); 
     /// Process Open About Dialog
     void OnAbout(wxCommandEvent& event); 
+    /// Process Open Leitner Dialog
+    void OnLeitner(wxCommandEvent& event); 
     /// Shows About dialog
     void ShowAbout(); 
+    /// Shows Leitner dialog
+    void ShowLeitner(); 
     /// Navigate: Previous word
     void OnBack(wxCommandEvent& event); 
     /// Navigate: Next word
@@ -58,6 +63,8 @@ public:
     void OnLast(wxCommandEvent& event); 
     /// Translate Button/Menu Event handler
     void OnTranslate(wxCommandEvent& event); 
+    /// Leitner button Event handler
+    void OnLeitnerBox(wxCommandEvent& event); 
     /// Selecting "Select" option 
     void OnSelect(wxCommandEvent& event); 
     /// Selecting "Search Similar" option
@@ -131,8 +138,12 @@ public:
     /// Shows desktop notifications
     bool ShowNotification(wxString word, wxString meaning);
     /// Processes input word and returned pure word
-    wxString ProcessWord(wxString word); 
-    
+    wxString ProcessWord(wxString word);
+    /// Loads Leinter box A contents
+    void LoadLeitnerBox();
+    /// Updates ltbox contents from config file
+    void LoadLeitnerBoxContents();
+
     wxLocale& m_locale;
     bool   hide;
 
@@ -140,7 +151,8 @@ private:
     wxComboBox       *m_text;
     wxTextCtrl       *m_label;
     wxStaticBox      *m_resbox;
-    wxBitmapButton   *m_translate;
+    wxBitmapButton   *m_translate,
+		     *m_leitnerbox;
     wxPanel          *panel;
     bool             m_smallToolbar,
                      m_horzToolbar,
@@ -155,15 +167,17 @@ private:
 	             revsrch,
 	             aspelli;	      
     size_t           m_rows;
-    wxMenu           *gomenu;
-    wxMenu           *opmenu;
-    wxMenu           *vimenu;
-    wxMenu           *edmenu;
-    wxMenuBar        *menuBar;
-    wxMenu           *helpMenu;
-    wxMenu           *menuFile;    
+    wxMenu           *gomenu,
+    	 	     *opmenu,
+                     *vimenu,
+                     *edmenu,
+                     *helpMenu,
+                     *menuFile,
+		     *toolsMenu;
+    wxMenuBar        *menuBar;   
     xFarDicAbout     *abframe;
     xFarDicSettings  *setframe;
+    xFarDicLeitner   *ltframe;
     int              entryq;        
     wxFont   	     m_font;
     wxFontData 	     retData;
@@ -171,7 +185,8 @@ private:
     wxArrayString    sugList,
 	             wordList,
 	             meanList,
-	             paths;
+	             paths,
+		     ltbox;
     wxString 	     watcher_now, 
 	             watcher_last,
 	             scanner_now,
@@ -186,6 +201,7 @@ private:
     wxArrayInt 	     seppos;
     wxSplashScreen   *splash;
     wxToolBar        *t_tbar;
+    int		     ltbaselimit;
 
     //Notification!
     NotifyNotification *n;  
