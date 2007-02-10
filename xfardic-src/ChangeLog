@@ -239,3 +239,7 @@ Added 'ment' and 'er' support to the ProcessWord function.
 Added separate option to enable/disable selection scanner.
 Added 'exist check' before parsing XDB databases.
 Added missing XDBs 'auto remove' feature.
+//////////////////////////////////////////////////////////////////////////////////////
+0.9.0    -- 2007-02-XX
+Added 'Leitner Box' feature to help memorizing words.
+Replaced clear history's menu/toolbar trash icons with clear icons.
