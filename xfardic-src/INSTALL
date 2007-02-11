@@ -11,14 +11,15 @@ The simplest way to compile xFarDic is:
 
   2. Type `make' to compile xFarDic .
 
-  3. Type `make install' as root user to install xFarDic.
+  3. Type `make install' as root user to install xFarDic. On Ubuntu based
+     systems you can use `sudo make install' command.
   
-Pre-requests
+Build Requirements
 =====================
 You should have wxGTK 2.5.x or 2.6.x devel files installed before
 compiling xFarDic. Get it from http://www.wxwidgets.org.
 
-Other neede packages are:
+Other needed packages are:
 
 1. aspell-dev
 2. libxml2-dev

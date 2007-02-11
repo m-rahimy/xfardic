@@ -68,7 +68,7 @@ Main window size changed.
 Some code clean up.
 //////////////////////////////////////////////////////////////////////////////////////
 0.4.0   -- 2004-10-01
-Finally, History cache works w/o any peoblem. 
+Finally, History cache works w/o any problem. 
 User can change result box font face/size.
 Search for Similar Word feature added.
 Minor fixes in application GUI design.
@@ -243,3 +243,4 @@ Added missing XDBs 'auto remove' feature.
 0.9.0    -- 2007-02-XX
 Added 'Leitner Box' feature to help memorizing words.
 Replaced clear history's menu/toolbar trash icons with clear icons.
+Added parenthesis support to the ProcessWord function.
