@@ -244,3 +244,4 @@ Added missing XDBs 'auto remove' feature.
 Added 'Leitner Box' feature to help memorizing words.
 Replaced clear history's menu/toolbar trash icons with clear icons.
 Added parenthesis support to the ProcessWord function.
+Fixed enabled navigator buttons on reverse search mode.
