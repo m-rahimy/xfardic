@@ -1330,7 +1330,7 @@ if(srch && !revsrch){
    }
 }
      	  
-  if (found && wordList.Index(m_text->GetValue(),false) > 0 && !(1-(wordList.Index(m_text->GetValue(),false)) == 0)){
+  if (found && !revsrch && wordList.Index(m_text->GetValue(),false) > 0 && !(1-(wordList.Index(m_text->GetValue(),false)) == 0)){
     if(vtool){
     	wxToolBarBase *tb = GetToolBar();
     	tb->EnableTool(ID_BACK, TRUE);
@@ -1348,7 +1348,7 @@ if(srch && !revsrch){
     gomenu->Enable(xFarDic_Back, FALSE);    
   }
 
-  if (found && !((wordList.Index(m_text->GetValue(),false)) == wordList.Index(wordList.Last(),false))){
+  if (found && !revsrch && !((wordList.Index(m_text->GetValue(),false)) == wordList.Index(wordList.Last(),false))){
     if(vtool){
         wxToolBarBase *tb = GetToolBar();
         tb->EnableTool(ID_FORWARD, TRUE);
