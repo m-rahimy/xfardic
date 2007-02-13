@@ -2262,7 +2262,7 @@ bool xFarDicApp::UpdateSwap()
     }*/
 
 	wxProgressDialog prog(_T("xFarDic"),
-                            _("Creating the swap file. Please wait, this will take a while..."),
+                            _("Creating the swap file. Please wait.\nThis will take a while..."),
                             wordList.GetCount(), 
                             this,
                             wxPD_APP_MODAL |
@@ -2287,7 +2287,6 @@ bool xFarDicApp::UpdateSwap()
 			prog.Update(x);
 		} 
 	}
-	wxYield();  
 
 	return true;    
 }
