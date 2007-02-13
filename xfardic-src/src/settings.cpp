@@ -40,6 +40,7 @@ BEGIN_EVENT_TABLE(xFarDicSettings, wxFrame)
     EVT_CHECKBOX(ID_CHK_CACHE,  xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_SRCHSIM,   xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_SPELL,  xFarDicSettings::EnableApply)
+    EVT_CHECKBOX(ID_CHK_SWAP,  xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_WATCHER,  xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_SCANNER,  xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_HIDE,  xFarDicSettings::EnableApply)
@@ -86,22 +87,24 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     wxArtClient client;
 
     wxBitmap  logo = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxSize(32,35));
+    wxBitmap  notelogo = wxArtProvider::GetBitmap(wxART_TIP, client, wxSize(32,35));
 
     (void)new wxStaticBitmap (this, -1, logo, wxPoint(20, 10));
-
+    
     m_ok = new wxButton(this, wxID_OK, _("&OK"), wxPoint(250,356), wxSize(80,36) );
     m_apply = new wxButton(this, wxID_APPLY, _("&Apply"), wxPoint(331,356), wxSize(80,36) );
     m_cancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxPoint(411,356), wxSize(80,36) );
 
-    chk_select = new wxCheckBox(setpanel, ID_CHK_SELECT, _("Enable Auto &Select Word After Translation"), wxPoint(2,115));
-    chk_hide  = new wxCheckBox(setpanel, ID_CHK_HIDE,  _("&Hide On Window Minimize and close"), wxPoint(2,137));  
-    chk_revsrch  = new wxCheckBox(setpanel, ID_CHK_REVSRCH,  _("Enable Inexact &Reverse Searching"), wxPoint(2,159)); 
-    chk_winpos = new wxCheckBox(setpanel, ID_CHK_WINPOS, _("Save Program Window P&ositions"), wxPoint(2,181));
-    chk_cache  = new wxCheckBox(setpanel, ID_CHK_CACHE,  _("Save Wor&d Cache On Exit"), wxPoint(2,203));
-    chk_watcher  = new wxCheckBox(setpanel, ID_CHK_WATCHER,  _("Enable Clipboard &Watcher"), wxPoint(300,115));
-    chk_scanner  = new wxCheckBox(setpanel, ID_CHK_SCANNER,  _("Enable Clipboard Sca&nner"), wxPoint(300,137));        
-    chk_srchsim   = new wxCheckBox(setpanel, ID_CHK_SRCHSIM,   _("Return Si&milar Words"), wxPoint(300,159));
-    chk_spell  = new wxCheckBox(setpanel, ID_CHK_SPELL,  _("Enable S&pell Checker"), wxPoint(300,181));
+    chk_select = new wxCheckBox(setpanel, ID_CHK_SELECT, _("Enable Auto &Select Word After Translation"), wxPoint(2,116));
+    chk_hide  = new wxCheckBox(setpanel, ID_CHK_HIDE,  _("&Hide On Window Minimize and close"), wxPoint(2,138));  
+    chk_revsrch  = new wxCheckBox(setpanel, ID_CHK_REVSRCH,  _("Enable Inexact &Reverse Searching"), wxPoint(2,160)); 
+    chk_winpos = new wxCheckBox(setpanel, ID_CHK_WINPOS, _("Save Program Window P&ositions"), wxPoint(2,182));
+    chk_cache  = new wxCheckBox(setpanel, ID_CHK_CACHE,  _("Save Wor&d Cache On Exit"), wxPoint(2,204));
+    chk_watcher  = new wxCheckBox(setpanel, ID_CHK_WATCHER,  _("Enable Clipboard &Watcher"), wxPoint(300,116));
+    chk_scanner  = new wxCheckBox(setpanel, ID_CHK_SCANNER,  _("Enable Clipboard Sca&nner"), wxPoint(300,138));        
+    chk_srchsim   = new wxCheckBox(setpanel, ID_CHK_SRCHSIM,   _("Return Si&milar Words"), wxPoint(300,160));
+    chk_spell  = new wxCheckBox(setpanel, ID_CHK_SPELL,  _("Enable S&pell Checker"), wxPoint(300,182));
+    chk_swap  = new wxCheckBox(setpanel, ID_CHK_SWAP,  _("Enable S&wap file"), wxPoint(300,204));
    
     // Set Default button
     m_ok->SetDefault();
@@ -166,19 +169,25 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
       chk_cache->SetValue(FALSE);
     }
 
-    numEntry = new wxSpinCtrl(setpanel, ID_SPIN_ENTRY, _T(""), wxPoint(300, 42), wxSize(50, 20) );      
+    if ( pConfig->Read(_T("Swap"), 0l) != 0 ) {
+      chk_swap->SetValue(TRUE);
+    }else{
+      chk_swap->SetValue(FALSE);
+    }
+
+    numEntry = new wxSpinCtrl(setpanel, ID_SPIN_ENTRY, _T(""), wxPoint(300, 40), wxSize(50, 20) );      
     numEntry->SetRange(3,15);
 
     int entry = pConfig->Read(_T("Num-Entries"), 10);  
     numEntry->SetValue(entry);
 
-    scantimeout = new wxSpinCtrl(setpanel, ID_SPIN_TIMEOUT, _T(""), wxPoint(300, 64), wxSize(50, 20) );      
+    scantimeout = new wxSpinCtrl(setpanel, ID_SPIN_TIMEOUT, _T(""), wxPoint(300, 62), wxSize(50, 20) );      
     scantimeout->SetRange(0,10);
 
     int timeout = pConfig->Read(_T("Scan-Timeout"), 5);  
     scantimeout->SetValue(timeout);
 
-    leitner = new wxSpinCtrl(setpanel, ID_SPIN_LEITNER, _T(""), wxPoint(300, 86), wxSize(50, 20) );      
+    leitner = new wxSpinCtrl(setpanel, ID_SPIN_LEITNER, _T(""), wxPoint(300, 84), wxSize(50, 20) );      
     leitner->SetRange(0,50);
 
     int ltbasecap = pConfig->Read(_T("Leitner-Base"), 10);  
@@ -190,18 +199,18 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     wxStaticText *langtext;
     langtext = new wxStaticText(setpanel, -1, _("Choose default &language:"), wxPoint(5, 12), wxSize(170, 30));
 
-    lang = new wxChoice(setpanel, ID_CHOICE, wxPoint(300,10), wxSize(150,wxDefaultCoord), langlist);
+    lang = new wxChoice(setpanel, ID_CHOICE, wxPoint(300,7), wxSize(150,wxDefaultCoord), langlist);
 
     lang->SetSelection(pConfig->Read(_T("GUI-Lang"), 2));  
 
     wxStaticText *settext;
-    settext = new wxStaticText(setpanel, -1, _("Number of Entries in History Box:"), wxPoint(5, 43), wxSize(218, 30));
+    settext = new wxStaticText(setpanel, -1, _("Number of Entries in History Box:"), wxPoint(5, 41), wxSize(218, 30));
 
     wxStaticText *timeouttext;
-    timeouttext = new wxStaticText(setpanel, -1, _("Scan window timeout (Sec):"), wxPoint(5, 67), wxSize(218, 30));
+    timeouttext = new wxStaticText(setpanel, -1, _("Scan window timeout (Sec):"), wxPoint(5, 65), wxSize(218, 30));
 
     wxStaticText *leitnertext;
-    leitnertext = new wxStaticText(setpanel, -1, _("Leitner box base capacity:"), wxPoint(5, 91), wxSize(218, 30));
+    leitnertext = new wxStaticText(setpanel, -1, _("Leitner box base capacity:"), wxPoint(5, 89), wxSize(218, 30));
        
     wxString path = pConfig->Read(_T("DB-Path"), _T(""));    
    
@@ -255,14 +264,18 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
      }	
    }
 
-    dbpath = new wxListBox(dbpanel, ID_DB_PATH, wxPoint(115, 13), wxSize(340, 120),dbs,wxLB_EXTENDED |wxLB_NEEDED_SB);
-
-    wxBitmap  notelogo = wxArtProvider::GetBitmap(wxART_TIP, client, wxSize(32,35));
+    dbpath = new wxListBox(dbpanel, ID_DB_PATH, wxPoint(115, 13), wxSize(340, 120),dbs,wxLB_EXTENDED |wxLB_NEEDED_SB);    
 
     (void)new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 175));
 
     wxStaticText *dbnote;
     dbnote = new wxStaticText(dbpanel, -1, _("Ctrl+Click to enable or disable available database(s)."), wxPoint(141, 188), wxSize(380, 80));
+
+    (void)new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 220));
+
+    wxStaticText *swapnote;
+    swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 50% and reduces performance by 20%."), wxPoint(141, 225), wxSize(380, 80));
+
 
     if(path.Len()!=0){
 	for(int x=0; x < dbs.GetCount(); x++){
@@ -385,6 +398,12 @@ void xFarDicSettings::SubmitChanges()
           pConfig->Write(wxT("/Options/Save-Cache"), 1);
       }else{
           pConfig->Write(wxT("/Options/Save-Cache"), 0);
+      }
+
+      if(chk_swap->GetValue()){
+          pConfig->Write(wxT("/Options/Swap"), 1);
+      }else{
+          pConfig->Write(wxT("/Options/Swap"), 0);
       }
 
       if(chk_winpos->GetValue()){

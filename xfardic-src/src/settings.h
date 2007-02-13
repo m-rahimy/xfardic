@@ -90,7 +90,9 @@ private:
     		*chk_watcher,
     		*chk_hide,
     		*chk_revsrch,
-		*chk_scanner;
+		*chk_scanner,
+		*chk_swap;
+
     wxChoice	*lang;
     wxArrayString langlist;
     wxSpinCtrl  *numEntry,
