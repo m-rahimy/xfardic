@@ -74,6 +74,7 @@ using namespace std;
 #include <libnotify/notify.h>
 #include <gtk/gtk.h>
 #include <cstring>
+#include "sqlite3.h"
 
 #include "constants.h"
 

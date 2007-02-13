@@ -120,10 +120,13 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     // Starting main timer 
     m_timer.Start(500);       
 
-    wxArtClient client;
-
+    wxArtClient client;    
+    
     //Load The leitner box content
     LoadLeitnerBox();
+
+    //Temp. activated swap
+    swap = TRUE;
 
     wxIcon taskicon = wxArtProvider::GetIcon(wxART_FIND, client, wxDefaultSize);
     ticon.SetIcon(taskicon, _T("xFarDic Multilingual Dictionary"));	
@@ -486,10 +489,10 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 	   }
 	   // Write detected path to config file
 	   pConfig->SetPath(wxT("/"));
-	   pConfig->Write(wxT("/Options/DB-Path"), longpath);        
+	   pConfig->Write(wxT("/Options/DB-Path"), longpath);        	  
 	   
 	   delete splash;
-	   wxYield();
+	   wxYield();	           
   }
   
   if(wordList.GetCount() >0){
@@ -601,6 +604,9 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
      } 
      
      pConfig->SetPath(wxT("/"));
+
+      //Init swap
+      initSwap();
 }
 
 xFarDicApp::~xFarDicApp()
@@ -1194,6 +1200,12 @@ void xFarDicApp::RecreateTrToolbar()
 
 bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
 {
+    int nrow, ncol, returnvalue;
+    char** qresult;
+    char** qrresult;
+
+    wxString qsql;
+    wxProgressDialog *prog;
     
     if(m_textVal.Len()==0){
     	m_textVal = m_text->GetValue();    
@@ -1228,25 +1240,48 @@ if(srch && !revsrch){
 	wxBusyCursor wait;
 	wxString tmpsrchII;
 	tmpstr = _T("");
-	wxProgressDialog prog(_T("xFarDic"),
-                            _("Please wait..."),
-                            meanList.GetCount(), 
-                            this,
-                            wxPD_APP_MODAL |
-                            wxPD_AUTO_HIDE |
-                            wxPD_SMOOTH);
+	if(!swap){
+		prog = new wxProgressDialog(_T("xFarDic"),
+	                            _("Please wait..."),
+	                            meanList.GetCount(), 
+	                            this,
+	                            wxPD_APP_MODAL |
+	                            wxPD_AUTO_HIDE |
+	                            wxPD_SMOOTH);
+	}
+
 	while(y < wordList.GetCount()){		
 		tmpsrchII = wordList.Item(y);
 		if(tmpsrchII.Contains(m_textVal)){
 			found = true;
-			tmpstr += meanList.Item(y) + _T(" = ") + tmpsrchII + _T("\n\n");			
+			if(!swap){
+				tmpstr += meanList.Item(y) + _T(" = ") + tmpsrchII + _T("\n\n");			
+			}else{
+				qsql = wxT("SELECT outw FROM words WHERE inw LIKE '%")+m_textVal+wxT("%'");
+				returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qresult, &nrow, &ncol, &db_error_msg);
+
+				// DEBUGGING
+				//fprintf(stderr, "returned meanings:%d\n", nrow);
+				
+				for(int x=1; x <= nrow; x++)
+				{
+					tmpstr += UTF8_STR(qresult[x]) + _T(" = ") + tmpsrchII + _T("\n\n");
+				}
+			}
 		}
 		y++;
-		if(y % 500  == 0){
-			prog.Update(y);
-		}		
-	}       
-	wxYield();	
+
+		if(!swap){
+			if(y % 500  == 0){
+				prog->Update(y);
+			}		
+		}
+	}
+       
+	if(!swap){
+		wxYield();	
+	}
+
 	m_label->SetFont(m_font);	
 	m_label->Clear();
 	if(tmpstr.Len()!=0){
@@ -1262,13 +1297,27 @@ if(srch && !revsrch){
 			tmpstr = _T("");
 			found = true;
 			if(m_label->GetValue()){
-				while(j < wordList.GetCount()){		
-					tmpsrchIII = wordList.Item(j);
-					if(tmpsrchIII.IsSameAs(m_textVal)){
-						tmpstr += meanList.Item(j) + _T("\n\n");											
-					}		
-					j++;
+				if(!swap){
+					while(j < wordList.GetCount()){		
+						tmpsrchIII = wordList.Item(j);
+						if(tmpsrchIII.IsSameAs(m_textVal)){
+							tmpstr += meanList.Item(j) + _T("\n\n");
+						}		
+						j++;
+					}
+				}else{					
+					qsql = wxT("SELECT outw FROM words WHERE inw = '")+m_textVal+wxT("'");
+		        		returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qresult, &nrow, &ncol, &db_error_msg);
+					
+					// DEBUGGING
+					//fprintf(stderr, "returned meanings:%d\n", nrow);
+
+					for(int x=1; x <= nrow; x++)
+					{
+						tmpstr += UTF8_STR(qresult[x]) + _T("\n\n");
+					}				
 				}
+
 				m_label->Clear();
 				m_label->SetFont(m_font);	
 				m_label->WriteText(tmpstr);			   
@@ -1301,25 +1350,47 @@ if(srch && !revsrch){
 	wxBusyCursor wait;
 	wxString tmpsrch;
 	tmpstr = _T("");
-	wxProgressDialog prog(_T("xFarDic"),
-                            _("Please wait..."),
-                            meanList.GetCount(), 
-                            this,
-                            wxPD_APP_MODAL |
-                            wxPD_AUTO_HIDE |
-                            wxPD_SMOOTH);
-	while(x < meanList.GetCount()){		
-		tmpsrch = meanList.Item(x);
-		if(tmpsrch.Contains(m_textVal)){
+	if(!swap){
+		wxProgressDialog prog(_T("xFarDic"),
+	                            _("Please wait..."),
+	                            meanList.GetCount(), 
+	                            this,
+	                            wxPD_APP_MODAL |
+	                            wxPD_AUTO_HIDE |
+	                            wxPD_SMOOTH);
+	
+		while(x < meanList.GetCount()){		
+			tmpsrch = meanList.Item(x);
+			if(tmpsrch.Contains(m_textVal)){
+				found = true;				
+				tmpstr += tmpsrch + _T(" = ") + wordList.Item(x) + _T("\n\n");											
+			}
+			x++;
+			if(x % 500  == 0){
+				prog.Update(x);
+			}		
+		}       	
+		wxYield();
+	}else{
+		qsql = wxT("SELECT inw FROM words WHERE outw LIKE '%")+m_textVal+wxT("%'");								
+		returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qresult, &nrow, &ncol, &db_error_msg);
+
+		qsql = wxT("SELECT outw FROM words WHERE outw LIKE '%")+m_textVal+wxT("%'");								
+		returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qrresult, &nrow, &ncol, &db_error_msg);
+
+		// DEBUGGING
+		//fprintf(stderr, "returned meanings:%d\n", nrow);
+
+		if(nrow > 0){
 			found = true;
-			tmpstr += tmpsrch + _T(" = ") + wordList.Item(x) + _T("\n\n");			
 		}
-		x++;
-		if(x % 500  == 0){
-			prog.Update(x);
-		}		
-	}       
-	wxYield();	
+			
+		for(int x=1; x <= nrow; x++)
+		{			
+			tmpstr += UTF8_STR(qrresult[x]) + _T(" = ") + UTF8_STR(qresult[x]) + _T("\n\n");
+		}
+	}
+
 	m_label->SetFont(m_font);	
 	m_label->Clear();
 	if(tmpstr.Len()!=0){
@@ -1711,8 +1782,8 @@ bool xFarDicApp::CheckSpell(wxString chkStr, bool suggest)
 }
 
 bool xFarDicApp::initDB(const char *filename) {    
-    int ret, counter;
-    wxString tmpstr, path;
+    int ret, counter, returnvalue;
+    wxString tmpstr, path, insertSQL;
     wxFile xmldb;
     
     // Check if xdb file exists before parsing
@@ -1722,7 +1793,7 @@ bool xFarDicApp::initDB(const char *filename) {
 	return false;
     }
    
-    counter =0;          
+    counter =0;     
 
     reader = xmlReaderForFile(filename, NULL, 0);
     if (reader != NULL) {
@@ -1735,15 +1806,17 @@ bool xFarDicApp::initDB(const char *filename) {
 			if(counter % 2 > 0){			
 			   size_t copies =1;			   
 			   tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));			   
-   		           wordList.Add(tmpstr.Lower(),copies);  
+   		           wordList.Add(tmpstr.Lower(),copies); 			   
 			}else{
 			   size_t copies =1;
-			   tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));			   
-   		           meanList.Add(tmpstr.Lower(),copies);                 			  			   
+			   if(!swap){
+				   tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));						   
+   			           meanList.Add(tmpstr.Lower(),copies);
+			   }
 			}
                }	    
 	  }	    
-            ret = xmlTextReaderRead(reader); 	                
+            ret = xmlTextReaderRead(reader); 		    
         }       
         
         xmlFreeTextReader(reader);               
@@ -2082,6 +2155,132 @@ void xFarDicApp::OnLeitnerBox(wxCommandEvent& event)
 		}
 	}
 	pConfig->Write(wxT("/Options/LTBOX-A"), tmpstr);
+}
+
+bool xFarDicApp::initSwap(bool cleanup)
+{
+    // SWAP file implementation
+    int returnvalue;
+    wxString swappath, initsql; 
+    wxFile swapfile;
+    bool update = FALSE;
+
+    swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
+
+    if(!swapfile.Exists(swappath))
+    {
+	update = TRUE;
+    }   
+
+    returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);
+
+    // DEBUGGING
+    if(returnvalue)
+    {
+	//fprintf(stderr, "Could not open the swap database: %s.\n", sqlite3_errmsg(Db));
+	sqlite3_close(Db);
+    }
+
+    if(cleanup)
+    {
+	    initsql = wxT("DROP TABLE words");
+
+	    returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);
+
+	    // DEBUGGING
+	    /*if (returnvalue != SQLITE_OK)
+	    {
+		fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
+	    }*/
+
+	    initsql = wxT("CREATE TABLE words(inw TEXT, outw TEXT)");
+
+	    returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);
+
+	    // DEBUGGING
+	    /*if (returnvalue != SQLITE_OK)
+	    {
+		fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
+	    }*/
+     }	
+
+     if(update){
+     	UpdateSwap();
+     }     
+     meanList.Empty();
+}
+
+bool xFarDicApp::UpdateSwap()
+{
+    // SWAP file implementation
+    int returnvalue;
+    wxString swappath, initsql, tmpIn, tmpOut;    
+    wxFile swapfile;
+
+    swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
+
+    if(swapfile.Exists(swappath))
+    {
+	wxRemoveFile(swappath);
+    }
+
+    returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);
+
+    // DEBUGGING
+    if (returnvalue)
+    {
+	//fprintf(stderr, "Could not open the swap database: %s.\n", sqlite3_errmsg(Db));
+	sqlite3_close(Db);
+    }
+
+    initsql = wxT("DROP TABLE words");
+
+    returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);
+
+    // DEBUGGING
+    /*if (returnvalue != SQLITE_OK)
+    {
+	fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
+    }*/
+
+    initsql = wxT("CREATE TABLE words(inw TEXT, outw TEXT)");
+
+    returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);
+
+    // DEBUGGING
+    /*if (returnvalue != SQLITE_OK)
+    {
+	fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
+    }*/
+
+	wxProgressDialog prog(_T("xFarDic"),
+                            _("Creating/Updating the swap file. Please wait..."),
+                            wordList.GetCount(), 
+                            this,
+                            wxPD_APP_MODAL |
+                            wxPD_AUTO_HIDE |
+                            wxPD_SMOOTH |
+			    wxPD_REMAINING_TIME);
+
+	for(int x=0; x < wordList.Count()-1; x++)
+	{
+		tmpIn = wordList.Item(x);
+		tmpOut = meanList.Item(x);
+
+  		tmpIn.Replace(wxT("'"),wxT("''"),TRUE);
+  		tmpOut.Replace(wxT("'"),wxT("''"),TRUE);
+
+		if(tmpIn.Len() != 0 && tmpOut.Len() !=  0){
+	        	initsql = wxT("INSERT INTO words (inw, outw) VALUES ('")+tmpIn+wxT("','")+tmpOut+wxT("')");
+        		returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
+		}
+
+		if(x % 500  == 0){
+			prog.Update(x);
+		} 
+	}
+	wxYield();   
+	meanList.Empty();
 }
 
 void xFarDicApp::LoadLeitnerBoxContents()

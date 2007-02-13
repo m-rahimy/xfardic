@@ -129,6 +129,10 @@ public:
     void Hide(wxIconizeEvent &event); 
     /// Load XML DBs
     bool initDB(const char *filename); 
+    /// Init swap file
+    bool initSwap(bool cleanup=FALSE);
+    /// Update swap file
+    bool UpdateSwap();	
     /// destructor     
     ~xFarDicApp();  
     /// Create toolbar function
@@ -165,7 +169,8 @@ private:
 	             vtool,	
 	             found,
 	             revsrch,
-	             aspelli;	      
+	             aspelli,
+		     swap;	      
     size_t           m_rows;
     wxMenu           *gomenu,
     	 	     *opmenu,
@@ -202,6 +207,10 @@ private:
     wxSplashScreen   *splash;
     wxToolBar        *t_tbar;
     int		     ltbaselimit;
+    
+    //Swapfile handle
+    sqlite3 	     *Db;
+    char 	     *db_error_msg;
 
     //Notification!
     NotifyNotification *n;  
