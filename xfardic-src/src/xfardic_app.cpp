@@ -124,10 +124,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     
     //Load The leitner box content
     LoadLeitnerBox();
-
-    //Temp. activated swap
-    swap = TRUE;
-
+   
     wxIcon taskicon = wxArtProvider::GetIcon(wxART_FIND, client, wxDefaultSize);
     ticon.SetIcon(taskicon, _T("xFarDic Multilingual Dictionary"));	
      
@@ -282,6 +279,8 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     wxConfigBase *pConfig = wxConfigBase::Get();
 
     pConfig->SetPath(wxT("/Options"));
+
+    swap = pConfig->Read(_T("Swap"), 0l);
 
     ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
   
@@ -2206,8 +2205,11 @@ bool xFarDicApp::initSwap(bool cleanup)
 
      if(update){
      	UpdateSwap();
-     }     
-     meanList.Empty();
+     }
+     
+     if(swap){
+	     meanList.Empty();
+     }
 }
 
 bool xFarDicApp::UpdateSwap()
@@ -2254,7 +2256,7 @@ bool xFarDicApp::UpdateSwap()
     }*/
 
 	wxProgressDialog prog(_T("xFarDic"),
-                            _("Creating/Updating the swap file. Please wait..."),
+                            _("Creating the swap file. Please wait, this will take a while..."),
                             wordList.GetCount(), 
                             this,
                             wxPD_APP_MODAL |
@@ -2280,7 +2282,10 @@ bool xFarDicApp::UpdateSwap()
 		} 
 	}
 	wxYield();   
-	meanList.Empty();
+     if(swap){
+         meanList.Empty();
+     }
+
 }
 
 void xFarDicApp::LoadLeitnerBoxContents()
