@@ -67,7 +67,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 
     wxIcon wicon;
     wicon.CopyFromBitmap(micon);
-    SetIcon(wicon);    
+    SetIcon(wicon);     
 
     layout = new wxNotebook(this, xFarDic_ChangeTab, wxPoint(5,60), wxSize(489,290));
 
@@ -75,6 +75,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     dbpanel =  new wxPanel(layout);
 
     submit = false;
+    swapupdate = false;
 
      size_t copies =1;
      langlist.Add(_("Persian"), copies);
@@ -274,7 +275,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     (void)new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 220));
 
     wxStaticText *swapnote;
-    swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 50% and reduces performance by 20%."), wxPoint(141, 225), wxSize(380, 80));
+    swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 55% and reduces performance by 20%."), wxPoint(141, 225), wxSize(380, 80));
 
 
     if(path.Len()!=0){
@@ -426,7 +427,11 @@ void xFarDicSettings::SubmitChanges()
 
       pConfig->Write(wxT("/Options/GUI-Lang"), lang->GetSelection());            
               
-      pConfig->Write(wxT("/Options/DB-Path"), path);     
+      pConfig->Write(wxT("/Options/DB-Path"), path);
+
+      if(swapupdate){     
+	      pConfig->Write(wxT("/Options/Swap-Update"), 1);     
+      }
       
       delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
@@ -480,7 +485,7 @@ void xFarDicSettings::EnableApply(wxCommandEvent& WXUNUSED(event))
 }
 
 void xFarDicSettings::OnPathUpdate(wxCommandEvent& WXUNUSED(event))
-{
+{     
      wxString path;
      m_apply->Enable(TRUE);
      
@@ -491,6 +496,8 @@ void xFarDicSettings::OnPathUpdate(wxCommandEvent& WXUNUSED(event))
      }else{
 	  dbinfo->Enable(FALSE);
      }
+
+     swapupdate = true;   
 
      // DEBUGGING
      //fprintf(stderr, "%s\n", (const char *)path.mb_str(wxConvUTF8));

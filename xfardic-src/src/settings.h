@@ -68,7 +68,8 @@ public:
     bool CheckPath(wxString dbpath);
     
     bool exist,
-	 submit;
+	 submit,
+	 swapupdate;
     /// constructor
     ~xFarDicSettings();    
 

@@ -150,4 +150,5 @@ const int  ID_BTN_TRANS_A	 = 165;
 const int  ID_BTN_REMOVE	 = 166;
 const int  ID_SPIN_LEITNER	 = 167;
 const int  ID_BTN_CONFIRM	 = 168;
+const int  ID_CHK_SWAP		 = 169;
 #endif

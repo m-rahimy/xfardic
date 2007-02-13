@@ -170,7 +170,8 @@ private:
 	             found,
 	             revsrch,
 	             aspelli,
-		     swap;	      
+		     swap,
+		     swapupdate;	      
     size_t           m_rows;
     wxMenu           *gomenu,
     	 	     *opmenu,

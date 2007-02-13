@@ -281,6 +281,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     pConfig->SetPath(wxT("/Options"));
 
     swap = pConfig->Read(_T("Swap"), 0l);
+    swapupdate = pConfig->Read(_T("Swap-Update"), 0l);
 
     ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
   
@@ -1808,7 +1809,7 @@ bool xFarDicApp::initDB(const char *filename) {
    		           wordList.Add(tmpstr.Lower(),copies); 			   
 			}else{
 			   size_t copies =1;
-			   if(!swap){
+			   if(!swap || swapupdate){
 				   tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));						   
    			           meanList.Add(tmpstr.Lower(),copies);
 			   }
@@ -2203,11 +2204,16 @@ bool xFarDicApp::initSwap(bool cleanup)
 	    }*/
      }	
 
-     if(update){
-     	UpdateSwap();
+     if(update || swapupdate){
+     	if(UpdateSwap()){
+		//Get Configuration From Config File
+		wxConfigBase *pConfig = wxConfigBase::Get();
+		pConfig->SetPath(wxT("/Options"));
+		pConfig->Write(wxT("/Options/Swap-Update"), 0);
+	}
      }
      
-     if(swap){
+     if(swap && !swapupdate){
 	     meanList.Empty();
      }
 }
@@ -2217,7 +2223,7 @@ bool xFarDicApp::UpdateSwap()
     // SWAP file implementation
     int returnvalue;
     wxString swappath, initsql, tmpIn, tmpOut;    
-    wxFile swapfile;
+    wxFile swapfile;    
 
     swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
 
@@ -2264,7 +2270,7 @@ bool xFarDicApp::UpdateSwap()
                             wxPD_SMOOTH |
 			    wxPD_REMAINING_TIME);
 
-	for(int x=0; x < wordList.Count()-1; x++)
+	for(int x=0; x < wordList.Count(); x++)
 	{
 		tmpIn = wordList.Item(x);
 		tmpOut = meanList.Item(x);
@@ -2281,11 +2287,9 @@ bool xFarDicApp::UpdateSwap()
 			prog.Update(x);
 		} 
 	}
-	wxYield();   
-     if(swap){
-         meanList.Empty();
-     }
+	wxYield();  
 
+	return true;    
 }
 
 void xFarDicApp::LoadLeitnerBoxContents()
