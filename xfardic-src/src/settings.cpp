@@ -272,10 +272,10 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     wxStaticText *dbnote;
     dbnote = new wxStaticText(dbpanel, -1, _("Ctrl+Click to enable or disable available database(s)."), wxPoint(141, 188), wxSize(380, 80));
 
-    (void)new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 220));
+    (void)new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 215));
 
     wxStaticText *swapnote;
-    swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 55% and reduces performance by 20%."), wxPoint(141, 225), wxSize(380, 80));
+    swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 55% and reduces performance by 20%."), wxPoint(141, 220), wxSize(380, 80));
 
 
     if(path.Len()!=0){
