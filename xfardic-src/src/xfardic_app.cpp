@@ -2273,6 +2273,9 @@ bool xFarDicApp::UpdateSwap()
 	initsql = wxT("VACUUM");
      	returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
 
+	// Emptying meanings list after update
+	meanList.Empty();
+
 	return true;    
 }
 
