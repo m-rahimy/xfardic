@@ -275,7 +275,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     (void)new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 215));
 
     wxStaticText *swapnote;
-    swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 55% and reduces performance by 20%."), wxPoint(141, 220), wxSize(380, 80));
+    swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 55% and performance by 15%."), wxPoint(141, 220), wxSize(340, 80));
 
 
     if(path.Len()!=0){
@@ -474,6 +474,7 @@ void xFarDicSettings::OnSetDB(wxCommandEvent& WXUNUSED(event))
 					       dbpath->SetStringSelection(path);
 					       dbinfo->Enable(TRUE);
  					       m_apply->Enable(TRUE);	
+					       swapupdate = true;
          }
     }
 	

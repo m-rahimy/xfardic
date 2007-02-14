@@ -130,7 +130,7 @@ public:
     /// Load XML DBs
     bool initDB(const char *filename); 
     /// Init swap file
-    bool initSwap(bool cleanup=FALSE);
+    bool initSwap();
     /// Update swap file
     bool UpdateSwap();	
     /// destructor     
@@ -171,7 +171,8 @@ private:
 	             revsrch,
 	             aspelli,
 		     swap,
-		     swapupdate;	      
+		     swapupdate,
+		     update;
     size_t           m_rows;
     wxMenu           *gomenu,
     	 	     *opmenu,

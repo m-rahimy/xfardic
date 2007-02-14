@@ -115,7 +115,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     m_horzToolbar = TRUE;
     m_rows = 1;
     m_text =  (wxComboBox *)NULL;
-    n = NULL;
+    n = NULL;    
 
     // Starting main timer 
     m_timer.Start(500);       
@@ -281,7 +281,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     pConfig->SetPath(wxT("/Options"));
 
     swap = pConfig->Read(_T("Swap"), 0l);
-    swapupdate = pConfig->Read(_T("Swap-Update"), 0l);
+    swapupdate = pConfig->Read(_T("Swap-Update"), 0l);    
 
     ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
   
@@ -1653,6 +1653,12 @@ void xFarDicApp::DoQuit()
     
     delete wxConfigBase::Set((wxConfigBase *) NULL);
     oSelection.End();
+    
+    // Closing swap
+    if(swap){
+    	sqlite3_close(Db);
+    }
+
     Destroy();
 }
 
@@ -2157,13 +2163,13 @@ void xFarDicApp::OnLeitnerBox(wxCommandEvent& event)
 	pConfig->Write(wxT("/Options/LTBOX-A"), tmpstr);
 }
 
-bool xFarDicApp::initSwap(bool cleanup)
+bool xFarDicApp::initSwap()
 {
     // SWAP file implementation
     int returnvalue;
     wxString swappath, initsql; 
     wxFile swapfile;
-    bool update = FALSE;
+    update = FALSE;
 
     swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
 
@@ -2175,38 +2181,14 @@ bool xFarDicApp::initSwap(bool cleanup)
     returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);
 
     // DEBUGGING
-    if(returnvalue)
+    if (returnvalue)
     {
 	//fprintf(stderr, "Could not open the swap database: %s.\n", sqlite3_errmsg(Db));
 	sqlite3_close(Db);
     }
 
-    if(cleanup)
-    {
-	    initsql = wxT("DROP TABLE words");
-
-	    returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);
-
-	    // DEBUGGING
-	    /*if (returnvalue != SQLITE_OK)
-	    {
-		fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
-	    }*/
-
-	    initsql = wxT("CREATE TABLE words(inw TEXT, outw TEXT)");
-
-	    returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);
-
-	    // DEBUGGING
-	    /*if (returnvalue != SQLITE_OK)
-	    {
-		fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
-	    }*/
-     }	
-
-     if(update || swapupdate){
+    if(update || swapupdate){
      	if(UpdateSwap()){
-		//Get Configuration From Config File
 		wxConfigBase *pConfig = wxConfigBase::Get();
 		pConfig->SetPath(wxT("/Options"));
 		pConfig->Write(wxT("/Options/Swap-Update"), 0);
@@ -2234,7 +2216,6 @@ bool xFarDicApp::UpdateSwap()
 
     returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);
 
-    // DEBUGGING
     if (returnvalue)
     {
 	//fprintf(stderr, "Could not open the swap database: %s.\n", sqlite3_errmsg(Db));
@@ -2261,7 +2242,7 @@ bool xFarDicApp::UpdateSwap()
 	fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
     }*/
 
-	wxProgressDialog prog(_T("xFarDic"),
+	wxProgressDialog prog(_T("xFarDic - Creating Swap..."),
                             _("Creating the swap file. Please wait.\nThis will take a while..."),
                             wordList.GetCount(), 
                             this,
