@@ -2269,6 +2269,10 @@ bool xFarDicApp::UpdateSwap()
 		} 
 	}
 
+	// Shrinking the swap file
+	initsql = wxT("VACUUM");
+     	returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
+
 	return true;    
 }
 
