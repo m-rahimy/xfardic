@@ -4184,7 +4184,7 @@ do
 	break
     fi
 done
-if test "x$LIBGNOME_INCLUDEDIR" = "x"; then
+if test "x$LIBWX_INCLUDEDIR" = "x"; then
     { { echo "$as_me:$LINENO: error: You should have wxGTK header files! Install libwxgtk2.6-dev" >&5
 echo "$as_me: error: You should have wxGTK header files! Install libwxgtk2.6-dev" >&2;}
    { (exit 1); exit 1; }; }
@@ -4209,6 +4209,24 @@ echo "$as_me: error: You should have libnotify header files! Install libnotify-d
    { (exit 1); exit 1; }; }
 else
     echo "checking for libnotify.h...yes"
+fi
+
+LIBSQLITE3_INCLUDEDIR=""
+for d in 			\
+    /usr/include\
+    $prefix/include
+do
+    if test -f "$d/sqlite3.h" ; then
+	LIBSQLITE3_INCLUDEDIR="$d"
+	break
+    fi
+done
+if test "x$LIBSQLITE3_INCLUDEDIR" = "x"; then
+    { { echo "$as_me:$LINENO: error: You should have libsqlite3 header files! Install libsqlite3-dev" >&5
+echo "$as_me: error: You should have libsqlite3 header files! Install libsqlite3-dev" >&2;}
+   { (exit 1); exit 1; }; }
+else
+    echo "checking for sqlite3.h...yes"
 fi
 
 #--------------------------------------------------------------------

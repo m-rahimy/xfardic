@@ -40,7 +40,7 @@ do
 	break
     fi
 done
-if test "x$LIBGNOME_INCLUDEDIR" = "x"; then
+if test "x$LIBWX_INCLUDEDIR" = "x"; then
     AC_MSG_ERROR([You should have wxGTK header files! Install libwxgtk2.6-dev])
 else
     echo "checking for wx.h...yes"
@@ -61,6 +61,22 @@ if test "x$LIBNOTIFY_INCLUDEDIR" = "x"; then
     AC_MSG_ERROR([You should have libnotify header files! Install libnotify-dev])
 else
     echo "checking for libnotify.h...yes"
+fi
+
+LIBSQLITE3_INCLUDEDIR=""
+for d in 			\
+    /usr/include\
+    $prefix/include
+do
+    if test -f "$d/sqlite3.h" ; then
+	LIBSQLITE3_INCLUDEDIR="$d"
+	break
+    fi
+done
+if test "x$LIBSQLITE3_INCLUDEDIR" = "x"; then
+    AC_MSG_ERROR([You should have libsqlite3 header files! Install libsqlite3-dev])
+else
+    echo "checking for sqlite3.h...yes"
 fi
 
 #--------------------------------------------------------------------
