@@ -1934,6 +1934,11 @@ wxString xFarDicApp::ProcessWord(wxString word){
 		word = word.RemoveLast();
 	}
 
+	// Check last dash!
+	if(LastChar.IsSameAs(_T("-"),FALSE)){
+		word = word.RemoveLast();
+	}
+
 	// Check last star!
 	if(LastChar.IsSameAs(_T("*"),FALSE)){
 		word = word.RemoveLast();
@@ -1956,6 +1961,11 @@ wxString xFarDicApp::ProcessWord(wxString word){
 
 	// Check first comma!
 	if(FirstChar.IsSameAs(_T(","),FALSE)){
+		word = word.Right(word.Len()-1);
+	}
+
+	// Check first dash!
+	if(FirstChar.IsSameAs(_T("-"),FALSE)){
 		word = word.Right(word.Len()-1);
 	}
 
