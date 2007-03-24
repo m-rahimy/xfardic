@@ -49,6 +49,21 @@ bool MyApp::OnInit()
     // Disabling wxLog
     wxLogNull logNo;
 
+    // Command line argument
+    static const wxCmdLineEntryDesc cmdLineDesc[] =
+    {
+	    { wxCMD_LINE_PARAM, NULL, NULL, _T("input"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
+	    { wxCMD_LINE_NONE }
+    };
+    wxCmdLineParser parser(cmdLineDesc, wxApp::argc, wxApp::argv);
+    parser.Parse();
+
+    wxString Param = parser.GetParam(0);
+	
+    // DEBUGGING
+    // fprintf(stderr, "%s\n", (const char *)Param.mb_str(wxConvUTF8));
+    // End Command line argument
+
     wxString xapp = wxString::Format(_T("xFarDic"), wxGetUserId().c_str());
     m_checker = new wxSingleInstanceChecker(xapp);
     if (m_checker->IsAnotherRunning())
@@ -126,25 +141,32 @@ bool MyApp::OnInit()
         frame->Centre();
     }
 
+    // translate sent argument or first cached word
+
+    if(Param.Len() != 0 && frame->CheckSpell(Param,0)){
+	    pConfig->Write(wxT("/Options/Temp-String"), Param);
+    }else{
+	    if(saved != 0){
+	       wxString str;
+	       long dummy;
+	       pConfig->SetPath(wxT("/Cache"));
+	       bool bCont = pConfig->GetFirstEntry(str, dummy);
+	       if(bCont){
+	      	  frame->translate();
+		}
+	    }
+    } 
+
     // and show it (the frames, unlike simple controls, are not shown when
     // created initially)
-
-    // translate first cached word
-    if(saved != 0){
-       wxString str;
-       long dummy;
-       pConfig->SetPath(wxT("/Cache"));
-       bool bCont = pConfig->GetFirstEntry(str, dummy);
-       if(bCont){
-      	  frame->translate();
-	}
-    } 
       
     frame->Show(TRUE);
     
     // success: wxApp::OnRun() will be called which will enter the main message
     // loop and the application will run. If we returned FALSE here, the
     // application would exit immediately.
+	
+    // DEBUGGING
     //fprintf(stderr, "Finished OnInit()\n");
     return TRUE;
 }

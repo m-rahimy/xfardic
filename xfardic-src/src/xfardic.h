@@ -71,6 +71,7 @@ using namespace std;
 #include "wx/artprov.h"
 #include "wx/snglinst.h"
 #include "wx/filesys.h"
+#include "wx/cmdline.h"
 #include <libnotify/notify.h>
 #include <gtk/gtk.h>
 #include <cstring>

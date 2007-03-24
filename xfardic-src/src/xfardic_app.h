@@ -150,9 +150,9 @@ public:
 
     wxLocale& m_locale;
     bool   hide;
+    wxComboBox       *m_text;
 
 private:
-    wxComboBox       *m_text;
     wxTextCtrl       *m_label;
     wxStaticBox      *m_resbox;
     wxBitmapButton   *m_translate,
