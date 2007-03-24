@@ -1811,7 +1811,7 @@ bool xFarDicApp::initDB(const char *filename) {
 	    	if(counter > 2){				    				
 			if(counter % 2 > 0){			
 			   size_t copies =1;			   
-			   tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));			   
+			   tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));		   
    		           wordList.Add(tmpstr.Lower(),copies); 			   
 			}else{
 			   size_t copies =1;
@@ -1822,7 +1822,9 @@ bool xFarDicApp::initDB(const char *filename) {
 			}
                }	    
 	  }	    
-            ret = xmlTextReaderRead(reader); 		    
+            ret = xmlTextReaderRead(reader);
+	    // DEBUGGING	  
+	    // fprintf(stderr, "%d\n", ret);		    
         }       
         
         xmlFreeTextReader(reader);               
