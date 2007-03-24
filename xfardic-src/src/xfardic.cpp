@@ -49,22 +49,31 @@ bool MyApp::OnInit()
     // Disabling wxLog
     wxLogNull logNo;
 
+    wxString logo, Param;
+
     // Command line argument
     static const wxCmdLineEntryDesc cmdLineDesc[] =
     {
-	    { wxCMD_LINE_PARAM, NULL, NULL, _T("input"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
+	    { wxCMD_LINE_SWITCH, _T("h"), _T("help"), _("displays this help message"), wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
+	    { wxCMD_LINE_PARAM, NULL, NULL, wxT("word"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
 	    { wxCMD_LINE_NONE }
     };
     wxCmdLineParser parser(cmdLineDesc, wxApp::argc, wxApp::argv);
-    parser.Parse();
+    logo.Printf(wxT("xFarDic %s (C)2004-2007 Alan Baghumian, Armen Baghumian\nxFarDic is free software released under the GPL.\n"),
+	      XVERSION);
+    parser.SetLogo(logo);
+    
+    if(parser.Parse()){
+	return FALSE;
+    }
 
-    wxString Param = parser.GetParam(0);
+    Param = parser.GetParam(0);
 	
     // DEBUGGING
     // fprintf(stderr, "%s\n", (const char *)Param.mb_str(wxConvUTF8));
     // End Command line argument
 
-    wxString xapp = wxString::Format(_T("xFarDic"), wxGetUserId().c_str());
+    wxString xapp = wxString::Format(wxT("xFarDic"), wxGetUserId().c_str());
     m_checker = new wxSingleInstanceChecker(xapp);
     if (m_checker->IsAnotherRunning())
     {
