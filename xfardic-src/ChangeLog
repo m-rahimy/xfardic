@@ -243,6 +243,8 @@ Added missing XDBs 'auto remove' feature.
 0.9.0    -- 2007-02-XX
 Added 'Leitner Box' feature to help memorizing words.
 Added 'swap file' support to decrease memory usage (55-60%)
+Added simple command line interface.
 Replaced clear history's menu/toolbar trash icons with clear icons.
 Added parenthesis support to the ProcessWord function.
 Fixed enabled navigator buttons on reverse search mode.
+
