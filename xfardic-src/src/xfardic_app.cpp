@@ -1651,14 +1651,8 @@ void xFarDicApp::DoQuit()
           pConfig->Write(wxT("/Options/y"), 0);	  
       }
     
-    delete wxConfigBase::Set((wxConfigBase *) NULL);
     oSelection.End();
     
-    // Closing swap
-    if(swap){
-    	sqlite3_close(Db);
-    }
-
     Destroy();
 }
 
@@ -2200,16 +2194,12 @@ bool xFarDicApp::initSwap()
     }
 
     if(update || swapupdate){
-     	if(UpdateSwap()){
-		wxConfigBase *pConfig = wxConfigBase::Get();
-		pConfig->SetPath(wxT("/Options"));
-		pConfig->Write(wxT("/Options/Swap-Update"), 0);
-	}
-     }
+     	UpdateSwap();
+    }
      
-     if(swap && !swapupdate){
-	     meanList.Empty();
-     }
+    if(swap && !swapupdate){
+	meanList.Empty();
+    }
 }
 
 bool xFarDicApp::UpdateSwap()
@@ -2268,10 +2258,10 @@ bool xFarDicApp::UpdateSwap()
 		tmpIn = wordList.Item(x);
 		tmpOut = meanList.Item(x);
 
-  		tmpIn.Replace(wxT("'"),wxT("''"),TRUE);
-  		tmpOut.Replace(wxT("'"),wxT("''"),TRUE);
-
 		if(tmpIn.Len() != 0 && tmpOut.Len() !=  0){
+			tmpIn.Replace(wxT("'"),wxT("''"),TRUE);
+  			tmpOut.Replace(wxT("'"),wxT("''"),TRUE);
+
 	        	initsql = wxT("INSERT INTO words (inw, outw) VALUES ('")+tmpIn+wxT("','")+tmpOut+wxT("')");
         		returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
 		}
@@ -2287,6 +2277,14 @@ bool xFarDicApp::UpdateSwap()
 
 	// Emptying meanings list after update
 	meanList.Empty();
+
+	// Disabling update-swap flag
+	wxConfigBase *pConfig = wxConfigBase::Get();
+	pConfig->SetPath(wxT("/Options"));
+	pConfig->Write(wxT("/Options/Swap-Update"), 0);
+
+	// DEBUGGING
+	// fprintf(stderr, "Finished swap file update/create\n");  
 
 	return true;    
 }
