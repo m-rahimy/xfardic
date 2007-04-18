@@ -281,7 +281,16 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     pConfig->SetPath(wxT("/Options"));
 
     swap = pConfig->Read(_T("Swap"), 0l);
-    swapupdate = pConfig->Read(_T("Swap-Update"), 0l);    
+    swapupdate = pConfig->Read(_T("Swap-Update"), 0l); 
+
+    // Check if swap file exists
+    wxFile swapfile;
+    wxString swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
+
+    if(!swapfile.Exists(swappath) && swap)
+    {
+	swapupdate = TRUE;
+    }      
 
     ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
   
@@ -1279,6 +1288,9 @@ if(srch && !revsrch){
 	}
        
 	if(!swap){
+
+		// Killing progress dialog
+		delete prog;
 		wxYield();	
 	}
 
@@ -1351,7 +1363,7 @@ if(srch && !revsrch){
 	wxString tmpsrch;
 	tmpstr = _T("");
 	if(!swap){
-		wxProgressDialog prog(_T("xFarDic"),
+		prog = new wxProgressDialog(_T("xFarDic"),
 	                            _("Please wait..."),
 	                            meanList.GetCount(), 
 	                            this,
@@ -1367,9 +1379,12 @@ if(srch && !revsrch){
 			}
 			x++;
 			if(x % 500  == 0){
-				prog.Update(x);
+				prog->Update(x);
 			}		
-		}       	
+		}    
+
+		// Killing progress dialog
+		delete prog;   	
 		wxYield();
 	}else{
 		qsql = wxT("SELECT inw FROM words WHERE outw LIKE '%")+m_textVal+wxT("%'");								
@@ -1864,11 +1879,13 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning){
     
     notify_notification_set_timeout (n, timeout); // timeout, 0 will disable that
     
-    if (!notify_notification_show (n, NULL)) 
-    {
-	// DEBUGGING
-	// fprintf(stderr, "failed to send notification\n");
-	return 1;
+    if(!swapupdate){
+	    if (!notify_notification_show (n, NULL)) 
+	    {
+		// DEBUGGING
+		// fprintf(stderr, "failed to send notification\n");
+		return 1;
+	    }
     }
 
     delete wxConfigBase::Set((wxConfigBase *) NULL);
@@ -2207,7 +2224,9 @@ bool xFarDicApp::UpdateSwap()
     // SWAP file implementation
     int returnvalue;
     wxString swappath, initsql, tmpIn, tmpOut;    
-    wxFile swapfile;    
+    wxFile swapfile;   
+
+    wxProgressDialog *prog; 
 
     swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
 
@@ -2244,7 +2263,7 @@ bool xFarDicApp::UpdateSwap()
 	fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
     }*/
 
-	wxProgressDialog prog(_T("xFarDic - Creating Swap..."),
+	prog = new wxProgressDialog(_T("xFarDic - Creating Swap..."),
                             _("Creating the swap file. Please wait.\nThis will take a while..."),
                             wordList.GetCount(), 
                             this,
@@ -2267,13 +2286,16 @@ bool xFarDicApp::UpdateSwap()
 		}
 
 		if(x % 500  == 0){
-			prog.Update(x);
+			prog->Update(x);
 		} 
 	}
 
-	// Shrinking the swap file
-	initsql = wxT("VACUUM");
-     	returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
+	// Killing progress dialog
+	delete prog;
+
+	// Shrinking the swap file. FIXME: Cause crash
+	//initsql = wxT("VACUUM");
+     	//returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
 
 	// Emptying meanings list after update
 	meanList.Empty();
@@ -2282,6 +2304,7 @@ bool xFarDicApp::UpdateSwap()
 	wxConfigBase *pConfig = wxConfigBase::Get();
 	pConfig->SetPath(wxT("/Options"));
 	pConfig->Write(wxT("/Options/Swap-Update"), 0);
+	swapupdate = FALSE;
 
 	// DEBUGGING
 	// fprintf(stderr, "Finished swap file update/create\n");  
