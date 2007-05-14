@@ -1869,12 +1869,12 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning){
     if(n == NULL){
 	n = notify_notification_new ((const char *)word.mb_str(wxConvUTF8), 
                                  (const char *)meaning.mb_str(wxConvUTF8),
-                                  NULL, NULL);
+                                  "stock_help", NULL);
     }else{
 	notify_notification_close (n, NULL);
 	n = notify_notification_new ((const char *)word.mb_str(wxConvUTF8), 
                                  (const char *)meaning.mb_str(wxConvUTF8),
-                                  NULL, NULL);
+                                  "stock_help", NULL);
     }	
     
     notify_notification_set_timeout (n, timeout); // timeout, 0 will disable that
