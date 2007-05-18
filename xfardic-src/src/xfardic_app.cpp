@@ -2198,7 +2198,10 @@ bool xFarDicApp::initSwap()
 
     if(!swapfile.Exists(swappath))
     {
-	update = TRUE;
+	if(swap)
+	{
+		update = TRUE;
+	}
     }   
 
     returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);
