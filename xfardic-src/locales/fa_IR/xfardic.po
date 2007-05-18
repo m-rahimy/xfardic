@@ -231,7 +231,7 @@ msgstr "زمان بسته شدن خودکار پنجره انتخاب خودکا
 
 #: ../src/settings.cpp:214
 msgid "Leitner box base capacity:"
-msgstr ""
+msgstr "طرفیت جعبه لایتنر:"
 
 #: ../src/settings.cpp:273
 msgid "Ctrl+Click to enable or disable available database(s)."
@@ -239,7 +239,7 @@ msgstr "برای فعال یا غیر فعال کردن بانک‌های موج
 
 #: ../src/settings.cpp:278
 msgid "Enabling swap reduces memory usage by 55% and performance by 15%."
-msgstr ""
+msgstr "فعال کردن swap باعث صرفه‌جویی در مصرف حافظه به میزان ۵۵٪ و کاهش سرعت به میزان ۱۵٪ خواهد شد."
 
 #: ../src/settings.cpp:288
 msgid "XML DB Path:"
@@ -323,11 +323,11 @@ msgstr "نمایش پنجره درباره"
 
 #: ../src/xfardic_app.cpp:175
 msgid "Leitner box\tCtrl+B"
-msgstr ""
+msgstr "جعبه لایتنر\tCtrl+B"
 
 #: ../src/xfardic_app.cpp:175
 msgid "Show Leitner box"
-msgstr ""
+msgstr "نمایش جعبه لایتنر"
 
 #: ../src/xfardic_app.cpp:180
 msgid "View Toolbar\tCtrl-T"
@@ -615,7 +615,7 @@ msgstr "لطفا یک واژه وارد نمایید.\n"
 
 #: ../src/xfardic_app.cpp:1254 ../src/xfardic_app.cpp:1367
 msgid "Please wait..."
-msgstr ""
+msgstr "لطفا صبر کنید..."
 
 #: ../src/xfardic_app.cpp:1302 ../src/xfardic_app.cpp:1357
 #: ../src/xfardic_app.cpp:1414 ../src/xfardic_app.cpp:1461
@@ -669,20 +669,24 @@ msgid ""
 "Selected word already exists in the box\n"
 "or not found in the installed database(s).\n"
 msgstr ""
+"کلمه انتخاب شده در حال حاضر موجود است\n"
+"یا در بانک‌های وازه نصب شده یافت نشده است.\n"
 
 #: ../src/xfardic_app.cpp:2170
 msgid "The leitner box is full.\n"
-msgstr ""
+msgstr "ظرفیت جعبه لایتنر تکمیل است.\n"
 
 #: ../src/xfardic_app.cpp:2270
 msgid ""
 "Creating the swap file. Please wait.\n"
 "This will take a while..."
 msgstr ""
+"در حال ایجاد فایل swap. لطفا صبر کنید.\n"
+"این کار ممکن است طول بکشد..."
 
 #: ../src/xfardic.cpp:57
 msgid "displays this help message"
-msgstr ""
+msgstr "نمایش این پیام راهنما"
 
 #: ../src/xfardic.cpp:81
 msgid "Another program instance is already running, aborting."
