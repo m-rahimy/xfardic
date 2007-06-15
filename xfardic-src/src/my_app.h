@@ -60,7 +60,7 @@ public:
     
 private:    
     
-    xFarDicApp	*frame;   
+    xFarDicApp *frame;   
 
 protected:
     wxLocale m_locale; // locale we'll be using 

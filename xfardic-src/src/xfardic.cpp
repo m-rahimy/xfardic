@@ -54,32 +54,31 @@ bool MyApp::OnInit()
     // Command line argument
     static const wxCmdLineEntryDesc cmdLineDesc[] =
     {
-	    { wxCMD_LINE_SWITCH, _T("h"), _T("help"), _("displays this help message"), wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
-	    { wxCMD_LINE_PARAM, NULL, NULL, wxT("word"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
-	    { wxCMD_LINE_NONE }
+        { wxCMD_LINE_SWITCH, _T("h"), _T("help"), _("displays this help message"), wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
+        { wxCMD_LINE_PARAM, NULL, NULL, wxT("word"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
+        { wxCMD_LINE_NONE }
     };
     wxCmdLineParser parser(cmdLineDesc, wxApp::argc, wxApp::argv);
     logo.Printf(wxT("xFarDic %s (C)2004-2007 Alan Baghumian, Armen Baghumian\nxFarDic is free software released under the GPL.\n"),
-	      XVERSION);
+          XVERSION);
     parser.SetLogo(logo);
     
-    if(parser.Parse()){
-	return FALSE;
+    if (parser.Parse()) {
+        return FALSE;
     }
 
     Param = parser.GetParam(0);
-	
+    
     // DEBUGGING
     // fprintf(stderr, "%s\n", (const char *)Param.mb_str(wxConvUTF8));
     // End Command line argument
 
     wxString xapp = wxString::Format(wxT("xFarDic"), wxGetUserId().c_str());
     m_checker = new wxSingleInstanceChecker(xapp);
-    if (m_checker->IsAnotherRunning())
-    {
-	wxString msg;
-	msg.Printf( _("Another program instance is already running, aborting."));
-	wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_EXCLAMATION, 0);
+    if (m_checker->IsAnotherRunning()) {
+        wxString msg;
+        msg.Printf( _("Another program instance is already running, aborting."));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_EXCLAMATION, 0);
         return FALSE;
     }
 
@@ -89,15 +88,15 @@ bool MyApp::OnInit()
 
     // note that it makes no sense to translate these strings, they are
     // shown before we set the locale anyhow
-        const wxString langNames[] =
-        {
-            _T("Farsi"),
-            _T("English (U.S.)"),
-            _T("System default"),
-	    //_T("Azeri")
-        };
+    const wxString langNames[] =
+    {
+        _T("Farsi"),
+        _T("English (U.S.)"),
+        _T("System default"),
+        //_T("Azeri")
+    };
 
-     static const wxLanguage langIds[] =
+    static const wxLanguage langIds[] =
     {
         wxLANGUAGE_FARSI,
         wxLANGUAGE_ENGLISH,
@@ -107,12 +106,12 @@ bool MyApp::OnInit()
 
     // the arrays should be in sync
     wxCOMPILE_TIME_ASSERT( WXSIZEOF(langNames) == WXSIZEOF(langIds),
-                               LangArraysMismatch );
+                           LangArraysMismatch );
 
     pConfig->SetPath(wxT("/Options"));
     m_locale.Init(langIds[pConfig->Read(_T("GUI-Lang"), 2)]);  
     
-    //    m_locale.Init(langIds[1]);
+    // m_locale.Init(langIds[1]);
 
     // Initialize the catalogs we'll be using
     m_locale.AddCatalogLookupPathPrefix(wxT("/usr/share/locale/"));
@@ -123,19 +122,19 @@ bool MyApp::OnInit()
     // shows that you may make use of the standard message catalogs as well
     //
     // if it's not installed on your system, it is just silently ignored
-     wxLogNull noLog;
-     m_locale.AddCatalog(_T("fileutils"));
+    wxLogNull noLog;
+    m_locale.AddCatalog(_T("fileutils"));
 
     //DEBUGGING
-    //fprintf(stderr, "Going to starting Frame\n");	
+    //fprintf(stderr, "Going to starting Frame\n");    
 
     // create the main application window
     frame = new xFarDicApp(_T("xFarDic ")XVERSION, wxPoint(150, 150), wxSize(520, 300), m_locale,
                            wxMINIMIZE_BOX | wxSYSTEM_MENU | wxCLOSE_BOX | wxCAPTION );
 
     //DEBUGGING
-    //fprintf(stderr, "Frame Started\n");	
-			   
+    //fprintf(stderr, "Frame Started\n");    
+               
     // uncomment this to force writing back of the defaults for all values
     // if they're not present in the config - this can give the user an idea
     // of all possible settings for this program
@@ -146,24 +145,24 @@ bool MyApp::OnInit()
     int y = pConfig->Read(_T("y"), 0l);
     int saved = pConfig->Read(_T("Save-Cache"), 1);    
 
-    if(x == 0 && y ==0){
+    if (x == 0 && y ==0) {
         frame->Centre();
     }
 
     // translate sent argument or first cached word
 
-    if(Param.Len() != 0 && frame->CheckSpell(Param,0)){
-	    pConfig->Write(wxT("/Options/Temp-String"), Param);
-    }else{
-	    if(saved != 0){
-	       wxString str;
-	       long dummy;
-	       pConfig->SetPath(wxT("/Cache"));
-	       bool bCont = pConfig->GetFirstEntry(str, dummy);
-	       if(bCont){
-	      	  frame->translate();
-		}
-	    }
+    if (Param.Len() != 0 && frame->CheckSpell(Param,0)) {
+        pConfig->Write(wxT("/Options/Temp-String"), Param);
+    } else {
+        if (saved != 0) {
+            wxString str;
+            long dummy;
+            pConfig->SetPath(wxT("/Cache"));
+            bool bCont = pConfig->GetFirstEntry(str, dummy);
+            if (bCont) {
+                frame->translate();
+            }
+        }
     } 
 
     // and show it (the frames, unlike simple controls, are not shown when
@@ -174,7 +173,7 @@ bool MyApp::OnInit()
     // success: wxApp::OnRun() will be called which will enter the main message
     // loop and the application will run. If we returned FALSE here, the
     // application would exit immediately.
-	
+    
     // DEBUGGING
     //fprintf(stderr, "Finished OnInit()\n");
     return TRUE;
@@ -182,8 +181,8 @@ bool MyApp::OnInit()
 
 /// Taskbar right-click event handler
 void MyApp::OnTaskRightDown(wxTaskBarIconEvent& WXUNUSED(event))
-{       	
-      frame->PopMenu();	
+{           
+     frame->PopMenu();    
      //DEBUGGING
      //fprintf(stderr, "task right click\n");
 }
@@ -192,18 +191,18 @@ void MyApp::OnTaskRightDown(wxTaskBarIconEvent& WXUNUSED(event))
 void MyApp::OnTaskLeftDown(wxTaskBarIconEvent& WXUNUSED(event))
 {
 
-     if (frame->IsIconized()){                                                                                                               
-                if(frame->hide){
-			frame->Show(TRUE);  
-		}else{
-			frame->Raise();
-			frame->SetFocus();                                                                                    
-		}
-         } else{
-		      if(frame->hide){                                                                                                               
-                	frame->Show(FALSE);                                                                                       
-		      }		
-        }                    	             
+    if (frame->IsIconized()) {
+        if (frame->hide) {
+            frame->Show(TRUE);  
+        } else {
+            frame->Raise();
+            frame->SetFocus();                                                                                    
+        }
+    } else {
+        if (frame->hide) {
+            frame->Show(FALSE);                                                                                       
+        }        
+    }                                     
     //DEBUGGING
     //fprintf(stderr, "task left click\n");
 }
@@ -226,7 +225,7 @@ void MyApp::OnSettings(wxCommandEvent& WXUNUSED(event))
 
 void MyApp::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
-    frame->Show(TRUE);		
+    frame->Show(TRUE);        
     frame->Raise();
     frame->SetFocus();
     frame->ShowAbout();
@@ -242,14 +241,14 @@ void MyApp::OnPaste(wxCommandEvent& WXUNUSED(event))
 }
 
 void MyApp::OnQuit(wxCommandEvent& WXUNUSED(event))
-{	       
-	frame->Destroy();  
-       //DEBUGGING
-       //fprintf(stderr, "Quit\n");
+{           
+    frame->Destroy();  
+    //DEBUGGING
+    //fprintf(stderr, "Quit\n");
 }
 
 MyApp::~MyApp()
 {
-        // Delete execution Lock file
-        delete m_checker;
+    // Delete execution Lock file
+    delete m_checker;
 }

@@ -56,15 +56,15 @@ public:
     void OnNextD(wxCommandEvent& event);  
     /// Back buttons event handlers
     void OnBackB(wxCommandEvent& event);
-    void OnBackC(wxCommandEvent& event);	      
-    void OnBackD(wxCommandEvent& event);	      
+    void OnBackC(wxCommandEvent& event);
+    void OnBackD(wxCommandEvent& event);     
     void OnBackE(wxCommandEvent& event);
     /// Remove word button event handler
     void OnRemoveA(wxCommandEvent& event);
     /// Confirm word event handler
     void OnConfirm(wxCommandEvent& event);
     /// Cleans up all boxes
-    void OnClear(wxCommandEvent& event);	      	      
+    void OnClear(wxCommandEvent& event);      
     /// Commit changes to the config file
     void SubmitChanges();
     /// Updates boxes
@@ -76,57 +76,56 @@ public:
 
 private:
     // any class wishing to process wxWindows events must use this macro   
-    wxListBox   *boxa,
-		*boxb,
-		*boxc,
-		*boxd,
-		*boxe;
+    wxListBox *boxa,
+              *boxb,
+              *boxc,
+              *boxd,
+              *boxe;
     wxStaticBox *m_ltbox;
 
     wxArrayString boxacontents,
-		  boxbcontents,
-		  boxccontents,
-		  boxdcontents,
-		  boxecontents;
+                  boxbcontents,
+                  boxccontents,
+                  boxdcontents,
+                  boxecontents;
    
-    wxPanel	  *bapanel,
-		  *bbpanel,
-		  *bcpanel,
-		  *bdpanel,
-		  *bepanel;
+    wxPanel *bapanel,
+            *bbpanel,
+            *bcpanel,
+            *bdpanel,
+            *bepanel;
 
-    wxButton	  *m_ok,
-		  *m_clear;
+    wxButton *m_ok, *m_clear;
 
-    wxBitmapButton  *m_anext,
-		    *m_bnext,
-		    *m_cnext,
-		    *m_dnext,
-		    *m_bback,
-		    *m_cback,
-		    *m_dback,
-		    *m_eback,
-		    *m_atrans,
-		    *m_btrans,
-		    *m_ctrans,
-		    *m_dtrans,
-		    *m_etrans,
-		    *m_remove,
-		    *m_confirm;
+    wxBitmapButton *m_anext,
+                   *m_bnext,
+                   *m_cnext,
+                   *m_dnext,
+                   *m_bback,
+                   *m_cback,
+                   *m_dback,
+                   *m_eback,
+                   *m_atrans,
+                   *m_btrans,
+                   *m_ctrans,
+                   *m_dtrans,
+                   *m_etrans,
+                   *m_remove,
+                   *m_confirm;
 
-    wxStaticText  *boxatext,
-		  *boxbtext,
-		  *boxctext,
-		  *boxdtext,
-		  *boxetext;
+    wxStaticText *boxatext,
+                 *boxbtext,
+                 *boxctext,
+                 *boxdtext,
+                 *boxetext;
 
-    wxNotebook    *layout;
+    wxNotebook *layout;
 
-    int		  bacap,
-		  bbcap,
-		  bccap,
-		  bdcap,
-		  becap;  
+    int bacap,
+        bbcap,
+        bccap,
+        bdcap,
+        becap;  
    
     DECLARE_EVENT_TABLE()
 };

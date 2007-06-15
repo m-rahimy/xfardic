@@ -132,7 +132,7 @@ public:
     /// Init swap file
     bool initSwap();
     /// Update swap file
-    bool UpdateSwap();	
+    bool UpdateSwap();    
     /// destructor     
     ~xFarDicApp();  
     /// Create toolbar function
@@ -156,70 +156,73 @@ private:
     wxTextCtrl       *m_label;
     wxStaticBox      *m_resbox;
     wxBitmapButton   *m_translate,
-		     *m_leitnerbox;
-    wxPanel          *panel;
-    bool             m_smallToolbar,
-                     m_horzToolbar,
-                     select,
-	             srch,
-                     cache,
-	             spell,
-	             watcher,
-		     scanner,
-	             vtool,	
-	             found,
-	             revsrch,
-	             aspelli,
-		     swap,
-		     swapupdate,
-		     update;
-    size_t           m_rows;
-    wxMenu           *gomenu,
-    	 	     *opmenu,
-                     *vimenu,
-                     *edmenu,
-                     *helpMenu,
-                     *menuFile,
-		     *toolsMenu;
+                     *m_leitnerbox;
+    wxPanel *panel;
+    bool    m_smallToolbar,
+            m_horzToolbar,
+            select,
+            srch,
+            cache,
+            spell,
+            watcher,
+            scanner,
+            vtool,    
+            found,
+            revsrch,
+            aspelli,
+            swap,
+            swapupdate,
+            update;
+    size_t  m_rows;
+    wxMenu  *gomenu,
+            *opmenu,
+            *vimenu,
+            *edmenu,
+            *helpMenu,
+            *menuFile,
+            *toolsMenu;
+
     wxMenuBar        *menuBar;   
     xFarDicAbout     *abframe;
     xFarDicSettings  *setframe;
     xFarDicLeitner   *ltframe;
     int              entryq;        
-    wxFont   	     m_font;
-    wxFontData 	     retData;
+    wxFont           m_font;
+    wxFontData       retData;
     wxTaskBarIcon    ticon;
     wxArrayString    sugList,
-	             wordList,
-	             meanList,
-	             paths,
-		     ltbox;
-    wxString 	     watcher_now, 
-	             watcher_last,
-	             scanner_now,
-	             scanner_last,
-    		     inputlang, 
-		     path,
-	             Part, 
-	             tmppath,
-	             tmpstr;
+                     wordList,
+                     meanList,
+                     paths,
+                     ltbox;
+    wxString         watcher_now, 
+                     watcher_last,
+                     scanner_now,
+                     scanner_last,
+                     inputlang, 
+                     path,
+                     Part, 
+                     tmppath,
+                     tmpstr;
+
     wxTimer          m_timer;  
     xmlTextReaderPtr reader;
-    wxArrayInt 	     seppos;
+    wxArrayInt       seppos;
     wxSplashScreen   *splash;
     wxToolBar        *t_tbar;
-    int		     ltbaselimit;
+    int              ltbaselimit;
     
     //Swapfile handle
-    sqlite3 	     *Db;
-    char 	     *db_error_msg;
+    sqlite3          *Db;
+    char             *db_error_msg;
 
     //Notification!
     NotifyNotification *n;  
 
     //Selection System
-    Selection	oSelection;  
+    Selection oSelection;  
           
     DECLARE_EVENT_TABLE()
 };
+
 #endif

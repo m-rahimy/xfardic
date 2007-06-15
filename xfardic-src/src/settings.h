@@ -68,8 +68,8 @@ public:
     bool CheckPath(wxString dbpath);
     
     bool exist,
-	 submit,
-	 swapupdate;
+         submit,
+         swapupdate;
     /// constructor
     ~xFarDicSettings();    
 
@@ -82,35 +82,37 @@ private:
     wxButton    *m_cancel;
     wxStaticBox *m_setbox;
     wxPanel     *setpanel,
-		*dbpanel;
+                *dbpanel;
     wxCheckBox  *chk_select,
-    		*chk_winpos,
-    		*chk_cache,
-    		*chk_srchsim,
-    		*chk_spell,
-    		*chk_watcher,
-    		*chk_hide,
-    		*chk_revsrch,
-		*chk_scanner,
-		*chk_swap;
+                *chk_winpos,
+                *chk_cache,
+                *chk_srchsim,
+                *chk_spell,
+                *chk_watcher,
+                *chk_hide,
+                *chk_revsrch,
+                *chk_scanner,
+                *chk_swap;
 
-    wxChoice	*lang;
+    wxChoice      *lang;
     wxArrayString langlist;
-    wxSpinCtrl  *numEntry,
-    		*scantimeout,
-		*leitner;
-    wxButton    *dbinfo;
-    wxButton    *dbdir;
-    wxListBox   *dbpath;
-    wxString	strSel;
-    wxString	dbname;
-    wxString	author;
-    wxString	inputlang;
-    wxString	version, tmppath; 
+    wxSpinCtrl    *numEntry,
+                  *scantimeout,
+                  *leitner;
+
+    wxButton      *dbinfo;
+    wxButton      *dbdir;
+    wxListBox     *dbpath;
+    wxString      strSel;
+    wxString      dbname;
+    wxString      author;
+    wxString      inputlang;
+    wxString      version, tmppath; 
+
     xmlTextReaderPtr reader;
-    wxArrayString dbs;
-    wxArrayInt 	dbcount, seppos;
-    wxNotebook* layout;
+    wxArrayString    dbs;
+    wxArrayInt       dbcount, seppos;
+    wxNotebook       *layout;
 
     DECLARE_EVENT_TABLE()
 };

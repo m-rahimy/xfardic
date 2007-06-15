@@ -103,7 +103,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     // set the frame icon    
     wxBitmap  micon(wxT("/usr/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
 
-    if(!micon.Ok()){
+    if (!micon.Ok()) {
         micon.LoadFile(wxT("/usr/local/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
     }
 
@@ -126,7 +126,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     LoadLeitnerBox();
    
     wxIcon taskicon = wxArtProvider::GetIcon(wxART_FIND, client, wxDefaultSize);
-    ticon.SetIcon(taskicon, _T("xFarDic Multilingual Dictionary"));	
+    ticon.SetIcon(taskicon, _T("xFarDic Multilingual Dictionary"));    
      
     wxBitmap  bcut = wxArtProvider::GetBitmap(wxART_CUT, client, wxDefaultSize);
     wxBitmap  bcut16 = wxArtProvider::GetBitmap(wxART_CUT, client, wxSize(16,16));
@@ -155,7 +155,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     wxBitmap  blast = wxArtProvider::GetBitmap(wxT("gtk-goto-last"), client, wxSize(16,16));
     wxBitmap  bsplash(wxT("/usr/share/xfardic/pixmaps/splash.png"), wxBITMAP_TYPE_PNG);
 
-    if(!bsplash.Ok()){
+    if (!bsplash.Ok()) {
         bsplash.LoadFile(wxT("/usr/local/share/xfardic/pixmaps/splash.png"), wxBITMAP_TYPE_PNG);
     }
         
@@ -287,27 +287,26 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     wxFile swapfile;
     wxString swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
 
-    if(!swapfile.Exists(swappath) && swap)
-    {
-	swapupdate = TRUE;
+    if (!swapfile.Exists(swappath) && swap) {
+        swapupdate = TRUE;
     }      
 
     ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
   
-   if ( pConfig->Read(_T("View-Toolbar"), 1) == 0 ) { 	
-	RecreateToolbar(FALSE);	
-	// Nasty hack to delete that stupid line!
-	wxToolBar *tbar = GetToolBar();
-	delete tbar;
-	// End Nasty hack
-	m_resbox->SetSize(4,43,511,202);
-	m_label->SetSize(12,50,493,189);          	
-      	vimenu->Check( xFarDic_ViewToolBar, FALSE );      
-	vtool = false;
-    }else{    
-    	RecreateToolbar();	
-    	vimenu->Check( xFarDic_ViewToolBar, TRUE );      
-	vtool = true;
+    if ( pConfig->Read(_T("View-Toolbar"), 1) == 0 ) {     
+        RecreateToolbar(FALSE);    
+        // Nasty hack to delete that stupid line!
+        wxToolBar *tbar = GetToolBar();
+        delete tbar;
+        // End Nasty hack
+        m_resbox->SetSize(4,43,511,202);
+        m_label->SetSize(12,50,493,189);              
+        vimenu->Check( xFarDic_ViewToolBar, FALSE );      
+        vtool = false;
+    } else {    
+        RecreateToolbar();    
+        vimenu->Check( xFarDic_ViewToolBar, TRUE );      
+        vtool = true;
     } 
 
     // Translation toolbar
@@ -335,247 +334,249 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     path = path.Trim(TRUE);
     path = path.Trim(FALSE);
  
- // if there are defined xdbs     
- if(path.Len() > 0){
-     for(int x=1; x <= path.Len(); x++){	
-        Part = path.GetChar(x);
-	if(Part.CmpNoCase(_T(";"))==0){
-		seppos.Add(x);		
-        }
-      } // End For
+    // if there are defined xdbs     
+    if (path.Len() > 0) {
+        for (int x=1; x <= path.Len(); x++) {    
+            Part = path.GetChar(x);
+            if (Part.CmpNoCase(_T(";"))==0) {
+                seppos.Add(x);        
+            }
+        } // End For
     
-   splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
+        splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
 
-   if(seppos.GetCount()>0){    
-	   for(int x=0; x <= seppos.GetCount(); x++){
-		if(x == 0){
-			tmppath = path.Mid(0,seppos[x]);
-			if(tmppath.Len()!=0){
-				paths.Add(path.Mid(0,seppos[x]));
-			}
-		}else if(x == seppos.GetCount()){
-			tmppath = path.Mid(seppos[x-1]+1,path.Len());
-			if(tmppath.Len()!=0){
-				paths.Add(path.Mid(seppos[x-1]+1,path.Len()));
-			}
-		}else{
-			tmppath = path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1);
-			if(tmppath.Len()!=0){
-				paths.Add(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1));
-			}
-		}
-	    }
+        if (seppos.GetCount()>0) {    
+            for (int x=0; x <= seppos.GetCount(); x++) {
+                if (x == 0) {
+                    tmppath = path.Mid(0,seppos[x]);
+                    if (tmppath.Len()!=0) {
+                        paths.Add(path.Mid(0,seppos[x]));
+                    }
+                } else if (x == seppos.GetCount()) {
+                    tmppath = path.Mid(seppos[x-1]+1,path.Len());
+                    if (tmppath.Len()!=0) {
+                        paths.Add(path.Mid(seppos[x-1]+1,path.Len()));
+                    }
+                } else {
+                    tmppath = path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1);
+                    if (tmppath.Len()!=0) {
+                        paths.Add(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1));
+                    }
+                }
+            }
 
-	   for(int x=0; x < paths.GetCount(); x++){			
-		if(paths.Item(x).Len()!=0){
-			initDB((const char *)paths.Item(x).mb_str(wxConvUTF8));		
-		}		
-	   }           
-	  
-   }else{
-    initDB((const char *)path.mb_str(wxConvUTF8));		
-   }
-  delete splash;
-  wxYield();	   
- // if there is no defined xdb, Database Auto-Load system
- }else{
-	    wxFileSystem fs;
-    	    wxString tmpstr, att, longpath, tmpfname;
-	    wxArrayString filenames;
+            for (int x=0; x < paths.GetCount(); x++) {            
+                if (paths.Item(x).Len()!=0) {
+                    initDB((const char *)paths.Item(x).mb_str(wxConvUTF8));        
+                }        
+            }           
+      
+        } else {
+            initDB((const char *)path.mb_str(wxConvUTF8));        
+        }
+        delete splash;
+        wxYield();       
+        // if there is no defined xdb, Database Auto-Load system
+    } else {
+        wxFileSystem fs;
+        wxString tmpstr, att, longpath, tmpfname;
+        wxArrayString filenames;
 
-	    splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
-	    
-	    fs.ChangePathTo(wxGetHomeDir(), true);
+        splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
+        
+        fs.ChangePathTo(wxGetHomeDir(), true);
 
-	    tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
-	    tmpfname = tmpstr;
-	    tmpfname.Replace(wxGetHomeDir()+wxT("/"), _T(""));
-	    //DEBUGGING
-	    //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
+        tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
+        tmpfname = tmpstr;
+        tmpfname.Replace(wxGetHomeDir()+wxT("/"), _T(""));
+        //DEBUGGING
+        //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
-	    if(tmpstr.Len() > 0){		
-		if(filenames.Index(tmpfname,false) == wxNOT_FOUND){
-			if(tmpfname.Len()>0){	
-				filenames.Add(tmpfname);			
-			}
-			paths.Add(tmpstr);
-		}
-		while(tmpstr.Len() >0){
-			tmpstr = fs.FindNext();
-   		        tmpfname = tmpstr;
-	   	        tmpfname.Replace(wxGetHomeDir()+wxT("/"), _T(""));
-	  	        //DEBUGGING
-	   	        //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
+        if (tmpstr.Len() > 0) {        
+            if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+                if (tmpfname.Len()>0) {    
+                    filenames.Add(tmpfname);            
+                }
+                paths.Add(tmpstr);
+            }
+            
+            while (tmpstr.Len() >0) {
+                tmpstr = fs.FindNext();
+                       tmpfname = tmpstr;
+                       tmpfname.Replace(wxGetHomeDir()+wxT("/"), _T(""));
+                      //DEBUGGING
+                       //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
-			if(filenames.Index(tmpfname,false) == wxNOT_FOUND){
-				if(tmpstr.Len() > 0){	
-					if(tmpfname.Len()>0){	
-						filenames.Add(tmpfname);			
-					}
-					paths.Add(tmpstr);
-				}
-			}
-		}
-	    }
+                if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+                    if (tmpstr.Len() > 0) {    
+                        if (tmpfname.Len()>0) {    
+                            filenames.Add(tmpfname);            
+                        }
+                        paths.Add(tmpstr);
+                    }
+                }
+            }
+        }
 
-	    fs.ChangePathTo(wxT("/usr/share/xfardic-xdb/"), true);
+        fs.ChangePathTo(wxT("/usr/share/xfardic-xdb/"), true);
 
-	    tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
-	    tmpfname = tmpstr;
-	    tmpfname.Replace(wxT("/usr/share/xfardic-xdb/"), _T(""));
-	    //DEBUGGING
-	    //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
+        tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
+        tmpfname = tmpstr;
+        tmpfname.Replace(wxT("/usr/share/xfardic-xdb/"), _T(""));
+        //DEBUGGING
+        //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
-	    if(tmpstr.Len() > 0){		
-		if(filenames.Index(tmpfname,false) == wxNOT_FOUND){
-			if(tmpfname.Len()>0){	
-				filenames.Add(tmpfname);			
-			}
-			paths.Add(tmpstr);
-		}
-		while(tmpstr.Len() >0){
-			tmpstr = fs.FindNext();
-   		        tmpfname = tmpstr;
-	   	        tmpfname.Replace(wxT("/usr/share/xfardic-xdb/"), _T(""));
-			//DEBUGGING
-		        //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
+        if (tmpstr.Len() > 0) {        
+            if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+                if (tmpfname.Len()>0) {    
+                    filenames.Add(tmpfname);            
+                }
+                paths.Add(tmpstr);
+            }
+            while (tmpstr.Len() >0) {
+                tmpstr = fs.FindNext();
+                       tmpfname = tmpstr;
+                       tmpfname.Replace(wxT("/usr/share/xfardic-xdb/"), _T(""));
+                //DEBUGGING
+                    //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
-			if(filenames.Index(tmpfname,false) == wxNOT_FOUND){
-				if(tmpstr.Len() > 0){	
-					if(tmpfname.Len()>0){	
-						filenames.Add(tmpfname);			
-					}
-					paths.Add(tmpstr);
-				}
-			}
-		}
-	    }
+                if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+                    if (tmpstr.Len() > 0) {    
+                        if (tmpfname.Len()>0) {    
+                            filenames.Add(tmpfname);            
+                        }
+                        paths.Add(tmpstr);
+                    }
+                }
+            }
+        }
 
-            fs.ChangePathTo(wxT("/usr/local/share/xfardic-xdb/"), true);
+        fs.ChangePathTo(wxT("/usr/local/share/xfardic-xdb/"), true);
 
-	    tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
-	    tmpfname = tmpstr;
-	    tmpfname.Replace(wxT("/usr/local/share/xfardic-xdb/"), _T(""));
-	    //DEBUGGING
-	    //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
+        tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
+        tmpfname = tmpstr;
+        tmpfname.Replace(wxT("/usr/local/share/xfardic-xdb/"), _T(""));
+        //DEBUGGING
+        //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
-	    if(tmpstr.Len() > 0){		
-		if(filenames.Index(tmpfname,false) == wxNOT_FOUND){
-			if(tmpfname.Len()>0){	
-				filenames.Add(tmpfname);			
-			}
-			paths.Add(tmpstr);
-		}
-		while(tmpstr.Len() >0){
-			tmpstr = fs.FindNext();
-   		        tmpfname = tmpstr;
-	   	        tmpfname.Replace(wxT("/usr/local/share/xfardic-xdb/"), _T(""));
-			//DEBUGGING
-		        //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
+        if (tmpstr.Len() > 0) {        
+            if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+                if (tmpfname.Len()>0) {    
+                    filenames.Add(tmpfname);            
+                }
+                paths.Add(tmpstr);
+            }
+            while (tmpstr.Len() >0) {
+                tmpstr = fs.FindNext();
+                       tmpfname = tmpstr;
+                       tmpfname.Replace(wxT("/usr/local/share/xfardic-xdb/"), _T(""));
+                //DEBUGGING
+                //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
-			if(filenames.Index(tmpfname,false) == wxNOT_FOUND){
-				if(tmpstr.Len() > 0){
-					if(tmpfname.Len()>0){	
-						filenames.Add(tmpfname);			
-					}
-					paths.Add(tmpstr);
-				}
-			}
-		}
-	    }
+                if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+                    if (tmpstr.Len() > 0) {
+                        if (tmpfname.Len()>0) {    
+                            filenames.Add(tmpfname);            
+                        }
+                        paths.Add(tmpstr);
+                    }
+                }
+            }
+        }
            
-	   for(int x=0; x < paths.GetCount(); x++){			
-		if(paths.Item(x).Len()!=0){
-			initDB((const char *)paths.Item(x).mb_str(wxConvUTF8));				
-		}
+        for (int x=0; x < paths.GetCount(); x++) {            
+            if (paths.Item(x).Len()!=0) {
+                initDB((const char *)paths.Item(x).mb_str(wxConvUTF8));                
+            }
 
-		att = _T(";");
-		if(x+1 < paths.GetCount()){
-				longpath += paths.Item(x) + att;
-			}else{
-				longpath += paths.Item(x);
-		}		
-	   }
-	   // Write detected path to config file
-	   pConfig->SetPath(wxT("/"));
-	   pConfig->Write(wxT("/Options/DB-Path"), longpath);        	  
-	   
-	   delete splash;
-	   wxYield();	           
-  }
+            att = _T(";");
+            if (x+1 < paths.GetCount()) {
+                    longpath += paths.Item(x) + att;
+            } else {
+                    longpath += paths.Item(x);
+            }        
+        }
+        
+        // Write detected path to config file
+        pConfig->SetPath(wxT("/"));
+        pConfig->Write(wxT("/Options/DB-Path"), longpath);              
+       
+        delete splash;
+        wxYield();               
+    }
   
-  if(wordList.GetCount() >0){
-	gomenu->Enable(xFarDic_First, TRUE);
+    if (wordList.GetCount() >0) {
+        gomenu->Enable(xFarDic_First, TRUE);
         gomenu->Enable(xFarDic_Last, TRUE);
-  }
+    }
 
-  if ( pConfig->Read(wxT("Auto-Select"), 1) != 0 ) {
-      select = true;
-      opmenu->Check( xFarDic_Select, TRUE );
-      if(vtool){
-      	wxToolBarBase *tb = GetToolBar();
-      	tb->ToggleTool( ID_SELECT, TRUE );     
-      }	
-    }else{
-      select = false;
+    if ( pConfig->Read(wxT("Auto-Select"), 1) != 0 ) {
+        select = true;
+        opmenu->Check( xFarDic_Select, TRUE );
+        if (vtool) {
+            wxToolBarBase *tb = GetToolBar();
+            tb->ToggleTool( ID_SELECT, TRUE );     
+        }    
+    } else {
+        select = false;
     }
     
     if ( pConfig->Read(wxT("Spell"), 1) != 0 ) {
-      spell = true;      
-      opmenu->Check( xFarDic_Spell, TRUE );      
-      if(vtool){
-      	wxToolBarBase *tb = GetToolBar();
-      	tb->ToggleTool( ID_SPELL, TRUE );     
-      }	
-    }else{
-      spell = false;
+        spell = true;      
+        opmenu->Check( xFarDic_Spell, TRUE );      
+        if (vtool) {
+            wxToolBarBase *tb = GetToolBar();
+            tb->ToggleTool( ID_SPELL, TRUE );     
+        }    
+    } else {
+        spell = false;
     }   
 
     if ( pConfig->Read(wxT("RevSrch"), 0l) != 0 ) {
-      revsrch = true;      
-      opmenu->Check( xFarDic_RevSrch, TRUE );      
-      if(vtool){
-      	wxToolBarBase *tb = GetToolBar();
-      	tb->ToggleTool( ID_REVSRCH, TRUE );     
-      }	
-    }else{
-      revsrch = false;
+        revsrch = true;      
+        opmenu->Check( xFarDic_RevSrch, TRUE );      
+        if (vtool) {
+            wxToolBarBase *tb = GetToolBar();
+            tb->ToggleTool( ID_REVSRCH, TRUE );     
+        }    
+    } else {
+        revsrch = false;
     }   
 
-   if ( pConfig->Read(wxT("Watcher"), 1) != 0 ) {
-      watcher = true;      
-      opmenu->Check( xFarDic_Watcher, TRUE );  
-    }else{
-      watcher = false;
+    if ( pConfig->Read(wxT("Watcher"), 1) != 0 ) {
+        watcher = true;      
+        opmenu->Check( xFarDic_Watcher, TRUE );  
+    } else {
+        watcher = false;
     }   
 
     if ( pConfig->Read(wxT("Scanner"), 1) != 0 ) {
-      scanner = true;      
-      opmenu->Check( xFarDic_Scanner, TRUE );
+        scanner = true;      
+        opmenu->Check( xFarDic_Scanner, TRUE );
     
-      // Initiating word scanning system
-      oSelection.Init();
-      oSelection.start();    
-    }else{
-      scanner = false;
+        // Initiating word scanning system
+        oSelection.Init();
+        oSelection.start();    
+    } else {
+        scanner = false;
     }   
 
     if ( pConfig->Read(wxT("Hide"), 0l) != 0 ) {
-      hide = true;      
-      opmenu->Check( xFarDic_Hide, TRUE );  
-    }else{
-      hide = false;
+        hide = true;      
+        opmenu->Check( xFarDic_Hide, TRUE );  
+    } else {
+        hide = false;
     }   
 
     if ( pConfig->Read(wxT("Srch-Similar"), 0l) != 0 ) {
-      srch = true;      
-      opmenu->Check( xFarDic_Srch, TRUE );      
-      if(vtool){
-      	wxToolBarBase *tb = GetToolBar();
-      	tb->ToggleTool( ID_SRCH, TRUE );     
-      }		
-    }else{
-      srch = false;
+        srch = true;      
+        opmenu->Check( xFarDic_Srch, TRUE );      
+        if (vtool) {
+            wxToolBarBase *tb = GetToolBar();
+            tb->ToggleTool( ID_SRCH, TRUE );     
+        }        
+    } else {
+        srch = false;
     }   
     
     // restore frame position
@@ -586,36 +587,37 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
     int save_cache = pConfig->Read(wxT("Save-Cache"), 1);
 
-    if( save_cache != 0){
-      cache = true;
-    }else{
-      cache = false;
+    if ( save_cache != 0) {
+        cache = true;
+    } else {
+        cache = false;
     }    
 
     entryq = pConfig->Read(wxT("Num-Entries"), 10);
     
-    if(cache){
-      pConfig->SetPath(wxT("../Cache"));
-      wxString str;
-      long dummy;
+    if (cache) {
+        pConfig->SetPath(wxT("../Cache"));
+        wxString str;
+        long dummy;
     
-      bool bCont = pConfig->GetFirstEntry(str, dummy);
-      while(bCont){
-              	m_text->Append(str);
-	        bCont = pConfig->GetNextEntry(str, dummy);
-	 }
-     }
-     m_text->SetSelection(m_text->GetCount()-1);
-     wxString m_textVal(m_text->GetValue());
+        bool bCont = pConfig->GetFirstEntry(str, dummy);
+        while (bCont) {
+            m_text->Append(str);
+            bCont = pConfig->GetNextEntry(str, dummy);
+        }
+    }
+    
+    m_text->SetSelection(m_text->GetCount()-1);
+    wxString m_textVal(m_text->GetValue());
 
-     if(select){
+    if (select) {
         m_text->SetSelection(0,m_textVal.Length());
-     } 
+    } 
      
-     pConfig->SetPath(wxT("/"));
+    pConfig->SetPath(wxT("/"));
 
-      //Init swap
-      initSwap();
+    //Init swap
+    initSwap();
 }
 
 xFarDicApp::~xFarDicApp()
@@ -648,256 +650,256 @@ void xFarDicApp::ViewToolbar(wxCommandEvent& WXUNUSED(event))
 {
     wxToolBar *tbar = GetToolBar();
     wxConfigBase *pConfig = wxConfigBase::Get();
-      if ( pConfig == NULL )
-      return;
-      
-      pConfig->SetPath(wxT("/"));
-
-    if ( !vtool )
-    {
-        vtool = true;
-	delete tbar;
-	RecreateToolbar();	
-	vimenu->Check( xFarDic_ViewToolBar, TRUE );		
-	m_resbox->SetSize(4,43,511,160);
-	m_label->SetSize(12,50,493,145);	
-	pConfig->Write(wxT("/Options/View-Toolbar"), 1);	
-	translate(m_text->GetValue());
+    if ( pConfig == NULL ) {
+        return;
     }
-    else
-    {
+      
+    pConfig->SetPath(wxT("/"));
+    
+    if ( !vtool ) {
+        vtool = true;
+        delete tbar;
+        RecreateToolbar();    
+        vimenu->Check( xFarDic_ViewToolBar, TRUE );        
+        m_resbox->SetSize(4,43,511,160);
+        m_label->SetSize(12,50,493,145);    
+        pConfig->Write(wxT("/Options/View-Toolbar"), 1);    
+        translate(m_text->GetValue());
+
+    } else {
+        
         vtool = false;
-	int y = tbar->GetSize().y;	
-	delete tbar;
-	vimenu->Check( xFarDic_ViewToolBar, FALSE );		
-        SetToolBar(NULL);	
-	m_resbox->SetSize(4,43,511,160+y);
-	m_label->SetSize(12,50,493,145+y);
-	pConfig->Write(wxT("/Options/View-Toolbar"), 0);		
+        int y = tbar->GetSize().y;    
+        delete tbar;
+        vimenu->Check( xFarDic_ViewToolBar, FALSE );        
+        SetToolBar(NULL);    
+        m_resbox->SetSize(4,43,511,160+y);
+        m_label->SetSize(12,50,493,145+y);
+        pConfig->Write(wxT("/Options/View-Toolbar"), 0);        
     }
 }
 
 void xFarDicApp::AutoTrans(wxCommandEvent& WXUNUSED(event))
 {
-   DoAutoTrans(); 
+    DoAutoTrans(); 
 }
 
 void xFarDicApp::DoAutoTrans()
 {
-   if(!revsrch){
-	    wxString m_textVal(m_text->GetValue());
-	    m_textVal.Trim( TRUE );
-	    m_textVal.Trim( FALSE );
-	    m_textVal.MakeLower(); 
+    if (!revsrch) {
+        wxString m_textVal(m_text->GetValue());
+        m_textVal.Trim( TRUE );
+        m_textVal.Trim( FALSE );
+        m_textVal.MakeLower(); 
 
-	    if(CheckSpell(m_textVal, FALSE)){	      	    
-		    if(m_textVal.Len() >1 && !srch){
-			    translate(m_textVal);
-		    }
-	    }
+        if (CheckSpell(m_textVal, FALSE)) {                  
+            if (m_textVal.Len() >1 && !srch) {
+                translate(m_textVal);
+            }
+        }
     }
 }
 
 void xFarDicApp::OnSelect(wxCommandEvent& WXUNUSED(event))
 {
   wxConfigBase *pConfig = wxConfigBase::Get();
-      if ( pConfig == NULL )
-      return;
+    if ( pConfig == NULL ) {
+        return;
+    }
       
-      pConfig->SetPath(wxT("/"));
+    pConfig->SetPath(wxT("/"));
 
-  if ( select == true )
-  {
-    select = false;
-    if(vtool){
-    	wxToolBarBase *tb = GetToolBar();
-    	tb->ToggleTool( ID_SELECT, FALSE );
-    }	
-    opmenu->Check( xFarDic_Select, FALSE );
-    wxString m_textVal;
-    m_text->SetSelection(0,0);
-    pConfig->Write(wxT("/Options/Auto-Select"), 0);
+    if ( select == true ) {
+        select = false;
+        if (vtool) {
+            wxToolBarBase *tb = GetToolBar();
+            tb->ToggleTool( ID_SELECT, FALSE );
+        }    
+        opmenu->Check( xFarDic_Select, FALSE );
+        wxString m_textVal;
+        m_text->SetSelection(0,0);
+        pConfig->Write(wxT("/Options/Auto-Select"), 0);
 
-  }else{
-    select = true;
-    if(vtool){
-    	wxToolBarBase *tb = GetToolBar();
-    	tb->ToggleTool( ID_SELECT, TRUE );
-    }	
-    opmenu->Check( xFarDic_Select, TRUE );    
-    wxString m_textVal(m_text->GetValue());
-    m_text->SetSelection(0,m_textVal.Length());
-    pConfig->Write(wxT("/Options/Auto-Select"), 1);
-  }
-  delete wxConfigBase::Set((wxConfigBase *) NULL);
+    } else {
+        select = true;
+        if (vtool) {
+            wxToolBarBase *tb = GetToolBar();
+            tb->ToggleTool( ID_SELECT, TRUE );
+        }    
+        opmenu->Check( xFarDic_Select, TRUE );    
+        wxString m_textVal(m_text->GetValue());
+        m_text->SetSelection(0,m_textVal.Length());
+        pConfig->Write(wxT("/Options/Auto-Select"), 1);
+    }
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
 
 void xFarDicApp::OnSrch(wxCommandEvent& WXUNUSED(event))
 {
-  wxConfigBase *pConfig = wxConfigBase::Get();
-      if ( pConfig == NULL )
-      return;
+    wxConfigBase *pConfig = wxConfigBase::Get();
+    if ( pConfig == NULL ) {
+        return;
+    }
       
-      pConfig->SetPath(wxT("/"));
+    pConfig->SetPath(wxT("/"));
 
-  if ( srch == true )
-  {
-    srch = false;
-    wxToolBarBase *tb = GetToolBar();
-    opmenu->Check( xFarDic_Srch, FALSE );
-    tb->ToggleTool( ID_SRCH, FALSE );
-    pConfig->Write(wxT("/Options/Srch-Similar"), 0);
+    if ( srch == true ) {
+        srch = false;
+        wxToolBarBase *tb = GetToolBar();
+        opmenu->Check( xFarDic_Srch, FALSE );
+        tb->ToggleTool( ID_SRCH, FALSE );
+        pConfig->Write(wxT("/Options/Srch-Similar"), 0);
 
-  }else{
-    srch = true;
-    wxToolBarBase *tb = GetToolBar();
-    opmenu->Check( xFarDic_Srch, TRUE );
-    tb->ToggleTool( ID_SRCH, TRUE );    
-    pConfig->Write(wxT("/Options/Srch-Similar"), 1);
-  }
-  delete wxConfigBase::Set((wxConfigBase *) NULL);
+    } else {
+        srch = true;
+        wxToolBarBase *tb = GetToolBar();
+        opmenu->Check( xFarDic_Srch, TRUE );
+        tb->ToggleTool( ID_SRCH, TRUE );    
+        pConfig->Write(wxT("/Options/Srch-Similar"), 1);
+    }
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
 
 void xFarDicApp::OnSpell(wxCommandEvent& WXUNUSED(event))
 {
-  DoOnSpell();
-  if(revsrch){
-       DoOnRevSrch();
-  }
+    DoOnSpell();
+    if (revsrch) {
+        DoOnRevSrch();
+    }
 }
 
 void xFarDicApp::DoOnSpell()
 {
-  wxConfigBase *pConfig = wxConfigBase::Get();
-      if ( pConfig == NULL )
-      return;
-      
-      pConfig->SetPath(wxT("/"));
+    wxConfigBase *pConfig = wxConfigBase::Get();
+    if ( pConfig == NULL ) {
+        return;
+    }
 
-  if ( spell == true )
-  {
-    spell = false;
-    wxToolBarBase *tb = GetToolBar();
-    opmenu->Check( xFarDic_Spell, FALSE );
-    tb->ToggleTool( ID_SPELL, FALSE );
-    pConfig->Write(wxT("/Options/Spell"), 0);
+    pConfig->SetPath(wxT("/"));
 
-  }else{
-    spell = true;
-    wxToolBarBase *tb = GetToolBar();
-    opmenu->Check( xFarDic_Spell, TRUE );
-    tb->ToggleTool( ID_SPELL, TRUE );    
-    pConfig->Write(wxT("/Options/Spell"), 1);
-  }
-  delete wxConfigBase::Set((wxConfigBase *) NULL);
+    if ( spell == true ) {
+        spell = false;
+        wxToolBarBase *tb = GetToolBar();
+        opmenu->Check( xFarDic_Spell, FALSE );
+        tb->ToggleTool( ID_SPELL, FALSE );
+        pConfig->Write(wxT("/Options/Spell"), 0);
+
+    } else {
+        spell = true;
+        wxToolBarBase *tb = GetToolBar();
+        opmenu->Check( xFarDic_Spell, TRUE );
+        tb->ToggleTool( ID_SPELL, TRUE );    
+        pConfig->Write(wxT("/Options/Spell"), 1);
+    }
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
 
 void xFarDicApp::OnRevSrch(wxCommandEvent& WXUNUSED(event))
 {
-  DoOnRevSrch();
-  if(spell){
-       DoOnSpell();
-  }
+    DoOnRevSrch();
+    if (spell) {
+        DoOnSpell();
+    }
 }
 
 void xFarDicApp::DoOnRevSrch()
 {
-  wxConfigBase *pConfig = wxConfigBase::Get();
-      if ( pConfig == NULL )
-      return;
+    wxConfigBase *pConfig = wxConfigBase::Get();
+    if ( pConfig == NULL ) {
+        return;
+    }
       
-      pConfig->SetPath(wxT("/"));
+    pConfig->SetPath(wxT("/"));
 
-  if ( revsrch == true )
-  {
-    revsrch = false;
-    wxToolBarBase *tb = GetToolBar();
-    opmenu->Check( xFarDic_RevSrch, FALSE );
-    tb->ToggleTool( ID_REVSRCH, FALSE );
-    pConfig->Write(wxT("/Options/RevSrch"), 0);
+    if ( revsrch == true ) {
+        revsrch = false;
+        wxToolBarBase *tb = GetToolBar();
+        opmenu->Check( xFarDic_RevSrch, FALSE );
+        tb->ToggleTool( ID_REVSRCH, FALSE );
+        pConfig->Write(wxT("/Options/RevSrch"), 0);
 
-  }else{
-    revsrch = true;
-    wxToolBarBase *tb = GetToolBar();
-    opmenu->Check( xFarDic_RevSrch, TRUE );
-    tb->ToggleTool( ID_REVSRCH, TRUE );    
-    pConfig->Write(wxT("/Options/RevSrch"), 1);
-  }
-  delete wxConfigBase::Set((wxConfigBase *) NULL);
+    } else {
+        revsrch = true;
+        wxToolBarBase *tb = GetToolBar();
+        opmenu->Check( xFarDic_RevSrch, TRUE );
+        tb->ToggleTool( ID_REVSRCH, TRUE );    
+        pConfig->Write(wxT("/Options/RevSrch"), 1);
+    }
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
 
 void xFarDicApp::OnWatcher(wxCommandEvent& WXUNUSED(event))
 {
-  wxConfigBase *pConfig = wxConfigBase::Get();
-      if ( pConfig == NULL )
-      return;
+    wxConfigBase *pConfig = wxConfigBase::Get();
+    if ( pConfig == NULL ) {
+        return;
+    }
       
-      pConfig->SetPath(wxT("/"));
+    pConfig->SetPath(wxT("/"));
 
-  if ( watcher == true )
-  {
-    watcher = false;
-    opmenu->Check( xFarDic_Watcher, FALSE );
-    pConfig->Write(wxT("/Options/Watcher"), 0);
-  }else{
-    watcher = true;
-    opmenu->Check( xFarDic_Watcher, TRUE );
-    pConfig->Write(wxT("/Options/Watcher"), 1);
-  }
-  delete wxConfigBase::Set((wxConfigBase *) NULL);
+    if ( watcher == true ) {
+        watcher = false;
+        opmenu->Check( xFarDic_Watcher, FALSE );
+        pConfig->Write(wxT("/Options/Watcher"), 0);
+    } else {
+        watcher = true;
+        opmenu->Check( xFarDic_Watcher, TRUE );
+        pConfig->Write(wxT("/Options/Watcher"), 1);
+    }
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
 
 void xFarDicApp::OnScanner(wxCommandEvent& WXUNUSED(event))
 {
-  wxConfigBase *pConfig = wxConfigBase::Get();
-      if ( pConfig == NULL )
-      return;
+    wxConfigBase *pConfig = wxConfigBase::Get();
+    if ( pConfig == NULL ) {
+        return;
+    }
       
-      pConfig->SetPath(wxT("/"));
-
-  if ( scanner == true )
-  {
-    scanner = false;
-    opmenu->Check( xFarDic_Scanner, FALSE );
-    pConfig->Write(wxT("/Options/Scanner"), 0);
-  }else{
-    scanner = true;
-    opmenu->Check( xFarDic_Scanner, TRUE );
-    pConfig->Write(wxT("/Options/Scanner"), 1);
-  }
-  delete wxConfigBase::Set((wxConfigBase *) NULL);
+    pConfig->SetPath(wxT("/"));
+    
+    if ( scanner == true ) {
+        scanner = false;
+        opmenu->Check( xFarDic_Scanner, FALSE );
+        pConfig->Write(wxT("/Options/Scanner"), 0);
+    } else {
+        scanner = true;
+        opmenu->Check( xFarDic_Scanner, TRUE );
+        pConfig->Write(wxT("/Options/Scanner"), 1);
+    }
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
 
 void xFarDicApp::OnHide(wxCommandEvent& WXUNUSED(event))
 {
-  wxConfigBase *pConfig = wxConfigBase::Get();
-      if ( pConfig == NULL )
-      return;
+    wxConfigBase *pConfig = wxConfigBase::Get();
+    if ( pConfig == NULL ) {
+        return;
+    }
       
-      pConfig->SetPath(wxT("/"));
+    pConfig->SetPath(wxT("/"));
   
-  if ( hide == true )
-  {
-    hide = false;
-    opmenu->Check( xFarDic_Hide, FALSE );
-    pConfig->Write(wxT("/Options/Hide"), 0);
-  }else{
-    hide = true;
-    opmenu->Check( xFarDic_Hide, TRUE );
-    pConfig->Write(wxT("/Options/Hide"), 1);
-  }
-  delete wxConfigBase::Set((wxConfigBase *) NULL);
+    if ( hide == true ) {
+        hide = false;
+        opmenu->Check( xFarDic_Hide, FALSE );
+        pConfig->Write(wxT("/Options/Hide"), 0);
+    } else {
+        hide = true;
+        opmenu->Check( xFarDic_Hide, TRUE );
+        pConfig->Write(wxT("/Options/Hide"), 1);
+    }
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
 
 void xFarDicApp::OnCopy(wxCommandEvent& WXUNUSED(event))
 {
     wxString m_textVal(m_label->GetValue());
 
-      // write to clipboard
-      if(wxTheClipboard->Open()){
-          wxTheClipboard->SetData(new wxTextDataObject(m_textVal));
-          wxTheClipboard->Close();
-        }
+    // write to clipboard
+    if (wxTheClipboard->Open()) {
+        wxTheClipboard->SetData(new wxTextDataObject(m_textVal));
+        wxTheClipboard->Close();
+    }
 }
 
 void xFarDicApp::OnCut(wxCommandEvent& WXUNUSED(event))
@@ -918,24 +920,23 @@ void xFarDicApp::DoPaste()
     wxString Clipstr;
 
     /// read from clipboard
-      if(wxTheClipboard->Open()){
-	 if (wxTheClipboard->IsSupported( wxDF_TEXT )){
-	          wxTheClipboard->GetData(data);
-		  Clipstr = data.GetText();		  
+    if (wxTheClipboard->Open()) {
+        if (wxTheClipboard->IsSupported( wxDF_TEXT )) {
+            wxTheClipboard->GetData(data);
+            Clipstr = data.GetText();          
 
-		  if(Clipstr.Len()==0)
-    		  {
-		      wxString msg;
-		      msg.Printf( _("Input text is too long.\n"));
-		      wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
-		      m_text->SetFocus();
-		      return;
-		   }else{   
-			  m_text->SetValue(ProcessWord(Clipstr));	 
-		   }
-	 }
-          wxTheClipboard->Close();
-        }    
+            if (Clipstr.Len()==0) {
+                wxString msg;
+                msg.Printf( _("Input text is too long.\n"));
+                wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+                m_text->SetFocus();
+                return;
+            } else {   
+                m_text->SetValue(ProcessWord(Clipstr));     
+            }
+        }
+        wxTheClipboard->Close();
+    }    
     DoTranslate();
 }
 
@@ -944,102 +945,105 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
     // Update ltbox contents from config file
     LoadLeitnerBoxContents();
 
-    if(watcher){	     
-            watcher_last = watcher_now.MakeLower();
-	    wxTextDataObject data;
+    if (watcher) {         
+        watcher_last = watcher_now.MakeLower();
+        wxTextDataObject data;
 
-	    // read from clipboard
-	    if(wxTheClipboard->Open()){
-	        wxTheClipboard->GetData(data);
-	        wxTheClipboard->Close();
-	    }
+        // read from clipboard
+        if (wxTheClipboard->Open()) {
+            wxTheClipboard->GetData(data);
+            wxTheClipboard->Close();
+        }
 
-	    watcher_now = data.GetText();
+        watcher_now = data.GetText();
 
-	    if(watcher_now.Len() > 40){
-		watcher_now = watcher_last;
-	    }
+        if (watcher_now.Len() > 40) {
+            watcher_now = watcher_last;
+        }
 
-	    watcher_now.MakeLower();
-	    watcher_now.Trim(TRUE);
-	    watcher_now.Trim(FALSE);	
+        watcher_now.MakeLower();
+        watcher_now.Trim(TRUE);
+        watcher_now.Trim(FALSE);    
 
-	    // Purify word!
-	    watcher_now = ProcessWord(watcher_now);
+        // Purify word!
+        watcher_now = ProcessWord(watcher_now);
     }
 
-    if(scanner){
-    	wxConfigBase *pConfig = wxConfigBase::Get();
+    if (scanner) {
+        wxConfigBase *pConfig = wxConfigBase::Get();
         scanner_last = scanner_now.MakeLower();
-    	scanner_now = pConfig->Read(wxT("/Options/Temp-String"), _T(""));
+        scanner_now = pConfig->Read(wxT("/Options/Temp-String"), _T(""));
 
-    	scanner_now.MakeLower();
-    	scanner_now.Trim(TRUE);
-    	scanner_now.Trim(FALSE);
+        scanner_now.MakeLower();
+        scanner_now.Trim(TRUE);
+        scanner_now.Trim(FALSE);
 
-	scanner_now = ProcessWord(scanner_now);
-    }	
+        scanner_now = ProcessWord(scanner_now);
+    }    
    
     //DEBUGGING
     //fprintf(stderr, "Checking Scanner-Now:%s\n", (const char *)scanner_now.mb_str(wxConvUTF8));
-    //fprintf(stderr, "Checking Scanner-Last:%s\n", (const char *)scanner_last.mb_str(wxConvUTF8));		
+    //fprintf(stderr, "Checking Scanner-Last:%s\n", (const char *)scanner_last.mb_str(wxConvUTF8));        
 
-    if(watcher){
-	    if(watcher_now.Len() > 0){
-		if(!watcher_now.IsSameAs(watcher_last, TRUE) && !watcher_now.IsSameAs(scanner_last, TRUE) && CheckSpell(watcher_now,0) && watcher_now.IsAscii() && watcher_now.IsWord()){	    
-		    m_text->SetValue(watcher_now);
-		    if(translate(watcher_now)){		    
-			    this->Raise();
-			    this->SetFocus();
-		    }
-	    	}
-	    }
+    if (watcher) {
+        if (watcher_now.Len() > 0) {
+            if (!watcher_now.IsSameAs(watcher_last, TRUE) && !watcher_now.IsSameAs(scanner_last, TRUE) && 
+                CheckSpell(watcher_now,0) && watcher_now.IsAscii() && watcher_now.IsWord()) {        
+
+                m_text->SetValue(watcher_now);
+                if (translate(watcher_now)) {            
+                    this->Raise();
+                    this->SetFocus();
+                }
+            }
+        }
     }
 
-    if(scanner){
-	    if(scanner_now.Len() > 0 && scanner_now != m_text->GetValue()){
-		if(!scanner_now.IsSameAs(scanner_last, TRUE) && !scanner_now.IsSameAs(watcher_last, TRUE) && CheckSpell(scanner_now,0) && scanner_now.IsAscii() && scanner_now.IsWord()){	    
-		    m_text->SetValue(scanner_now);
-		    translate(scanner_now,false,true);		    	    
-	    	}
-	    }
+    if (scanner) {
+        if (scanner_now.Len() > 0 && scanner_now != m_text->GetValue()) {
+            if (!scanner_now.IsSameAs(scanner_last, TRUE) && !scanner_now.IsSameAs(watcher_last, TRUE) && 
+               CheckSpell(scanner_now,0) && scanner_now.IsAscii() && scanner_now.IsWord()) {        
+                m_text->SetValue(scanner_now);
+                translate(scanner_now,false,true);                    
+            }
+        }
     }
 }
 
 void xFarDicApp::PopMenu()
 {
-	wxMenu* menuFileT = new wxMenu;
-	wxArtClient client;
+    wxMenu* menuFileT = new wxMenu;
+    wxArtClient client;
 
-	wxBitmap  bquit = wxArtProvider::GetBitmap(wxART_QUIT, client, wxSize(16,16));
-    	wxBitmap  bpaste = wxArtProvider::GetBitmap(wxART_PASTE, client, wxSize(16,16));
-       	wxBitmap  bsettings = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxSize(16,16));
-        wxBitmap  bfont = wxArtProvider::GetBitmap(wxART_HELP_SETTINGS, client, wxSize(16,16));
-    	wxBitmap  babout = wxArtProvider::GetBitmap(wxT("gtk-about"), client, wxSize(16,16));
+    wxBitmap  bquit = wxArtProvider::GetBitmap(wxART_QUIT, client, wxSize(16,16));
+    wxBitmap  bpaste = wxArtProvider::GetBitmap(wxART_PASTE, client, wxSize(16,16));
+    wxBitmap  bsettings = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxSize(16,16));
+    wxBitmap  bfont = wxArtProvider::GetBitmap(wxART_HELP_SETTINGS, client, wxSize(16,16));
+    wxBitmap  babout = wxArtProvider::GetBitmap(wxT("gtk-about"), client, wxSize(16,16));
     
-	
-	wxMenuItem *paste = new wxMenuItem(menuFileT,xFarDic_Paste, _("&Paste and Translate\tCtrl-V"));
-        paste->SetBitmap(bpaste);
-        menuFileT->Append(paste);
+    
+    wxMenuItem *paste = new wxMenuItem(menuFileT,xFarDic_Paste, _("&Paste and Translate\tCtrl-V"));
+    paste->SetBitmap(bpaste);
+    menuFileT->Append(paste);
 
-	wxMenuItem *setfont = new wxMenuItem(menuFileT,xFarDic_Setfont, _("Set Result Box Font\tCtrl+F"));
-        setfont->SetBitmap(bfont);
-        menuFileT->Append(setfont);
+    wxMenuItem *setfont = new wxMenuItem(menuFileT,xFarDic_Setfont, _("Set Result Box Font\tCtrl+F"));
+    setfont->SetBitmap(bfont);
+    menuFileT->Append(setfont);
 
-	wxMenuItem *settings = new wxMenuItem(menuFileT,xFarDic_Settings, _("Open Setti&ngs\tAlt+N"));
-        settings->SetBitmap(bsettings);
-        menuFileT->Append(settings);
-        menuFileT->AppendSeparator();
+    wxMenuItem *settings = new wxMenuItem(menuFileT,xFarDic_Settings, _("Open Setti&ngs\tAlt+N"));
+    settings->SetBitmap(bsettings);
+    menuFileT->Append(settings);
+    menuFileT->AppendSeparator();
 
-	wxMenuItem *about = new wxMenuItem(menuFileT,xFarDic_About, _("&About xFarDic\tF1"));
-        about->SetBitmap(babout);
-        menuFileT->Append(about);
-        menuFileT->AppendSeparator();
-	
-        wxMenuItem *tquit = new wxMenuItem(menuFileT,xFarDic_QApp, _("&Quit\tCtrl+Q"));
-        tquit->SetBitmap(bquit);
-        menuFileT->Append(tquit);
-	ticon.PopupMenu(menuFileT);
+    wxMenuItem *about = new wxMenuItem(menuFileT,xFarDic_About, _("&About xFarDic\tF1"));
+    about->SetBitmap(babout);
+    menuFileT->Append(about);
+    menuFileT->AppendSeparator();
+
+    wxMenuItem *tquit = new wxMenuItem(menuFileT,xFarDic_QApp, _("&Quit\tCtrl+Q"));
+    tquit->SetBitmap(bquit);
+    menuFileT->Append(tquit);
+    ticon.PopupMenu(menuFileT);
 }
 
 void xFarDicApp::OnSetFont(wxCommandEvent& WXUNUSED(event))
@@ -1054,22 +1058,21 @@ void xFarDicApp::ShowSetFont()
     data.SetInitialFont(m_font);
     
     wxFontDialog dialog(this, data);
-    if ( dialog.ShowModal() == wxID_OK )
-    {
+    if ( dialog.ShowModal() == wxID_OK ) {
         retData = dialog.GetFontData();
         m_font = retData.GetChosenFont();        
- 	m_label->SetFont(m_font);	
-	
-	pConfig->SetPath(wxT("/"));
-	
-	pConfig->Write(wxT("/Options/Font-Face"), m_font.GetFaceName());
-	pConfig->Write(wxT("/Options/Font-Size"), m_font.GetPointSize());
-	pConfig->Write(wxT("/Options/Font-Style"), m_font.GetStyle());
-	pConfig->Write(wxT("/Options/Font-Family"), m_font.GetFamily());
-	pConfig->Write(wxT("/Options/Font-Enc"), m_font.GetDefaultEncoding());
-	pConfig->Write(wxT("/Options/Font-Wgt"), m_font.GetWeight());
-	
-	delete wxConfigBase::Set((wxConfigBase *) NULL);
+        m_label->SetFont(m_font);    
+    
+        pConfig->SetPath(wxT("/"));
+        
+        pConfig->Write(wxT("/Options/Font-Face"), m_font.GetFaceName());
+        pConfig->Write(wxT("/Options/Font-Size"), m_font.GetPointSize());
+        pConfig->Write(wxT("/Options/Font-Style"), m_font.GetStyle());
+        pConfig->Write(wxT("/Options/Font-Family"), m_font.GetFamily());
+        pConfig->Write(wxT("/Options/Font-Enc"), m_font.GetDefaultEncoding());
+        pConfig->Write(wxT("/Options/Font-Wgt"), m_font.GetWeight());
+        
+        delete wxConfigBase::Set((wxConfigBase *) NULL);
     } 
 }
 
@@ -1082,129 +1085,128 @@ void xFarDicApp::RecreateToolbar(bool activate)
     delete toolBar;
     SetToolBar(NULL);    
 
-    if(activate){
-	    long style = toolBar ? toolBar->GetWindowStyle() : TOOLBAR_STYLE;   
-	    style &= ~(wxTB_HORIZONTAL | wxTB_VERTICAL);
-	    style |= m_horzToolbar ? wxTB_HORIZONTAL : wxTB_VERTICAL;
+    if (activate) {
+        long style = toolBar ? toolBar->GetWindowStyle() : TOOLBAR_STYLE;   
+        style &= ~(wxTB_HORIZONTAL | wxTB_VERTICAL);
+        style |= m_horzToolbar ? wxTB_HORIZONTAL : wxTB_VERTICAL;
 
-	    toolBar = CreateToolBar(style, ID_TOOLBAR);	    
+        toolBar = CreateToolBar(style, ID_TOOLBAR);        
 
-	    // Set up toolbar
-	    wxBitmap toolBarBitmaps[13];
-	    wxArtClient client;
+        // Set up toolbar
+        wxBitmap toolBarBitmaps[13];
+        wxArtClient client;
 
-	    wxBitmap  cut = wxArtProvider::GetBitmap(wxART_CUT, client, wxDefaultSize);
-	    wxBitmap  quit = wxArtProvider::GetBitmap(wxART_QUIT, client, wxDefaultSize);
-	    wxBitmap  paste = wxArtProvider::GetBitmap(wxART_PASTE, client, wxDefaultSize);
-	    wxBitmap  copy = wxArtProvider::GetBitmap(wxART_COPY, client, wxDefaultSize);
-	    wxBitmap  settings = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxDefaultSize);
-	    wxBitmap  trash = wxArtProvider::GetBitmap(wxT("gtk-clear"), client, wxDefaultSize);
-	    wxBitmap  selectb = wxArtProvider::GetBitmap(wxART_REDO, client, wxDefaultSize);
-	    wxBitmap  btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
-	    wxBitmap  back = wxArtProvider::GetBitmap(wxART_GO_BACK, client, wxDefaultSize);
-	    wxBitmap  forward = wxArtProvider::GetBitmap(wxART_GO_FORWARD, client, wxDefaultSize);
-	    wxBitmap  spellb = wxArtProvider::GetBitmap(wxT("gtk-spell-check"), client, wxDefaultSize);
-	    wxBitmap  revsrchb = wxArtProvider::GetBitmap(wxART_UNDO, client, wxDefaultSize);
-	    wxBitmap  similar = wxArtProvider::GetBitmap(wxT("gtk-find-and-replace"), client, wxDefaultSize);
-	    wxBitmap  leitner = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);	     	     
+        wxBitmap  cut = wxArtProvider::GetBitmap(wxART_CUT, client, wxDefaultSize);
+        wxBitmap  quit = wxArtProvider::GetBitmap(wxART_QUIT, client, wxDefaultSize);
+        wxBitmap  paste = wxArtProvider::GetBitmap(wxART_PASTE, client, wxDefaultSize);
+        wxBitmap  copy = wxArtProvider::GetBitmap(wxART_COPY, client, wxDefaultSize);
+        wxBitmap  settings = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxDefaultSize);
+        wxBitmap  trash = wxArtProvider::GetBitmap(wxT("gtk-clear"), client, wxDefaultSize);
+        wxBitmap  selectb = wxArtProvider::GetBitmap(wxART_REDO, client, wxDefaultSize);
+        wxBitmap  btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
+        wxBitmap  back = wxArtProvider::GetBitmap(wxART_GO_BACK, client, wxDefaultSize);
+        wxBitmap  forward = wxArtProvider::GetBitmap(wxART_GO_FORWARD, client, wxDefaultSize);
+        wxBitmap  spellb = wxArtProvider::GetBitmap(wxT("gtk-spell-check"), client, wxDefaultSize);
+        wxBitmap  revsrchb = wxArtProvider::GetBitmap(wxART_UNDO, client, wxDefaultSize);
+        wxBitmap  similar = wxArtProvider::GetBitmap(wxT("gtk-find-and-replace"), client, wxDefaultSize);
+        wxBitmap  leitner = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);                  
 
-	    toolBarBitmaps[0]  = back;
-	    toolBarBitmaps[1]  = forward;
-	    toolBarBitmaps[2]  = similar;
-	    toolBarBitmaps[3]  = quit;
-	    toolBarBitmaps[4]  = selectb;
-	    toolBarBitmaps[5]  = settings;
-	    toolBarBitmaps[6]  = copy;
-	    toolBarBitmaps[7]  = cut;
-	    toolBarBitmaps[8]  = paste;
-	    toolBarBitmaps[9]  = trash;
-	    toolBarBitmaps[10] = spellb;
-	    toolBarBitmaps[11] = revsrchb;
-	    toolBarBitmaps[12] = leitner;
+        toolBarBitmaps[0]  = back;
+        toolBarBitmaps[1]  = forward;
+        toolBarBitmaps[2]  = similar;
+        toolBarBitmaps[3]  = quit;
+        toolBarBitmaps[4]  = selectb;
+        toolBarBitmaps[5]  = settings;
+        toolBarBitmaps[6]  = copy;
+        toolBarBitmaps[7]  = cut;
+        toolBarBitmaps[8]  = paste;
+        toolBarBitmaps[9]  = trash;
+        toolBarBitmaps[10] = spellb;
+        toolBarBitmaps[11] = revsrchb;
+        toolBarBitmaps[12] = leitner;
 
-	    if ( !m_smallToolbar )
-	    {
-	        int w = 2*toolBarBitmaps[0].GetWidth(),
-	            h = 2*toolBarBitmaps[0].GetHeight();
-	        for ( size_t n = 0; n < WXSIZEOF(toolBarBitmaps); n++ )
-	        {
-	            toolBarBitmaps[n] =
-	                wxBitmap(toolBarBitmaps[n].ConvertToImage().Scale(w, h));
-	        }
+        if ( !m_smallToolbar ) {
+            int w = 2*toolBarBitmaps[0].GetWidth(),
+                h = 2*toolBarBitmaps[0].GetHeight();
+            for ( size_t n = 0; n < WXSIZEOF(toolBarBitmaps); n++ ) {
+                toolBarBitmaps[n] =
+                    wxBitmap(toolBarBitmaps[n].ConvertToImage().Scale(w, h));
+            }
 
-	        toolBar->SetToolBitmapSize(wxSize(w, h));
-	    }
+            toolBar->SetToolBitmapSize(wxSize(w, h));
+        }
 
-	    toolBar->SetToolSeparation(0);
+        toolBar->SetToolSeparation(0);
 
-	    toolBar->AddTool(ID_BACK, _("Back"), toolBarBitmaps[0], _("Previous Word"));
-	    toolBar->AddTool(ID_FORWARD, _("Fwd"), toolBarBitmaps[1], _("Next Word"));
-	    toolBar->AddSeparator();
-	    toolBar->AddTool(ID_CUT, _("Cut"), toolBarBitmaps[7], _("Cut"));
-	    toolBar->AddTool(ID_COPY, _("Copy"), toolBarBitmaps[6], _("Copy Result"));
-	    toolBar->AddTool(ID_PASTE, _("Paste"), toolBarBitmaps[8], _("Paste and Translate"));
-	    toolBar->AddTool(ID_TRASH, _("Trash"), toolBarBitmaps[9], _("Clear History"));
-	    //toolBar->AddTool(ID_TOOL_LT, _("Leitner Box"), toolBarBitmaps[12], _("Open leitner box"));        
-	    toolBar->AddSeparator();
-	    toolBar->AddTool(ID_SELECT, _("Select"), toolBarBitmaps[4], _("Auto Select Text"), wxITEM_CHECK);
-	    toolBar->AddTool(ID_SPELL, _("Spell"), toolBarBitmaps[10], _("Spell Checking"), wxITEM_CHECK);
-	    toolBar->AddTool(ID_REVSRCH, wxT("RevSrch"), toolBarBitmaps[11], _("Reverse Search"), wxITEM_CHECK);
-	    toolBar->AddTool(ID_SRCH, _("Similar"), toolBarBitmaps[2], _("Return similar words"), wxITEM_CHECK);
-	    toolBar->AddSeparator();
-	    toolBar->AddTool(ID_SETTINGS, _("Settings"), toolBarBitmaps[5], _("Settings"));
-	    toolBar->AddTool(ID_QUIT, _("Quit"), toolBarBitmaps[3], _("Quit"));
+        toolBar->AddTool(ID_BACK, _("Back"), toolBarBitmaps[0], _("Previous Word"));
+        toolBar->AddTool(ID_FORWARD, _("Fwd"), toolBarBitmaps[1], _("Next Word"));
+        toolBar->AddSeparator();
+        toolBar->AddTool(ID_CUT, _("Cut"), toolBarBitmaps[7], _("Cut"));
+        toolBar->AddTool(ID_COPY, _("Copy"), toolBarBitmaps[6], _("Copy Result"));
+        toolBar->AddTool(ID_PASTE, _("Paste"), toolBarBitmaps[8], _("Paste and Translate"));
+        toolBar->AddTool(ID_TRASH, _("Trash"), toolBarBitmaps[9], _("Clear History"));
+        //toolBar->AddTool(ID_TOOL_LT, _("Leitner Box"), toolBarBitmaps[12], _("Open leitner box"));        
+        toolBar->AddSeparator();
+        toolBar->AddTool(ID_SELECT, _("Select"), toolBarBitmaps[4], _("Auto Select Text"), wxITEM_CHECK);
+        toolBar->AddTool(ID_SPELL, _("Spell"), toolBarBitmaps[10], _("Spell Checking"), wxITEM_CHECK);
+        toolBar->AddTool(ID_REVSRCH, wxT("RevSrch"), toolBarBitmaps[11], _("Reverse Search"), wxITEM_CHECK);
+        toolBar->AddTool(ID_SRCH, _("Similar"), toolBarBitmaps[2], _("Return similar words"), wxITEM_CHECK);
+        toolBar->AddSeparator();
+        toolBar->AddTool(ID_SETTINGS, _("Settings"), toolBarBitmaps[5], _("Settings"));
+        toolBar->AddTool(ID_QUIT, _("Quit"), toolBarBitmaps[3], _("Quit"));
 
-	    wxToolBarBase *tb = GetToolBar();
-	    tb->EnableTool(ID_BACK, FALSE);
-	    tb->EnableTool(ID_FORWARD, FALSE);
+        wxToolBarBase *tb = GetToolBar();
+        tb->EnableTool(ID_BACK, FALSE);
+        tb->EnableTool(ID_FORWARD, FALSE);
 
-	    if(select){
-		tb->ToggleTool( ID_SELECT, TRUE );     
-	    }
-	    
-	    if(spell){
-		tb->ToggleTool( ID_SPELL, TRUE );     
-	    }
+        if (select) {
+            tb->ToggleTool( ID_SELECT, TRUE );     
+        }
+        
+        if (spell) {
+            tb->ToggleTool( ID_SPELL, TRUE );     
+        }
 
-	    if(revsrch){
-		tb->ToggleTool( ID_REVSRCH, TRUE );     
-	    }
+        if (revsrch) {
+            tb->ToggleTool( ID_REVSRCH, TRUE );     
+        }
 
-	    if(srch){
-		tb->ToggleTool( ID_SRCH, TRUE );     
-	    }  
-    }else{
-	    toolBar = CreateToolBar(-1, ID_TOOLBAR);
+        if (srch) {
+            tb->ToggleTool( ID_SRCH, TRUE );     
+        }  
+    } else {
+        toolBar = CreateToolBar(-1, ID_TOOLBAR);
     }
 }
 
 /// Translation toolbar creation function
 void xFarDicApp::RecreateTrToolbar()
 {
-	t_tbar = new wxToolBar(this, ID_TRANSTOOLBAR,
-	                              wxPoint(0, 37), wxSize(520, 37),
-	                              wxTB_HORIZONTAL | wxTB_DOCKABLE);
+    t_tbar = new wxToolBar(this, ID_TRANSTOOLBAR,
+                           wxPoint(0, 37), wxSize(520, 37),
+                           wxTB_HORIZONTAL | wxTB_DOCKABLE);
 
-	m_text = new wxComboBox(t_tbar, ID_COMBO, _T(""), wxPoint(9, 8), wxSize(375, 30), 0, NULL, wxCB_DROPDOWN & wxPROCESS_ENTER);
-	m_text->SetFocus();
+    m_text = new wxComboBox(t_tbar, ID_COMBO, _T(""), wxPoint(9, 8), wxSize(375, 30), 0, NULL,
+                            wxCB_DROPDOWN & wxPROCESS_ENTER);
+    m_text->SetFocus();
 
-	// Icon
-        wxArtClient client;    
-        wxBitmap  btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
-	wxBitmap  bltbox = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);
+    // Icon
+    wxArtClient client;    
+    wxBitmap  btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
+    wxBitmap  bltbox = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);
 
-	m_translate = new wxBitmapButton(t_tbar, ID_BUTTON_TRANSLATE, btranslate, wxPoint(415,4), wxSize(65,36));
-	m_leitnerbox = new wxBitmapButton(t_tbar, ID_BTN_LT, bltbox, wxPoint(470,4), wxSize(65,36));
+    m_translate = new wxBitmapButton(t_tbar, ID_BUTTON_TRANSLATE, btranslate, wxPoint(415,4), wxSize(65,36));
+    m_leitnerbox = new wxBitmapButton(t_tbar, ID_BTN_LT, bltbox, wxPoint(470,4), wxSize(65,36));
 
-	//Set Default button
-	m_translate->SetDefault();
+    //Set Default button
+    m_translate->SetDefault();
 
-	// Translation toolbar implementation 
-	t_tbar->AddControl(m_text);
-	t_tbar->AddControl(m_translate);
-	t_tbar->AddControl(m_leitnerbox);
-	t_tbar->Realize();
-	t_tbar->SetSize(0, 0, 520, 37);    
+    // Translation toolbar implementation 
+    t_tbar->AddControl(m_text);
+    t_tbar->AddControl(m_translate);
+    t_tbar->AddControl(m_leitnerbox);
+    t_tbar->Realize();
+    t_tbar->SetSize(0, 0, 520, 37);    
 }
 
 bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
@@ -1216,8 +1218,8 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
     wxString qsql;
     wxProgressDialog *prog;
     
-    if(m_textVal.Len()==0){
-    	m_textVal = m_text->GetValue();    
+    if (m_textVal.Len()==0) {
+        m_textVal = m_text->GetValue();    
     }
 
     found = false;
@@ -1233,243 +1235,239 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
     //fprintf(stderr, "%s\n", (const char *)m_textVal.mb_str(wxConvUTF8));
 
     /// mmm... We do not need empty string!
-    if(m_textVal.Len()==0)
-    {
-      wxString msg;
-      msg.Printf( _("Please enter clause.\n"));
-      wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
-      m_text->SetFocus();
-      return 0;
+    if (m_textVal.Len()==0) {
+        wxString msg;
+        msg.Printf( _("Please enter clause.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        m_text->SetFocus();
+        return 0;
     }   
     
     wxString document = path;       
 
-if(srch && !revsrch){
-	int y =0;
-	wxBusyCursor wait;
-	wxString tmpsrchII;
-	tmpstr = _T("");
-	if(!swap){
-		prog = new wxProgressDialog(_T("xFarDic"),
-	                            _("Please wait..."),
-	                            meanList.GetCount(), 
-	                            this,
-	                            wxPD_APP_MODAL |
-	                            wxPD_AUTO_HIDE |
-	                            wxPD_SMOOTH);
-	}
+    if (srch && !revsrch) {
+        int y =0;
+        wxBusyCursor wait;
+        wxString tmpsrchII;
+        tmpstr = _T("");
+        if (!swap) {
+            prog = new wxProgressDialog(_T("xFarDic"), _("Please wait..."), meanList.GetCount(), 
+                                    this, wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_SMOOTH);
+        }
 
-	while(y < wordList.GetCount()){		
-		tmpsrchII = wordList.Item(y);
-		if(tmpsrchII.Contains(m_textVal)){
-			found = true;
-			if(!swap){
-				tmpstr += meanList.Item(y) + _T(" = ") + tmpsrchII + _T("\n\n");			
-			}else{
-				qsql = wxT("SELECT outw FROM words WHERE inw LIKE '%")+m_textVal+wxT("%'");
-				returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qresult, &nrow, &ncol, &db_error_msg);
+        while (y < wordList.GetCount()) {
+            tmpsrchII = wordList.Item(y);
+            if (tmpsrchII.Contains(m_textVal)) {
+                found = true;
+                if (!swap) {
+                    tmpstr += meanList.Item(y) + _T(" = ") + tmpsrchII + _T("\n\n");            
+                } else {
+                    qsql = wxT("SELECT outw FROM words WHERE inw LIKE '%")+m_textVal+wxT("%'");
+                    returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qresult, &nrow, 
+                                                    &ncol, &db_error_msg);
 
-				// DEBUGGING
-				//fprintf(stderr, "returned meanings:%d\n", nrow);
-				
-				for(int x=1; x <= nrow; x++)
-				{
-					tmpstr += UTF8_STR(qresult[x]) + _T(" = ") + tmpsrchII + _T("\n\n");
-				}
-			}
-		}
-		y++;
+                    // DEBUGGING
+                    //fprintf(stderr, "returned meanings:%d\n", nrow);
+                    
+                    for (int x=1; x <= nrow; x++) {
+                        tmpstr += UTF8_STR(qresult[x]) + _T(" = ") + tmpsrchII + _T("\n\n");
+                    }
+                }
+            }
+            y++;
 
-		if(!swap){
-			if(y % 500  == 0){
-				prog->Update(y);
-			}		
-		}
-	}
+            if (!swap) {
+                if (y % 500  == 0) {
+                    prog->Update(y);
+                }        
+            }
+        }
        
-	if(!swap){
+        if (!swap) {
 
-		// Killing progress dialog
-		delete prog;
-		wxYield();	
-	}
+            // Killing progress dialog
+            delete prog;
+            wxYield();    
+        }
 
-	m_label->SetFont(m_font);	
-	m_label->Clear();
-	if(tmpstr.Len()!=0){
-		m_label->WriteText(tmpstr);
-	}else{
-		m_label->SetValue(_("Phrase not found."));
-	}
-}else{
-   if(!revsrch){
-		if(wordList.Index(m_textVal,false) != wxNOT_FOUND){
-			wxString tmpsrchIII;
-			int j=0;
-			tmpstr = _T("");
-			found = true;
-			if(m_label->GetValue()){
-				if(!swap){
-					while(j < wordList.GetCount()){		
-						tmpsrchIII = wordList.Item(j);
-						if(tmpsrchIII.IsSameAs(m_textVal)){
-							tmpstr += meanList.Item(j) + _T("\n\n");
-						}		
-						j++;
-					}
-				}else{					
-					qsql = wxT("SELECT outw FROM words WHERE inw = '")+m_textVal+wxT("'");
-		        		returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qresult, &nrow, &ncol, &db_error_msg);
-					
-					// DEBUGGING
-					//fprintf(stderr, "returned meanings:%d\n", nrow);
+        m_label->SetFont(m_font);    
+        m_label->Clear();
+        if (tmpstr.Len()!=0) {
+            m_label->WriteText(tmpstr);
+        } else {
+            m_label->SetValue(_("Phrase not found."));
+        }
+    } else {
+        
+        if (!revsrch) {
+            if (wordList.Index(m_textVal,false) != wxNOT_FOUND) {
+                wxString tmpsrchIII;
+                int j=0;
+                tmpstr = _T("");
+                found = true;
+                
+                if (m_label->GetValue()) {
+                    if (!swap) {
+                        while (j < wordList.GetCount()) {
+                            tmpsrchIII = wordList.Item(j);
+                            if (tmpsrchIII.IsSameAs(m_textVal)) {
+                                tmpstr += meanList.Item(j) + _T("\n\n");
+                            }        
+                            j++;
+                        }
+                    } else {                    
+                        qsql = wxT("SELECT outw FROM words WHERE inw = '")+m_textVal+wxT("'");
+                        returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qresult, 
+                                                        &nrow, &ncol, &db_error_msg);
+                        
+                        // DEBUGGING
+                        //fprintf(stderr, "returned meanings:%d\n", nrow);
 
-					for(int x=1; x <= nrow; x++)
-					{
-						tmpstr += UTF8_STR(qresult[x]) + _T("\n\n");
-					}				
-				}
+                        for (int x=1; x <= nrow; x++) {
+                            tmpstr += UTF8_STR(qresult[x]) + _T("\n\n");
+                        }                
+                    }
 
-				m_label->Clear();
-				m_label->SetFont(m_font);	
-				m_label->WriteText(tmpstr);			   
-				m_text->SetValue(wordList.Item(wordList.Index(m_textVal,false)));	
-			}
-                        if(atrans == FALSE){
-				if(m_text->FindString(m_textVal) == -1) {
-			           if(m_text->GetCount() <= entryq-1){
-				      if(m_textVal.Len()>1){
-			              	m_text->Append(m_textVal);
-				      }
-			              m_text->SetSelection(m_text->GetCount()-1);              
-		                   }else{
-        	    		      m_text->Delete(0);
-				      if(m_textVal.Len()>1){
-			              	m_text->Append(m_textVal);
-				      }
-			              m_text->SetSelection(m_text->GetCount()-1);
-			              m_text->SetValue(m_textVal);
-			            }
-        	                }
-	     		}
-		  }else{
-			found = false;
-			m_label->SetValue(_("Phrase not found."));			
-		  }	
-   }else{
-	// implement reverse rearch
-	int x =0;
-	wxBusyCursor wait;
-	wxString tmpsrch;
-	tmpstr = _T("");
-	if(!swap){
-		prog = new wxProgressDialog(_T("xFarDic"),
-	                            _("Please wait..."),
-	                            meanList.GetCount(), 
-	                            this,
-	                            wxPD_APP_MODAL |
-	                            wxPD_AUTO_HIDE |
-	                            wxPD_SMOOTH);
-	
-		while(x < meanList.GetCount()){		
-			tmpsrch = meanList.Item(x);
-			if(tmpsrch.Contains(m_textVal)){
-				found = true;				
-				tmpstr += tmpsrch + _T(" = ") + wordList.Item(x) + _T("\n\n");											
-			}
-			x++;
-			if(x % 500  == 0){
-				prog->Update(x);
-			}		
-		}    
+                    m_label->Clear();
+                    m_label->SetFont(m_font);    
+                    m_label->WriteText(tmpstr);               
+                    m_text->SetValue(wordList.Item(wordList.Index(m_textVal,false)));    
+                }
+               
+                if (atrans == FALSE) {
+                    if (m_text->FindString(m_textVal) == -1) {
+                        if (m_text->GetCount() <= entryq-1) {
+                            if (m_textVal.Len()>1) {
+                                m_text->Append(m_textVal);
+                            }
+                            m_text->SetSelection(m_text->GetCount()-1);              
+                        } else {
+                            m_text->Delete(0);
 
-		// Killing progress dialog
-		delete prog;   	
-		wxYield();
-	}else{
-		qsql = wxT("SELECT inw FROM words WHERE outw LIKE '%")+m_textVal+wxT("%'");								
-		returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qresult, &nrow, &ncol, &db_error_msg);
+                            if (m_textVal.Len()>1) {
+                                m_text->Append(m_textVal);
+                            }
+                            m_text->SetSelection(m_text->GetCount()-1);
+                            m_text->SetValue(m_textVal);
+                        }
+                    }
+                }
+            } else {
+                found = false;
+                m_label->SetValue(_("Phrase not found."));            
+            }    
+        } else {
+            // implement reverse rearch
+            int x =0;
+            wxBusyCursor wait;
+            wxString tmpsrch;
+            tmpstr = _T("");
+            if (!swap) {
+                prog = new wxProgressDialog(_T("xFarDic"), _("Please wait..."), meanList.GetCount(), this,
+                                            wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_SMOOTH);
+            
+                while (x < meanList.GetCount()) {
+                    tmpsrch = meanList.Item(x);
+                    if (tmpsrch.Contains(m_textVal)) {
+                        found = true;                
+                        tmpstr += tmpsrch + _T(" = ") + wordList.Item(x) + _T("\n\n");
+                    }
+                    x++;
+                    if (x % 500  == 0) {
+                        prog->Update(x);
+                    }        
+                }    
 
-		qsql = wxT("SELECT outw FROM words WHERE outw LIKE '%")+m_textVal+wxT("%'");								
-		returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qrresult, &nrow, &ncol, &db_error_msg);
+                // Killing progress dialog
+                delete prog;       
+                wxYield();
+            } else {
+                qsql = wxT("SELECT inw FROM words WHERE outw LIKE '%")+m_textVal+wxT("%'");                                
+                returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qresult, &nrow, 
+                                                &ncol, &db_error_msg);
 
-		// DEBUGGING
-		//fprintf(stderr, "returned meanings:%d\n", nrow);
+                qsql = wxT("SELECT outw FROM words WHERE outw LIKE '%")+m_textVal+wxT("%'");                                
+                returnvalue = sqlite3_get_table(Db, (const char *)qsql.mb_str(wxConvUTF8),&qrresult, &nrow, 
+                                                &ncol, &db_error_msg);
 
-		if(nrow > 0){
-			found = true;
-		}
-			
-		for(int x=1; x <= nrow; x++)
-		{			
-			tmpstr += UTF8_STR(qrresult[x]) + _T(" = ") + UTF8_STR(qresult[x]) + _T("\n\n");
-		}
-	}
+                // DEBUGGING
+                //fprintf(stderr, "returned meanings:%d\n", nrow);
 
-	m_label->SetFont(m_font);	
-	m_label->Clear();
-	if(tmpstr.Len()!=0){
-		m_label->WriteText(tmpstr);
-	}else{
-		m_label->SetValue(_("Phrase not found."));
-	}
-   }
-}
-     	  
-  if (found && !revsrch && wordList.Index(m_text->GetValue(),false) > 0 && !(1-(wordList.Index(m_text->GetValue(),false)) == 0)){
-    if(vtool){
-    	wxToolBarBase *tb = GetToolBar();
-    	tb->EnableTool(ID_BACK, TRUE);
-    }	 
-    gomenu->Enable(xFarDic_Back, TRUE);
-    if(select){
-         wxString m_textVal(m_text->GetValue());
-         m_text->SetSelection(0,m_textVal.Length());
+                if (nrow > 0) {
+                    found = true;
+                }
+                    
+                for (int x=1; x <= nrow; x++) {            
+                    tmpstr += UTF8_STR(qrresult[x]) + _T(" = ") + UTF8_STR(qresult[x]) + _T("\n\n");
+                }
+            }
+
+            m_label->SetFont(m_font);    
+            m_label->Clear();
+            if (tmpstr.Len()!=0) {
+                m_label->WriteText(tmpstr);
+            } else {
+                m_label->SetValue(_("Phrase not found."));
+            }
+        }
+    }
+           
+    if (found && !revsrch && wordList.Index(m_text->GetValue(),false) > 0 && 
+        !(1-(wordList.Index(m_text->GetValue(),false)) == 0)) {
+
+        if (vtool) {
+            wxToolBarBase *tb = GetToolBar();
+            tb->EnableTool(ID_BACK, TRUE);
+        }     
+        gomenu->Enable(xFarDic_Back, TRUE);
+        if (select) {
+            wxString m_textVal(m_text->GetValue());
+            m_text->SetSelection(0,m_textVal.Length());
+        }  
+    } else {
+        if (vtool) {
+            wxToolBarBase *tb = GetToolBar();
+            tb->EnableTool(ID_BACK, FALSE);
+        }    
+        gomenu->Enable(xFarDic_Back, FALSE);    
+    }
+
+    if (found && !revsrch && !((wordList.Index(m_text->GetValue(),false)) == wordList.Index(wordList.Last(),false))) {
+        if (vtool) {
+            wxToolBarBase *tb = GetToolBar();
+            tb->EnableTool(ID_FORWARD, TRUE);
+        }  
+        gomenu->Enable(xFarDic_Forward, TRUE);
+        if (select) {
+            wxString m_textVal(m_text->GetValue());
+            m_text->SetSelection(0,m_textVal.Length());
+        }  
+    } else {
+        if (vtool) {
+            wxToolBarBase *tb = GetToolBar();
+            tb->EnableTool(ID_FORWARD, FALSE);
+        }    
+        gomenu->Enable(xFarDic_Forward, FALSE);    
+    }
+
+    if (select) {
+        wxString m_textVal(m_text->GetValue());
+        m_text->SetSelection(0,m_textVal.Length());
     }  
-  } else {
-    if(vtool){
-    	wxToolBarBase *tb = GetToolBar();
-        tb->EnableTool(ID_BACK, FALSE);
-    }	
-    gomenu->Enable(xFarDic_Back, FALSE);    
-  }
 
-  if (found && !revsrch && !((wordList.Index(m_text->GetValue(),false)) == wordList.Index(wordList.Last(),false))){
-    if(vtool){
-        wxToolBarBase *tb = GetToolBar();
-        tb->EnableTool(ID_FORWARD, TRUE);
-    }  
-    gomenu->Enable(xFarDic_Forward, TRUE);
-    if(select){
-         wxString m_textVal(m_text->GetValue());
-         m_text->SetSelection(0,m_textVal.Length());
-    }  
-  } else {
-    if(vtool){
-        wxToolBarBase *tb = GetToolBar();
-        tb->EnableTool(ID_FORWARD, FALSE);
-    }	
-    gomenu->Enable(xFarDic_Forward, FALSE);    
-  }
+    if (!found) {
+        m_label->SetValue(_("Phrase not found."));    
+    } else {
+        if (ltbox.GetCount() < ltbaselimit) {
+            m_leitnerbox->Enable(TRUE);
+        }
+    }
 
-  if(select){
-         wxString m_textVal(m_text->GetValue());
-         m_text->SetSelection(0,m_textVal.Length());
-   }  
-
-  if(!found){
-	m_label->SetValue(_("Phrase not found."));	
-  }else{
-	if(ltbox.GetCount() < ltbaselimit){
-		m_leitnerbox->Enable(TRUE);
-  	}
-  }
-
-  if(notify){
-	ShowNotification(m_textVal, m_label->GetValue());
-  }
+    if (notify) {
+        ShowNotification(m_textVal, m_label->GetValue());
+    }
   
-  return found;
+    return found;
 }
 
 void xFarDicApp::OnTranslate(wxCommandEvent& WXUNUSED(event))
@@ -1484,40 +1482,37 @@ void xFarDicApp::DoTranslate()
     m_textVal.Trim( FALSE );
     m_textVal.MakeLower();    
 
-   if(spell){   
-     if(!revsrch){	
-   	if(CheckSpell(m_textVal,1) == 0){	  
-	     wxString suggestion = ShowAspell(sugList);	     	     
-	     if(suggestion.Len()!=0){
-		m_text->SetValue(suggestion);
-		m_textVal = suggestion;
-		m_textVal.Trim( TRUE );
-		m_textVal.Trim( FALSE );
-		m_textVal.MakeLower();
-	     }else{
-		return;
-	     }	             
-   	} 
-     }
+    if (spell) {   
+        if (!revsrch) {    
+            if (CheckSpell(m_textVal,1) == 0) {      
+                wxString suggestion = ShowAspell(sugList);                  
+
+                if (suggestion.Len()!=0) {
+                    m_text->SetValue(suggestion);
+                    m_textVal = suggestion;
+                    m_textVal.Trim( TRUE );
+                    m_textVal.Trim( FALSE );
+                    m_textVal.MakeLower();
+                } else {
+                    return;
+                }                 
+            } 
+        }
     }  
 
-   //let actually translate!
-   translate();     
+    //let actually translate!
+    translate();     
 }
 
 wxString xFarDicApp::ShowAspell(wxArrayString sugList)
 {
-    wxSingleChoiceDialog aspelldialog(this,
-                                _("xFarDic spell checker found error(s) on your typed word.\n Please choose correct word from list and then click OK."),                               
-                                _("xFarDic Spell Checker"),
-                                sugList);
+    wxSingleChoiceDialog aspelldialog(this, _("xFarDic spell checker found error(s) on your typed word.\n Please choose correct word from list and then click OK."), _("xFarDic Spell Checker"), sugList);
 
-    	if (aspelldialog.ShowModal() == wxID_OK)
-    	{
-		return aspelldialog.GetStringSelection();
-	}else{
-		return wxEmptyString;
-	}    	        
+    if (aspelldialog.ShowModal() == wxID_OK) {
+       return aspelldialog.GetStringSelection();
+    } else {
+        return wxEmptyString;
+    }                
 }
 
 void xFarDicApp::OnSettings(wxCommandEvent& WXUNUSED(event))
@@ -1528,83 +1523,83 @@ void xFarDicApp::OnSettings(wxCommandEvent& WXUNUSED(event))
 void xFarDicApp::ShowSettings()
 {
     if (showSettings) {
-       // getting main window position
-       int pos_x, pos_y;
-       GetPosition(&pos_x, &pos_y);
+        // getting main window position
+        int pos_x, pos_y;
+        GetPosition(&pos_x, &pos_y);
 
-       // getting mainwindow size
-       int size_x, size_y;
-       GetSize(&size_x, &size_y);
+        // getting mainwindow size
+        int size_x, size_y;
+        GetSize(&size_x, &size_y);
 
-       // About window size
-       int const x = 500;
-       int const y = 400;
+        // About window size
+        int const x = 500;
+        int const y = 400;
 
-       // About window position
-       int z = pos_x + (( size_x - x) / 2 );
-       int w = pos_y + (( size_y - y) / 2 );
+        // About window position
+        int z = pos_x + (( size_x - x) / 2 );
+        int w = pos_y + (( size_y - y) / 2 );
 
 
-	setframe = new xFarDicSettings(this, _("xFarDic Settings"),
-                               wxPoint(z, w), wxSize(x, y), m_locale, wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR);       
-	       
-       setframe->Show(TRUE);
-       showSettings = false;
-     }
+        setframe = new xFarDicSettings(this, _("xFarDic Settings"), wxPoint(z, w), wxSize(x, y), m_locale, 
+                                       wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR);       
+           
+        setframe->Show(TRUE);
+        showSettings = false;
+    }
 }
 
 void xFarDicApp::ShowAbout()
 {
     if (showAbout) {
-       // getting main window position
-       int pos_x, pos_y;
-       GetPosition(&pos_x, &pos_y);
+        // getting main window position
+        int pos_x, pos_y;
+        GetPosition(&pos_x, &pos_y);
 
-       // getting mainwindow size
-       int size_x, size_y;
-       GetSize(&size_x, &size_y);
+        // getting mainwindow size
+        int size_x, size_y;
+        GetSize(&size_x, &size_y);
 
-       // About window size
-       int const x = 400;
-       int const y = 350;
+        // About window size
+        int const x = 400;
+        int const y = 350;
+ 
+        // About window position
+        int z = pos_x + (( size_x - x) / 2 );
+        int w = pos_y + (( size_y - y) / 2 );
 
-       // About window position
-       int z = pos_x + (( size_x - x) / 2 );
-       int w = pos_y + (( size_y - y) / 2 );
-
-       abframe = new xFarDicAbout(this, _("About xFarDic"),
-                               wxPoint(z, w), wxSize(x, y), m_locale,wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR);
+        abframe = new xFarDicAbout(this, _("About xFarDic"), wxPoint(z, w), wxSize(x, y), m_locale, 
+                                   wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR);
       
-       abframe->Show(TRUE);
-       showAbout = false;
-     }  
+        abframe->Show(TRUE);
+        showAbout = false;
+    }  
 }
 
 void xFarDicApp::ShowLeitner()
 {
     if (showLeitner) {
-       // getting main window position
-       int pos_x, pos_y;
-       GetPosition(&pos_x, &pos_y);
+        // getting main window position
+        int pos_x, pos_y;
+        GetPosition(&pos_x, &pos_y);
+ 
+        // getting mainwindow size
+        int size_x, size_y;
+        GetSize(&size_x, &size_y);
 
-       // getting mainwindow size
-       int size_x, size_y;
-       GetSize(&size_x, &size_y);
+        // About window size
+        int const x = 350;
+        int const y = 350;
 
-       // About window size
-       int const x = 350;
-       int const y = 350;
+        // About window position
+        int z = pos_x + (( size_x - x) / 2 );
+        int w = pos_y + (( size_y - y) / 2 );
 
-       // About window position
-       int z = pos_x + (( size_x - x) / 2 );
-       int w = pos_y + (( size_y - y) / 2 );
-
-       ltframe = new xFarDicLeitner(this, _("xFarDic - Leitner Box"),
-                               wxPoint(z, w), wxSize(x, y), m_locale,wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR);
+        ltframe = new xFarDicLeitner(this, _("xFarDic - Leitner Box"), wxPoint(z, w), wxSize(x, y), m_locale,
+                                     wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR);
       
-       ltframe->Show(TRUE);
-       showLeitner = false;
-     }  
+        ltframe->Show(TRUE);
+        showLeitner = false;
+    }  
 }
 
 /// Quit event handler
@@ -1620,70 +1615,68 @@ void xFarDicApp::DoQuit()
     pConfig->SetPath(wxT("/"));
 
     if ( pConfig->Read(wxT("/Options/Save-Cache"), 1) != 0 ) {
-       //delete all entries from file
+        //delete all entries from file
         int count = pConfig->Read(wxT("/Options/Num-Entries"), 10);
-	int textcount = m_text->GetCount();
-	
-	pConfig->SetPath(wxT("/Cache"));	
-	wxString str;
-      	long dummy;
-      	int counter =0;
-	
-	bool bCont = pConfig->GetFirstEntry(str, dummy);
-	for(int i=0; i<=textcount; i++)
-	{
-		pConfig->DeleteEntry(str, false);     
-		str = _T("");   		
-		pConfig->GetFirstEntry(str, dummy);
-		counter++;
-		//fprintf(stderr, "delete entry:%d\n", counter);
-	}
-			
-	if(m_text->GetCount() > 0){      	     			
-		if(textcount < count){
-			count = textcount;
-		}
-        	for(int j=0; j<count; j++){   	    		    	
-	    		pConfig->Write(m_text->GetString(j), j);	    	
-        	}
-	}	
-    }else{
-    	//delete all entries from file      
-	pConfig->SetPath(wxT("/"));
-	pConfig->DeleteGroup(wxT("Cache"));	
+        int textcount = m_text->GetCount();
+    
+        pConfig->SetPath(wxT("/Cache"));    
+        wxString str;
+        long dummy;
+        int counter =0;
+    
+        bool bCont = pConfig->GetFirstEntry(str, dummy);
+        for (int i=0; i<=textcount; i++) {
+            pConfig->DeleteEntry(str, false);     
+            str = _T("");           
+            pConfig->GetFirstEntry(str, dummy);
+            counter++;
+            //fprintf(stderr, "delete entry:%d\n", counter);
+        }
+            
+        if (m_text->GetCount() > 0) {                           
+            if (textcount < count) {
+                count = textcount;
+            }
+            for (int j=0; j<count; j++) {                           
+                pConfig->Write(m_text->GetString(j), j);            
+            }
+        }    
+    } else {
+        //delete all entries from file      
+        pConfig->SetPath(wxT("/"));
+        pConfig->DeleteGroup(wxT("Cache"));    
     }    
     
     pConfig->SetPath(wxT("/"));
 
-    if(pConfig->Read(wxT("/Options/Win-Pos"), 0l) != 0 ){
-          int x, y;
-          GetPosition(&x, &y);
-          pConfig->Write(wxT("/Options/x"), (long) x);
-          pConfig->Write(wxT("/Options/y"), (long) y);	  
-      }else{
-          pConfig->Write(wxT("/Options/Win-Pos"), 0);
-          pConfig->Write(wxT("/Options/x"), 0);
-          pConfig->Write(wxT("/Options/y"), 0);	  
-      }
+    if (pConfig->Read(wxT("/Options/Win-Pos"), 0l) != 0 ) {
+        int x, y;
+        GetPosition(&x, &y);
+        pConfig->Write(wxT("/Options/x"), (long) x);
+        pConfig->Write(wxT("/Options/y"), (long) y);      
+    } else {
+        pConfig->Write(wxT("/Options/Win-Pos"), 0);
+        pConfig->Write(wxT("/Options/x"), 0);
+        pConfig->Write(wxT("/Options/y"), 0);      
+    }
     
     oSelection.End();
-    
     Destroy();
 }
 
 /// Close event handles
 void xFarDicApp::OnClose(wxCloseEvent& WXUNUSED(event))
 {
-    if(hide == true){
+    if (hide == true) {
         this->Show(FALSE);
-    }else{
+    } else {
         DoQuit();
     }
 }
 
 void xFarDicApp::OnBack(wxCommandEvent& WXUNUSED(event))
 {
-   translate(wordList.Item((wordList.Index(m_text->GetValue(),false))-1),TRUE);        
+    translate(wordList.Item((wordList.Index(m_text->GetValue(),false))-1),TRUE);        
     return;
 }
 
@@ -1709,9 +1702,9 @@ void xFarDicApp::OnTrash(wxCommandEvent& WXUNUSED(event))
 {
     wxConfigBase *pConfig = wxConfigBase::Get();
 
-    //delete all entries from file      	
-	pConfig->SetPath(wxT("/"));
-	pConfig->DeleteGroup(wxT("Cache"));
+    //delete all entries from file          
+    pConfig->SetPath(wxT("/"));
+    pConfig->DeleteGroup(wxT("Cache"));
 
     delete wxConfigBase::Set((wxConfigBase *) NULL);   
     m_text->Clear();
@@ -1729,12 +1722,11 @@ void xFarDicApp::OnLeitner(wxCommandEvent& WXUNUSED(event))
 
 void xFarDicApp::Hide(wxIconizeEvent& event)
 {    
-	   if (event.Iconized() && hide == true)
-        {                                                                                                
-                this->Show(FALSE);                                                                                      
-         } else{                                                                                                               
-                this->Show(TRUE);                                                                                       
-        }                      
+    if (event.Iconized() && hide == true) {
+        this->Show(FALSE);
+    } else {
+        this->Show(TRUE);                                                                                       
+    }                      
 }
 
 /// Spell checking main function
@@ -1743,57 +1735,59 @@ void xFarDicApp::Hide(wxIconizeEvent& event)
 /// returns 2 if Aspell is not installed.
 bool xFarDicApp::CheckSpell(wxString chkStr, bool suggest)
 {
-	//spell checking goes here
-	AspellConfig * spell_config = new_aspell_config();
+    //spell checking goes here
+    AspellConfig * spell_config = new_aspell_config();
 
-	// Some error handling for Aspell
-	//if(inputlang.Len()!=0){
-	//	 aspell_config_replace(spell_config, "lang", (const char *)inputlang.mb_str(wxConvUTF8));
-	//}else{
-		  aspell_config_replace(spell_config, "lang","en");
-	//}
+    // Some error handling for Aspell
+    //if (inputlang.Len()!=0) {
+    //     aspell_config_replace(spell_config, "lang", (const char *)inputlang.mb_str(wxConvUTF8));
+    //} else {
+    aspell_config_replace(spell_config, "lang","en");
+    //}
 
-	// Small hack for two part words to ignore aspell
-	if(chkStr.Contains(_T(" "))){ return 1;}
+    // Small hack for two part words to ignore aspell
+    if (chkStr.Contains(_T(" "))) { 
+        return 1;
+    }
 
-    	AspellCanHaveError * possible_err = new_aspell_speller(spell_config);
-        AspellSpeller * spell_checker = 0;
+    AspellCanHaveError * possible_err = new_aspell_speller(spell_config);
+    AspellSpeller * spell_checker = 0;
 
-	if (aspell_error_number(possible_err) != 0){		
-		//DEBUGGING
-		//fprintf(stderr, "%s",aspell_error_message(possible_err),1);
-		if(!aspelli){
-			wxString msg;
-			msg.Printf(_("It seems that Aspell is not installed.\nxFarDic will not work correctly."));
-			wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_WARNING, this);
-			aspelli = true;
-		}
-		spell =0;
-		return 2;
-	}else{
-	        spell_checker = to_aspell_speller(possible_err); 
+    if (aspell_error_number(possible_err) != 0) {        
+        //DEBUGGING
+        //fprintf(stderr, "%s",aspell_error_message(possible_err),1);
+        if (!aspelli) {
+            wxString msg;
+            msg.Printf(_("It seems that Aspell is not installed.\nxFarDic will not work correctly."));
+            wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_WARNING, this);
+            aspelli = true;
         }
+        spell =0;
+        return 2;
+    } else {
+        spell_checker = to_aspell_speller(possible_err); 
+    }
 
-	if(suggest){
-		 const AspellWordList * suggestions = aspell_speller_suggest(spell_checker, (const char *)chkStr.mb_str(wxConvUTF8), chkStr.Len());
-          	 AspellStringEnumeration * elements = aspell_word_list_elements(suggestions);
-       
-	          const char * word;
+    if (suggest) {
+        const AspellWordList * suggestions = aspell_speller_suggest(spell_checker, (const char *)chkStr.mb_str(wxConvUTF8),
+                                                                    chkStr.Len());
+        AspellStringEnumeration * elements = aspell_word_list_elements(suggestions);
+        const char * word;
 
-		  // clear array
-		  sugList.Empty();
-	
-		    while ( (word = aspell_string_enumeration_next(elements)) != NULL ){
-		      // add words to suggestion list	     
-		       size_t copies =1;
-		        if(wordList.Index(UTF8_STR(word),false) != wxNOT_FOUND){
-			       sugList.Add(UTF8_STR(word),copies);    
-			}
-		     }
-	}
+        // clear array
+        sugList.Empty();
+    
+        while ((word = aspell_string_enumeration_next(elements)) != NULL ) {
+            // add words to suggestion list         
+            size_t copies =1;
+            if (wordList.Index(UTF8_STR(word),false) != wxNOT_FOUND) {
+                sugList.Add(UTF8_STR(word),copies);    
+            }
+        }
+    }
 
-	// resturns 1 if correct
-        return aspell_speller_check(spell_checker, (const char *)chkStr.mb_str(wxConvUTF8), chkStr.Len());
+    // resturns 1 if correct
+    return aspell_speller_check(spell_checker, (const char *)chkStr.mb_str(wxConvUTF8), chkStr.Len());
 }
 
 bool xFarDicApp::initDB(const char *filename) {    
@@ -1802,10 +1796,10 @@ bool xFarDicApp::initDB(const char *filename) {
     wxFile xmldb;
     
     // Check if xdb file exists before parsing
-    if(!xmldb.Exists(UTF8_STR(filename))){
-	// DEBUGGING
-	// fprintf(stderr, "%s\n", filename);
-	return false;
+    if (!xmldb.Exists(UTF8_STR(filename))) {
+        // DEBUGGING
+        // fprintf(stderr, "%s\n", filename);
+        return false;
     }
    
     counter =0;     
@@ -1813,42 +1807,42 @@ bool xFarDicApp::initDB(const char *filename) {
     reader = xmlReaderForFile(filename, NULL, 0);
     if (reader != NULL) {
         ret = xmlTextReaderRead(reader);
-        while (ret == 1){
-	    if(xmlTextReaderNodeType(reader) == 3)           
-	   {
-		counter++;            
-	    	if(counter > 2){				    				
-			if(counter % 2 > 0){			
-			   size_t copies =1;			   
-			   tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));		   
-   		           wordList.Add(tmpstr.Lower(),copies); 			   
-			}else{
-			   size_t copies =1;
-			   if(!swap || swapupdate){
-				   tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));						   
-   			           meanList.Add(tmpstr.Lower(),copies);
-			   }
-			}
-               }	    
-	  }	    
+        while (ret == 1) {
+            if (xmlTextReaderNodeType(reader) == 3) {
+                counter++;            
+                if (counter > 2) {                                    
+                    if (counter % 2 > 0) {            
+                       size_t copies =1;               
+                       tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));           
+                              wordList.Add(tmpstr.Lower(),copies);                
+                    } else {
+                       size_t copies =1;
+                       if (!swap || swapupdate) {
+                           tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));                           
+                                  meanList.Add(tmpstr.Lower(),copies);
+                       }
+                    }
+                }        
+            }        
+            
             ret = xmlTextReaderRead(reader);
-	    // DEBUGGING	  
-	    // fprintf(stderr, "%d\n", ret);		    
+            // DEBUGGING      
+            // fprintf(stderr, "%d\n", ret);
         }       
         
-        xmlFreeTextReader(reader);               
+        xmlFreeTextReader(reader);
         xmlCleanupParser();
-	return true;
+        return true;
     } else {
-	wxString msg;
-   	msg.Printf( _("Parse Error. Invalid Document.\n It is possible that XML-DB is not installed.\n Set XML DB path in settings window."));
-	wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_STOP, this);
-	return false;
+        wxString msg;
+        msg.Printf( _("Parse Error. Invalid Document.\n It is possible that XML-DB is not installed.\n Set XML DB path in settings window."));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_STOP, this);
+        return false;
     }
 }
 
-bool xFarDicApp::ShowNotification(wxString word, wxString meaning){
-
+bool xFarDicApp::ShowNotification(wxString word, wxString meaning)
+{
     notify_init("xFarDic");
 
     //Get Configuration From Config File
@@ -1857,333 +1851,337 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning){
     pConfig->SetPath(wxT("/Options"));
     int timeout = pConfig->Read(wxT("/Options/Scan-Timeout"), 5);
     
-    if(timeout != 0){
+    if (timeout != 0) {
        timeout = timeout*1000;
     }
 
-    if(meaning.Len() > 1500){
-	meaning.Truncate(1500);
-	meaning = meaning + _T("...");
+    if (meaning.Len() > 1500) {
+        meaning.Truncate(1500);
+        meaning = meaning + _T("...");
     }
 
-    if(n == NULL){
-	n = notify_notification_new ((const char *)word.mb_str(wxConvUTF8), 
-                                 (const char *)meaning.mb_str(wxConvUTF8),
-                                  "stock_help", NULL);
-    }else{
-	notify_notification_close (n, NULL);
-	n = notify_notification_new ((const char *)word.mb_str(wxConvUTF8), 
-                                 (const char *)meaning.mb_str(wxConvUTF8),
-                                  "stock_help", NULL);
-    }	
+    if (n == NULL) {
+        n = notify_notification_new ((const char *)word.mb_str(wxConvUTF8), 
+                                     (const char *)meaning.mb_str(wxConvUTF8),
+                                     "stock_help", NULL);
+    } else {
+        notify_notification_close (n, NULL);
+        n = notify_notification_new ((const char *)word.mb_str(wxConvUTF8), 
+                                     (const char *)meaning.mb_str(wxConvUTF8),
+                                     "stock_help", NULL);
+    }    
     
     notify_notification_set_timeout (n, timeout); // timeout, 0 will disable that
     
-    if(!swapupdate){
-	    if (!notify_notification_show (n, NULL)) 
-	    {
-		// DEBUGGING
-		// fprintf(stderr, "failed to send notification\n");
-		return 1;
-	    }
+    if (!swapupdate) {
+        if (!notify_notification_show (n, NULL)) {
+            // DEBUGGING
+            // fprintf(stderr, "failed to send notification\n");
+            return 1;
+        }
     }
 
     delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
 
 wxString xFarDicApp::ProcessWord(wxString word){
-	wxString LastChar, FirstChar;
+    wxString LastChar, FirstChar;
 
-	FirstChar = word;
-	FirstChar.Right(1);
+    FirstChar = word;
+    FirstChar.Right(1);
 
-	LastChar = word.Last();
+    LastChar = word.Last();
 
-	// DEBUGGING
-	// fprintf(stderr, "%s\n", (const char *)word.mb_str(wxConvUTF8));
-	
-	// Check last parentheses!	
-	if(LastChar.IsSameAs(_T(")"),FALSE)){
-		word = word.RemoveLast();
-	}
-			
-	// Check last point!	
-	if(LastChar.IsSameAs(_T("."),FALSE)){
-		word = word.RemoveLast();
-	}
+    // DEBUGGING
+    // fprintf(stderr, "%s\n", (const char *)word.mb_str(wxConvUTF8));
+    
+    // Check last parentheses!    
+    if (LastChar.IsSameAs(_T(")"),FALSE)) {
+        word = word.RemoveLast();
+    }
+            
+    // Check last point!    
+    if (LastChar.IsSameAs(_T("."),FALSE)) {
+        word = word.RemoveLast();
+    }
 
-	// Check last colon!
-	if(LastChar.IsSameAs(_T(":"),FALSE)){
-		word = word.RemoveLast();
-	}
+    // Check last colon!
+    if (LastChar.IsSameAs(_T(":"),FALSE)) {
+        word = word.RemoveLast();
+    }
 
-	// Check last semicolon!
-	if(LastChar.IsSameAs(_T(";"),FALSE)){
-		word = word.RemoveLast();
-	}
+    // Check last semicolon!
+    if (LastChar.IsSameAs(_T(";"),FALSE)) {
+        word = word.RemoveLast();
+    }
 
-	// Check last comma!
-	if(LastChar.IsSameAs(_T(","),FALSE)){
-		word = word.RemoveLast();
-	}
+    // Check last comma!
+    if (LastChar.IsSameAs(_T(","),FALSE)) {
+        word = word.RemoveLast();
+    }
 
-	// Check last quotation!
-	if(LastChar.IsSameAs(_T("\""),FALSE)){
-		word = word.RemoveLast();
-	}
+    // Check last quotation!
+    if (LastChar.IsSameAs(_T("\""),FALSE)) {
+        word = word.RemoveLast();
+    }
 
-	// Check last single quotation!
-	if(LastChar.IsSameAs(_T("'"),FALSE)){
-		word = word.RemoveLast();
-	}
+    // Check last single quotation!
+    if (LastChar.IsSameAs(_T("'"),FALSE)) {
+        word = word.RemoveLast();
+    }
 
-	// Check last exclamation mark!
-	if(LastChar.IsSameAs(_T("!"),FALSE)){
-		word = word.RemoveLast();
-	}
+    // Check last exclamation mark!
+    if (LastChar.IsSameAs(_T("!"),FALSE)) {
+        word = word.RemoveLast();
+    }
 
-	// Check last comma!
-	if(LastChar.IsSameAs(_T("?"),FALSE)){
-		word = word.RemoveLast();
-	}
+    // Check last comma!
+    if (LastChar.IsSameAs(_T("?"),FALSE)) {
+        word = word.RemoveLast();
+    }
 
-	// Check last dash!
-	if(LastChar.IsSameAs(_T("-"),FALSE)){
-		word = word.RemoveLast();
-	}
+    // Check last dash!
+    if (LastChar.IsSameAs(_T("-"),FALSE)) {
+        word = word.RemoveLast();
+    }
 
-	// Check last star!
-	if(LastChar.IsSameAs(_T("*"),FALSE)){
-		word = word.RemoveLast();
-	}
+    // Check last star!
+    if (LastChar.IsSameAs(_T("*"),FALSE)) {
+        word = word.RemoveLast();
+    }
 
-	// Check first parentheses!	
-	if(FirstChar.IsSameAs(_T("("),FALSE)){
-		word = word.Right(word.Len()-1);
-	}
-	
-	// Check first point!	
-	if(FirstChar.IsSameAs(_T("."),FALSE)){
-		word = word.Right(word.Len()-1);
-	}
+    // Check first parentheses!    
+    if (FirstChar.IsSameAs(_T("("),FALSE)) {
+        word = word.Right(word.Len()-1);
+    }
+    
+    // Check first point!    
+    if (FirstChar.IsSameAs(_T("."),FALSE)) {
+        word = word.Right(word.Len()-1);
+    }
 
-	// Check first colon!
-	if(FirstChar.IsSameAs(_T(":"),FALSE)){
-		word = word.Right(word.Len()-1);
-	}
+    // Check first colon!
+    if (FirstChar.IsSameAs(_T(":"),FALSE)) {
+        word = word.Right(word.Len()-1);
+    }
 
-	// Check first comma!
-	if(FirstChar.IsSameAs(_T(","),FALSE)){
-		word = word.Right(word.Len()-1);
-	}
+    // Check first comma!
+    if (FirstChar.IsSameAs(_T(","),FALSE)) {
+        word = word.Right(word.Len()-1);
+    }
 
-	// Check first dash!
-	if(FirstChar.IsSameAs(_T("-"),FALSE)){
-		word = word.Right(word.Len()-1);
-	}
+    // Check first dash!
+    if (FirstChar.IsSameAs(_T("-"),FALSE)) {
+        word = word.Right(word.Len()-1);
+    }
 
-	// Check first semicolon!
-	if(FirstChar.IsSameAs(_T(";"),FALSE)){
-		word = word.Right(word.Len()-1);
-	}
+    // Check first semicolon!
+    if (FirstChar.IsSameAs(_T(";"),FALSE)) {
+        word = word.Right(word.Len()-1);
+    }
 
-	// Check first quotation!
-	if(FirstChar.IsSameAs(_T("\""),FALSE)){
-		word = word.Right(word.Len()-1);
-	}
+    // Check first quotation!
+    if (FirstChar.IsSameAs(_T("\""),FALSE)) {
+        word = word.Right(word.Len()-1);
+    }
 
-	// Check first single quotation!
-	if(FirstChar.IsSameAs(_T("'"),FALSE)){
-		word = word.Right(word.Len()-1);
-	}
+    // Check first single quotation!
+    if (FirstChar.IsSameAs(_T("'"),FALSE)) {
+        word = word.Right(word.Len()-1);
+    }
 
-	// Check first exclamation mark!
-	if(FirstChar.IsSameAs(_T("!"),FALSE)){
-		word = word.Right(word.Len()-1);
-	}
+    // Check first exclamation mark!
+    if (FirstChar.IsSameAs(_T("!"),FALSE)) {
+        word = word.Right(word.Len()-1);
+    }
 
-	// Check first comma!
-	if(FirstChar.IsSameAs(_T("?"),FALSE)){
-		word = word.Right(word.Len()-1);
-	}
+    // Check first comma!
+    if (FirstChar.IsSameAs(_T("?"),FALSE)) {
+        word = word.Right(word.Len()-1);
+    }
 
-	// Check first star!
-	if(FirstChar.IsSameAs(_T("*"),FALSE)){
-		word = word.Right(word.Len()-1);
-	}
+    // Check first star!
+    if (FirstChar.IsSameAs(_T("*"),FALSE)) {
+        word = word.Right(word.Len()-1);
+    }
 
-	// Check last 's!
-	if(word.Right(2) == _T("'s")){
-		return word.Left(word.Len()-2);
-	}
-	
-	// Check for Last ied
-	if(word.Right(3) == _T("ied")){
-		return word.Left(word.Len()-3)+_T("y");
-	}
+    // Check last 's!
+    if (word.Right(2) == _T("'s")) {
+        return word.Left(word.Len()-2);
+    }
+    
+    // Check for Last ied
+    if (word.Right(3) == _T("ied")) {
+        return word.Left(word.Len()-3)+_T("y");
+    }
 
-	// Check for Last ies
-	if(word.Right(3) == _T("ies")){
-		return word.Left(word.Len()-3)+_T("y");
-	}
+    // Check for Last ies
+    if (word.Right(3) == _T("ies")) {
+        return word.Left(word.Len()-3)+_T("y");
+    }
 
-	// Check for Last ying
-	if(word.Right(4) == _T("ying")){
-		return word.Left(word.Len()-3);
-	}
+    // Check for Last ying
+    if (word.Right(4) == _T("ying")) {
+        return word.Left(word.Len()-3);
+    }
 
-	// Check for Last ning
-	if(word.Right(4) == _T("ning") && (wordList.Index(word,false) == wxNOT_FOUND)){
-		if(wordList.Index(word.Left(word.Len()-4),false) != wxNOT_FOUND){
-			return word.Left(word.Len()-4);
-		}
-	}
+    // Check for Last ning
+    if (word.Right(4) == _T("ning") && (wordList.Index(word,false) == wxNOT_FOUND)) {
+        if (wordList.Index(word.Left(word.Len()-4),false) != wxNOT_FOUND) {
+            return word.Left(word.Len()-4);
+        }
+    }
 
-	// Check for Last zation
-	if(word.Right(6) == _T("zation") && (wordList.Index(word,false) == wxNOT_FOUND)){
-		if(wordList.Index(word.Left(word.Len()-5)+_T("e"),false) != wxNOT_FOUND){
-			return word.Left(word.Len()-5)+_T("e");
-		}
-	}
+    // Check for Last zation
+    if (word.Right(6) == _T("zation") && (wordList.Index(word,false) == wxNOT_FOUND)) {
+        if (wordList.Index(word.Left(word.Len()-5)+_T("e"),false) != wxNOT_FOUND) {
+            return word.Left(word.Len()-5)+_T("e");
+        }
+    }
 
-	// Check for Last ment
-	if(word.Right(4) == _T("ment") && (wordList.Index(word,false) == wxNOT_FOUND)){
-		if(wordList.Index(word.Left(word.Len()-4),false) != wxNOT_FOUND){
-			return word.Left(word.Len()-4);
-		}
-	}
+    // Check for Last ment
+    if (word.Right(4) == _T("ment") && (wordList.Index(word,false) == wxNOT_FOUND)) {
+        if (wordList.Index(word.Left(word.Len()-4),false) != wxNOT_FOUND) {
+            return word.Left(word.Len()-4);
+        }
+    }
 
-	// Check for Last ing
-	if(word.Right(3) == _T("ing") && (wordList.Index(word,false) == wxNOT_FOUND)){
-		if(wordList.Index(word.Left(word.Len()-3)+_T("e"),false) != wxNOT_FOUND){
-			return word.Left(word.Len()-3)+_T("e");
-		}else{
-			return word.Left(word.Len()-3);
-		}
-	}
+    // Check for Last ing
+    if (word.Right(3) == _T("ing") && (wordList.Index(word,false) == wxNOT_FOUND)) {
+        if (wordList.Index(word.Left(word.Len()-3)+_T("e"),false) != wxNOT_FOUND) {
+            return word.Left(word.Len()-3)+_T("e");
+        } else {
+            return word.Left(word.Len()-3);
+        }
+    }
 
-	// Check for Last s
-	if(word.Right(1) == _T("s") && (wordList.Index(word,false) == wxNOT_FOUND) && (wordList.Index(word.Left(word.Len()-1),false) != wxNOT_FOUND)){
-		return word.Left(word.Len()-1);
-	}
+    // Check for Last s
+    if (word.Right(1) == _T("s") && (wordList.Index(word,false) == wxNOT_FOUND) && 
+        (wordList.Index(word.Left(word.Len()-1),false) != wxNOT_FOUND)) {
+        return word.Left(word.Len()-1);
+    }
 
-	// Check for Last ly
-	if(word.Right(2) == _T("ly") && (wordList.Index(word,false) == wxNOT_FOUND) && (wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND)){
-		return word.Left(word.Len()-2);
-	}
+    // Check for Last ly
+    if (word.Right(2) == _T("ly") && (wordList.Index(word,false) == wxNOT_FOUND) && 
+        (wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND)) {
+        return word.Left(word.Len()-2);
+    }
 
-	// Check for Last ed
-	if(word.Right(2) == _T("ed")){
-		if(wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND){
-			return word.Left(word.Len()-2);
-		}else{
-			return word.Left(word.Len()-1);
-		}
-	}
+    // Check for Last ed
+    if (word.Right(2) == _T("ed")) {
+        if (wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND) {
+            return word.Left(word.Len()-2);
+        } else {
+            return word.Left(word.Len()-1);
+        }
+    }
 
-	// Check for Last es
-	if(word.Right(2) == _T("es") && (wordList.Index(word,false) == wxNOT_FOUND) && (wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND)){
-		return word.Left(word.Len()-2);		
-	}
+    // Check for Last es
+    if (word.Right(2) == _T("es") && (wordList.Index(word,false) == wxNOT_FOUND) && 
+        (wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND)) {
+        return word.Left(word.Len()-2);        
+    }
 
-	// Check for Last er
-	if(word.Right(2) == _T("er") && (wordList.Index(word,false) == wxNOT_FOUND) && (wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND)){
-		return word.Left(word.Len()-2);		
-	}
+    // Check for Last er
+    if (word.Right(2) == _T("er") && (wordList.Index(word,false) == wxNOT_FOUND) && 
+        (wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND)) {
+        return word.Left(word.Len()-2);
+    }
 
-	return word;
+    return word;
 }
 
 void xFarDicApp::LoadLeitnerBox()
 {
-   wxString tmpstr, ltboxstr; 
-   wxArrayInt position;
+    wxString tmpstr, ltboxstr; 
+    wxArrayInt position;
 
-   //Get Configuration From Config File
-   wxConfigBase *pConfig = wxConfigBase::Get();
+    //Get Configuration From Config File
+    wxConfigBase *pConfig = wxConfigBase::Get();
 
-   pConfig->SetPath(wxT("/Options"));
+    pConfig->SetPath(wxT("/Options"));
 
-   ltboxstr = pConfig->Read(_T("LTBOX-A"), _T(""));
+    ltboxstr = pConfig->Read(_T("LTBOX-A"), _T(""));
    
-   ltboxstr = ltboxstr.Trim(TRUE);
-   ltboxstr = ltboxstr.Trim(FALSE);  
+    ltboxstr = ltboxstr.Trim(TRUE);
+    ltboxstr = ltboxstr.Trim(FALSE);  
 
-  position.Empty();
+    position.Empty();
  
-  if(ltboxstr.Len() > 0){
-     for(int x=1; x <= ltboxstr.Len(); x++){	
-        Part = ltboxstr.GetChar(x);
-	if(Part.CmpNoCase(_T(";"))==0){
-		position.Add(x);		
-        }
-      } // End For
-  }
+    if (ltboxstr.Len() > 0) {
+        for (int x=1; x <= ltboxstr.Len(); x++) {    
+            Part = ltboxstr.GetChar(x);
+            if (Part.CmpNoCase(_T(";"))==0) {
+                position.Add(x);        
+            }
+        } // End For
+    }
 
-  if(position.GetCount()>0){    
-	   for(int x=0; x <= position.GetCount(); x++){
-		if(x == 0){
-			tmpstr = ltboxstr.Mid(0,position[x]);
-			if(tmpstr.Len()!=0){
-				ltbox.Add(ltboxstr.Mid(0,position[x]));
-			}
-		}else if(x == position.GetCount()){
-			tmpstr = ltboxstr.Mid(position[x-1]+1,ltboxstr.Len());
-			if(tmpstr.Len()!=0){
-				ltbox.Add(ltboxstr.Mid(position[x-1]+1,ltboxstr.Len()));
-			}
-		}else{
-			tmpstr = ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1);
-			if(tmpstr.Len()!=0){
-				ltbox.Add(ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1));
-			}
-		}
-	    }   	  
-  }else if(ltboxstr.Len() > 0){
-	ltbox.Add(ltboxstr);
-  }
+    if (position.GetCount()>0) {    
+        for (int x=0; x <= position.GetCount(); x++) {
+            if (x == 0) {
+                tmpstr = ltboxstr.Mid(0,position[x]);
+                if (tmpstr.Len()!=0) {
+                    ltbox.Add(ltboxstr.Mid(0,position[x]));
+                }
+            } else if (x == position.GetCount()) {
+                tmpstr = ltboxstr.Mid(position[x-1]+1,ltboxstr.Len());
+                if (tmpstr.Len()!=0) {
+                    ltbox.Add(ltboxstr.Mid(position[x-1]+1,ltboxstr.Len()));
+                }
+            } else {
+                tmpstr = ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1);
+                if (tmpstr.Len()!=0) {
+                    ltbox.Add(ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1));
+                }
+            }
+        }         
+    } else if (ltboxstr.Len() > 0) {
+        ltbox.Add(ltboxstr);
+    }
 }
 
 void xFarDicApp::OnLeitnerBox(wxCommandEvent& event)
 {
-	wxString tmpstr, att, msg;	
+    wxString tmpstr, att, msg;    
 
-	//Get Configuration From Config File
-   	wxConfigBase *pConfig = wxConfigBase::Get();
+    //Get Configuration From Config File
+    wxConfigBase *pConfig = wxConfigBase::Get();
 
-	pConfig->SetPath(wxT("/Options"));
+    pConfig->SetPath(wxT("/Options"));
 
-        ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
+    ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
 
-	if(ltbox.GetCount() < ltbaselimit)
-	{
-		if(ltbox.Index(m_text->GetValue(),false) == wxNOT_FOUND && wordList.Index(m_text->GetValue(),false) != wxNOT_FOUND)
-		{
-			ltbox.Add(m_text->GetValue());
-		}else{
-			msg.Printf( _("Selected word already exists in the box\nor not found in the installed database(s).\n"));
-			wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
-			m_text->SetFocus();
-			return;
-		}
-	}else{
-		msg.Printf( _("The leitner box is full.\n"));
-		wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
-		m_text->SetFocus();
-		return;
-	}
-	
-	if(ltbox.GetCount()>0){      	
-		for(int x=0; x < ltbox.GetCount(); x++){
-			if(tmpstr.Len()==0){att = _T(";");}
-			if(x+1 < ltbox.GetCount()){
-				tmpstr = tmpstr + ltbox[x] + att;
-			}else{
-				tmpstr = tmpstr + ltbox[x];
-			}
-		}
-	}
-	pConfig->Write(wxT("/Options/LTBOX-A"), tmpstr);
+    if (ltbox.GetCount() < ltbaselimit) {
+        if (ltbox.Index(m_text->GetValue(),false) == wxNOT_FOUND && 
+            wordList.Index(m_text->GetValue(),false) != wxNOT_FOUND) {
+            ltbox.Add(m_text->GetValue());
+        } else {
+            msg.Printf( _("Selected word already exists in the box\nor not found in the installed database(s).\n"));
+            wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+            m_text->SetFocus();
+            return;
+        }
+    } else {
+        msg.Printf( _("The leitner box is full.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        m_text->SetFocus();
+        return;
+    }
+    
+    if (ltbox.GetCount()>0) {          
+        for (int x=0; x < ltbox.GetCount(); x++) {
+            if (tmpstr.Len()==0) {
+                att = _T(";");
+            }
+            if (x+1 < ltbox.GetCount()) {
+                tmpstr = tmpstr + ltbox[x] + att;
+            } else {
+                tmpstr = tmpstr + ltbox[x];
+            }
+        }
+    }
+    pConfig->Write(wxT("/Options/LTBOX-A"), tmpstr);
 }
 
 bool xFarDicApp::initSwap()
@@ -2196,29 +2194,26 @@ bool xFarDicApp::initSwap()
 
     swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
 
-    if(!swapfile.Exists(swappath))
-    {
-	if(swap)
-	{
-		update = TRUE;
-	}
+    if (!swapfile.Exists(swappath)) {
+        if (swap) {
+            update = TRUE;
+        }
     }   
 
     returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);
 
     // DEBUGGING
-    if (returnvalue)
-    {
-	//fprintf(stderr, "Could not open the swap database: %s.\n", sqlite3_errmsg(Db));
-	sqlite3_close(Db);
+    if (returnvalue) {
+        //fprintf(stderr, "Could not open the swap database: %s.\n", sqlite3_errmsg(Db));
+        sqlite3_close(Db);
     }
 
-    if(update || swapupdate){
-     	UpdateSwap();
+    if (update || swapupdate) {
+         UpdateSwap();
     }
      
-    if(swap && !swapupdate){
-	meanList.Empty();
+    if (swap && !swapupdate) {
+        meanList.Empty();
     }
 }
 
@@ -2233,17 +2228,15 @@ bool xFarDicApp::UpdateSwap()
 
     swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
 
-    if(swapfile.Exists(swappath))
-    {
-	wxRemoveFile(swappath);
+    if (swapfile.Exists(swappath)) {
+        wxRemoveFile(swappath);
     }
 
     returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);
 
-    if (returnvalue)
-    {
-	//fprintf(stderr, "Could not open the swap database: %s.\n", sqlite3_errmsg(Db));
-	sqlite3_close(Db);
+    if (returnvalue) {
+        //fprintf(stderr, "Could not open the swap database: %s.\n", sqlite3_errmsg(Db));
+        sqlite3_close(Db);
     }
 
     initsql = wxT("DROP TABLE words");
@@ -2251,9 +2244,8 @@ bool xFarDicApp::UpdateSwap()
     returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);
 
     // DEBUGGING
-    /*if (returnvalue != SQLITE_OK)
-    {
-	fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
+    /*if (returnvalue != SQLITE_OK) {
+          fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
     }*/
 
     initsql = wxT("CREATE TABLE words(inw TEXT, outw TEXT)");
@@ -2261,108 +2253,103 @@ bool xFarDicApp::UpdateSwap()
     returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);
 
     // DEBUGGING
-    /*if (returnvalue != SQLITE_OK)
-    {
-	fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
+    /*if (returnvalue != SQLITE_OK) {
+    fprintf(stderr, "SQL statement: %s FAILED\nREASON: %s\n", (const char *)initsql.mb_str(wxConvUTF8), db_error_msg);             
     }*/
 
-	prog = new wxProgressDialog(_T("xFarDic - Creating Swap..."),
-                            _("Creating the swap file. Please wait.\nThis will take a while..."),
-                            wordList.GetCount(), 
-                            this,
-                            wxPD_APP_MODAL |
-                            wxPD_AUTO_HIDE |
-                            wxPD_SMOOTH |
-			    wxPD_REMAINING_TIME);
+    prog = new wxProgressDialog(_T("xFarDic - Creating Swap..."), 
+                                _("Creating the swap file. Please wait.\nThis will take a while..."),
+                                wordList.GetCount(), this, wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_SMOOTH |
+                                wxPD_REMAINING_TIME);
 
-	for(int x=0; x < wordList.Count(); x++)
-	{
-		tmpIn = wordList.Item(x);
-		tmpOut = meanList.Item(x);
+    for (int x=0; x < wordList.Count(); x++) {
+        tmpIn = wordList.Item(x);
+        tmpOut = meanList.Item(x);
 
-		if(tmpIn.Len() != 0 && tmpOut.Len() !=  0){
-			tmpIn.Replace(wxT("'"),wxT("''"),TRUE);
-  			tmpOut.Replace(wxT("'"),wxT("''"),TRUE);
+        if (tmpIn.Len() != 0 && tmpOut.Len() !=  0) {
+            tmpIn.Replace(wxT("'"),wxT("''"),TRUE);
+            tmpOut.Replace(wxT("'"),wxT("''"),TRUE);
 
-	        	initsql = wxT("INSERT INTO words (inw, outw) VALUES ('")+tmpIn+wxT("','")+tmpOut+wxT("')");
-        		returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
-		}
+            initsql = wxT("INSERT INTO words (inw, outw) VALUES ('")+tmpIn+wxT("','")+tmpOut+wxT("')");
+            returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
+        }
 
-		if(x % 500  == 0){
-			prog->Update(x);
-		} 
-	}
+        if (x % 500  == 0) {
+            prog->Update(x);
+        } 
+    }
 
-	// Killing progress dialog
-	delete prog;
+    // Killing progress dialog
+    delete prog;
 
-	// Shrinking the swap file. FIXME: Cause crash
-	//initsql = wxT("VACUUM");
-     	//returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
+    // Shrinking the swap file. FIXME: Cause crash
+    //initsql = wxT("VACUUM");
+    //returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
 
-	// Emptying meanings list after update
-	meanList.Empty();
+    // Emptying meanings list after update
+    meanList.Empty();
 
-	// Disabling update-swap flag
-	wxConfigBase *pConfig = wxConfigBase::Get();
-	pConfig->SetPath(wxT("/Options"));
-	pConfig->Write(wxT("/Options/Swap-Update"), 0);
-	swapupdate = FALSE;
+    // Disabling update-swap flag
+    wxConfigBase *pConfig = wxConfigBase::Get();
+    pConfig->SetPath(wxT("/Options"));
+    pConfig->Write(wxT("/Options/Swap-Update"), 0);
+    swapupdate = FALSE;
 
-	// DEBUGGING
-	// fprintf(stderr, "Finished swap file update/create\n");  
+    // DEBUGGING
+    // fprintf(stderr, "Finished swap file update/create\n");  
 
-	return true;    
+    return true;    
 }
 
 void xFarDicApp::LoadLeitnerBoxContents()
 {
-   wxString tmpstr, ltboxstr, Part;
-   wxArrayInt position;
+    wxString tmpstr, ltboxstr, Part;
+    wxArrayInt position;
    
-   //Get Configuration From Config File
-   wxConfigBase *pConfig = wxConfigBase::Get();
+    //Get Configuration From Config File
+    wxConfigBase *pConfig = wxConfigBase::Get();
 
-   pConfig->SetPath(wxT("/Options"));
+    pConfig->SetPath(wxT("/Options"));
 
-   ltboxstr = pConfig->Read(_T("LTBOX-A"), _T(""));
+    ltboxstr = pConfig->Read(_T("LTBOX-A"), _T(""));
    
-   ltboxstr = ltboxstr.Trim(TRUE);
-   ltboxstr = ltboxstr.Trim(FALSE);
-
-  position.Empty();
+    ltboxstr = ltboxstr.Trim(TRUE);
+    ltboxstr = ltboxstr.Trim(FALSE);
  
-  if(ltboxstr.Len() > 0){
-     for(int x=1; x <= ltboxstr.Len(); x++){	
-        Part = ltboxstr.GetChar(x);
-	if(Part.CmpNoCase(_T(";"))==0){
-		position.Add(x);		
-        }
-      } // End For
-  }
+    position.Empty();
+ 
+    if (ltboxstr.Len() > 0) {
+        for (int x=1; x <= ltboxstr.Len(); x++) {    
+            Part = ltboxstr.GetChar(x);
+            if (Part.CmpNoCase(_T(";"))==0) {
+                position.Add(x);        
+            }
+        } // End For
+    }
 
-  ltbox.Empty();
+    ltbox.Empty();
 
-  if(position.GetCount()>0){    
-	   for(int x=0; x <= position.GetCount(); x++){
-		if(x == 0){
-			tmpstr = ltboxstr.Mid(0,position[x]);
-			if(tmpstr.Len()!=0){
-				ltbox.Add(ltboxstr.Mid(0,position[x]));
-			}
-		}else if(x == position.GetCount()){
-			tmpstr = ltboxstr.Mid(position[x-1]+1,ltboxstr.Len());
-			if(tmpstr.Len()!=0){
-				ltbox.Add(ltboxstr.Mid(position[x-1]+1,ltboxstr.Len()));
-			}
-		}else{
-			tmpstr = ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1);
-			if(tmpstr.Len()!=0){
-				ltbox.Add(ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1));
-			}
-		}
-	    }   	  
-  }else if(ltboxstr.Len() > 0){
-	ltbox.Add(ltboxstr);
-  }
+    if (position.GetCount()>0) {    
+        
+        for (int x=0; x <= position.GetCount(); x++) {
+            if (x == 0) {
+                tmpstr = ltboxstr.Mid(0,position[x]);
+                if (tmpstr.Len()!=0) {
+                    ltbox.Add(ltboxstr.Mid(0,position[x]));
+                }
+            } else if (x == position.GetCount()) {
+                tmpstr = ltboxstr.Mid(position[x-1]+1,ltboxstr.Len());
+                if (tmpstr.Len()!=0) {
+                    ltbox.Add(ltboxstr.Mid(position[x-1]+1,ltboxstr.Len()));
+                }
+            } else {
+                tmpstr = ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1);
+                if (tmpstr.Len()!=0) {
+                    ltbox.Add(ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1));
+                }
+            }
+        }         
+    } else if (ltboxstr.Len() > 0) {
+        ltbox.Add(ltboxstr);
+    }
 }

@@ -23,6 +23,7 @@
 // | Authors: Alan Baghumian <alan@technotux.org                             |
 // |          Armen Baghumian <armen@OpenSourceClub.org>                     |
 // +-------------------------------------------------------------------------+
+
 #include "about.h"
 
 BEGIN_EVENT_TABLE(xFarDicAbout, wxFrame)
@@ -49,7 +50,7 @@ xFarDicAbout::xFarDicAbout(wxWindow *parent, const wxString& title, const wxPoin
     // set the frame icon    
     wxBitmap  micon(_T("/usr/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
 
-    if(!micon.Ok()){
+    if (!micon.Ok()) {
         micon.LoadFile(_T("/usr/local/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
     }
 
@@ -66,7 +67,7 @@ xFarDicAbout::xFarDicAbout(wxWindow *parent, const wxString& title, const wxPoin
     //xFarDic Logo
     wxBitmap logo(_T("/usr/share/xfardic/pixmaps/xfardic-logo.png"), wxBITMAP_TYPE_PNG);   
 
-    if (!logo.Ok()){
+    if (!logo.Ok()) {
         logo.LoadFile(_T("/usr/local/share/xfardic/pixmaps/xfardic-logo.png"), wxBITMAP_TYPE_PNG);       
     }        
 
@@ -93,7 +94,7 @@ xFarDicAbout::xFarDicAbout(wxWindow *parent, const wxString& title, const wxPoin
     m_infolabel = new wxStaticText(infopanel, -1, infomsg, wxPoint(5, 10), wxSize(380,390));
     m_liclabel = new wxStaticText(licpanel, -1, licmsg, wxPoint(5, 10), wxSize(380,390));
     m_titlabel = new wxStaticText(this, -1, titmsg, wxPoint(31, 84), wxSize(340,390), wxALIGN_CENTRE);
-    m_abbox = new wxStaticBox(this, -1, wxT(""), wxPoint(5, 5), wxSize(390,105), wxALIGN_CENTRE);	
+    m_abbox = new wxStaticBox(this, -1, wxT(""), wxPoint(5, 5), wxSize(390,105), wxALIGN_CENTRE);
 
     // Setting Label Font
     m_font.SetPointSize(15);
@@ -104,5 +105,4 @@ xFarDicAbout::xFarDicAbout(wxWindow *parent, const wxString& title, const wxPoin
     layout->AddPage(infopanel, _("Information"));
     layout->AddPage(licpanel, _("License"));    
     layout->AddPage(autpanel, _("Authors"));
-        
 }

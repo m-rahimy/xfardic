@@ -23,6 +23,7 @@
 // | Authors: Alan Baghumian  <alan@technotux.org                            |
 // |          Armen Baghumian <armen@OpenSourceClub.org>                     |
 // +-------------------------------------------------------------------------+
+
 // This code is based on StarDic's selection system.
 #ifndef __SD_SELECTION_H__
 #define __SD_SELECTION_H__
@@ -40,7 +41,8 @@ private:
 	void create_selection_widget();
 
 	static gint TimeOutCallback(gpointer data);
-	static void SelectionReceivedCallback(GtkWidget* widget,GtkSelectionData *selection_data, guint time, Selection *oSelection);
+	static void SelectionReceivedCallback(GtkWidget* widget,GtkSelectionData *selection_data, guint time, 
+                                          Selection *oSelection);
 	void SelectionReceived(char* sValue);
 	gboolean Enable();
 public:

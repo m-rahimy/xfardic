@@ -59,7 +59,7 @@ private:
                    *licpanel;
 
     wxNotebook*     layout;
-    wxFont   	    m_font;    
+    wxFont          m_font;    
    
     DECLARE_EVENT_TABLE()
 };
