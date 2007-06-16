@@ -945,7 +945,7 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
     // Update ltbox contents from config file
     LoadLeitnerBoxContents();
 
-    if (watcher) {         
+    if (watcher && !swapupdate) {         
         watcher_last = watcher_now.MakeLower();
         wxTextDataObject data;
 
@@ -969,7 +969,7 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
         watcher_now = ProcessWord(watcher_now);
     }
 
-    if (scanner) {
+    if (scanner && !swapupdate) {
         wxConfigBase *pConfig = wxConfigBase::Get();
         scanner_last = scanner_now.MakeLower();
         scanner_now = pConfig->Read(wxT("/Options/Temp-String"), _T(""));
@@ -985,7 +985,7 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
     //fprintf(stderr, "Checking Scanner-Now:%s\n", (const char *)scanner_now.mb_str(wxConvUTF8));
     //fprintf(stderr, "Checking Scanner-Last:%s\n", (const char *)scanner_last.mb_str(wxConvUTF8));        
 
-    if (watcher) {
+    if (watcher && !swapupdate) {
         if (watcher_now.Len() > 0) {
             if (!watcher_now.IsSameAs(watcher_last, TRUE) && !watcher_now.IsSameAs(scanner_last, TRUE) && 
                 CheckSpell(watcher_now,0) && watcher_now.IsAscii() && watcher_now.IsWord()) {        
@@ -999,7 +999,7 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
         }
     }
 
-    if (scanner) {
+    if (scanner && !swapupdate) {
         if (scanner_now.Len() > 0 && scanner_now != m_text->GetValue()) {
             if (!scanner_now.IsSameAs(scanner_last, TRUE) && !scanner_now.IsSameAs(watcher_last, TRUE) && 
                CheckSpell(scanner_now,0) && scanner_now.IsAscii() && scanner_now.IsWord()) {        
@@ -1284,7 +1284,6 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
         }
        
         if (!swap) {
-
             // Killing progress dialog
             delete prog;
             wxYield();    
@@ -2210,11 +2209,7 @@ bool xFarDicApp::initSwap()
 
     if (update || swapupdate) {
          UpdateSwap();
-    }
-     
-    if (swap && !swapupdate) {
-        meanList.Empty();
-    }
+    }     
 }
 
 bool xFarDicApp::UpdateSwap()
@@ -2230,7 +2225,7 @@ bool xFarDicApp::UpdateSwap()
 
     if (swapfile.Exists(swappath)) {
         wxRemoveFile(swappath);
-    }
+    }    
 
     returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);
 
@@ -2282,12 +2277,10 @@ bool xFarDicApp::UpdateSwap()
     // Killing progress dialog
     delete prog;
 
-    // Shrinking the swap file. FIXME: Cause crash
-    //initsql = wxT("VACUUM");
-    //returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
-
     // Emptying meanings list after update
-    meanList.Empty();
+    if(meanList.GetCount() > 0){
+        meanList.Empty();  
+    }
 
     // Disabling update-swap flag
     wxConfigBase *pConfig = wxConfigBase::Get();
@@ -2295,8 +2288,12 @@ bool xFarDicApp::UpdateSwap()
     pConfig->Write(wxT("/Options/Swap-Update"), 0);
     swapupdate = FALSE;
 
+    // Shrinking the swap file
+    initsql = wxT("VACUUM");
+    returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
+
     // DEBUGGING
-    // fprintf(stderr, "Finished swap file update/create\n");  
+    //fprintf(stderr, "Finished swap file update/create\n");  
 
     return true;    
 }
