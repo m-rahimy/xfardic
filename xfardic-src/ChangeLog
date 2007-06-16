@@ -248,4 +248,9 @@ Replaced clear history's menu/toolbar trash icons with clear icons.
 Added parenthesis support to the ProcessWord function.
 Fixed enabled navigator buttons on reverse search mode.
 Few minor bug fixes and clean-ups.
-
+New splash screen with SVG version.
+//////////////////////////////////////////////////////////////////////////////////////
+0.9.1    -- 2007-06-16
+Fixed crash on UpdateSwap().
+Several code clean-ups.
+//////////////////////////////////////////////////////////////////////////////////////
