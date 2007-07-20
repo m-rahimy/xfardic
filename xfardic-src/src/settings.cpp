@@ -266,7 +266,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 
     dbtext = new wxStaticText(dbpanel, -1, _("XML DB Path:"));
 
-    dbpath = new wxListBox(dbpanel, ID_DB_PATH, wxDefaultSize, dbs, wxLB_EXTENDED |wxLB_NEEDED_SB);    
+    dbpath = new wxListBox(dbpanel, ID_DB_PATH, wxDefaultPosition, wxDefaultSize, dbs, wxLB_EXTENDED | wxLB_NEEDED_SB);    
 
     dbdir = new wxButton(dbpanel, wxID_ADD, _("Add"));
     dbinfo = new wxButton(dbpanel, wxID_HELP, _("DB info"));
