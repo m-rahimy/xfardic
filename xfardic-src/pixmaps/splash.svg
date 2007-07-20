@@ -13,13 +13,14 @@
    height="188"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.44.1"
+   inkscape:version="0.45.1"
    version="1.0"
-   sodipodi:docbase="/home/shams"
-   sodipodi:docname="1.SVG"
+   sodipodi:docbase="/home/alan/svn/xfardic/trunk/xfardic-src/pixmaps"
+   sodipodi:docname="splash.svg"
    inkscape:export-filename="/home/shams/splash.png"
    inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-ydpi="90"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs4">
     <linearGradient
@@ -783,7 +784,7 @@
      width="278px"
      height="188px"
      inkscape:window-width="1280"
-     inkscape:window-height="952"
+     inkscape:window-height="729"
      inkscape:window-x="0"
      inkscape:window-y="25" />
   <metadata
@@ -1064,6 +1065,6 @@
          x="8.3626852"
          y="24.103104"
          id="tspan3410"
-         style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;font-family:Bitstream Charter">0.9.0</tspan></text>
+         style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;font-family:Bitstream Charter">0.10.0</tspan></text>
   </g>
 </svg>
