@@ -1196,8 +1196,8 @@ void xFarDicApp::RecreateTrToolbar()
     wxBitmap  btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
     wxBitmap  bltbox = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);
 
-    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(65,30));
-    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(65,30));
+    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(80,34));
+    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(80,34));
 
     //Set Default button
     m_translate->SetDefault();   
