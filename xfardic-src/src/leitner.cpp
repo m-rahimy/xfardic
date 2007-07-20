@@ -93,8 +93,8 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     bepanel = new wxPanel(layout);
 
     m_ltbox = new wxStaticBox(this, ID_LTBOX, _T(""));
-    m_ok    = new wxButton(this, wxID_OK, _("&OK"));
-    m_clear = new wxButton(this, wxID_CLEAR, _("&Clear"));
+    m_ok    = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition,wxSize(80,36));
+    m_clear = new wxButton(this, wxID_CLEAR, _("&Clear"), wxDefaultPosition, wxSize(80,36));
 
     // Set Default button
     m_ok->SetDefault();   
@@ -121,23 +121,23 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     wxBitmap  del = wxArtProvider::GetBitmap(wxART_DEL_BOOKMARK, client, wxDefaultSize);
     wxBitmap  confirm = wxArtProvider::GetBitmap( wxART_TIP, client, wxDefaultSize);
 
-    m_anext = new wxBitmapButton(bapanel, ID_BTN_NEXT_A, next);
-    m_bnext = new wxBitmapButton(bbpanel, ID_BTN_NEXT_B, next);
-    m_cnext = new wxBitmapButton(bcpanel, ID_BTN_NEXT_C, next);
-    m_dnext = new wxBitmapButton(bdpanel, ID_BTN_NEXT_D, next);
+    m_anext = new wxBitmapButton(bapanel, ID_BTN_NEXT_A, next, wxDefaultPosition,wxSize(80,36));
+    m_bnext = new wxBitmapButton(bbpanel, ID_BTN_NEXT_B, next, wxDefaultPosition,wxSize(80,36));
+    m_cnext = new wxBitmapButton(bcpanel, ID_BTN_NEXT_C, next, wxDefaultPosition,wxSize(80,36));
+    m_dnext = new wxBitmapButton(bdpanel, ID_BTN_NEXT_D, next, wxDefaultPosition,wxSize(80,36));
 
-    m_bback = new wxBitmapButton(bbpanel, ID_BTN_BACK_B, back);
-    m_cback = new wxBitmapButton(bcpanel, ID_BTN_BACK_C, back);
-    m_dback = new wxBitmapButton(bdpanel, ID_BTN_BACK_D, back);
-    m_remove = new wxBitmapButton(bapanel, ID_BTN_REMOVE, del);
-    m_confirm = new wxBitmapButton(bepanel, ID_BTN_CONFIRM, confirm);
-    m_eback = new wxBitmapButton(bepanel, ID_BTN_BACK_E, back);
+    m_bback = new wxBitmapButton(bbpanel, ID_BTN_BACK_B, back, wxDefaultPosition,wxSize(80,36));
+    m_cback = new wxBitmapButton(bcpanel, ID_BTN_BACK_C, back, wxDefaultPosition,wxSize(80,36));
+    m_dback = new wxBitmapButton(bdpanel, ID_BTN_BACK_D, back, wxDefaultPosition,wxSize(80,36));
+    m_remove = new wxBitmapButton(bapanel, ID_BTN_REMOVE, del, wxDefaultPosition,wxSize(80,36));
+    m_confirm = new wxBitmapButton(bepanel, ID_BTN_CONFIRM, confirm, wxDefaultPosition,wxSize(80,36));
+    m_eback = new wxBitmapButton(bepanel, ID_BTN_BACK_E, back, wxDefaultPosition,wxSize(80,36));
 
-    m_atrans = new wxBitmapButton(bapanel, ID_BTN_TRANS_A, trans);
-    m_btrans = new wxBitmapButton(bbpanel, ID_BTN_TRANS_B, trans);
-    m_ctrans = new wxBitmapButton(bcpanel, ID_BTN_TRANS_C, trans);
-    m_dtrans = new wxBitmapButton(bdpanel, ID_BTN_TRANS_D, trans);
-    m_etrans = new wxBitmapButton(bepanel, ID_BTN_TRANS_E, trans);
+    m_atrans = new wxBitmapButton(bapanel, ID_BTN_TRANS_A, trans, wxDefaultPosition,wxSize(80,36));
+    m_btrans = new wxBitmapButton(bbpanel, ID_BTN_TRANS_B, trans, wxDefaultPosition,wxSize(80,36));
+    m_ctrans = new wxBitmapButton(bcpanel, ID_BTN_TRANS_C, trans, wxDefaultPosition,wxSize(80,36));
+    m_dtrans = new wxBitmapButton(bdpanel, ID_BTN_TRANS_D, trans, wxDefaultPosition,wxSize(80,36));
+    m_etrans = new wxBitmapButton(bepanel, ID_BTN_TRANS_E, trans, wxDefaultPosition,wxSize(80,36));
 
     // Quantity Checks
     if (boxacontents.GetCount() < bacap) {
