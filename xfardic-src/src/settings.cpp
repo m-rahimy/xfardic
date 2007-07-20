@@ -111,19 +111,19 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     leitner->SetRange(0,50);
 
     chk_select = new wxCheckBox(setpanel, ID_CHK_SELECT, _("Enable Auto &Select Word After Translation"));
-    chk_hide  = new wxCheckBox(setpanel, ID_CHK_HIDE,  _("&Hide On Window Minimize and close"));
-    chk_revsrch  = new wxCheckBox(setpanel, ID_CHK_REVSRCH,  _("Enable Inexact &Reverse Searching"));
+    chk_hide  = new wxCheckBox(setpanel, ID_CHK_HIDE,  _("&Hide On Window Minimize and close"));  
+    chk_revsrch  = new wxCheckBox(setpanel, ID_CHK_REVSRCH,  _("Enable Inexact &Reverse Searching")); 
     chk_winpos = new wxCheckBox(setpanel, ID_CHK_WINPOS, _("Save Program Window P&ositions"));
     chk_cache  = new wxCheckBox(setpanel, ID_CHK_CACHE,  _("Save Wor&d Cache On Exit"));
     chk_watcher  = new wxCheckBox(setpanel, ID_CHK_WATCHER,  _("Enable Clipboard &Watcher"));
-    chk_scanner  = new wxCheckBox(setpanel, ID_CHK_SCANNER,  _("Enable Clipboard Sca&nner"));
+    chk_scanner  = new wxCheckBox(setpanel, ID_CHK_SCANNER,  _("Enable Clipboard Sca&nner"));        
     chk_srchsim   = new wxCheckBox(setpanel, ID_CHK_SRCHSIM,   _("Return Si&milar Words"));
     chk_spell  = new wxCheckBox(setpanel, ID_CHK_SPELL,  _("Enable S&pell Checker"));
     chk_swap  = new wxCheckBox(setpanel, ID_CHK_SWAP,  _("Enable S&wap file"));
-    
-    m_ok = new wxButton(this, wxID_OK, _("&OK"));
-    m_apply = new wxButton(this, wxID_APPLY, _("&Apply"));
-    m_cancel = new wxButton(this, wxID_CANCEL, _("&Cancel"));
+
+    m_ok = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition,wxSize(80,36));
+    m_apply = new wxButton(this, wxID_APPLY, _("&Apply"), wxDefaultPosition,wxSize(80,36));
+    m_cancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition,wxSize(80,36));
   
     // Set Default button
     m_ok->SetDefault();
@@ -266,10 +266,10 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 
     dbtext = new wxStaticText(dbpanel, -1, _("XML DB Path:"));
 
-    dbpath = new wxListBox(dbpanel, ID_DB_PATH, wxDefaultPosition, wxDefaultSize, dbs, wxLB_EXTENDED | wxLB_NEEDED_SB);    
+    dbpath = new wxListBox(dbpanel, ID_DB_PATH, wxDefaultPosition, wxDefaultSize, dbs, wxLB_EXTENDED |wxLB_NEEDED_SB);    
 
-    dbdir = new wxButton(dbpanel, wxID_ADD, _("Add"));
-    dbinfo = new wxButton(dbpanel, wxID_HELP, _("DB info"));
+    dbdir = new wxButton(dbpanel, wxID_ADD, _("Add"), wxDefaultPosition,wxSize(80,36));
+    dbinfo = new wxButton(dbpanel, wxID_HELP, _("DB info"), wxDefaultPosition,wxSize(80,36));
    
     notelogoBitmap1 = new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 175));
 
@@ -296,7 +296,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     if (submit == true) {
         SubmitChanges();
     } 
-    CreateLayout();   
+	CreateLayout();   
 }
 
 /// Settings window destructor.
@@ -596,72 +596,73 @@ bool xFarDicSettings::CheckPath(wxString dbpath)
 
 void xFarDicSettings::CreateLayout() {
 
-     wxBoxSizer *logoandtextSizer = new wxBoxSizer(wxHORIZONTAL);
-     logoandtextSizer->Add(settingsBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     logoandtextSizer->Add(effecttext, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	wxBoxSizer *logoandtextSizer = new wxBoxSizer(wxHORIZONTAL);
+	logoandtextSizer->Add(settingsBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	logoandtextSizer->Add(effecttext, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-     wxStaticBoxSizer *staticBoxSizer = new wxStaticBoxSizer(m_setbox,wxVERTICAL);
-     staticBoxSizer->Add(logoandtextSizer,0,wxEXPAND|wxALL,5);
-     staticBoxSizer->Add(layout,1,wxEXPAND|wxALL,5);
+	wxStaticBoxSizer *staticBoxSizer = new wxStaticBoxSizer(m_setbox,wxVERTICAL);
+	staticBoxSizer->Add(logoandtextSizer,0,wxEXPAND|wxALL,5);
+	staticBoxSizer->Add(layout,1,wxEXPAND|wxALL,5);
 
-     wxGridSizer *setpanelSizer = new wxGridSizer(9,2,0,0);
-     setpanelSizer->Add(langtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(lang , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(settext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(numEntry , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(timeouttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(scantimeout , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(leitnertext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(leitner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(chk_select , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(chk_watcher , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(chk_hide , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(chk_scanner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(chk_revsrch , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(chk_srchsim , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(chk_winpos , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(chk_spell , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(chk_cache , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     setpanelSizer->Add(chk_swap , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	wxGridSizer *setpanelSizer = new wxGridSizer(9,2,0,0);
+	setpanelSizer->Add(langtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(lang , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(settext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(numEntry , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(timeouttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(scantimeout , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(leitnertext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(leitner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(chk_select , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(chk_watcher , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(chk_hide , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(chk_scanner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(chk_revsrch , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(chk_srchsim , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(chk_winpos , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(chk_spell , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(chk_cache , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(chk_swap , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-     wxBoxSizer *dbpanelSizer = new wxBoxSizer(wxHORIZONTAL);
-     wxBoxSizer *dbpanelrightSizer = new wxBoxSizer(wxVERTICAL);
-     dbpanelrightSizer->Add(dbpath, 1, wxEXPAND|wxALL, 5);
-     wxBoxSizer *dbpanelrightSizerbuttons = new wxBoxSizer(wxHORIZONTAL);
-     dbpanelrightSizerbuttons->Add(dbdir, 0, wxEXPAND|wxALL, 5);
-     dbpanelrightSizerbuttons->Add(dbinfo, 0, wxEXPAND|wxALL, 5);
-     wxBoxSizer *dbpanelrightSizerfirsttext = new wxBoxSizer(wxHORIZONTAL);
-     dbpanelrightSizerfirsttext->Add(notelogoBitmap1, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     dbpanelrightSizerfirsttext->Add(dbnote, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     wxBoxSizer *dbpanelrightSizersecondtext = new wxBoxSizer(wxHORIZONTAL);
-     dbpanelrightSizersecondtext->Add(notelogoBitmap2, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     dbpanelrightSizersecondtext->Add(swapnote, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-     dbpanelrightSizer->Add(dbpanelrightSizerbuttons, 0, wxEXPAND|wxALL, 5);
-     dbpanelrightSizer->Add(dbpanelrightSizerfirsttext, 0, wxEXPAND|wxALL, 5);
-     dbpanelrightSizer->Add(dbpanelrightSizersecondtext, 0, wxEXPAND|wxALL, 5);
-     dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 5);
-     dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 5);
+	wxBoxSizer *dbpanelSizer = new wxBoxSizer(wxHORIZONTAL);
+	wxBoxSizer *dbpanelrightSizer = new wxBoxSizer(wxVERTICAL);
+	dbpanelrightSizer->Add(dbpath, 1, wxEXPAND|wxALL, 5);
+	wxBoxSizer *dbpanelrightSizerbuttons = new wxBoxSizer(wxHORIZONTAL);
+	dbpanelrightSizerbuttons->Add(dbdir, 0, wxEXPAND|wxALL, 5);
+	dbpanelrightSizerbuttons->Add(dbinfo, 0, wxEXPAND|wxALL, 5);
+	wxBoxSizer *dbpanelrightSizerfirsttext = new wxBoxSizer(wxHORIZONTAL);
+	dbpanelrightSizerfirsttext->Add(notelogoBitmap1, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	dbpanelrightSizerfirsttext->Add(dbnote, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	wxBoxSizer *dbpanelrightSizersecondtext = new wxBoxSizer(wxHORIZONTAL);
+	dbpanelrightSizersecondtext->Add(notelogoBitmap2, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	dbpanelrightSizersecondtext->Add(swapnote, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	dbpanelrightSizer->Add(dbpanelrightSizerbuttons, 0, wxEXPAND|wxALL, 5);
+	dbpanelrightSizer->Add(dbpanelrightSizerfirsttext, 0, wxEXPAND|wxALL, 5);
+	dbpanelrightSizer->Add(dbpanelrightSizersecondtext, 0, wxEXPAND|wxALL, 5);
+	dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 5);
+	dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 5);
 
-     setpanel->SetAutoLayout(true);
-     setpanel->SetSizer( setpanelSizer );
-     dbpanel->SetAutoLayout(true);
-     dbpanel->SetSizer( dbpanelSizer );
+	setpanel->SetAutoLayout(true);
+	setpanel->SetSizer( setpanelSizer );
+	dbpanel->SetAutoLayout(true);
+	dbpanel->SetSizer( dbpanelSizer );
 
-     wxBoxSizer *bottomSizer = new wxBoxSizer(wxHORIZONTAL);
-     bottomSizer->AddStretchSpacer(1);
-     bottomSizer->Add(m_ok, 0, wxALIGN_RIGHT, 5);
-     bottomSizer->Add(m_apply, 0, wxALIGN_RIGHT, 5);
-     bottomSizer->Add(m_cancel, 0, wxALIGN_RIGHT, 5);     
-     
-     staticBoxSizer->Add(bottomSizer,0,wxEXPAND|wxALL,5);
+	wxBoxSizer *bottomSizer = new wxBoxSizer(wxHORIZONTAL);
+	bottomSizer->AddStretchSpacer(1);
+	bottomSizer->Add(m_ok, 0, wxALIGN_RIGHT, 5);
+	bottomSizer->Add(m_apply, 0, wxALIGN_RIGHT, 5);
+	bottomSizer->Add(m_cancel, 0, wxALIGN_RIGHT, 5);	
+	
 
-     wxBoxSizer *topSizer = new wxBoxSizer(wxVERTICAL);
-     topSizer->Add(staticBoxSizer,
-               1, //make vertically stretchable
-               wxEXPAND|wxALL,
-               5);
-     SetSizer(topSizer);
-     topSizer->Fit(this);
-     topSizer->SetSizeHints(this);
+	staticBoxSizer->Add(bottomSizer,0,wxEXPAND|wxALL,5);
+
+	wxBoxSizer *topSizer = new wxBoxSizer(wxVERTICAL);
+	topSizer->Add(staticBoxSizer,
+			1, //make vertically stretchable
+			wxEXPAND|wxALL,
+			5);
+	SetSizer(topSizer);
+	topSizer->Fit(this);
+	topSizer->SetSizeHints(this);
 }
 
