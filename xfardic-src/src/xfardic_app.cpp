@@ -1524,11 +1524,7 @@ void xFarDicApp::ShowSettings()
         int size_x, size_y;
         GetSize(&size_x, &size_y);
 
-        // About window size
-        int const x = 500;
-        int const y = 400;
-
-        // About window position
+        // Settings window position
         int z = pos_x + (( size_x - x) / 2 );
         int w = pos_y + (( size_y - y) / 2 );
 
@@ -1551,10 +1547,6 @@ void xFarDicApp::ShowAbout()
         int size_x, size_y;
         GetSize(&size_x, &size_y);
 
-        // About window size
-        int const x = 400;
-        int const y = 350;
- 
         // About window position
         int z = pos_x + (( size_x - x) / 2 );
         int w = pos_y + (( size_y - y) / 2 );
