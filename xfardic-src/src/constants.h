@@ -153,3 +153,4 @@ const int  ID_BTN_CONFIRM      = 168;
 const int  ID_CHK_SWAP         = 169;
 
 #endif
+

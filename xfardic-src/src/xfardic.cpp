@@ -31,6 +31,7 @@
 // static object for many reasons) and also declares the accessor function
 // wxGetApp() which will return the reference of the right type (i.e. MyApp and
 // not wxApp)
+
 IMPLEMENT_APP(MyApp)
 
 BEGIN_EVENT_TABLE(MyApp, wxApp)
@@ -129,8 +130,9 @@ bool MyApp::OnInit()
     //fprintf(stderr, "Going to starting Frame\n");    
 
     // create the main application window
-    frame = new xFarDicApp(_T("xFarDic ")XVERSION, wxPoint(150, 150), wxSize(520, 300), m_locale,
-                           wxMINIMIZE_BOX | wxSYSTEM_MENU | wxCLOSE_BOX | wxCAPTION );
+    frame = new xFarDicApp(_T("xFarDic ")XVERSION, /*wxPoint(150, 150)*/wxDefaultPosition, wxDefaultSize, m_locale,
+                           //wxMINIMIZE_BOX | wxSYSTEM_MENU | wxCLOSE_BOX | wxCAPTION );
+                           wxDEFAULT_FRAME_STYLE);
 
     //DEBUGGING
     //fprintf(stderr, "Frame Started\n");    
@@ -252,3 +254,4 @@ MyApp::~MyApp()
     // Delete execution Lock file
     delete m_checker;
 }
+

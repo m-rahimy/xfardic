@@ -153,11 +153,14 @@ public:
     wxComboBox       *m_text;
 
 private:
+     void CreateLayout();
+
+private:
     wxTextCtrl       *m_label;
     wxStaticBox      *m_resbox;
     wxBitmapButton   *m_translate,
                      *m_leitnerbox;
-    wxPanel *panel;
+    //wxPanel *panel;
     bool    m_smallToolbar,
             m_horzToolbar,
             select,
@@ -209,7 +212,6 @@ private:
     xmlTextReaderPtr reader;
     wxArrayInt       seppos;
     wxSplashScreen   *splash;
-    wxToolBar        *t_tbar;
     int              ltbaselimit;
     
     //Swapfile handle
@@ -226,3 +228,4 @@ private:
 };
 
 #endif
+

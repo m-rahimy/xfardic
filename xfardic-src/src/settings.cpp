@@ -69,7 +69,18 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     wicon.CopyFromBitmap(micon);
     SetIcon(wicon);     
 
-    layout = new wxNotebook(this, xFarDic_ChangeTab, wxPoint(5,60), wxSize(489,290));
+    m_setbox = new wxStaticBox(this, ID_SETBOX, _T(""));
+
+    wxArtClient client;
+
+    wxBitmap  logo = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxSize(32,35));
+    wxBitmap  notelogo = wxArtProvider::GetBitmap(wxART_TIP, client, wxSize(32,35));
+
+    settingsBitmap = new wxStaticBitmap (this, -1, logo);
+   
+    effecttext = new wxStaticText(this, -1, _("Here you can configure your desired options. Changes will take effect after xFarDic restart."));
+
+    layout = new wxNotebook(this, xFarDic_ChangeTab);
 
     setpanel =  new wxPanel(layout);
     dbpanel =  new wxPanel(layout);
@@ -82,31 +93,38 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     langlist.Add(_("English (U.S)"),copies);
     langlist.Add(_("System default"),copies);
     //langlist.Add(_("Azeri"),copies);
-    
-    m_setbox = new wxStaticBox(this, ID_SETBOX, _T(""), wxPoint(0,4), wxSize(500,396) );
 
-    wxArtClient client;
-
-    wxBitmap  logo = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxSize(32,35));
-    wxBitmap  notelogo = wxArtProvider::GetBitmap(wxART_TIP, client, wxSize(32,35));
-
-    (void)new wxStaticBitmap (this, -1, logo, wxPoint(20, 10));
-    
-    m_ok = new wxButton(this, wxID_OK, _("&OK"), wxPoint(250,356), wxSize(80,36) );
-    m_apply = new wxButton(this, wxID_APPLY, _("&Apply"), wxPoint(331,356), wxSize(80,36) );
-    m_cancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxPoint(411,356), wxSize(80,36) );
-
-    chk_select = new wxCheckBox(setpanel, ID_CHK_SELECT, _("Enable Auto &Select Word After Translation"), wxPoint(2,116));
-    chk_hide  = new wxCheckBox(setpanel, ID_CHK_HIDE,  _("&Hide On Window Minimize and close"), wxPoint(2,138));  
-    chk_revsrch  = new wxCheckBox(setpanel, ID_CHK_REVSRCH,  _("Enable Inexact &Reverse Searching"), wxPoint(2,160)); 
-    chk_winpos = new wxCheckBox(setpanel, ID_CHK_WINPOS, _("Save Program Window P&ositions"), wxPoint(2,182));
-    chk_cache  = new wxCheckBox(setpanel, ID_CHK_CACHE,  _("Save Wor&d Cache On Exit"), wxPoint(2,204));
-    chk_watcher  = new wxCheckBox(setpanel, ID_CHK_WATCHER,  _("Enable Clipboard &Watcher"), wxPoint(300,116));
-    chk_scanner  = new wxCheckBox(setpanel, ID_CHK_SCANNER,  _("Enable Clipboard Sca&nner"), wxPoint(300,138));        
-    chk_srchsim   = new wxCheckBox(setpanel, ID_CHK_SRCHSIM,   _("Return Si&milar Words"), wxPoint(300,160));
-    chk_spell  = new wxCheckBox(setpanel, ID_CHK_SPELL,  _("Enable S&pell Checker"), wxPoint(300,182));
-    chk_swap  = new wxCheckBox(setpanel, ID_CHK_SWAP,  _("Enable S&wap file"), wxPoint(300,204));
    
+    langtext = new wxStaticText(setpanel, -1, _("Choose default &language:"));
+    lang = new wxChoice(setpanel, ID_CHOICE, wxDefaultPosition, wxDefaultSize, langlist);
+
+    settext = new wxStaticText(setpanel, -1, _("Number of Entries in History Box:"));
+    numEntry = new wxSpinCtrl(setpanel, ID_SPIN_ENTRY, _T(""));
+    numEntry->SetRange(3,15);
+
+    timeouttext = new wxStaticText(setpanel, -1, _("Scan window timeout (Sec):"));
+    scantimeout = new wxSpinCtrl(setpanel, ID_SPIN_TIMEOUT, _T(""));
+    scantimeout->SetRange(0,10);
+
+    leitnertext = new wxStaticText(setpanel, -1, _("Leitner box base capacity:"));
+    leitner = new wxSpinCtrl(setpanel, ID_SPIN_LEITNER, _T(""));
+    leitner->SetRange(0,50);
+
+    chk_select = new wxCheckBox(setpanel, ID_CHK_SELECT, _("Enable Auto &Select Word After Translation"));
+    chk_hide  = new wxCheckBox(setpanel, ID_CHK_HIDE,  _("&Hide On Window Minimize and close"));
+    chk_revsrch  = new wxCheckBox(setpanel, ID_CHK_REVSRCH,  _("Enable Inexact &Reverse Searching"));
+    chk_winpos = new wxCheckBox(setpanel, ID_CHK_WINPOS, _("Save Program Window P&ositions"));
+    chk_cache  = new wxCheckBox(setpanel, ID_CHK_CACHE,  _("Save Wor&d Cache On Exit"));
+    chk_watcher  = new wxCheckBox(setpanel, ID_CHK_WATCHER,  _("Enable Clipboard &Watcher"));
+    chk_scanner  = new wxCheckBox(setpanel, ID_CHK_SCANNER,  _("Enable Clipboard Sca&nner"));
+    chk_srchsim   = new wxCheckBox(setpanel, ID_CHK_SRCHSIM,   _("Return Si&milar Words"));
+    chk_spell  = new wxCheckBox(setpanel, ID_CHK_SPELL,  _("Enable S&pell Checker"));
+    chk_swap  = new wxCheckBox(setpanel, ID_CHK_SWAP,  _("Enable S&wap file"));
+    
+    m_ok = new wxButton(this, wxID_OK, _("&OK"));
+    m_apply = new wxButton(this, wxID_APPLY, _("&Apply"));
+    m_cancel = new wxButton(this, wxID_CANCEL, _("&Cancel"));
+  
     // Set Default button
     m_ok->SetDefault();
     m_apply->Enable(FALSE);
@@ -176,43 +194,24 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
       chk_swap->SetValue(FALSE);
     }
 
-    numEntry = new wxSpinCtrl(setpanel, ID_SPIN_ENTRY, _T(""), wxPoint(300, 40), wxSize(50, 20) );      
-    numEntry->SetRange(3,15);
+   
 
     int entry = pConfig->Read(_T("Num-Entries"), 10);  
     numEntry->SetValue(entry);
 
-    scantimeout = new wxSpinCtrl(setpanel, ID_SPIN_TIMEOUT, _T(""), wxPoint(300, 62), wxSize(50, 20) );      
-    scantimeout->SetRange(0,10);
 
     int timeout = pConfig->Read(_T("Scan-Timeout"), 5);  
     scantimeout->SetValue(timeout);
 
-    leitner = new wxSpinCtrl(setpanel, ID_SPIN_LEITNER, _T(""), wxPoint(300, 84), wxSize(50, 20) );      
-    leitner->SetRange(0,50);
 
     int ltbasecap = pConfig->Read(_T("Leitner-Base"), 10);  
     leitner->SetValue(ltbasecap);
     
-    wxStaticText *effecttext;
-    effecttext = new wxStaticText(this, -1, _("Here you can configure your desired options. Changes will take effect after xFarDic restart."), wxPoint(65, 16), wxSize(380, 80));
-
-    wxStaticText *langtext;
-    langtext = new wxStaticText(setpanel, -1, _("Choose default &language:"), wxPoint(5, 12), wxSize(170, 30));
-
-    lang = new wxChoice(setpanel, ID_CHOICE, wxPoint(300,7), wxSize(150,wxDefaultCoord), langlist);
-
+   
+   
     lang->SetSelection(pConfig->Read(_T("GUI-Lang"), 2));  
 
-    wxStaticText *settext;
-    settext = new wxStaticText(setpanel, -1, _("Number of Entries in History Box:"), wxPoint(5, 41), wxSize(218, 30));
-
-    wxStaticText *timeouttext;
-    timeouttext = new wxStaticText(setpanel, -1, _("Scan window timeout (Sec):"), wxPoint(5, 65), wxSize(218, 30));
-
-    wxStaticText *leitnertext;
-    leitnertext = new wxStaticText(setpanel, -1, _("Leitner box base capacity:"), wxPoint(5, 89), wxSize(218, 30));
-       
+           
     wxString path = pConfig->Read(_T("DB-Path"), _T(""));    
    
     wxString Part;
@@ -265,17 +264,20 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
         }    
     }
 
-    dbpath = new wxListBox(dbpanel, ID_DB_PATH, wxPoint(115, 13), wxSize(340, 120),dbs,wxLB_EXTENDED |wxLB_NEEDED_SB);    
+    dbtext = new wxStaticText(dbpanel, -1, _("XML DB Path:"));
 
-    (void)new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 175));
+    dbpath = new wxListBox(dbpanel, ID_DB_PATH, wxDefaultSize, dbs, wxLB_EXTENDED |wxLB_NEEDED_SB);    
 
-    wxStaticText *dbnote;
-    dbnote = new wxStaticText(dbpanel, -1, _("Ctrl+Click to enable or disable available database(s)."), wxPoint(141, 188), wxSize(380, 80));
+    dbdir = new wxButton(dbpanel, wxID_ADD, _("Add"));
+    dbinfo = new wxButton(dbpanel, wxID_HELP, _("DB info"));
+   
+    notelogoBitmap1 = new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 175));
 
-    (void)new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 215));
+    dbnote = new wxStaticText(dbpanel, -1, _("Ctrl+Click to enable or disable available database(s)."));
 
-    wxStaticText *swapnote;
-    swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 55% and performance by 15%."), wxPoint(141, 220), wxSize(340, 80));
+    notelogoBitmap2 = new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 215));
+
+    swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 55% and performance by 15%."));
 
     if (path.Len()!=0) {
         for (int x=0; x < dbs.GetCount(); x++) {
@@ -283,12 +285,6 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
         }
     }        
            
-    wxStaticText *dbtext;
-    dbtext = new wxStaticText(dbpanel, -1, _("XML DB Path:"), wxPoint(10, 15), wxSize(93, 29));    
-    
-    dbdir = new wxButton(dbpanel, wxID_ADD, _("Add"), wxPoint(115,135), wxSize(80,30) );
-    dbinfo = new wxButton(dbpanel, wxID_HELP, _("DB info"), wxPoint(205,135), wxSize(80,30) );
-    
     if (path.Len()==0) {
         dbinfo->Enable(FALSE);
     }
@@ -299,7 +295,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     //if there are changes on DBs, auto-submit changes
     if (submit == true) {
         SubmitChanges();
-    }    
+    } 
+    CreateLayout();   
 }
 
 /// Settings window destructor.
@@ -596,3 +593,75 @@ bool xFarDicSettings::CheckPath(wxString dbpath)
         return false;
     }
 }
+
+void xFarDicSettings::CreateLayout() {
+
+     wxBoxSizer *logoandtextSizer = new wxBoxSizer(wxHORIZONTAL);
+     logoandtextSizer->Add(settingsBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     logoandtextSizer->Add(effecttext, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+
+     wxStaticBoxSizer *staticBoxSizer = new wxStaticBoxSizer(m_setbox,wxVERTICAL);
+     staticBoxSizer->Add(logoandtextSizer,0,wxEXPAND|wxALL,5);
+     staticBoxSizer->Add(layout,1,wxEXPAND|wxALL,5);
+
+     wxGridSizer *setpanelSizer = new wxGridSizer(9,2,0,0);
+     setpanelSizer->Add(langtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(lang , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(settext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(numEntry , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(timeouttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(scantimeout , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(leitnertext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(leitner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(chk_select , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(chk_watcher , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(chk_hide , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(chk_scanner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(chk_revsrch , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(chk_srchsim , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(chk_winpos , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(chk_spell , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(chk_cache , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     setpanelSizer->Add(chk_swap , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+
+     wxBoxSizer *dbpanelSizer = new wxBoxSizer(wxHORIZONTAL);
+     wxBoxSizer *dbpanelrightSizer = new wxBoxSizer(wxVERTICAL);
+     dbpanelrightSizer->Add(dbpath, 1, wxEXPAND|wxALL, 5);
+     wxBoxSizer *dbpanelrightSizerbuttons = new wxBoxSizer(wxHORIZONTAL);
+     dbpanelrightSizerbuttons->Add(dbdir, 0, wxEXPAND|wxALL, 5);
+     dbpanelrightSizerbuttons->Add(dbinfo, 0, wxEXPAND|wxALL, 5);
+     wxBoxSizer *dbpanelrightSizerfirsttext = new wxBoxSizer(wxHORIZONTAL);
+     dbpanelrightSizerfirsttext->Add(notelogoBitmap1, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     dbpanelrightSizerfirsttext->Add(dbnote, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     wxBoxSizer *dbpanelrightSizersecondtext = new wxBoxSizer(wxHORIZONTAL);
+     dbpanelrightSizersecondtext->Add(notelogoBitmap2, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     dbpanelrightSizersecondtext->Add(swapnote, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+     dbpanelrightSizer->Add(dbpanelrightSizerbuttons, 0, wxEXPAND|wxALL, 5);
+     dbpanelrightSizer->Add(dbpanelrightSizerfirsttext, 0, wxEXPAND|wxALL, 5);
+     dbpanelrightSizer->Add(dbpanelrightSizersecondtext, 0, wxEXPAND|wxALL, 5);
+     dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 5);
+     dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 5);
+
+     setpanel->SetAutoLayout(true);
+     setpanel->SetSizer( setpanelSizer );
+     dbpanel->SetAutoLayout(true);
+     dbpanel->SetSizer( dbpanelSizer );
+
+     wxBoxSizer *bottomSizer = new wxBoxSizer(wxHORIZONTAL);
+     bottomSizer->AddStretchSpacer(1);
+     bottomSizer->Add(m_ok, 0, wxALIGN_RIGHT, 5);
+     bottomSizer->Add(m_apply, 0, wxALIGN_RIGHT, 5);
+     bottomSizer->Add(m_cancel, 0, wxALIGN_RIGHT, 5);     
+     
+     staticBoxSizer->Add(bottomSizer,0,wxEXPAND|wxALL,5);
+
+     wxBoxSizer *topSizer = new wxBoxSizer(wxVERTICAL);
+     topSizer->Add(staticBoxSizer,
+               1, //make vertically stretchable
+               wxEXPAND|wxALL,
+               5);
+     SetSizer(topSizer);
+     topSizer->Fit(this);
+     topSizer->SetSizeHints(this);
+}
+

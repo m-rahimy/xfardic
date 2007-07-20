@@ -45,9 +45,12 @@ public:
     ~xFarDicAbout(); 
 
     wxLocale& m_locale;
+private:
+    void CreateLayout();
 
 private:
     // any class wishing to process wxWindows events must use this macro
+    wxStaticBitmap *staticBitmap;
     wxStaticText   *m_autlabel,
                    *m_titlabel,
                    *m_infolabel,
@@ -65,3 +68,4 @@ private:
 };
 
 #endif
+

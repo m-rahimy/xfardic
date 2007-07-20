@@ -59,7 +59,6 @@ public:
     ~MyApp();  
     
 private:    
-    
     xFarDicApp *frame;   
 
 protected:
@@ -70,3 +69,4 @@ protected:
 };
 
 #endif
+

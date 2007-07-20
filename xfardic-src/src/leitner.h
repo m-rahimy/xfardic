@@ -73,6 +73,9 @@ public:
     ~xFarDicLeitner(); 
 
     wxLocale& m_locale;
+    void CreateLayout();
+    wxStaticBitmap *staticBitmap;
+    wxStaticText *lttext;
 
 private:
     // any class wishing to process wxWindows events must use this macro   
@@ -130,3 +133,4 @@ private:
     DECLARE_EVENT_TABLE()
 };
 #endif
+

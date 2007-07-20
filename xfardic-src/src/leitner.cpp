@@ -82,9 +82,9 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
 
     wxBitmap  logo = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxSize(32,35));
 
-    (void)new wxStaticBitmap (this, -1, logo, wxPoint(10, 10));
+    staticBitmap = new wxStaticBitmap (this, -1, logo, wxPoint(10, 10));
 
-    layout = new wxNotebook(this, xFarDic_ChangeTab, wxPoint(6,80), wxSize(335,224));
+    layout = new wxNotebook(this, xFarDic_ChangeTab);
 
     bapanel = new wxPanel(layout);
     bbpanel = new wxPanel(layout);
@@ -92,23 +92,14 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     bdpanel = new wxPanel(layout);
     bepanel = new wxPanel(layout);
 
-    m_ltbox = new wxStaticBox(this, ID_LTBOX, _T(""), wxPoint(0,4), wxSize(348,345));
-    m_ok    = new wxButton(this, wxID_OK, _("&OK"), wxPoint(261,309), wxSize(80,36));
-    m_clear = new wxButton(this, wxID_CLEAR, _("&Clear"), wxPoint(178,309), wxSize(80,36));
+    m_ltbox = new wxStaticBox(this, ID_LTBOX, _T(""));
+    m_ok    = new wxButton(this, wxID_OK, _("&OK"));
+    m_clear = new wxButton(this, wxID_CLEAR, _("&Clear"));
 
     // Set Default button
     m_ok->SetDefault();   
 
-    wxStaticText *lttext;
-    lttext = new wxStaticText(this, -1, _("Leitner box can be used to support memorization by way of spaced repetition. This is how it works: you try to recall the meaning of a word. If you succeed, you send the word to the next box. But if you fail, you send it back to the first box."), wxPoint(48, 10), wxSize(295, 70)); 
-
-    // Box lables
-    /*wxStaticText *batxt, *bbtxt, *bctxt, *bdtxt, *betxt;
-    batxt = new wxStaticText(bapanel, -1, _T("Capacity: 10 words"), wxPoint(210,10), wxSize(120,30));
-    bbtxt = new wxStaticText(bbpanel, -1, _T("Capacity: 20 words"), wxPoint(210,10), wxSize(120,30));
-    bctxt = new wxStaticText(bcpanel, -1, _T("Capacity: 40 words"), wxPoint(210,10), wxSize(120,30));
-    bdtxt = new wxStaticText(bdpanel, -1, _T("Capacity: 80 words"), wxPoint(210,10), wxSize(120,30));
-    betxt = new wxStaticText(bepanel, -1, _T("Capacity: 150 words"), wxPoint(210,10), wxSize(120,30));*/
+    lttext = new wxStaticText(this, -1, _("Leitner box can be used to support\nmemorization by way of spaced repetition.\nThis is how it works: you try to recall the\nmeaning of a word. If you succeed, you send\nthe word to the next box. But if you fail, you\nsend it back to the first box.")); 
 
     // Load box contents
     boxacontents = LoadLeitnerBoxContents(wxT("LTBOX-A"));
@@ -117,11 +108,11 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     boxdcontents = LoadLeitnerBoxContents(wxT("LTBOX-D"));
     boxecontents = LoadLeitnerBoxContents(wxT("LTBOX-E"));
 
-    boxa = new wxListBox(bapanel, ID_LTBOX_A, wxPoint(5,5), wxSize(190, 180),boxacontents,wxLB_SINGLE|wxLB_NEEDED_SB);
-    boxb = new wxListBox(bbpanel, ID_LTBOX_B, wxPoint(5,5), wxSize(190, 180),boxbcontents,wxLB_SINGLE|wxLB_NEEDED_SB);
-    boxc = new wxListBox(bcpanel, ID_LTBOX_C, wxPoint(5,5), wxSize(190, 180),boxccontents,wxLB_SINGLE|wxLB_NEEDED_SB);
-    boxd = new wxListBox(bdpanel, ID_LTBOX_D, wxPoint(5,5), wxSize(190, 180),boxdcontents,wxLB_SINGLE|wxLB_NEEDED_SB);
-    boxe = new wxListBox(bepanel, ID_LTBOX_E, wxPoint(5,5), wxSize(190, 180),boxecontents,wxLB_SINGLE|wxLB_NEEDED_SB);
+    boxa = new wxListBox(bapanel, ID_LTBOX_A, wxDefaultPosition, wxDefaultSize, boxacontents, wxLB_SINGLE|wxLB_NEEDED_SB);
+    boxb = new wxListBox(bbpanel, ID_LTBOX_B, wxDefaultPosition, wxDefaultSize, boxbcontents, wxLB_SINGLE|wxLB_NEEDED_SB);
+    boxc = new wxListBox(bcpanel, ID_LTBOX_C, wxDefaultPosition, wxDefaultSize, boxccontents, wxLB_SINGLE|wxLB_NEEDED_SB);
+    boxd = new wxListBox(bdpanel, ID_LTBOX_D, wxDefaultPosition, wxDefaultSize, boxdcontents, wxLB_SINGLE|wxLB_NEEDED_SB);
+    boxe = new wxListBox(bepanel, ID_LTBOX_E, wxDefaultPosition, wxDefaultSize, boxecontents, wxLB_SINGLE|wxLB_NEEDED_SB);
 
     // Icon
     wxBitmap  next = wxArtProvider::GetBitmap(wxART_GO_FORWARD, client, wxDefaultSize);
@@ -130,23 +121,23 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     wxBitmap  del = wxArtProvider::GetBitmap(wxART_DEL_BOOKMARK, client, wxDefaultSize);
     wxBitmap  confirm = wxArtProvider::GetBitmap( wxART_TIP, client, wxDefaultSize);
 
-    m_anext = new wxBitmapButton(bapanel, ID_BTN_NEXT_A, next, wxPoint(223,30), wxSize(80,36));
-    m_bnext = new wxBitmapButton(bbpanel, ID_BTN_NEXT_B, next, wxPoint(223,30), wxSize(80,36));
-    m_cnext = new wxBitmapButton(bcpanel, ID_BTN_NEXT_C, next, wxPoint(223,30), wxSize(80,36));
-    m_dnext = new wxBitmapButton(bdpanel, ID_BTN_NEXT_D, next, wxPoint(223,30), wxSize(80,36));
+    m_anext = new wxBitmapButton(bapanel, ID_BTN_NEXT_A, next);
+    m_bnext = new wxBitmapButton(bbpanel, ID_BTN_NEXT_B, next);
+    m_cnext = new wxBitmapButton(bcpanel, ID_BTN_NEXT_C, next);
+    m_dnext = new wxBitmapButton(bdpanel, ID_BTN_NEXT_D, next);
 
-    m_bback = new wxBitmapButton(bbpanel, ID_BTN_BACK_B, back, wxPoint(223,70), wxSize(80,36));
-    m_cback = new wxBitmapButton(bcpanel, ID_BTN_BACK_C, back, wxPoint(223,70), wxSize(80,36));
-    m_dback = new wxBitmapButton(bdpanel, ID_BTN_BACK_D, back, wxPoint(223,70), wxSize(80,36));
-    m_remove = new wxBitmapButton(bapanel, ID_BTN_REMOVE, del, wxPoint(223,70), wxSize(80,36));
-    m_confirm = new wxBitmapButton(bepanel, ID_BTN_CONFIRM, confirm, wxPoint(223,70), wxSize(80,36));
-    m_eback = new wxBitmapButton(bepanel, ID_BTN_BACK_E, back, wxPoint(223,30), wxSize(80,36));
+    m_bback = new wxBitmapButton(bbpanel, ID_BTN_BACK_B, back);
+    m_cback = new wxBitmapButton(bcpanel, ID_BTN_BACK_C, back);
+    m_dback = new wxBitmapButton(bdpanel, ID_BTN_BACK_D, back);
+    m_remove = new wxBitmapButton(bapanel, ID_BTN_REMOVE, del);
+    m_confirm = new wxBitmapButton(bepanel, ID_BTN_CONFIRM, confirm);
+    m_eback = new wxBitmapButton(bepanel, ID_BTN_BACK_E, back);
 
-    m_atrans = new wxBitmapButton(bapanel, ID_BTN_TRANS_A, trans, wxPoint(223,110), wxSize(80,36));
-    m_btrans = new wxBitmapButton(bbpanel, ID_BTN_TRANS_B, trans, wxPoint(223,110), wxSize(80,36));
-    m_ctrans = new wxBitmapButton(bcpanel, ID_BTN_TRANS_C, trans, wxPoint(223,110), wxSize(80,36));
-    m_dtrans = new wxBitmapButton(bdpanel, ID_BTN_TRANS_D, trans, wxPoint(223,110), wxSize(80,36));
-    m_etrans = new wxBitmapButton(bepanel, ID_BTN_TRANS_E, trans, wxPoint(223,110), wxSize(80,36));
+    m_atrans = new wxBitmapButton(bapanel, ID_BTN_TRANS_A, trans);
+    m_btrans = new wxBitmapButton(bbpanel, ID_BTN_TRANS_B, trans);
+    m_ctrans = new wxBitmapButton(bcpanel, ID_BTN_TRANS_C, trans);
+    m_dtrans = new wxBitmapButton(bdpanel, ID_BTN_TRANS_D, trans);
+    m_etrans = new wxBitmapButton(bepanel, ID_BTN_TRANS_E, trans);
 
     // Quantity Checks
     if (boxacontents.GetCount() < bacap) {
@@ -169,7 +160,8 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     layout->AddPage(bbpanel, _("Box B"));
     layout->AddPage(bcpanel, _("Box C")); 
     layout->AddPage(bdpanel, _("Box D")); 
-    layout->AddPage(bepanel, _("Box E"));  
+    layout->AddPage(bepanel, _("Box E")); 
+    CreateLayout(); 
 }
 
 /// OK button click event handler.
@@ -736,3 +728,76 @@ void xFarDicLeitner::SubmitChanges()
 
     pConfig->Write(_T("/Options/LTBOX-D"), tmpStr);
 }
+
+void xFarDicLeitner::CreateLayout() {
+     wxBoxSizer *topsizer = new wxBoxSizer( wxVERTICAL );
+
+     wxBoxSizer *logoandtextsizer = new wxBoxSizer(wxHORIZONTAL);
+     logoandtextsizer->Add(staticBitmap, 0, wxALIGN_LEFT|wxALL, 5);
+     logoandtextsizer->Add(lttext, 0, wxALIGN_LEFT|wxALL, 5);
+     topsizer->Add(logoandtextsizer, 0, wxEXPAND|wxALL, 5);
+     
+     topsizer->Add(layout, 1, wxALL|wxEXPAND, 5);
+
+     wxBoxSizer *bapanelsizer = new wxBoxSizer(wxHORIZONTAL);
+     bapanelsizer->Add(boxa, 1, wxEXPAND|wxALL, 10);
+     wxBoxSizer *babuttonssizer = new wxBoxSizer(wxVERTICAL);
+     babuttonssizer->Add(m_anext ,1 ,wxEXPAND|wxALL ,5);
+     babuttonssizer->Add(m_remove ,1 ,wxEXPAND|wxALL ,5);
+     babuttonssizer->Add(m_atrans ,1 ,wxEXPAND|wxALL ,5);
+     bapanelsizer->Add(babuttonssizer, 0, wxEXPAND|wxALL, 10);
+
+     wxBoxSizer *bbpanelsizer = new wxBoxSizer(wxHORIZONTAL);
+     bbpanelsizer->Add(boxb, 1, wxEXPAND|wxALL, 10);
+     wxBoxSizer *bbbuttonssizer = new wxBoxSizer(wxVERTICAL);
+     bbbuttonssizer->Add(m_bnext ,1 ,wxEXPAND|wxALL ,5);
+     bbbuttonssizer->Add(m_bback ,1 ,wxEXPAND|wxALL ,5);
+     bbbuttonssizer->Add(m_btrans ,1 ,wxEXPAND|wxALL ,5);
+     bbpanelsizer->Add(bbbuttonssizer, 0, wxEXPAND|wxALL, 10);
+
+     wxBoxSizer *bcpanelsizer = new wxBoxSizer(wxHORIZONTAL);
+     bcpanelsizer->Add(boxc, 1, wxEXPAND|wxALL, 10);
+     wxBoxSizer *bcbuttonssizer = new wxBoxSizer(wxVERTICAL);
+     bcbuttonssizer->Add(m_cnext ,1 ,wxEXPAND|wxALL ,5);
+     bcbuttonssizer->Add(m_cback ,1 ,wxEXPAND|wxALL ,5);
+     bcbuttonssizer->Add(m_ctrans ,1 ,wxEXPAND|wxALL ,5);
+     bcpanelsizer->Add(bcbuttonssizer, 0, wxEXPAND|wxALL, 10);
+
+     wxBoxSizer *bdpanelsizer = new wxBoxSizer(wxHORIZONTAL);
+     bdpanelsizer->Add(boxd, 1, wxEXPAND|wxALL, 10);
+     wxBoxSizer *bdbuttonssizer = new wxBoxSizer(wxVERTICAL);
+     bdbuttonssizer->Add(m_dnext ,1 ,wxEXPAND|wxALL ,5);
+     bdbuttonssizer->Add(m_dback ,1 ,wxEXPAND|wxALL ,5);
+     bdbuttonssizer->Add(m_dtrans ,1 ,wxEXPAND|wxALL ,5);
+     bdpanelsizer->Add(bdbuttonssizer, 0, wxEXPAND|wxALL, 10);
+
+     wxBoxSizer *bepanelsizer = new wxBoxSizer(wxHORIZONTAL);
+     bepanelsizer->Add(boxe, 1, wxEXPAND|wxALL, 10);
+     wxBoxSizer *bebuttonssizer = new wxBoxSizer(wxVERTICAL);
+     bebuttonssizer->Add(m_eback ,1 ,wxEXPAND|wxALL ,5);
+     bebuttonssizer->Add(m_confirm ,1 ,wxEXPAND|wxALL ,5);
+     bebuttonssizer->Add(m_etrans ,1 ,wxEXPAND|wxALL ,5);
+     bepanelsizer->Add(bebuttonssizer, 0, wxEXPAND|wxALL, 10);
+
+     bapanel->SetAutoLayout( true );
+     bapanel->SetSizer( bapanelsizer );
+     bbpanel->SetAutoLayout( true );
+     bbpanel->SetSizer( bbpanelsizer );
+     bcpanel->SetAutoLayout( true );
+     bcpanel->SetSizer( bcpanelsizer );
+     bdpanel->SetAutoLayout( true );
+     bdpanel->SetSizer( bdpanelsizer );
+     bepanel->SetAutoLayout( true );
+     bepanel->SetSizer( bepanelsizer );
+
+     wxBoxSizer *bottomsizer = new wxBoxSizer(wxHORIZONTAL);
+     bottomsizer->AddStretchSpacer(1);
+     bottomsizer->Add(m_clear, 0, wxALIGN_RIGHT|wxALL, 5);
+     bottomsizer->Add(m_ok, 0, wxALIGN_RIGHT|wxALL, 5);
+     
+     topsizer->Add(bottomsizer, 0, wxEXPAND|wxALL, 5);
+
+     SetSizer( topsizer );
+     topsizer->SetSizeHints( this );
+}
+

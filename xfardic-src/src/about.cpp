@@ -45,7 +45,7 @@ xFarDicAbout::~xFarDicAbout()
 
 /// About Windows creation function
 xFarDicAbout::xFarDicAbout(wxWindow *parent, const wxString& title, const wxPoint& pos, const wxSize& size, wxLocale& locale, long style)
-       : wxFrame(parent, -1, title, pos, size, style), m_locale(locale)
+       : wxFrame(parent, -1, title, pos, size, style|wxMAXIMIZE_BOX), m_locale(locale)
 {    
     // set the frame icon    
     wxBitmap  micon(_T("/usr/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
@@ -58,22 +58,22 @@ xFarDicAbout::xFarDicAbout(wxWindow *parent, const wxString& title, const wxPoin
     wicon.CopyFromBitmap(micon);
     SetIcon(wicon);  
 
-    layout = new wxNotebook(this, xFarDic_ChangeTab, wxPoint(5,113), wxSize(390,200));
-
-    infopanel =  new wxPanel(layout);
-    autpanel =  new wxPanel(layout);
-    licpanel =  new wxPanel(layout);
-    
     //xFarDic Logo
     wxBitmap logo(_T("/usr/share/xfardic/pixmaps/xfardic-logo.png"), wxBITMAP_TYPE_PNG);   
 
     if (!logo.Ok()) {
         logo.LoadFile(_T("/usr/local/share/xfardic/pixmaps/xfardic-logo.png"), wxBITMAP_TYPE_PNG);       
-    }        
+    }
 
-    (void)new wxStaticBitmap (this, -1, logo, wxPoint(155, 8));
-  
-    m_ok = new wxButton(this, wxID_CLOSE, _("&Close"), wxPoint(315,315), wxSize(80,36) );
+    staticBitmap = new wxStaticBitmap (this, -1, logo);
+
+    layout = new wxNotebook(this, xFarDic_ChangeTab);
+
+    infopanel =  new wxPanel(layout);
+    autpanel =  new wxPanel(layout);
+    licpanel =  new wxPanel(layout);
+    
+    m_ok = new wxButton(this, wxID_CLOSE, _("&Close"));
 
     //Set Default button
     m_ok->SetDefault();
@@ -86,15 +86,15 @@ xFarDicAbout::xFarDicAbout(wxWindow *parent, const wxString& title, const wxPoin
            _("xFarDic "),
            XVERSION);
 
-    infomsg.Printf(_T("%s"),_("Latest News and Updates: http://www.xfardic.org\n\nBug Report/Feature Request: alan@technotux.org\n\nIMPORTANT NOTICE:\nYou can get required XDB word databases from project home page at http://sf.net/projects/xfardic. Without word databases, xFarDic *will not* work."));
+    infomsg.Printf(_T("%s"),_("Latest News and Updates: http://www.xfardic.org\n\nBug Report/Feature Request: alan@technotux.org\n\nIMPORTANT NOTICE:\nYou can get required XDB word databases from project\nhome page at http://sf.net/projects/xfardic. Without word\ndatabases, xFarDic *will not* work."));
 
-    licmsg.Printf(_T("%s"),_("xFarDic is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n\nxFarDic is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details."));
+    licmsg.Printf(_T("%s"),_("xFarDic is free software; you can redistribute it and/or\nmodify it under the terms of the GNU General Public License\nas published by the Free Software Foundation; either\nversion 2 of the License, or (at your option) any later\nversion.\n\nxFarDic is distributed in the hope that it will be useful, but\nWITHOUT ANY WARRANTY; without even the implied warranty\nof MERCHANTABILITY or FITNESS FOR A PARTICULAR\nPURPOSE. See the GNU General Public License for more\ndetails."));
 
-    m_autlabel = new wxStaticText(autpanel, -1, autmsg, wxPoint(5, 10), wxSize(380,390));
-    m_infolabel = new wxStaticText(infopanel, -1, infomsg, wxPoint(5, 10), wxSize(380,390));
-    m_liclabel = new wxStaticText(licpanel, -1, licmsg, wxPoint(5, 10), wxSize(380,390));
-    m_titlabel = new wxStaticText(this, -1, titmsg, wxPoint(31, 84), wxSize(340,390), wxALIGN_CENTRE);
-    m_abbox = new wxStaticBox(this, -1, wxT(""), wxPoint(5, 5), wxSize(390,105), wxALIGN_CENTRE);
+    m_autlabel = new wxStaticText(autpanel, -1, autmsg);
+    m_infolabel = new wxStaticText(infopanel, -1, infomsg);
+    m_liclabel = new wxStaticText(licpanel, -1, licmsg);
+    m_titlabel = new wxStaticText(this, -1, titmsg);
+    m_abbox = new wxStaticBox(this, -1, wxT(""));
 
     // Setting Label Font
     m_font.SetPointSize(15);
@@ -105,4 +105,34 @@ xFarDicAbout::xFarDicAbout(wxWindow *parent, const wxString& title, const wxPoin
     layout->AddPage(infopanel, _("Information"));
     layout->AddPage(licpanel, _("License"));    
     layout->AddPage(autpanel, _("Authors"));
+    CreateLayout();
 }
+
+void xFarDicAbout::CreateLayout() {
+     wxBoxSizer *topsizer = new wxBoxSizer( wxVERTICAL );
+
+     topsizer->Add(staticBitmap, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 0);
+     topsizer->Add(m_titlabel, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 0);
+     
+     topsizer->Add(layout, 1, wxALL|wxEXPAND, 5);
+
+     wxSizer *infopanelsizer = new wxBoxSizer(wxVERTICAL);
+     infopanelsizer->Add( m_infolabel, 1, wxEXPAND|wxALL, 5);
+     wxSizer *autpanelsizer = new wxBoxSizer(wxVERTICAL);
+     autpanelsizer->Add( m_autlabel, 1, wxEXPAND|wxALL, 5);
+     wxSizer *licpanelsizer = new wxBoxSizer(wxVERTICAL);
+     licpanelsizer->Add( m_liclabel, 1, wxEXPAND|wxALL, 5);
+
+     infopanel->SetAutoLayout( true );
+     infopanel->SetSizer( infopanelsizer );
+     autpanel->SetAutoLayout( true );
+     autpanel->SetSizer( autpanelsizer );
+     licpanel->SetAutoLayout( true );
+     licpanel->SetSizer( licpanelsizer );
+
+     topsizer->Add(m_ok, 0, wxALIGN_RIGHT|wxALL, 5);
+
+     SetSizer( topsizer );
+     topsizer->SetSizeHints( this );
+}
+

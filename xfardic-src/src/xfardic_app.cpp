@@ -272,8 +272,10 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     CreateStatusBar(1);
 #endif
 
-    m_resbox = new wxStaticBox(this, ID_BOX_RESULT, _T(""), wxPoint(4,43), wxSize(511,160) );
-    m_label = new wxTextCtrl(this, ID_RES_CTRL, _T(""), wxPoint(12, 50), wxSize(493, 145), wxTE_MULTILINE | wxTE_READONLY);   
+    m_resbox = new wxStaticBox(this, ID_BOX_RESULT, _T(""));
+    m_label = new wxTextCtrl(this, ID_RES_CTRL, _T(""), wxDefaultPosition,
+                    wxSize(493, 145), 
+                    wxTE_MULTILINE | wxTE_READONLY);   
 
     //Get Configuration From Config File
     wxConfigBase *pConfig = wxConfigBase::Get();
@@ -618,6 +620,9 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
     //Init swap
     initSwap();
+
+    //Init layout
+    CreateLayout();
 }
 
 xFarDicApp::~xFarDicApp()
@@ -1182,11 +1187,7 @@ void xFarDicApp::RecreateToolbar(bool activate)
 /// Translation toolbar creation function
 void xFarDicApp::RecreateTrToolbar()
 {
-    t_tbar = new wxToolBar(this, ID_TRANSTOOLBAR,
-                           wxPoint(0, 37), wxSize(520, 37),
-                           wxTB_HORIZONTAL | wxTB_DOCKABLE);
-
-    m_text = new wxComboBox(t_tbar, ID_COMBO, _T(""), wxPoint(9, 8), wxSize(375, 30), 0, NULL,
+    m_text = new wxComboBox(this, ID_COMBO, _T(""), wxDefaultPosition, wxSize(375, 30), 0, NULL,
                             wxCB_DROPDOWN & wxPROCESS_ENTER);
     m_text->SetFocus();
 
@@ -1195,18 +1196,11 @@ void xFarDicApp::RecreateTrToolbar()
     wxBitmap  btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
     wxBitmap  bltbox = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);
 
-    m_translate = new wxBitmapButton(t_tbar, ID_BUTTON_TRANSLATE, btranslate, wxPoint(415,4), wxSize(65,36));
-    m_leitnerbox = new wxBitmapButton(t_tbar, ID_BTN_LT, bltbox, wxPoint(470,4), wxSize(65,36));
+    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(65,30));
+    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(65,30));
 
     //Set Default button
-    m_translate->SetDefault();
-
-    // Translation toolbar implementation 
-    t_tbar->AddControl(m_text);
-    t_tbar->AddControl(m_translate);
-    t_tbar->AddControl(m_leitnerbox);
-    t_tbar->Realize();
-    t_tbar->SetSize(0, 0, 520, 37);    
+    m_translate->SetDefault();   
 }
 
 bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
@@ -1538,9 +1532,8 @@ void xFarDicApp::ShowSettings()
         int z = pos_x + (( size_x - x) / 2 );
         int w = pos_y + (( size_y - y) / 2 );
 
-
-        setframe = new xFarDicSettings(this, _("xFarDic Settings"), wxPoint(z, w), wxSize(x, y), m_locale, 
-                                       wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR);       
+        setframe = new xFarDicSettings(this, _("xFarDic Settings"), wxPoint(z, w), wxDefaultSize
+                         , m_locale, wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR | wxCLOSE_BOX);       
            
         setframe->Show(TRUE);
         showSettings = false;
@@ -1566,8 +1559,8 @@ void xFarDicApp::ShowAbout()
         int z = pos_x + (( size_x - x) / 2 );
         int w = pos_y + (( size_y - y) / 2 );
 
-        abframe = new xFarDicAbout(this, _("About xFarDic"), wxPoint(z, w), wxSize(x, y), m_locale, 
-                                   wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR);
+        abframe = new xFarDicAbout(this, _("About xFarDic"), wxPoint(z, w), wxDefaultSize
+                         , m_locale, wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR | wxCLOSE_BOX);
       
         abframe->Show(TRUE);
         showAbout = false;
@@ -1593,8 +1586,8 @@ void xFarDicApp::ShowLeitner()
         int z = pos_x + (( size_x - x) / 2 );
         int w = pos_y + (( size_y - y) / 2 );
 
-        ltframe = new xFarDicLeitner(this, _("xFarDic - Leitner Box"), wxPoint(z, w), wxSize(x, y), m_locale,
-                                     wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR);
+        ltframe = new xFarDicLeitner(this, _("xFarDic - Leitner Box"), wxPoint(z, w), wxDefaultSize
+                         , m_locale, wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR | wxCLOSE_BOX);
       
         ltframe->Show(TRUE);
         showLeitner = false;
@@ -2350,3 +2343,34 @@ void xFarDicApp::LoadLeitnerBoxContents()
         ltbox.Add(ltboxstr);
     }
 }
+
+void xFarDicApp::CreateLayout() {
+     wxBoxSizer *horizontalSizer = new wxBoxSizer(wxHORIZONTAL);
+     horizontalSizer->Add(m_text,
+                    1, //make horizontally stretchable
+                    wxALL, //make border all around
+                    5); //set border width to 5
+     horizontalSizer->Add(m_translate,
+                    0, //make horizontally unstretchable
+                    wxALL,
+                    5);
+     horizontalSizer->Add(m_leitnerbox,
+                    0,
+                    wxALL,
+                    5);
+     wxStaticBoxSizer *staticSizer = new wxStaticBoxSizer(m_resbox,wxVERTICAL);
+     staticSizer->Add(m_label,
+               1, //make vertically stretchable
+               wxEXPAND | //make horizontally stretchable
+               wxALL,
+               5);
+     wxBoxSizer *topSizer = new wxBoxSizer(wxVERTICAL);
+     topSizer->Add(horizontalSizer,
+               0, //make vertically unstretchable
+               wxEXPAND|wxALL);
+     topSizer->Add(staticSizer, 1, wxEXPAND|wxALL, 5);
+     SetSizer(topSizer);
+     topSizer->Fit(this);
+     topSizer->SetSizeHints(this);
+}
+

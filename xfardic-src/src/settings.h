@@ -76,6 +76,20 @@ public:
    wxLocale& m_locale;
 
 private:
+     void CreateLayout();
+     wxStaticBitmap *settingsBitmap;
+     wxStaticText *effecttext;
+     wxStaticText *langtext;
+     wxStaticText *settext;
+     wxStaticText *timeouttext;
+     wxStaticText *leitnertext;
+     wxStaticText *dbtext;
+     wxStaticText *dbnote;
+     wxStaticText *swapnote;
+     wxStaticBitmap *notelogoBitmap1;
+     wxStaticBitmap *notelogoBitmap2;
+
+private:
     // any class wishing to process wxWindows events must use this macro
     wxButton    *m_ok;
     wxButton    *m_apply;
@@ -118,3 +132,4 @@ private:
 };
 
 #endif
+
