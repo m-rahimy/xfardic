@@ -34,7 +34,7 @@ class xFarDicTexttoSpeech
 {
 public:
         bool init;
-        xFarDicTexttoSpeech();
+        xFarDicTexttoSpeech(bool debug);
         int say(const char *, ...);        
 private:
         CORBA_Object co;
@@ -45,7 +45,7 @@ private:
         GNOME_Speech_voice_gender gender;
         GNOME_Speech_VoiceInfoList *voices;
         
-        CORBA_Object select_server(CORBA_Environment *);        
+        CORBA_Object select_server(CORBA_Environment *, bool debug);        
 };
 
 #endif

@@ -349,11 +349,13 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 	splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
 
         // creating tts
-	tts = new xFarDicTexttoSpeech();
+	tts = new xFarDicTexttoSpeech(true);
 
         // is tts OK?
         if(!tts->init){
             ttsinit = false;
+            // DEBUGGING
+            fprintf(stderr, "TTS:%d\n", tts->init);
         }
 
         if (seppos.GetCount()>0) {    
@@ -1206,7 +1208,7 @@ void xFarDicApp::RecreateTrToolbar()
     m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(50,34));
 
     if(!ttsinit){
-        m_ttos->Enable(false);
+        //m_ttos->Enable(false);
     }
 
     //Set Default button
