@@ -26,6 +26,7 @@ Other needed packages are:
 3. libgnome-desktop-dev
 4. libnotify-dev
 5. libsqlite3-dev
+6. libgnome-speech-dev
 
 On Debian/Ubuntu issue following command to install required libs:
 
