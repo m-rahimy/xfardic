@@ -24,66 +24,28 @@
 // |          Armen Baghumian <armen@OpenSourceClub.org>                     |
 // +-------------------------------------------------------------------------+
 
-#ifndef __XFARDIC_H
-#define __XFARDIC_H
+#ifndef __TEXTTOSPEECH_H
+#define __TEXTTOSPEECH_H
 
-using namespace std;
+#include <xfardic.h>
 
-// For compilers that support precompilation, includes "wx/wx.h".
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif
-
-#include "wx/wxprec.h"
-#include "wx/filefn.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <libxml/xmlmemory.h>
-#include <libxml/parser.h>
-#include <libxml/xmlreader.h>
-#include "wx/string.h"
-#include "wx/config.h"
-#include "wx/choice.h"
-#include "wx/clipbrd.h"
-#include "wx/filename.h"
-#include "wx/statbmp.h"
-#include "wx/spinctrl.h"
-#include "wx/splash.h"
-#include "wx/fontdlg.h"
-#include "wx/fontenum.h"
-#include "wx/fontmap.h"
-#include "wx/taskbar.h"
-#include "wx/utils.h"
-#include "wx/filedlg.h"
-#include "wx/generic/filedlgg.h"
-#include "wx/log.h"
-#include "wx/intl.h"
-#include "wx/timer.h"
-#include "wx/choicdlg.h"
-#include "wx/listbox.h"
-#include "wx/notebook.h"
-#include "wx/msgdlg.h"
-#include "aspell.h"
-#include "wx/dynarray.h"
-#include "wx/progdlg.h"
-#include "wx/bmpbuttn.h"
-#include "wx/artprov.h"
-#include "wx/snglinst.h"
-#include "wx/filesys.h"
-#include "wx/cmdline.h"
-#include <libnotify/notify.h>
-#include <gtk/gtk.h>
-#include <cstring>
-#include "sqlite3.h"
-
-#include <glib/gmain.h>
-#include <bonobo/bonobo-types.h>
-#include <bonobo/bonobo-main.h>
-#include <bonobo/bonobo-exception.h>
-#include <gnome-speech/gnome-speech.h>
-
-#include "constants.h"
+/// xFarDic Text to Speech Abstraction Class
+class xFarDicTexttoSpeech 
+{
+public:
+        bool init;
+        xFarDicTexttoSpeech();
+        int say(const char *, ...);        
+private:
+        CORBA_Object co;
+        CORBA_Environment cev;
+        CORBA_string driver_name, driver_version;
+        CORBA_string synth_name, synth_version;
+        GNOME_Speech_Speaker speaker;
+        GNOME_Speech_voice_gender gender;
+        GNOME_Speech_VoiceInfoList *voices;
+        
+        CORBA_Object select_server(CORBA_Environment *);        
+};
 
 #endif
-

@@ -74,6 +74,7 @@ BEGIN_EVENT_TABLE(xFarDicApp, wxFrame)
     EVT_MENU(xFarDic_Leitner, xFarDicApp::OnLeitner)
     EVT_BUTTON(ID_BUTTON_TRANSLATE, xFarDicApp::OnTranslate)
     EVT_BUTTON(ID_BTN_LT, xFarDicApp::OnLeitnerBox)
+    EVT_BUTTON(ID_BUTTON_TTOS, xFarDicApp::OnTexttoSpeech)
     EVT_TOOL(ID_SPELL, xFarDicApp::OnSpell)
     EVT_TOOL(ID_REVSRCH, xFarDicApp::OnRevSrch)
     EVT_TOOL(ID_SRCH, xFarDicApp::OnSrch)
@@ -344,8 +345,16 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
                 seppos.Add(x);        
             }
         } // End For
-    
-        splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
+   
+	splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
+
+        // creating tts
+	tts = new xFarDicTexttoSpeech();
+
+        // is tts OK?
+        if(!tts->init){
+            ttsinit = false;
+        }
 
         if (seppos.GetCount()>0) {    
             for (int x=0; x <= seppos.GetCount(); x++) {
@@ -1182,7 +1191,7 @@ void xFarDicApp::RecreateToolbar(bool activate)
 /// Translation toolbar creation function
 void xFarDicApp::RecreateTrToolbar()
 {
-    m_text = new wxComboBox(this, ID_COMBO, _T(""), wxDefaultPosition, wxSize(375, 30), 0, NULL,
+    m_text = new wxComboBox(this, ID_COMBO, _T(""), wxDefaultPosition, wxSize(335, 30), 0, NULL,
                             wxCB_DROPDOWN & wxPROCESS_ENTER);
     m_text->SetFocus();
 
@@ -1190,9 +1199,15 @@ void xFarDicApp::RecreateTrToolbar()
     wxArtClient client;    
     wxBitmap  btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
     wxBitmap  bltbox = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);
+    wxBitmap  bttos = wxArtProvider::GetBitmap(wxT("sound"), client, wxDefaultSize);
 
-    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(80,34));
-    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(80,34));
+    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(50,34));
+    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(50,34));
+    m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(50,34));
+
+    if(!ttsinit){
+        m_ttos->Enable(false);
+    }
 
     //Set Default button
     m_translate->SetDefault();   
@@ -2345,6 +2360,10 @@ void xFarDicApp::CreateLayout() {
                     0,
                     wxALL,
                     5);
+     horizontalSizer->Add(m_ttos,
+ 	   	    0,
+ 	 	    wxALL,
+ 		    5);
      wxStaticBoxSizer *staticSizer = new wxStaticBoxSizer(m_resbox,wxVERTICAL);
      staticSizer->Add(m_label,
                1, //make vertically stretchable
@@ -2360,4 +2379,9 @@ void xFarDicApp::CreateLayout() {
      topSizer->Fit(this);
      topSizer->SetSizeHints(this);
 }
+
+void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {
+ 	tts->say(m_text->GetValue().mb_str(wxConvUTF8));
+}
+
 

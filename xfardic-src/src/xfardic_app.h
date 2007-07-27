@@ -32,6 +32,7 @@
 #include "settings.h"
 #include "selection.h"
 #include "leitner.h"
+#include "tts.h"
 
 /// xFarDic Application Main Class
 class xFarDicApp : public wxFrame
@@ -64,7 +65,9 @@ public:
     /// Translate Button/Menu Event handler
     void OnTranslate(wxCommandEvent& event); 
     /// Leitner button Event handler
-    void OnLeitnerBox(wxCommandEvent& event); 
+    void OnLeitnerBox(wxCommandEvent& event);
+    /// Text to Speech button   Event handler
+    void OnTexttoSpeech(wxCommandEvent &event);
     /// Selecting "Select" option 
     void OnSelect(wxCommandEvent& event); 
     /// Selecting "Search Similar" option
@@ -154,6 +157,8 @@ public:
 
 private:
      void CreateLayout();
+     wxBitmapButton *m_ttos;
+     xFarDicTexttoSpeech *tts;
 
 private:
     wxTextCtrl       *m_label;
@@ -175,7 +180,8 @@ private:
             aspelli,
             swap,
             swapupdate,
-            update;
+            update,
+            ttsinit;
     size_t  m_rows;
     wxMenu  *gomenu,
             *opmenu,
