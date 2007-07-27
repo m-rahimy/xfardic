@@ -348,7 +348,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
    
 	splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
 
-        // creating tts
+        // creating tts, call + true -> enables debug messages
 	tts = new xFarDicTexttoSpeech(true);
 
         // is tts OK?
@@ -1203,9 +1203,9 @@ void xFarDicApp::RecreateTrToolbar()
     wxBitmap  bltbox = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);
     wxBitmap  bttos = wxArtProvider::GetBitmap(wxT("sound"), client, wxDefaultSize);
 
-    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(50,34));
-    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(50,34));
-    m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(50,34));
+    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(50,33));
+    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(50,33));
+    m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(50,33));
 
     if(!ttsinit){
         //m_ttos->Enable(false);
@@ -2353,19 +2353,19 @@ void xFarDicApp::CreateLayout() {
      horizontalSizer->Add(m_text,
                     1, //make horizontally stretchable
                     wxALL, //make border all around
-                    5); //set border width to 5
+                    2); //set border width to 5
      horizontalSizer->Add(m_translate,
                     0, //make horizontally unstretchable
                     wxALL,
-                    5);
+                    2);
      horizontalSizer->Add(m_leitnerbox,
                     0,
                     wxALL,
-                    5);
+                    2);
      horizontalSizer->Add(m_ttos,
  	   	    0,
  	 	    wxALL,
- 		    5);
+ 		    2);
      wxStaticBoxSizer *staticSizer = new wxStaticBoxSizer(m_resbox,wxVERTICAL);
      staticSizer->Add(m_label,
                1, //make vertically stretchable

@@ -192,25 +192,18 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
       chk_swap->SetValue(TRUE);
     } else {
       chk_swap->SetValue(FALSE);
-    }
-
-   
+    }  
 
     int entry = pConfig->Read(_T("Num-Entries"), 10);  
     numEntry->SetValue(entry);
 
-
     int timeout = pConfig->Read(_T("Scan-Timeout"), 5);  
     scantimeout->SetValue(timeout);
 
-
     int ltbasecap = pConfig->Read(_T("Leitner-Base"), 10);  
-    leitner->SetValue(ltbasecap);
-    
-   
+    leitner->SetValue(ltbasecap); 
    
     lang->SetSelection(pConfig->Read(_T("GUI-Lang"), 2));  
-
            
     wxString path = pConfig->Read(_T("DB-Path"), _T(""));    
    
@@ -296,7 +289,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     if (submit == true) {
         SubmitChanges();
     } 
-	CreateLayout();   
+ 
+    CreateLayout();   
 }
 
 /// Settings window destructor.
@@ -605,24 +599,24 @@ void xFarDicSettings::CreateLayout() {
 	staticBoxSizer->Add(layout,1,wxEXPAND|wxALL,5);
 
 	wxGridSizer *setpanelSizer = new wxGridSizer(9,2,0,0);
-	setpanelSizer->Add(langtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(lang , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(settext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(numEntry , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(timeouttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(scantimeout , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(leitnertext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(leitner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(chk_select , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(chk_watcher , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(chk_hide , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(chk_scanner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(chk_revsrch , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(chk_srchsim , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(chk_winpos , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(chk_spell , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(chk_cache , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	setpanelSizer->Add(chk_swap , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	setpanelSizer->Add(langtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(lang , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(settext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(numEntry , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(timeouttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(scantimeout , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(leitnertext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(leitner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(chk_select , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(chk_watcher , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(chk_hide , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(chk_scanner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(chk_revsrch , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(chk_srchsim , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(chk_winpos , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(chk_spell , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(chk_cache , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(chk_swap , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
 	wxBoxSizer *dbpanelSizer = new wxBoxSizer(wxHORIZONTAL);
 	wxBoxSizer *dbpanelrightSizer = new wxBoxSizer(wxVERTICAL);
