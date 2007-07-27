@@ -1193,7 +1193,7 @@ void xFarDicApp::RecreateToolbar(bool activate)
 /// Translation toolbar creation function
 void xFarDicApp::RecreateTrToolbar()
 {
-    m_text = new wxComboBox(this, ID_COMBO, _T(""), wxDefaultPosition, wxSize(335, 30), 0, NULL,
+    m_text = new wxComboBox(this, ID_COMBO, _T(""), wxDefaultPosition, wxSize(335, 32), 0, NULL,
                             wxCB_DROPDOWN & wxPROCESS_ENTER);
     m_text->SetFocus();
 
@@ -1203,12 +1203,12 @@ void xFarDicApp::RecreateTrToolbar()
     wxBitmap  bltbox = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);
     wxBitmap  bttos = wxArtProvider::GetBitmap(wxT("sound"), client, wxDefaultSize);
 
-    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(50,33));
-    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(50,33));
-    m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(50,33));
+    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(50,34));
+    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(50,34));
+    m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(50,34));
 
     if(!ttsinit){
-        //m_ttos->Enable(false);
+        m_ttos->Enable(false);
     }
 
     //Set Default button
@@ -1824,7 +1824,7 @@ bool xFarDicApp::initDB(const char *filename) {
             ret = xmlTextReaderRead(reader);
             // DEBUGGING      
             // fprintf(stderr, "%d\n", ret);
-        }       
+        } // End while      
         
         xmlFreeTextReader(reader);
         xmlCleanupParser();
@@ -2383,7 +2383,7 @@ void xFarDicApp::CreateLayout() {
 }
 
 void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {
- 	tts->say(m_text->GetValue().mb_str(wxConvUTF8));
+     tts->say(m_text->GetValue().mb_str(wxConvUTF8));
 }
 
 
