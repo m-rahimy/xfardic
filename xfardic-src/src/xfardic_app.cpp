@@ -626,12 +626,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 }
 
 xFarDicApp::~xFarDicApp()
-{
-    delete m_text;
-    delete m_label;
-    delete m_resbox;
-    delete m_translate;
-        
+{       
     Destroy();
 }
 
@@ -1525,8 +1520,8 @@ void xFarDicApp::ShowSettings()
         GetSize(&size_x, &size_y);
 
         // Settings window position
-        int z = pos_x + (( size_x - x) / 2 );
-        int w = pos_y + (( size_y - y) / 2 );
+        int z = pos_x + (( size_x - pos_x) / 2 );
+        int w = pos_y + (( size_y - pos_y) / 2 );
 
         setframe = new xFarDicSettings(this, _("xFarDic Settings"), wxPoint(z, w), wxDefaultSize
                          , m_locale, wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR | wxCLOSE_BOX);       
@@ -1548,8 +1543,8 @@ void xFarDicApp::ShowAbout()
         GetSize(&size_x, &size_y);
 
         // About window position
-        int z = pos_x + (( size_x - x) / 2 );
-        int w = pos_y + (( size_y - y) / 2 );
+        int z = pos_x + (( size_x - pos_x) / 2 );
+        int w = pos_y + (( size_y - pos_y) / 2 );
 
         abframe = new xFarDicAbout(this, _("About xFarDic"), wxPoint(z, w), wxDefaultSize
                          , m_locale, wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR | wxCLOSE_BOX);
@@ -1575,8 +1570,8 @@ void xFarDicApp::ShowLeitner()
         int const y = 350;
 
         // About window position
-        int z = pos_x + (( size_x - x) / 2 );
-        int w = pos_y + (( size_y - y) / 2 );
+        int z = pos_x + (( size_x - pos_x) / 2 );
+        int w = pos_y + (( size_y - pos_y) / 2 );
 
         ltframe = new xFarDicLeitner(this, _("xFarDic - Leitner Box"), wxPoint(z, w), wxDefaultSize
                          , m_locale, wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR | wxCLOSE_BOX);
@@ -2212,6 +2207,12 @@ bool xFarDicApp::UpdateSwap()
         wxRemoveFile(swappath);
     }    
 
+    // Disabling update-swap flag
+    wxConfigBase *pConfig = wxConfigBase::Get();
+    pConfig->SetPath(wxT("/Options"));
+    pConfig->Write(wxT("/Options/Swap-Update"), 0);
+    swapupdate = FALSE;
+
     returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);
 
     if (returnvalue) {
@@ -2266,12 +2267,6 @@ bool xFarDicApp::UpdateSwap()
     if(meanList.GetCount() > 0){
         meanList.Empty();  
     }
-
-    // Disabling update-swap flag
-    wxConfigBase *pConfig = wxConfigBase::Get();
-    pConfig->SetPath(wxT("/Options"));
-    pConfig->Write(wxT("/Options/Swap-Update"), 0);
-    swapupdate = FALSE;
 
     // Shrinking the swap file
     initsql = wxT("VACUUM");
