@@ -312,9 +312,6 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         vtool = true;
     } 
 
-    // Translation toolbar
-    RecreateTrToolbar();      
-       
     wxString fontface = pConfig->Read(_T("Font-Face"));        
     int fontsize = pConfig->Read(_T("Font-Size"), 12);
     //fprintf(stderr, "font-size:%d\n",fontsize);
@@ -354,9 +351,12 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         // is tts OK?
         if(!tts->init){
             ttsinit = false;
-            // DEBUGGING
-            fprintf(stderr, "TTS:%d\n", tts->init);
+        }else{
+            ttsinit = true;
         }
+
+        // DEBUGGING
+        //fprintf(stderr, "TTS:%d\n", tts->init);
 
         if (seppos.GetCount()>0) {    
             for (int x=0; x <= seppos.GetCount(); x++) {
@@ -517,6 +517,9 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         delete splash;
         wxYield();               
     }
+
+    // Translation toolbar
+    RecreateTrToolbar();      
   
     if (wordList.GetCount() >0) {
         gomenu->Enable(xFarDic_First, TRUE);
@@ -1209,6 +1212,8 @@ void xFarDicApp::RecreateTrToolbar()
 
     if(!ttsinit){
         m_ttos->Enable(false);
+    }else{
+        m_ttos->Enable(true);
     }
 
     //Set Default button
