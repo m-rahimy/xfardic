@@ -38,7 +38,8 @@ clean:
 	dh_testroot
 	rm -f build-stamp
 	rm -rf config.cache
-	dh_clean	
+	dh_clean
+	$(MAKE) clean
 	
 install: build
 	dh_testdir
