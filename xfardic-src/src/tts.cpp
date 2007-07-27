@@ -56,10 +56,9 @@ xFarDicTexttoSpeech::xFarDicTexttoSpeech(bool debug) {
         /* Attempt to initialize the driver  */
         if (!GNOME_Speech_SynthesisDriver_driverInit (co, &cev)) {
                 if(debug){
-                fprintf (stderr, "Server could not be initialized.\n");
-                if(debug){
-                    bonobo_object_release_unref (co, NULL);
+                     fprintf (stderr, "Server could not be initialized.\n");
                 }
+                bonobo_object_release_unref (co, NULL);
                 CORBA_exception_free (&cev);
                 bonobo_debug_shutdown ();
                 init = false;
@@ -74,6 +73,7 @@ xFarDicTexttoSpeech::xFarDicTexttoSpeech(bool debug) {
                 }
                 CORBA_free (driver_name);
         }
+
         driver_version = GNOME_Speech_SynthesisDriver__get_driverVersion (co, &cev);
         if (!BONOBO_EX (&cev))
         {
@@ -82,6 +82,7 @@ xFarDicTexttoSpeech::xFarDicTexttoSpeech(bool debug) {
                 }
                 CORBA_free (driver_version);
         }
+
         synth_name = GNOME_Speech_SynthesisDriver__get_synthesizerName (co, &cev);
         if (!BONOBO_EX (&cev))
         {
@@ -90,6 +91,7 @@ xFarDicTexttoSpeech::xFarDicTexttoSpeech(bool debug) {
                 }
                 CORBA_free (synth_name);
         }
+
         synth_version = GNOME_Speech_SynthesisDriver__get_synthesizerVersion (co, &cev);
         if (!BONOBO_EX (&cev))
         {
@@ -99,7 +101,9 @@ xFarDicTexttoSpeech::xFarDicTexttoSpeech(bool debug) {
                 CORBA_free (synth_version);
         }
 
-        fprintf(stderr, "selecting male gender.\n");
+        if(debug){
+             fprintf(stderr, "selecting male gender.\n");
+        }
         gender = GNOME_Speech_gender_male; //OR  GNOME_Speech_gender_female;
 
         /* Display list of voices */
@@ -111,7 +115,7 @@ xFarDicTexttoSpeech::xFarDicTexttoSpeech(bool debug) {
                      fprintf (stderr, "Exception getting voice list.\n");
                 }
                 init = false;
-          return;
+                return;
         }
 
         if (voices->_length < 1) {
@@ -119,7 +123,7 @@ xFarDicTexttoSpeech::xFarDicTexttoSpeech(bool debug) {
                      fprintf (stderr, "No voices, bailing out.\n");
                 }
                 init = false;
-          return;
+                return;
         }
        
         int i;
@@ -132,8 +136,7 @@ xFarDicTexttoSpeech::xFarDicTexttoSpeech(bool debug) {
                     }
                     bonobo_object_release_unref (speaker, NULL);
                 }
-          
-         }
+          }
         } // end for
  
         if (speaker == CORBA_OBJECT_NIL) {
@@ -195,11 +198,12 @@ CORBA_Object xFarDicTexttoSpeech::select_server(CORBA_Environment *ev, bool debu
              return CORBA_OBJECT_NIL;
       }
 
-     if (servers->_length > 0) 
+     if (servers->_length > 0){
           if(debug){
               fprintf(stderr,"Detected servers:\n");
           }
-          int Festival = -1,Espeak = -1;
+          Festival = -1,Espeak = -1;
+     }
 
      for (i = 0; i < servers->_length; i++){
                 info = &servers->_buffer[i];
@@ -231,20 +235,20 @@ CORBA_Object xFarDicTexttoSpeech::select_server(CORBA_Environment *ev, bool debu
           return CORBA_OBJECT_NIL;
      }
       
-      if(debug){
-           fprintf (stderr, "Attempting to activate %s.\n", info->iid);
-      }
+     if(debug){
+          fprintf (stderr, "Attempting to activate %s.\n", info->iid);
+     }
 
-      rv = bonobo_activation_activate_from_id ((const Bonobo_ActivationID) info->iid, 0, NULL, ev);
+     rv = bonobo_activation_activate_from_id ((const Bonobo_ActivationID) info->iid, 0, NULL, ev);
 
-      if (BONOBO_EX (ev)) {
-          if(debug){
-             fprintf (stderr, "Error activating service\n.");
-          }
-          return CORBA_OBJECT_NIL;
-      }
+     if (BONOBO_EX (ev)) {
+         if(debug){
+            fprintf (stderr, "Error activating service\n.");
+         }
+         return CORBA_OBJECT_NIL;
+     }
 
-      CORBA_free (servers);
-      return rv;
+     CORBA_free (servers);
+     return rv;
 }
 

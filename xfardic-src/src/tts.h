@@ -37,6 +37,9 @@ public:
         xFarDicTexttoSpeech(bool debug);
         int say(const char *, ...);        
 private:
+        int Festival,
+            Espeak;
+
         CORBA_Object co;
         CORBA_Environment cev;
         CORBA_string driver_name, driver_version;
