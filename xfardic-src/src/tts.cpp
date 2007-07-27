@@ -162,7 +162,10 @@ int xFarDicTexttoSpeech::say(const char *format, ...) {
      CORBA_exception_init (&cev);
 
      str = g_strdup_vprintf (format, args);
-     fprintf (stderr, "%s\n", str);
+
+     // DEBUGGING
+     // fprintf (stderr, "Saying %s\n", str);
+
      GNOME_Speech_Speaker_say (speaker, str, &cev);
      
      // DEBUGGING
