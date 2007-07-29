@@ -118,6 +118,9 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     m_text =  (wxComboBox *)NULL;
     n = NULL;    
 
+    // First initialize Espeak engine
+    espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL);
+
     // Starting main timer 
     m_timer.Start(500);       
 
@@ -313,7 +316,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     } 
 
     wxString fontface = pConfig->Read(_T("Font-Face"));        
-    int fontsize = pConfig->Read(_T("Font-Size"), 12);
+    int fontsize = pConfig->Read(_T("Font-Size"), 10);
     //fprintf(stderr, "font-size:%d\n",fontsize);
     int fontstyle = pConfig->Read(_T("Font-Style"), 90);
     //fprintf(stderr, "font-style:%d\n",fontstyle);
@@ -344,19 +347,6 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         } // End For
    
 	splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
-
-        // creating tts, call + true -> enables debug messages
-	tts = new xFarDicTexttoSpeech(true);
-
-        // is tts OK?
-        if(!tts->init){
-            ttsinit = false;
-        }else{
-            ttsinit = true;
-        }
-
-        // DEBUGGING
-        //fprintf(stderr, "TTS:%d\n", tts->init);
 
         if (seppos.GetCount()>0) {    
             for (int x=0; x <= seppos.GetCount(); x++) {
@@ -451,7 +441,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
                        tmpfname = tmpstr;
                        tmpfname.Replace(wxT("/usr/share/xfardic-xdb/"), _T(""));
                 //DEBUGGING
-                    //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
+                //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
                 if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
                     if (tmpstr.Len() > 0) {    
@@ -631,7 +621,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     } 
      
     pConfig->SetPath(wxT("/"));
-
+    
     //Init swap
     initSwap();
 
@@ -1210,11 +1200,11 @@ void xFarDicApp::RecreateTrToolbar()
     m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(50,34));
     m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(50,34));
 
-    if(!ttsinit){
+    /*if(!ttsinit){
         m_ttos->Enable(false);
     }else{
         m_ttos->Enable(true);
-    }
+    }*/
 
     //Set Default button
     m_translate->SetDefault();   
@@ -2195,10 +2185,8 @@ bool xFarDicApp::initSwap()
 
     swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
 
-    if (!swapfile.Exists(swappath)) {
-        if (swap) {
+    if (!swapfile.Exists(swappath) && swap) {
             update = TRUE;
-        }
     }   
 
     returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);
@@ -2387,8 +2375,16 @@ void xFarDicApp::CreateLayout() {
      topSizer->SetSizeHints(this);
 }
 
-void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {
-     tts->say(m_text->GetValue().mb_str(wxConvUTF8));
+void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {     
+    // Espeak playback implementation
+    int synth_flags = espeakCHARS_AUTO | espeakPHONEMES | espeakENDPAUSE;
+    int size;
+
+    size = strlen(m_text->GetValue().mb_str(wxConvUTF8));
+
+    espeak_Synth(m_text->GetValue().mb_str(wxConvUTF8),size+1,0,POS_CHARACTER,0,synth_flags,NULL,NULL);
+    espeak_Synchronize();
+    return;
 }
 
 

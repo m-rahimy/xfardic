@@ -32,7 +32,6 @@
 #include "settings.h"
 #include "selection.h"
 #include "leitner.h"
-#include "tts.h"
 
 /// xFarDic Application Main Class
 class xFarDicApp : public wxFrame
@@ -158,7 +157,6 @@ public:
 private:
      void CreateLayout();
      wxBitmapButton *m_ttos;
-     xFarDicTexttoSpeech *tts;
 
 private:
     wxTextCtrl       *m_label;
@@ -180,8 +178,7 @@ private:
             aspelli,
             swap,
             swapupdate,
-            update,
-            ttsinit;
+            update;
     size_t  m_rows;
     wxMenu  *gomenu,
             *opmenu,

@@ -76,12 +76,7 @@ using namespace std;
 #include <gtk/gtk.h>
 #include <cstring>
 #include "sqlite3.h"
-
-#include <glib/gmain.h>
-#include <bonobo/bonobo-types.h>
-#include <bonobo/bonobo-main.h>
-#include <bonobo/bonobo-exception.h>
-#include <gnome-speech/gnome-speech.h>
+#include "speak_lib.h"
 
 #include "constants.h"
 
