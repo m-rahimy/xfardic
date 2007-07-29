@@ -63,21 +63,20 @@ else
     echo "checking for libnotify.h...yes"
 fi
 
-LIBGNOMESPEECH_INCLUDEDIR=""
+LIBESPEAK_INCLUDEDIR=""
 for d in 			\
-    /opt/gnome/include/gnome-speech-1.0/gnome-speech\
-    /usr/include/gnome-speech-1.0/gnome-speech\
-    $prefix/include/gnome-speech-1.0/gnome-speech
+    /usr/include/espeak\
+    $prefix/include/espeak
 do
-    if test -f "$d/gnome-speech.h" ; then
-	LIBGNOMESPEECH_INCLUDEDIR="$d"
+    if test -f "$d/speak_lib.h" ; then
+	LIBESPEAK_INCLUDEDIR="$d"
 	break
     fi
 done
-if test "x$LIBGNOMESPEECH_INCLUDEDIR" = "x"; then
-    AC_MSG_ERROR([You should have libgnome-speech header files! Install libgnome-speech-dev])
+if test "x$LIBESPEAK_INCLUDEDIR" = "x"; then
+    AC_MSG_ERROR([You should have Espeak header files! Install libespeak-dev])
 else
-    echo "checking for gnome-speech.h...yes"
+    echo "checking for speak_lib.h...yes"
 fi
 
 LIBSQLITE3_INCLUDEDIR=""
