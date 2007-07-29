@@ -65,7 +65,7 @@ public:
     void OnTranslate(wxCommandEvent& event); 
     /// Leitner button Event handler
     void OnLeitnerBox(wxCommandEvent& event);
-    /// Text to Speech button   Event handler
+    /// Text to Speech button Event handler
     void OnTexttoSpeech(wxCommandEvent &event);
     /// Selecting "Select" option 
     void OnSelect(wxCommandEvent& event); 
@@ -149,6 +149,8 @@ public:
     void LoadLeitnerBox();
     /// Updates ltbox contents from config file
     void LoadLeitnerBoxContents();
+    /// Speaks input box value
+    void Speak();
 
     wxLocale& m_locale;
     bool   hide;
@@ -172,6 +174,7 @@ private:
             spell,
             watcher,
             scanner,
+            speak,
             vtool,    
             found,
             revsrch,

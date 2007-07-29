@@ -41,8 +41,9 @@ BEGIN_EVENT_TABLE(xFarDicSettings, wxFrame)
     EVT_CHECKBOX(ID_CHK_SRCHSIM, xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_SPELL, xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_SWAP, xFarDicSettings::EnableApply)
+    EVT_CHECKBOX(ID_CHK_SPEAK, xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_WATCHER, xFarDicSettings::EnableApply)
-    EVT_CHECKBOX(ID_CHK_SCANNER,  xFarDicSettings::EnableApply)
+    EVT_CHECKBOX(ID_CHK_SCANNER,  xFarDicSettings::EnableScanner)
     EVT_CHECKBOX(ID_CHK_HIDE,  xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_REVSRCH,  xFarDicSettings::EnableApply)
     EVT_SPINCTRL(ID_SPIN_TIMEOUT,  xFarDicSettings::EnableSpApply)
@@ -120,6 +121,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     chk_srchsim   = new wxCheckBox(setpanel, ID_CHK_SRCHSIM,   _("Return Si&milar Words"));
     chk_spell  = new wxCheckBox(setpanel, ID_CHK_SPELL,  _("Enable S&pell Checker"));
     chk_swap  = new wxCheckBox(setpanel, ID_CHK_SWAP,  _("Enable S&wap file"));
+    chk_speak  = new wxCheckBox(setpanel, ID_CHK_SPEAK,  _("Spea&k With Clipboard Scanner"));
 
     m_ok = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition,wxSize(80,36));
     m_apply = new wxButton(this, wxID_APPLY, _("&Apply"), wxDefaultPosition,wxSize(80,36));
@@ -170,11 +172,18 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
       chk_watcher->SetValue(FALSE);
     }
 
+    if ( pConfig->Read(_T("Speak"), 0l) != 0 ) {
+      chk_speak->SetValue(TRUE);
+    } else {
+      chk_speak->SetValue(FALSE);
+    }    
+
     if ( pConfig->Read(_T("Scanner"), 1) != 0 ) {
       chk_scanner->SetValue(TRUE);
     } else {
       chk_scanner->SetValue(FALSE);
-    }
+      chk_speak->Enable(FALSE);
+    }    
 
     if ( pConfig->Read(_T("Win-Pos"), 1) != 0 ) {
       chk_winpos->SetValue(TRUE);
@@ -377,6 +386,12 @@ void xFarDicSettings::SubmitChanges()
         pConfig->Write(wxT("/Options/Scanner"), 0);
     }
 
+    if (chk_speak->GetValue()) {
+        pConfig->Write(wxT("/Options/Speak"), 1);
+    } else {
+        pConfig->Write(wxT("/Options/Speak"), 0);
+    }
+
     if (chk_hide->GetValue()) {
         pConfig->Write(wxT("/Options/Hide"), 1);
     } else {
@@ -476,6 +491,17 @@ void xFarDicSettings::OnSetDB(wxCommandEvent& WXUNUSED(event))
 void xFarDicSettings::EnableApply(wxCommandEvent& WXUNUSED(event))
 {
     m_apply->Enable(TRUE);
+}
+
+void xFarDicSettings::EnableScanner(wxCommandEvent& WXUNUSED(event))
+{
+    m_apply->Enable(TRUE);
+   
+    if (chk_scanner->GetValue()) {
+        chk_speak->Enable(TRUE);
+    }else{
+        chk_speak->Enable(FALSE);
+    }
 }
 
 void xFarDicSettings::OnPathUpdate(wxCommandEvent& WXUNUSED(event))
@@ -617,6 +643,7 @@ void xFarDicSettings::CreateLayout() {
 	setpanelSizer->Add(chk_spell , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 	setpanelSizer->Add(chk_cache , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 	setpanelSizer->Add(chk_swap , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	setpanelSizer->Add(chk_speak , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
 	wxBoxSizer *dbpanelSizer = new wxBoxSizer(wxHORIZONTAL);
 	wxBoxSizer *dbpanelrightSizer = new wxBoxSizer(wxVERTICAL);

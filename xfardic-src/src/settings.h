@@ -58,6 +58,8 @@ public:
     void EnableSpApply(wxSpinEvent& event); 
     /// Enables Apply button
     void EnableApply(wxCommandEvent& event);
+    /// Enables Apply & Speak button
+    void EnableScanner(wxCommandEvent& event);
     /// Process path update event
     void OnPathUpdate(wxCommandEvent& event);  
     /// Checks XML DB validation
@@ -106,7 +108,8 @@ private:
                 *chk_hide,
                 *chk_revsrch,
                 *chk_scanner,
-                *chk_swap;
+                *chk_swap,
+                *chk_speak;
 
     wxChoice      *lang;
     wxArrayString langlist;

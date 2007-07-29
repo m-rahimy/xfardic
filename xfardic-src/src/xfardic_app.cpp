@@ -556,8 +556,14 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         watcher = false;
     }   
 
+    if ( pConfig->Read(wxT("Speak"), 0l) != 0 ) {
+        speak = true;      
+    } else {
+        speak = false;
+    }   
+
     if ( pConfig->Read(wxT("Scanner"), 1) != 0 ) {
-        scanner = true;      
+        scanner = true;     
         opmenu->Check( xFarDic_Scanner, TRUE );
     
         // Initiating word scanning system
@@ -565,6 +571,9 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         oSelection.start();    
     } else {
         scanner = false;
+
+        // Speak if scanner is enabled
+        speak = false;
     }   
 
     if ( pConfig->Read(wxT("Hide"), 0l) != 0 ) {
@@ -864,6 +873,9 @@ void xFarDicApp::OnScanner(wxCommandEvent& WXUNUSED(event))
     
     if ( scanner == true ) {
         scanner = false;
+
+        //Speak if scanner is enabled
+        speak = false;
         opmenu->Check( xFarDic_Scanner, FALSE );
         pConfig->Write(wxT("/Options/Scanner"), 0);
     } else {
@@ -1645,7 +1657,10 @@ void xFarDicApp::DoQuit()
         pConfig->Write(wxT("/Options/y"), 0);      
     }
     
-    oSelection.End();
+    //Stop selection system
+    oSelection.End();   
+
+    //Destroy xFarDic
     Destroy();
 }
 
@@ -1863,6 +1878,9 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning)
             // DEBUGGING
             // fprintf(stderr, "failed to send notification\n");
             return 1;
+        }
+        if(speak){
+            Speak();
         }
     }
 
@@ -2370,6 +2388,10 @@ void xFarDicApp::CreateLayout() {
 }
 
 void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {     
+    Speak();
+}
+
+void xFarDicApp::Speak() {
     // Espeak playback implementation
     int synth_flags = espeakCHARS_AUTO | espeakPHONEMES | espeakENDPAUSE;
     int size;
@@ -2378,7 +2400,8 @@ void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {
 
     espeak_Synth(m_text->GetValue().mb_str(wxConvUTF8),size+1,0,POS_CHARACTER,0,synth_flags,NULL,NULL);
     espeak_Synchronize();
+
+    espeak_Cancel();
     return;
 }
-
 
