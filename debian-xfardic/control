@@ -8,7 +8,7 @@ Standards-Version: 3.7.2
 
 Package: xfardic
 Architecture: any
-Depends: ${shlibs:Depends}, aspell-en, xfardic-xdb, notification-daemon, festival-voice
+Depends: ${shlibs:Depends}, aspell-en, xfardic-xdb, notification-daemon, festvox-kallpc16k | festival-voice
 Description: Multilingual Dictionary Engine
  xFarDic is a Multilingual dictionary engine based on wxGTK, 
  libxml2 and GTK2 with several XDB word databases.
