@@ -337,9 +337,13 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     // First initialize Espeak engine
     espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL);
 
-    espeak_SetParameter(espeakRATE, 115,0);
+    espeak_SetParameter(espeakRATE, 125,0);
     espeak_SetParameter(espeakVOLUME, 150,0);
     espeak_SetParameter(espeakPITCH, 55,0);
+
+    // American English
+    wxString voiceName=wxT("us-mbrola-3");
+    espeak_SetVoiceByName((const char *)voiceName.mb_str(wxConvUTF8));
  
     // if there are defined xdbs     
     if (path.Len() > 0) {
@@ -640,11 +644,6 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
     //Init layout
     CreateLayout();
-}
-
-xFarDicApp::~xFarDicApp()
-{       
-    Destroy();
 }
 
 void xFarDicApp::OnFocus(wxFocusEvent& event)
