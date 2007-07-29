@@ -63,6 +63,23 @@ else
     echo "checking for libnotify.h...yes"
 fi
 
+LIBGNOMESPEECH_INCLUDEDIR=""
+for d in 			\
+    /opt/gnome/include/gnome-speech-1.0/gnome-speech\
+    /usr/include/gnome-speech-1.0/gnome-speech\
+    $prefix/include/gnome-speech-1.0/gnome-speech
+do
+    if test -f "$d/gnome-speech.h" ; then
+	LIBGNOMESPEECH_INCLUDEDIR="$d"
+	break
+    fi
+done
+if test "x$LIBGNOMESPEECH_INCLUDEDIR" = "x"; then
+    AC_MSG_ERROR([You should have libgnome-speech header files! Install libgnome-speech-dev])
+else
+    echo "checking for gnome-speech.h...yes"
+fi
+
 LIBSQLITE3_INCLUDEDIR=""
 for d in 			\
     /usr/include\
