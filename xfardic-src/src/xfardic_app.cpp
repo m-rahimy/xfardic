@@ -118,9 +118,6 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     m_text =  (wxComboBox *)NULL;
     n = NULL;    
 
-    // First initialize Espeak engine
-    espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL);
-
     // Starting main timer 
     m_timer.Start(500);       
 
@@ -336,6 +333,13 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
     path = path.Trim(TRUE);
     path = path.Trim(FALSE);
+
+    // First initialize Espeak engine
+    espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL);
+
+    espeak_SetParameter(espeakRATE, 115,0);
+    espeak_SetParameter(espeakVOLUME, 150,0);
+    espeak_SetParameter(espeakPITCH, 55,0);
  
     // if there are defined xdbs     
     if (path.Len() > 0) {
@@ -347,7 +351,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         } // End For
    
 	splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
-
+         
         if (seppos.GetCount()>0) {    
             for (int x=0; x <= seppos.GetCount(); x++) {
                 if (x == 0) {
