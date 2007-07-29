@@ -1200,12 +1200,6 @@ void xFarDicApp::RecreateTrToolbar()
     m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(50,34));
     m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(50,34));
 
-    /*if(!ttsinit){
-        m_ttos->Enable(false);
-    }else{
-        m_ttos->Enable(true);
-    }*/
-
     //Set Default button
     m_translate->SetDefault();   
 }
