@@ -134,9 +134,7 @@ public:
     /// Init swap file
     bool initSwap();
     /// Update swap file
-    bool UpdateSwap();    
-    /// destructor     
-    ~xFarDicApp();  
+    bool UpdateSwap();      
     /// Create toolbar function
     void RecreateToolbar(bool activate=TRUE); 
     /// Create translation toolbar function
@@ -175,6 +173,7 @@ private:
             watcher,
             scanner,
             speak,
+            tts,
             vtool,    
             found,
             revsrch,

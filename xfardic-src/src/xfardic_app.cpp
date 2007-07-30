@@ -335,15 +335,18 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     path = path.Trim(FALSE);
 
     // First initialize Espeak engine
-    espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL);
+    tts = pConfig->Read(_T("TTS"), 0l);
+    if(tts){ 
+        espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL);
 
-    espeak_SetParameter(espeakRATE, 125,0);
-    espeak_SetParameter(espeakVOLUME, 150,0);
-    espeak_SetParameter(espeakPITCH, 55,0);
+        espeak_SetParameter(espeakRATE, 125,0);
+        espeak_SetParameter(espeakVOLUME, 150,0);
+        espeak_SetParameter(espeakPITCH, 55,0);
 
-    // American English
-    wxString voiceName=wxT("us-mbrola-3");
-    espeak_SetVoiceByName((const char *)voiceName.mb_str(wxConvUTF8));
+        // American English
+        wxString voiceName=wxT("us-mbrola-3");
+        espeak_SetVoiceByName((const char *)voiceName.mb_str(wxConvUTF8));
+    }
  
     // if there are defined xdbs     
     if (path.Len() > 0) {
@@ -1215,6 +1218,10 @@ void xFarDicApp::RecreateTrToolbar()
     m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(50,34));
     m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(50,34));
 
+    if(!tts){
+       m_ttos->Enable(FALSE);
+    }
+
     //Set Default button
     m_translate->SetDefault();   
 }
@@ -1609,7 +1616,7 @@ void xFarDicApp::OnQuit(wxCommandEvent& WXUNUSED(event))
 }
 
 void xFarDicApp::DoQuit()
-{
+{    
     // TRUE is to force the frame to close
     wxConfigBase *pConfig = wxConfigBase::Get();
     pConfig->SetPath(wxT("/"));
@@ -1658,10 +1665,16 @@ void xFarDicApp::DoQuit()
         pConfig->Write(wxT("/Options/Win-Pos"), 0);
         pConfig->Write(wxT("/Options/x"), 0);
         pConfig->Write(wxT("/Options/y"), 0);      
+    }    
+
+    //Kill Espeak
+    if(tts){
+      espeak_Cancel();
+      espeak_Terminate();
     }
     
     //Stop selection system
-    oSelection.End();   
+    oSelection.End();       
 
     //Destroy xFarDic
     Destroy();
@@ -2395,16 +2408,18 @@ void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {
 }
 
 void xFarDicApp::Speak() {
-    // Espeak playback implementation
-    int synth_flags = espeakCHARS_AUTO | espeakPHONEMES | espeakENDPAUSE;
-    int size;
+    if(tts){
+        // Espeak playback implementation
+        int synth_flags = espeakCHARS_AUTO | espeakPHONEMES | espeakENDPAUSE;
+        int size;
 
-    size = strlen(m_text->GetValue().mb_str(wxConvUTF8));
+        size = strlen(m_text->GetValue().mb_str(wxConvUTF8));
 
-    espeak_Synth(m_text->GetValue().mb_str(wxConvUTF8),size+1,0,POS_CHARACTER,0,synth_flags,NULL,NULL);
-    espeak_Synchronize();
+        espeak_Synth(m_text->GetValue().mb_str(wxConvUTF8),size+1,0,POS_CHARACTER,0,synth_flags,NULL,NULL);
+        espeak_Synchronize();
 
-    espeak_Cancel();
+        espeak_Cancel();
+    }
     return;
 }
 

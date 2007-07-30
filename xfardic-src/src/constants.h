@@ -153,6 +153,7 @@ const int  ID_BTN_CONFIRM      = 168;
 const int  ID_CHK_SWAP         = 169;
 const int  ID_BUTTON_TTOS      = 170;
 const int  ID_CHK_SPEAK        = 171;
+const int  ID_CHK_TTS          = 172;
 
 #endif
 
