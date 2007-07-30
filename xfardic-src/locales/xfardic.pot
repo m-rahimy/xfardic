@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-29 15:41+0330\n"
+"POT-Creation-Date: 2007-07-30 09:06+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,7 +70,7 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#: ../src/leitner.cpp:96 ../src/settings.cpp:126
+#: ../src/leitner.cpp:96 ../src/settings.cpp:128
 msgid "&OK"
 msgstr ""
 
@@ -140,525 +140,529 @@ msgstr ""
 msgid "Box E is full.\n"
 msgstr ""
 
-#: ../src/settings.cpp:82
+#: ../src/settings.cpp:83
 msgid ""
 "Here you can configure your desired options. Changes will take effect after "
 "xFarDic restart."
 msgstr ""
 
-#: ../src/settings.cpp:93
+#: ../src/settings.cpp:94
 msgid "Persian"
 msgstr ""
 
-#: ../src/settings.cpp:94
+#: ../src/settings.cpp:95
 msgid "English (U.S)"
 msgstr ""
 
-#: ../src/settings.cpp:95
+#: ../src/settings.cpp:96
 msgid "System default"
 msgstr ""
 
-#: ../src/settings.cpp:99
+#: ../src/settings.cpp:100
 msgid "Choose default &language:"
 msgstr ""
 
-#: ../src/settings.cpp:102
+#: ../src/settings.cpp:103
 msgid "Number of Entries in History Box:"
 msgstr ""
 
-#: ../src/settings.cpp:106
+#: ../src/settings.cpp:107
 msgid "Scan window timeout (Sec):"
 msgstr ""
 
-#: ../src/settings.cpp:110
+#: ../src/settings.cpp:111
 msgid "Leitner box base capacity:"
 msgstr ""
 
-#: ../src/settings.cpp:114
+#: ../src/settings.cpp:115
 msgid "Enable Auto &Select Word After Translation"
 msgstr ""
 
-#: ../src/settings.cpp:115
+#: ../src/settings.cpp:116
 msgid "&Hide On Window Minimize and close"
 msgstr ""
 
-#: ../src/settings.cpp:116
+#: ../src/settings.cpp:117
 msgid "Enable Inexact &Reverse Searching"
 msgstr ""
 
-#: ../src/settings.cpp:117
+#: ../src/settings.cpp:118
 msgid "Save Program Window P&ositions"
 msgstr ""
 
-#: ../src/settings.cpp:118
+#: ../src/settings.cpp:119
 msgid "Save Wor&d Cache On Exit"
 msgstr ""
 
-#: ../src/settings.cpp:119
+#: ../src/settings.cpp:120
 msgid "Enable Clipboard &Watcher"
 msgstr ""
 
-#: ../src/settings.cpp:120
+#: ../src/settings.cpp:121
 msgid "Enable Clipboard Sca&nner"
 msgstr ""
 
-#: ../src/settings.cpp:121
-msgid "Return Si&milar Words"
-msgstr ""
-
 #: ../src/settings.cpp:122
-msgid "Enable S&pell Checker"
-msgstr ""
-
-#: ../src/settings.cpp:123
-msgid "Enable S&wap file"
-msgstr ""
-
-#: ../src/settings.cpp:124
 msgid "Spea&k With Clipboard Scanner"
 msgstr ""
 
-#: ../src/settings.cpp:127
+#: ../src/settings.cpp:123
+msgid "Return Si&milar Words"
+msgstr ""
+
+#: ../src/settings.cpp:124
+msgid "Enable S&pell Checker"
+msgstr ""
+
+#: ../src/settings.cpp:125
+msgid "Enable S&wap file"
+msgstr ""
+
+#: ../src/settings.cpp:126
+msgid "Enable Text to Speech En&gine"
+msgstr ""
+
+#: ../src/settings.cpp:129
 msgid "&Apply"
 msgstr ""
 
-#: ../src/settings.cpp:128
+#: ../src/settings.cpp:130
 msgid "&Cancel"
 msgstr ""
 
-#: ../src/settings.cpp:269
+#: ../src/settings.cpp:280
 msgid "XML DB Path:"
 msgstr ""
 
-#: ../src/settings.cpp:273
+#: ../src/settings.cpp:284
 msgid "Add"
 msgstr ""
 
-#: ../src/settings.cpp:274
+#: ../src/settings.cpp:285
 msgid "DB info"
 msgstr ""
 
-#: ../src/settings.cpp:278
+#: ../src/settings.cpp:289
 msgid "Ctrl+Click to enable or disable available database(s)."
 msgstr ""
 
-#: ../src/settings.cpp:282
+#: ../src/settings.cpp:293
 msgid "Enabling swap reduces memory usage by 55% and performance by 15%."
 msgstr ""
 
-#: ../src/settings.cpp:294
+#: ../src/settings.cpp:305
 msgid "Options"
 msgstr ""
 
-#: ../src/settings.cpp:295
+#: ../src/settings.cpp:306
 msgid "Databases"
 msgstr ""
 
-#: ../src/settings.cpp:352
+#: ../src/settings.cpp:363
 msgid ""
 "XML DB path is empty.\n"
 "xFarDic will now work without a valid database."
 msgstr ""
 
-#: ../src/settings.cpp:353
+#: ../src/settings.cpp:364
 msgid "Warning"
 msgstr ""
 
-#: ../src/settings.cpp:465
+#: ../src/settings.cpp:482
 msgid "Choose a XML DataBase"
 msgstr ""
 
-#: ../src/settings.cpp:465
+#: ../src/settings.cpp:482
 msgid "XML DataBase files (*.xdb)|*.xdb"
 msgstr ""
 
-#: ../src/settings.cpp:544
+#: ../src/settings.cpp:576
 msgid "DB Name  : "
 msgstr ""
 
-#: ../src/settings.cpp:545
+#: ../src/settings.cpp:577
 msgid "DB Author : "
 msgstr ""
 
-#: ../src/settings.cpp:546
+#: ../src/settings.cpp:578
 msgid "DB Version: "
 msgstr ""
 
-#: ../src/settings.cpp:547
+#: ../src/settings.cpp:579
 msgid "Input Lang: "
 msgstr ""
 
-#: ../src/settings.cpp:549
+#: ../src/settings.cpp:581
 msgid "No information found."
 msgstr ""
 
-#: ../src/settings.cpp:553
+#: ../src/settings.cpp:585
 msgid "No information found or no databse is selected."
 msgstr ""
 
-#: ../src/settings.cpp:556
+#: ../src/settings.cpp:588
 msgid "XML Database information"
 msgstr ""
 
-#: ../src/settings.cpp:598
+#: ../src/settings.cpp:630
 msgid "Parse Error. Invalid Document.\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:173
+#: ../src/xfardic_app.cpp:170
 msgid "&About...\tF1"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:173
+#: ../src/xfardic_app.cpp:170
 msgid "Show about dialog"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:179
+#: ../src/xfardic_app.cpp:176
 msgid "Leitner box\tCtrl+B"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:179
+#: ../src/xfardic_app.cpp:176
 msgid "Show Leitner box"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:184
+#: ../src/xfardic_app.cpp:181
 msgid "View Toolbar\tCtrl-T"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:184
+#: ../src/xfardic_app.cpp:181
 msgid "Toggle toolbar On/Off"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:186
+#: ../src/xfardic_app.cpp:183
 msgid "Translate\tAlt-T"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:186
+#: ../src/xfardic_app.cpp:183
 msgid "Translate word"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:191 ../src/xfardic_app.cpp:1059
+#: ../src/xfardic_app.cpp:188 ../src/xfardic_app.cpp:1065
 msgid "&Quit\tCtrl+Q"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:191
+#: ../src/xfardic_app.cpp:188
 msgid "Quit this program"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:197
+#: ../src/xfardic_app.cpp:194
 msgid "For&ward\tAlt-W"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:197
+#: ../src/xfardic_app.cpp:194
 msgid "Next word"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:201
+#: ../src/xfardic_app.cpp:198
 msgid "&Back\tAlt-B"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:201
+#: ../src/xfardic_app.cpp:198
 msgid "Previous word"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:207
+#: ../src/xfardic_app.cpp:204
 msgid "Fi&rst Word\tAlt+R"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:207
+#: ../src/xfardic_app.cpp:204
 msgid "First word"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:211
+#: ../src/xfardic_app.cpp:208
 msgid "&Last Word\tAlt+L"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:211
+#: ../src/xfardic_app.cpp:208
 msgid "Last word"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:221
+#: ../src/xfardic_app.cpp:218
 msgid "Auto &Select\tAlt-S"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:221
+#: ../src/xfardic_app.cpp:218
 msgid "Auto select word"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:222
+#: ../src/xfardic_app.cpp:219
 msgid "Enable Clipboard &Watcher\tCtrl-W"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:222
+#: ../src/xfardic_app.cpp:219
 msgid "Enable clipboard watcher"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:223
+#: ../src/xfardic_app.cpp:220
 msgid "Enable Selection Sca&nner\tCtrl-N"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:223
+#: ../src/xfardic_app.cpp:220
 msgid "Enable selection scanner"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:224
+#: ../src/xfardic_app.cpp:221
 msgid "Return Similar Words\tCtrl-S"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:224 ../src/xfardic_app.cpp:1169
+#: ../src/xfardic_app.cpp:221 ../src/xfardic_app.cpp:1175
 msgid "Return similar words"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:225
+#: ../src/xfardic_app.cpp:222
 msgid "Enable &Hide On Minimize and Close\tCtrl-H"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:225
+#: ../src/xfardic_app.cpp:222
 msgid "Enable hide on minimize and close"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:226
+#: ../src/xfardic_app.cpp:223
 msgid "Enable S&pell Checking\tCtrl-P"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:226
+#: ../src/xfardic_app.cpp:223
 msgid "Enable spell checking"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:227
+#: ../src/xfardic_app.cpp:224
 msgid "Enable Inexact &Reverse Searching\tCtrl-R"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:227
+#: ../src/xfardic_app.cpp:224
 msgid "Enable inexact reverse searchning"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:231
+#: ../src/xfardic_app.cpp:228
 msgid "Set Result Box Font\tCtrl-F"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:231
+#: ../src/xfardic_app.cpp:228
 msgid "Set result box font"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:235
+#: ../src/xfardic_app.cpp:232
 msgid "Setti&ngs\tAlt-N"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:235
+#: ../src/xfardic_app.cpp:232
 msgid "Configure settings"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:241
+#: ../src/xfardic_app.cpp:238
 msgid "C&ut\tCtrl-X"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:241
+#: ../src/xfardic_app.cpp:238
 msgid "Cut input text"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:245
+#: ../src/xfardic_app.cpp:242
 msgid "&Copy\tCtrl-C"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:245
+#: ../src/xfardic_app.cpp:242
 msgid "Copy result to clipboard"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:249 ../src/xfardic_app.cpp:1041
+#: ../src/xfardic_app.cpp:246 ../src/xfardic_app.cpp:1047
 msgid "&Paste and Translate\tCtrl-V"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:249
+#: ../src/xfardic_app.cpp:246
 msgid "Paste from clipboard"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:254
+#: ../src/xfardic_app.cpp:251
 msgid "Clear History\tCtrl-D"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:254
+#: ../src/xfardic_app.cpp:251
 msgid "Clear history"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:261
+#: ../src/xfardic_app.cpp:258
 msgid "&File"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:262
+#: ../src/xfardic_app.cpp:259
 msgid "&Edit"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:263
+#: ../src/xfardic_app.cpp:260
 msgid "&View"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:264
+#: ../src/xfardic_app.cpp:261
 msgid "Nav&igate"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:265
+#: ../src/xfardic_app.cpp:262
 msgid "Too&ls"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:266
+#: ../src/xfardic_app.cpp:263
 msgid "&Options"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:267
+#: ../src/xfardic_app.cpp:264
 msgid "&Help"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:946
+#: ../src/xfardic_app.cpp:952
 msgid "Input text is too long.\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1045
+#: ../src/xfardic_app.cpp:1051
 msgid "Set Result Box Font\tCtrl+F"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1049
+#: ../src/xfardic_app.cpp:1055
 msgid "Open Setti&ngs\tAlt+N"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1054
+#: ../src/xfardic_app.cpp:1060
 msgid "&About xFarDic\tF1"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1157
+#: ../src/xfardic_app.cpp:1163
 msgid "Back"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1157
+#: ../src/xfardic_app.cpp:1163
 msgid "Previous Word"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1158
+#: ../src/xfardic_app.cpp:1164
 msgid "Fwd"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1158
+#: ../src/xfardic_app.cpp:1164
 msgid "Next Word"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1160
+#: ../src/xfardic_app.cpp:1166
 msgid "Cut"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1161
+#: ../src/xfardic_app.cpp:1167
 msgid "Copy"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1161
+#: ../src/xfardic_app.cpp:1167
 msgid "Copy Result"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1162
+#: ../src/xfardic_app.cpp:1168
 msgid "Paste"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1162
+#: ../src/xfardic_app.cpp:1168
 msgid "Paste and Translate"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1163
+#: ../src/xfardic_app.cpp:1169
 msgid "Trash"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1163
+#: ../src/xfardic_app.cpp:1169
 msgid "Clear History"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1166
+#: ../src/xfardic_app.cpp:1172
 msgid "Select"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1166
+#: ../src/xfardic_app.cpp:1172
 msgid "Auto Select Text"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1167
+#: ../src/xfardic_app.cpp:1173
 msgid "Spell"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1167
+#: ../src/xfardic_app.cpp:1173
 msgid "Spell Checking"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1168
+#: ../src/xfardic_app.cpp:1174
 msgid "Reverse Search"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1169
+#: ../src/xfardic_app.cpp:1175
 msgid "Similar"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1171
+#: ../src/xfardic_app.cpp:1177
 msgid "Settings"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1172
+#: ../src/xfardic_app.cpp:1178
 msgid "Quit"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1247
+#: ../src/xfardic_app.cpp:1257
 msgid "Please enter clause.\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1261 ../src/xfardic_app.cpp:1372
+#: ../src/xfardic_app.cpp:1271 ../src/xfardic_app.cpp:1382
 msgid "Please wait..."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1304 ../src/xfardic_app.cpp:1363
-#: ../src/xfardic_app.cpp:1416 ../src/xfardic_app.cpp:1465
+#: ../src/xfardic_app.cpp:1314 ../src/xfardic_app.cpp:1373
+#: ../src/xfardic_app.cpp:1426 ../src/xfardic_app.cpp:1475
 msgid "Phrase not found."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1515
+#: ../src/xfardic_app.cpp:1525
 msgid ""
 "xFarDic spell checker found error(s) on your typed word.\n"
 " Please choose correct word from list and then click OK."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1515
+#: ../src/xfardic_app.cpp:1525
 msgid "xFarDic Spell Checker"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1544
+#: ../src/xfardic_app.cpp:1554
 msgid "xFarDic Settings"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1567
+#: ../src/xfardic_app.cpp:1577
 msgid "About xFarDic"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1594
+#: ../src/xfardic_app.cpp:1604
 msgid "xFarDic - Leitner Box"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1761
+#: ../src/xfardic_app.cpp:1777
 msgid ""
 "It seems that Aspell is not installed.\n"
 "xFarDic will not work correctly."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1838
+#: ../src/xfardic_app.cpp:1854
 msgid ""
 "Parse Error. Invalid Document.\n"
 " It is possible that XML-DB is not installed.\n"
 " Set XML DB path in settings window."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:2163
+#: ../src/xfardic_app.cpp:2179
 msgid ""
 "Selected word already exists in the box\n"
 "or not found in the installed database(s).\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:2169
+#: ../src/xfardic_app.cpp:2185
 msgid "The leitner box is full.\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:2264
+#: ../src/xfardic_app.cpp:2280
 msgid ""
 "Creating the swap file. Please wait.\n"
 "This will take a while..."
