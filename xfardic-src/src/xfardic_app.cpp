@@ -336,7 +336,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
     // First initialize Espeak engine
     tts = pConfig->Read(_T("TTS"), 0l);
-    if(tts){ 
+    if (tts) { 
         espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL);
 
         espeak_SetParameter(espeakRATE, 125,0);
@@ -357,7 +357,8 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
             }
         } // End For
    
-	splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
+        splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 
+                                    wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
          
         if (seppos.GetCount()>0) {    
             for (int x=0; x <= seppos.GetCount(); x++) {
@@ -2384,9 +2385,9 @@ void xFarDicApp::CreateLayout() {
                     wxALL,
                     2);
      horizontalSizer->Add(m_ttos,
- 	   	    0,
- 	 	    wxALL,
- 		    2);
+                    0,
+                    wxALL,
+                    2);
      wxStaticBoxSizer *staticSizer = new wxStaticBoxSizer(m_resbox,wxVERTICAL);
      staticSizer->Add(m_label,
                1, //make vertically stretchable
@@ -2408,18 +2409,19 @@ void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {
 }
 
 void xFarDicApp::Speak() {
-    if(tts){
+    if (tts) {
         // Espeak playback implementation
         int synth_flags = espeakCHARS_AUTO | espeakPHONEMES | espeakENDPAUSE;
         int size;
 
         size = strlen(m_text->GetValue().mb_str(wxConvUTF8));
 
-        espeak_Synth(m_text->GetValue().mb_str(wxConvUTF8),size+1,0,POS_CHARACTER,0,synth_flags,NULL,NULL);
+        espeak_Synth(m_text->GetValue().mb_str(wxConvUTF8), size+1 ,0 ,POS_CHARACTER, 0, synth_flags, NULL, NULL);
         espeak_Synchronize();
 
         espeak_Cancel();
     }
+
     return;
 }
 
