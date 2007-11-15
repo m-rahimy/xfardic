@@ -51,6 +51,8 @@ extern bool showSettings;
 
 BEGIN_EVENT_TABLE(xFarDicApp, wxFrame)    
     EVT_MENU(xFarDic_Translate,  xFarDicApp::OnTranslate)
+    EVT_MENU(xFarDic_AddLeitner, xFarDicApp::OnLeitnerBox)
+    EVT_MENU(xFarDic_Pronounce,  xFarDicApp::OnTexttoSpeech)
     EVT_MENU(xFarDic_Quit,  xFarDicApp::OnQuit)
     EVT_MENU(xFarDic_About, xFarDicApp::OnAbout)
     EVT_MENU(xFarDic_Back, xFarDicApp::OnBack)
@@ -154,6 +156,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     wxBitmap  bleitner = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxSize(16,16));
     wxBitmap  bfirst = wxArtProvider::GetBitmap(wxT("gtk-goto-first"), client, wxSize(16,16));
     wxBitmap  blast = wxArtProvider::GetBitmap(wxT("gtk-goto-last"), client, wxSize(16,16));
+    wxBitmap  bttos = wxArtProvider::GetBitmap(wxT("sound"), client, wxSize(16,16));
     wxBitmap  bsplash(wxT("/usr/share/xfardic/pixmaps/splash.png"), wxBITMAP_TYPE_PNG);
 
     if (!bsplash.Ok()) {
@@ -183,6 +186,14 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     wxMenuItem *translate = new wxMenuItem(menuFile,xFarDic_Translate, _("Translate\tAlt-T"), _("Translate word"));
     translate->SetBitmap(btranslate16);
     menuFile->Append(translate);
+
+    wxMenuItem *addleitner = new wxMenuItem(menuFile,xFarDic_AddLeitner, _("Add to leitner box\tAlt-X"), _("Add word to the leitner box"));
+    addleitner->SetBitmap(bleitner);
+    menuFile->Append(addleitner);
+
+    wxMenuItem *pronounce = new wxMenuItem(menuFile,xFarDic_Pronounce, _("Pronounce\tAlt-P"), _("Add word to the leitner box"));
+    pronounce->SetBitmap(bttos);
+    menuFile->Append(pronounce);
     menuFile->AppendSeparator();
 
     wxMenuItem *quit = new wxMenuItem(menuFile,xFarDic_Quit, _("&Quit\tCtrl+Q"), _("Quit this program"));
@@ -255,7 +266,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
     // now append the freshly created menu to the menu bar...
     menuBar = new wxMenuBar();
-    menuBar->Append(menuFile, _("&File"));
+    menuBar->Append(menuFile, _("&Word"));
     menuBar->Append(edmenu, _("&Edit"));
     menuBar->Append(vimenu, _("&View"));
     menuBar->Append(gomenu, _("Nav&igate"));
@@ -337,7 +348,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     // First initialize Espeak engine
     tts = pConfig->Read(_T("TTS"), 0l);
     if (tts) { 
-        espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL);
+        espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL,0);
 
         espeak_SetParameter(espeakRATE, 125,0);
         espeak_SetParameter(espeakVOLUME, 150,0);
@@ -2162,6 +2173,11 @@ void xFarDicApp::LoadLeitnerBox()
 }
 
 void xFarDicApp::OnLeitnerBox(wxCommandEvent& event)
+{
+    AddToLeitnerBox();
+}
+
+void xFarDicApp::AddToLeitnerBox()
 {
     wxString tmpstr, att, msg;    
 

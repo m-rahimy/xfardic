@@ -31,7 +31,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-#define XVERSION  _T("0.9.99.2")
+#define XVERSION  _T("0.9.99.3")
 
 // IDs for the controls and the menu commands
 enum
@@ -62,6 +62,8 @@ enum
     xFarDic_RevSrch,
     xFarDic_ChangeTab,
     xFarDic_Leitner,
+    xFarDic_AddLeitner,
+    xFarDic_Pronounce,
 
     // it is important for the id corresponding to the "About" command to have
     // this standard value as otherwise it won't be handled properly under Mac

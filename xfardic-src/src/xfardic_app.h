@@ -149,6 +149,8 @@ public:
     void LoadLeitnerBoxContents();
     /// Speaks input box value
     void Speak();
+    /// Add word to the leitner box
+    void AddToLeitnerBox();
 
     wxLocale& m_locale;
     bool   hide;
