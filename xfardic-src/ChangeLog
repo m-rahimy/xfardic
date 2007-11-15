@@ -254,8 +254,9 @@ New splash screen with SVG version.
 Fixed crash on UpdateSwap().
 Several code clean-ups.
 //////////////////////////////////////////////////////////////////////////////////////
-0.10.0   -- 2007-08-XX
+0.10.0   -- 2007-11-XX
 Implemented dynamic sizers, Thanks Saeed Taghavi.
 Implemented TTS engine based on Espeak, Thanks Saeed Taghavi
 Several minor fixes and clean-ups.
+Added `Add to the leitner box` and `Pronounce` menu items and accelators
 
