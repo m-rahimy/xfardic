@@ -84,7 +84,14 @@ private:
               *boxc,
               *boxd,
               *boxe;
+
     wxStaticBox *m_ltbox;
+
+    wxString boxasize,
+             boxbsize,
+             boxcsize,
+             boxdsize,
+             boxesize;
 
     wxArrayString boxacontents,
                   boxbcontents,

@@ -114,6 +114,18 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     boxd = new wxListBox(bdpanel, ID_LTBOX_D, wxDefaultPosition, wxDefaultSize, boxdcontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
     boxe = new wxListBox(bepanel, ID_LTBOX_E, wxDefaultPosition, wxDefaultSize, boxecontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
 
+    boxasize = _("Word Count: ")+wxString::Format(wxT("%d"), boxa->GetCount())+wxT("/")+wxString::Format(wxT("%d"), bacap);
+    boxbsize = _("Word Count: ")+wxString::Format(wxT("%d"), boxb->GetCount())+wxT("/")+wxString::Format(wxT("%d"), bbcap);
+    boxcsize = _("Word Count: ")+wxString::Format(wxT("%d"), boxc->GetCount())+wxT("/")+wxString::Format(wxT("%d"), bccap);
+    boxdsize = _("Word Count: ")+wxString::Format(wxT("%d"), boxd->GetCount())+wxT("/")+wxString::Format(wxT("%d"), bdcap);
+    boxesize = _("Word Count: ")+wxString::Format(wxT("%d"), boxe->GetCount())+wxT("/")+wxString::Format(wxT("%d"), becap);
+    
+    boxatext = new wxStaticText(bapanel, -1, boxasize);
+    boxbtext = new wxStaticText(bbpanel, -1, boxbsize);
+    boxctext = new wxStaticText(bcpanel, -1, boxcsize);
+    boxdtext = new wxStaticText(bdpanel, -1, boxdsize);
+    boxetext = new wxStaticText(bepanel, -1, boxesize);
+
     // Icon
     wxBitmap  next = wxArtProvider::GetBitmap(wxART_GO_FORWARD, client, wxDefaultSize);
     wxBitmap  back = wxArtProvider::GetBitmap(wxART_GO_BACK, client, wxDefaultSize);
@@ -740,44 +752,49 @@ void xFarDicLeitner::CreateLayout() {
      topsizer->Add(layout, 1, wxALL|wxEXPAND, 5);
 
      wxBoxSizer *bapanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bapanelsizer->Add(boxa, 1, wxEXPAND|wxALL, 10);
+     bapanelsizer->Add(boxa, 1, wxEXPAND|wxALL, 6);
      wxBoxSizer *babuttonssizer = new wxBoxSizer(wxVERTICAL);
-     babuttonssizer->Add(m_anext ,1 ,wxEXPAND|wxALL ,5);
-     babuttonssizer->Add(m_remove ,1 ,wxEXPAND|wxALL ,5);
-     babuttonssizer->Add(m_atrans ,1 ,wxEXPAND|wxALL ,5);
-     bapanelsizer->Add(babuttonssizer, 0, wxEXPAND|wxALL, 10);
+     babuttonssizer->Add(boxatext, 1, wxTOP, 1);
+     babuttonssizer->Add(m_anext ,1 ,wxEXPAND|wxALL, 6);
+     babuttonssizer->Add(m_remove ,1 ,wxEXPAND|wxALL, 6);
+     babuttonssizer->Add(m_atrans ,1 ,wxEXPAND|wxALL, 6);
+     bapanelsizer->Add(babuttonssizer, 0, wxEXPAND|wxALL, 6);
 
      wxBoxSizer *bbpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bbpanelsizer->Add(boxb, 1, wxEXPAND|wxALL, 10);
+     bbpanelsizer->Add(boxb, 1, wxEXPAND|wxALL, 6);
      wxBoxSizer *bbbuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bbbuttonssizer->Add(m_bnext ,1 ,wxEXPAND|wxALL ,5);
-     bbbuttonssizer->Add(m_bback ,1 ,wxEXPAND|wxALL ,5);
-     bbbuttonssizer->Add(m_btrans ,1 ,wxEXPAND|wxALL ,5);
-     bbpanelsizer->Add(bbbuttonssizer, 0, wxEXPAND|wxALL, 10);
+     bbbuttonssizer->Add(boxbtext, 1, wxTOP, 1);
+     bbbuttonssizer->Add(m_bnext ,1 ,wxEXPAND|wxALL, 6);
+     bbbuttonssizer->Add(m_bback ,1 ,wxEXPAND|wxALL, 6);
+     bbbuttonssizer->Add(m_btrans ,1 ,wxEXPAND|wxALL, 6);
+     bbpanelsizer->Add(bbbuttonssizer, 0, wxEXPAND|wxALL, 6);
 
      wxBoxSizer *bcpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bcpanelsizer->Add(boxc, 1, wxEXPAND|wxALL, 10);
+     bcpanelsizer->Add(boxc, 1, wxEXPAND|wxALL, 6);
      wxBoxSizer *bcbuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bcbuttonssizer->Add(m_cnext ,1 ,wxEXPAND|wxALL ,5);
-     bcbuttonssizer->Add(m_cback ,1 ,wxEXPAND|wxALL ,5);
-     bcbuttonssizer->Add(m_ctrans ,1 ,wxEXPAND|wxALL ,5);
-     bcpanelsizer->Add(bcbuttonssizer, 0, wxEXPAND|wxALL, 10);
+     bcbuttonssizer->Add(boxctext, 1, wxTOP, 1);
+     bcbuttonssizer->Add(m_cnext ,1 ,wxEXPAND|wxALL, 6);
+     bcbuttonssizer->Add(m_cback ,1 ,wxEXPAND|wxALL, 6);
+     bcbuttonssizer->Add(m_ctrans ,1 ,wxEXPAND|wxALL, 6);
+     bcpanelsizer->Add(bcbuttonssizer, 0, wxEXPAND|wxALL, 6);
 
      wxBoxSizer *bdpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bdpanelsizer->Add(boxd, 1, wxEXPAND|wxALL, 10);
+     bdpanelsizer->Add(boxd, 1, wxEXPAND|wxALL, 6);
      wxBoxSizer *bdbuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bdbuttonssizer->Add(m_dnext ,1 ,wxEXPAND|wxALL ,5);
-     bdbuttonssizer->Add(m_dback ,1 ,wxEXPAND|wxALL ,5);
-     bdbuttonssizer->Add(m_dtrans ,1 ,wxEXPAND|wxALL ,5);
-     bdpanelsizer->Add(bdbuttonssizer, 0, wxEXPAND|wxALL, 10);
+     bdbuttonssizer->Add(boxdtext, 1, wxTOP, 1);
+     bdbuttonssizer->Add(m_dnext ,1 ,wxEXPAND|wxALL, 6);
+     bdbuttonssizer->Add(m_dback ,1 ,wxEXPAND|wxALL, 6);
+     bdbuttonssizer->Add(m_dtrans ,1 ,wxEXPAND|wxALL, 6);
+     bdpanelsizer->Add(bdbuttonssizer, 0, wxEXPAND|wxALL, 6);
 
      wxBoxSizer *bepanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bepanelsizer->Add(boxe, 1, wxEXPAND|wxALL, 10);
+     bepanelsizer->Add(boxe, 1, wxEXPAND|wxALL, 6);
      wxBoxSizer *bebuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bebuttonssizer->Add(m_eback ,1 ,wxEXPAND|wxALL ,5);
-     bebuttonssizer->Add(m_confirm ,1 ,wxEXPAND|wxALL ,5);
-     bebuttonssizer->Add(m_etrans ,1 ,wxEXPAND|wxALL ,5);
-     bepanelsizer->Add(bebuttonssizer, 0, wxEXPAND|wxALL, 10);
+     bebuttonssizer->Add(boxetext, 1, wxTOP, 1);
+     bebuttonssizer->Add(m_eback ,1 ,wxEXPAND|wxALL, 6);
+     bebuttonssizer->Add(m_confirm ,1 ,wxEXPAND|wxALL, 6);
+     bebuttonssizer->Add(m_etrans ,1 ,wxEXPAND|wxALL, 6);
+     bepanelsizer->Add(bebuttonssizer, 0, wxEXPAND|wxALL, 6);
 
      bapanel->SetAutoLayout( true );
      bapanel->SetSizer( bapanelsizer );
