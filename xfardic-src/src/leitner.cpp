@@ -108,11 +108,11 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     boxdcontents = LoadLeitnerBoxContents(wxT("LTBOX-D"));
     boxecontents = LoadLeitnerBoxContents(wxT("LTBOX-E"));
 
-    boxa = new wxListBox(bapanel, ID_LTBOX_A, wxDefaultPosition, wxDefaultSize, boxacontents, wxLB_SINGLE|wxLB_NEEDED_SB);
-    boxb = new wxListBox(bbpanel, ID_LTBOX_B, wxDefaultPosition, wxDefaultSize, boxbcontents, wxLB_SINGLE|wxLB_NEEDED_SB);
-    boxc = new wxListBox(bcpanel, ID_LTBOX_C, wxDefaultPosition, wxDefaultSize, boxccontents, wxLB_SINGLE|wxLB_NEEDED_SB);
-    boxd = new wxListBox(bdpanel, ID_LTBOX_D, wxDefaultPosition, wxDefaultSize, boxdcontents, wxLB_SINGLE|wxLB_NEEDED_SB);
-    boxe = new wxListBox(bepanel, ID_LTBOX_E, wxDefaultPosition, wxDefaultSize, boxecontents, wxLB_SINGLE|wxLB_NEEDED_SB);
+    boxa = new wxListBox(bapanel, ID_LTBOX_A, wxDefaultPosition, wxDefaultSize, boxacontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
+    boxb = new wxListBox(bbpanel, ID_LTBOX_B, wxDefaultPosition, wxDefaultSize, boxbcontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
+    boxc = new wxListBox(bcpanel, ID_LTBOX_C, wxDefaultPosition, wxDefaultSize, boxccontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
+    boxd = new wxListBox(bdpanel, ID_LTBOX_D, wxDefaultPosition, wxDefaultSize, boxdcontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
+    boxe = new wxListBox(bepanel, ID_LTBOX_E, wxDefaultPosition, wxDefaultSize, boxecontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
 
     // Icon
     wxBitmap  next = wxArtProvider::GetBitmap(wxART_GO_FORWARD, client, wxDefaultSize);
