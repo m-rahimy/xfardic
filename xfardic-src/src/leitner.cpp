@@ -108,11 +108,11 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     boxdcontents = LoadLeitnerBoxContents(wxT("LTBOX-D"));
     boxecontents = LoadLeitnerBoxContents(wxT("LTBOX-E"));
 
-    boxa = new wxListBox(bapanel, ID_LTBOX_A, wxDefaultPosition, wxDefaultSize, boxacontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
-    boxb = new wxListBox(bbpanel, ID_LTBOX_B, wxDefaultPosition, wxDefaultSize, boxbcontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
-    boxc = new wxListBox(bcpanel, ID_LTBOX_C, wxDefaultPosition, wxDefaultSize, boxccontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
-    boxd = new wxListBox(bdpanel, ID_LTBOX_D, wxDefaultPosition, wxDefaultSize, boxdcontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
-    boxe = new wxListBox(bepanel, ID_LTBOX_E, wxDefaultPosition, wxDefaultSize, boxecontents, wxLB_SINGLE|wxLB_NEEDED_SB|wxLB_SORT);
+    boxa = new wxListBox(bapanel, ID_LTBOX_A, wxDefaultPosition, wxDefaultSize, boxacontents, wxLB_SINGLE|wxLB_NEEDED_SB);
+    boxb = new wxListBox(bbpanel, ID_LTBOX_B, wxDefaultPosition, wxDefaultSize, boxbcontents, wxLB_SINGLE|wxLB_NEEDED_SB);
+    boxc = new wxListBox(bcpanel, ID_LTBOX_C, wxDefaultPosition, wxDefaultSize, boxccontents, wxLB_SINGLE|wxLB_NEEDED_SB);
+    boxd = new wxListBox(bdpanel, ID_LTBOX_D, wxDefaultPosition, wxDefaultSize, boxdcontents, wxLB_SINGLE|wxLB_NEEDED_SB);
+    boxe = new wxListBox(bepanel, ID_LTBOX_E, wxDefaultPosition, wxDefaultSize, boxecontents, wxLB_SINGLE|wxLB_NEEDED_SB);
 
     boxasize = _("Word Count: ")+wxString::Format(wxT("%d"), boxa->GetCount())+wxT("/")+wxString::Format(wxT("%d"), bacap);
     boxbsize = _("Word Count: ")+wxString::Format(wxT("%d"), boxb->GetCount())+wxT("/")+wxString::Format(wxT("%d"), bbcap);
@@ -237,15 +237,18 @@ wxArrayString xFarDicLeitner::LoadLeitnerBoxContents(wxString configpath)
 void xFarDicLeitner::OnTranslateA(wxCommandEvent& event)
 {
     wxArrayInt selection;
-    wxString tmpStr;
+    wxString tmpStr, msg;
     
     wxConfigBase *pConfig = wxConfigBase::Get();
 
     boxa->GetSelections(selection);
 
     if (selection.GetCount()>0) {
-        boxa->GetSelections(selection);
         tmpStr = boxa->GetString(selection[0]);
+    }else{
+        msg.Printf( _("Please select a word.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        return;
     }
 
     if (tmpStr.Len()>0) {                  
@@ -257,7 +260,7 @@ void xFarDicLeitner::OnTranslateA(wxCommandEvent& event)
 void xFarDicLeitner::OnTranslateB(wxCommandEvent& event)
 {
     wxArrayInt selection;
-    wxString tmpStr;
+    wxString tmpStr, msg;
     
     wxConfigBase *pConfig = wxConfigBase::Get();
 
@@ -265,6 +268,10 @@ void xFarDicLeitner::OnTranslateB(wxCommandEvent& event)
 
     if (selection.GetCount()>0) {
         tmpStr = boxb->GetString(selection[0]);
+    }else{
+        msg.Printf( _("Please select a word.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        return;
     }
 
     if (tmpStr.Len()>0) {                  
@@ -276,7 +283,7 @@ void xFarDicLeitner::OnTranslateB(wxCommandEvent& event)
 void xFarDicLeitner::OnTranslateC(wxCommandEvent& event)
 {
     wxArrayInt selection;
-    wxString tmpStr;
+    wxString tmpStr, msg;
     
     wxConfigBase *pConfig = wxConfigBase::Get();
 
@@ -284,6 +291,10 @@ void xFarDicLeitner::OnTranslateC(wxCommandEvent& event)
 
     if (selection.GetCount()>0) {
         tmpStr = boxc->GetString(selection[0]);
+    }else{
+        msg.Printf( _("Please select a word.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        return;
     }
 
     if (tmpStr.Len()>0) {                  
@@ -295,7 +306,7 @@ void xFarDicLeitner::OnTranslateC(wxCommandEvent& event)
 void xFarDicLeitner::OnTranslateD(wxCommandEvent& event)
 {
     wxArrayInt selection;
-    wxString tmpStr;
+    wxString tmpStr, msg;
     
     wxConfigBase *pConfig = wxConfigBase::Get();
 
@@ -303,6 +314,10 @@ void xFarDicLeitner::OnTranslateD(wxCommandEvent& event)
 
     if (selection.GetCount()>0) {
         tmpStr = boxd->GetString(selection[0]);
+    }else{
+        msg.Printf( _("Please select a word.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        return;
     }
 
     if (tmpStr.Len()>0) {                  
@@ -314,7 +329,7 @@ void xFarDicLeitner::OnTranslateD(wxCommandEvent& event)
 void xFarDicLeitner::OnTranslateE(wxCommandEvent& event)
 {
     wxArrayInt selection;
-    wxString tmpStr;
+    wxString tmpStr, msg;
     
     wxConfigBase *pConfig = wxConfigBase::Get();
 
@@ -322,6 +337,10 @@ void xFarDicLeitner::OnTranslateE(wxCommandEvent& event)
 
     if (selection.GetCount()>0) {
         tmpStr = boxe->GetString(selection[0]);
+    }else{
+        msg.Printf( _("Please select a word.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        return;
     }
 
     if (tmpStr.Len()>0) {                  
@@ -632,8 +651,16 @@ void xFarDicLeitner::OnBackE(wxCommandEvent& event)
     }
 }
 
-void xFarDicLeitner::UpdateBoxes()
+void xFarDicLeitner::UpdateBoxes(bool reload)
 {
+    if(reload){
+       boxacontents = LoadLeitnerBoxContents(wxT("LTBOX-A"));
+       boxbcontents = LoadLeitnerBoxContents(wxT("LTBOX-B"));
+       boxccontents = LoadLeitnerBoxContents(wxT("LTBOX-C"));
+       boxdcontents = LoadLeitnerBoxContents(wxT("LTBOX-D"));
+       boxecontents = LoadLeitnerBoxContents(wxT("LTBOX-E"));
+    }
+    
     // Update contents
     boxa->Set(boxacontents);
     boxb->Set(boxbcontents);
@@ -664,6 +691,19 @@ void xFarDicLeitner::UpdateBoxes()
     } else {
         m_anext->Enable(TRUE);
     }
+
+    // Update box counter labels
+    boxasize = _("Word Count: ")+wxString::Format(wxT("%d"), boxa->GetCount())+wxT("/")+wxString::Format(wxT("%d"), bacap);
+    boxbsize = _("Word Count: ")+wxString::Format(wxT("%d"), boxb->GetCount())+wxT("/")+wxString::Format(wxT("%d"), bbcap);
+    boxcsize = _("Word Count: ")+wxString::Format(wxT("%d"), boxc->GetCount())+wxT("/")+wxString::Format(wxT("%d"), bccap);
+    boxdsize = _("Word Count: ")+wxString::Format(wxT("%d"), boxd->GetCount())+wxT("/")+wxString::Format(wxT("%d"), bdcap);
+    boxesize = _("Word Count: ")+wxString::Format(wxT("%d"), boxe->GetCount())+wxT("/")+wxString::Format(wxT("%d"), becap);
+    
+    boxatext->SetLabel(boxasize);
+    boxbtext->SetLabel(boxbsize);
+    boxctext->SetLabel(boxcsize);
+    boxdtext->SetLabel(boxdsize);
+    boxetext->SetLabel(boxesize);
 }
 
 void xFarDicLeitner::SubmitChanges()
@@ -752,49 +792,49 @@ void xFarDicLeitner::CreateLayout() {
      topsizer->Add(layout, 1, wxALL|wxEXPAND, 5);
 
      wxBoxSizer *bapanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bapanelsizer->Add(boxa, 1, wxEXPAND|wxALL, 6);
+     bapanelsizer->Add(boxa, 1, wxEXPAND|wxALL, 5);
      wxBoxSizer *babuttonssizer = new wxBoxSizer(wxVERTICAL);
      babuttonssizer->Add(boxatext, 1, wxTOP, 1);
-     babuttonssizer->Add(m_anext ,1 ,wxEXPAND|wxALL, 6);
-     babuttonssizer->Add(m_remove ,1 ,wxEXPAND|wxALL, 6);
-     babuttonssizer->Add(m_atrans ,1 ,wxEXPAND|wxALL, 6);
-     bapanelsizer->Add(babuttonssizer, 0, wxEXPAND|wxALL, 6);
+     babuttonssizer->Add(m_anext ,1 ,wxEXPAND|wxALL, 5);
+     babuttonssizer->Add(m_remove ,1 ,wxEXPAND|wxALL, 5);
+     babuttonssizer->Add(m_atrans ,1 ,wxEXPAND|wxALL, 5);
+     bapanelsizer->Add(babuttonssizer, 0, wxEXPAND|wxALL, 5);
 
      wxBoxSizer *bbpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bbpanelsizer->Add(boxb, 1, wxEXPAND|wxALL, 6);
+     bbpanelsizer->Add(boxb, 1, wxEXPAND|wxALL, 5);
      wxBoxSizer *bbbuttonssizer = new wxBoxSizer(wxVERTICAL);
      bbbuttonssizer->Add(boxbtext, 1, wxTOP, 1);
-     bbbuttonssizer->Add(m_bnext ,1 ,wxEXPAND|wxALL, 6);
-     bbbuttonssizer->Add(m_bback ,1 ,wxEXPAND|wxALL, 6);
-     bbbuttonssizer->Add(m_btrans ,1 ,wxEXPAND|wxALL, 6);
-     bbpanelsizer->Add(bbbuttonssizer, 0, wxEXPAND|wxALL, 6);
+     bbbuttonssizer->Add(m_bnext ,1 ,wxEXPAND|wxALL, 5);
+     bbbuttonssizer->Add(m_bback ,1 ,wxEXPAND|wxALL, 5);
+     bbbuttonssizer->Add(m_btrans ,1 ,wxEXPAND|wxALL, 5);
+     bbpanelsizer->Add(bbbuttonssizer, 0, wxEXPAND|wxALL, 5);
 
      wxBoxSizer *bcpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bcpanelsizer->Add(boxc, 1, wxEXPAND|wxALL, 6);
+     bcpanelsizer->Add(boxc, 1, wxEXPAND|wxALL, 5);
      wxBoxSizer *bcbuttonssizer = new wxBoxSizer(wxVERTICAL);
      bcbuttonssizer->Add(boxctext, 1, wxTOP, 1);
-     bcbuttonssizer->Add(m_cnext ,1 ,wxEXPAND|wxALL, 6);
-     bcbuttonssizer->Add(m_cback ,1 ,wxEXPAND|wxALL, 6);
-     bcbuttonssizer->Add(m_ctrans ,1 ,wxEXPAND|wxALL, 6);
-     bcpanelsizer->Add(bcbuttonssizer, 0, wxEXPAND|wxALL, 6);
+     bcbuttonssizer->Add(m_cnext ,1 ,wxEXPAND|wxALL, 5);
+     bcbuttonssizer->Add(m_cback ,1 ,wxEXPAND|wxALL, 5);
+     bcbuttonssizer->Add(m_ctrans ,1 ,wxEXPAND|wxALL, 5);
+     bcpanelsizer->Add(bcbuttonssizer, 0, wxEXPAND|wxALL, 5);
 
      wxBoxSizer *bdpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bdpanelsizer->Add(boxd, 1, wxEXPAND|wxALL, 6);
+     bdpanelsizer->Add(boxd, 1, wxEXPAND|wxALL, 5);
      wxBoxSizer *bdbuttonssizer = new wxBoxSizer(wxVERTICAL);
      bdbuttonssizer->Add(boxdtext, 1, wxTOP, 1);
-     bdbuttonssizer->Add(m_dnext ,1 ,wxEXPAND|wxALL, 6);
-     bdbuttonssizer->Add(m_dback ,1 ,wxEXPAND|wxALL, 6);
-     bdbuttonssizer->Add(m_dtrans ,1 ,wxEXPAND|wxALL, 6);
-     bdpanelsizer->Add(bdbuttonssizer, 0, wxEXPAND|wxALL, 6);
+     bdbuttonssizer->Add(m_dnext ,1 ,wxEXPAND|wxALL, 5);
+     bdbuttonssizer->Add(m_dback ,1 ,wxEXPAND|wxALL, 5);
+     bdbuttonssizer->Add(m_dtrans ,1 ,wxEXPAND|wxALL, 5);
+     bdpanelsizer->Add(bdbuttonssizer, 0, wxEXPAND|wxALL, 5);
 
      wxBoxSizer *bepanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bepanelsizer->Add(boxe, 1, wxEXPAND|wxALL, 6);
+     bepanelsizer->Add(boxe, 1, wxEXPAND|wxALL, 5);
      wxBoxSizer *bebuttonssizer = new wxBoxSizer(wxVERTICAL);
      bebuttonssizer->Add(boxetext, 1, wxTOP, 1);
-     bebuttonssizer->Add(m_eback ,1 ,wxEXPAND|wxALL, 6);
-     bebuttonssizer->Add(m_confirm ,1 ,wxEXPAND|wxALL, 6);
-     bebuttonssizer->Add(m_etrans ,1 ,wxEXPAND|wxALL, 6);
-     bepanelsizer->Add(bebuttonssizer, 0, wxEXPAND|wxALL, 6);
+     bebuttonssizer->Add(m_eback ,1 ,wxEXPAND|wxALL, 5);
+     bebuttonssizer->Add(m_confirm ,1 ,wxEXPAND|wxALL, 5);
+     bebuttonssizer->Add(m_etrans ,1 ,wxEXPAND|wxALL, 5);
+     bepanelsizer->Add(bebuttonssizer, 0, wxEXPAND|wxALL, 5);
 
      bapanel->SetAutoLayout( true );
      bapanel->SetSizer( bapanelsizer );

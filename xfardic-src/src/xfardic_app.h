@@ -183,7 +183,9 @@ private:
             swap,
             swapupdate,
             update;
+
     size_t  m_rows;
+
     wxMenu  *gomenu,
             *opmenu,
             *vimenu,

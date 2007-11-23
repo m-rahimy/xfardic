@@ -68,7 +68,7 @@ public:
     /// Commit changes to the config file
     void SubmitChanges();
     /// Updates boxes
-    void UpdateBoxes(); 
+    void UpdateBoxes(bool reload = FALSE); 
     /// Leitner window constructor
     ~xFarDicLeitner(); 
 

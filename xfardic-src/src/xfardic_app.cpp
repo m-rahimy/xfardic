@@ -1605,11 +1605,7 @@ void xFarDicApp::ShowLeitner()
         int size_x, size_y;
         GetSize(&size_x, &size_y);
 
-        // About window size
-        int const x = 350;
-        int const y = 350;
-
-        // About window position
+        // window position
         int z = pos_x + (( size_x - pos_x) / 2 );
         int w = pos_y + (( size_y - pos_y) / 2 );
 
@@ -2218,6 +2214,10 @@ void xFarDicApp::AddToLeitnerBox()
         }
     }
     pConfig->Write(wxT("/Options/LTBOX-A"), tmpstr);
+
+    if(!showLeitner){
+         ltframe->UpdateBoxes(true);
+    }
 }
 
 bool xFarDicApp::initSwap()
