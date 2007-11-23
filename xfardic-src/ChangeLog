@@ -256,7 +256,9 @@ Several code clean-ups.
 //////////////////////////////////////////////////////////////////////////////////////
 0.10.0   -- 2007-11-XX
 Implemented dynamic sizers, Thanks Saeed Taghavi.
-Implemented TTS engine based on Espeak, Thanks Saeed Taghavi
+Implemented TTS engine based on Espeak, Thanks Saeed Taghavi.
 Several minor fixes and clean-ups.
-Added `Add to the leitner box` and `Pronounce` menu items and accelators
+Added `Add to the leitner box` and `Pronounce` menu items and accelators.
+Improved leitner box implementation.
+Several code clean-ups.
 
