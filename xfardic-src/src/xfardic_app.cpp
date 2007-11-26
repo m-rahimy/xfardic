@@ -239,11 +239,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     wxMenuItem *setfont = new wxMenuItem(opmenu,xFarDic_Setfont, _("Set Result Box Font\tCtrl-F"), _("Set result box font"));
     setfont->SetBitmap(bfont);
     opmenu->Append(setfont);
-
-    wxMenuItem *settings = new wxMenuItem(opmenu,xFarDic_Settings, _("Setti&ngs\tAlt-N"), _("Configure settings"));
-    settings->SetBitmap(bsettings16);
-    opmenu->Append(settings);
-         
+        
     edmenu = new wxMenu;
       
     wxMenuItem *cut = new wxMenuItem(edmenu,xFarDic_Cut, _("C&ut\tCtrl-X"), _("Cut input text"));
@@ -262,16 +258,22 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     wxMenuItem *trash = new wxMenuItem(edmenu,xFarDic_Trash, _("Clear History\tCtrl-D"), _("Clear history"));
     trash->SetBitmap(btrash16);
     edmenu->Append(trash);
-    
+    edmenu->AppendSeparator();
+
+    edmenu->Append(xFarDic_Options, _T("&Options"), opmenu);  
+
+    wxMenuItem *settings = new wxMenuItem(edmenu,xFarDic_Settings, _("Preferences\tAlt+P"), _("Configure settings"));
+    settings->SetBitmap(bsettings16);
+    edmenu->Append(settings);
+  
 
     // now append the freshly created menu to the menu bar...
     menuBar = new wxMenuBar();
-    menuBar->Append(menuFile, _("&Word"));
+    menuBar->Append(menuFile, _("&File"));
     menuBar->Append(edmenu, _("&Edit"));
     menuBar->Append(vimenu, _("&View"));
     menuBar->Append(gomenu, _("Nav&igate"));
     menuBar->Append(toolsMenu, _("Too&ls"));
-    menuBar->Append(opmenu, _("&Options"));
     menuBar->Append(helpMenu, _("&Help"));    
 
     // ... and attach this menu bar to the frame
@@ -279,14 +281,8 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         
 #endif // wxUSE_MENUS
 
-#if wxUSE_STATUSBAR
-    // create a status bar just for fun (by default with 1 pane only)
-    CreateStatusBar(1);
-#endif
-
-    m_resbox = new wxStaticBox(this, ID_BOX_RESULT, _T(""));
     m_label = new wxTextCtrl(this, ID_RES_CTRL, _T(""), wxDefaultPosition,
-                    wxSize(493, 145), 
+                    wxSize(493, 185), 
                     wxTE_MULTILINE | wxTE_READONLY);   
 
     //Get Configuration From Config File
@@ -313,8 +309,6 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         wxToolBar *tbar = GetToolBar();
         delete tbar;
         // End Nasty hack
-        m_resbox->SetSize(4,43,511,202);
-        m_label->SetSize(12,50,493,189);              
         vimenu->Check( xFarDic_ViewToolBar, FALSE );      
         vtool = false;
     } else {    
@@ -692,8 +686,6 @@ void xFarDicApp::ViewToolbar(wxCommandEvent& WXUNUSED(event))
         delete tbar;
         RecreateToolbar();    
         vimenu->Check( xFarDic_ViewToolBar, TRUE );        
-        m_resbox->SetSize(4,43,511,160);
-        m_label->SetSize(12,50,493,145);    
         pConfig->Write(wxT("/Options/View-Toolbar"), 1);    
         translate(m_text->GetValue());
 
@@ -704,8 +696,6 @@ void xFarDicApp::ViewToolbar(wxCommandEvent& WXUNUSED(event))
         delete tbar;
         vimenu->Check( xFarDic_ViewToolBar, FALSE );        
         SetToolBar(NULL);    
-        m_resbox->SetSize(4,43,511,160+y);
-        m_label->SetSize(12,50,493,145+y);
         pConfig->Write(wxT("/Options/View-Toolbar"), 0);        
     }
 }
@@ -1064,7 +1054,7 @@ void xFarDicApp::PopMenu()
     setfont->SetBitmap(bfont);
     menuFileT->Append(setfont);
 
-    wxMenuItem *settings = new wxMenuItem(menuFileT,xFarDic_Settings, _("Open Setti&ngs\tAlt+N"));
+    wxMenuItem *settings = new wxMenuItem(menuFileT,xFarDic_Settings, _("Open Preferences\tAlt+P"));
     settings->SetBitmap(bsettings);
     menuFileT->Append(settings);
     menuFileT->AppendSeparator();
@@ -1186,7 +1176,7 @@ void xFarDicApp::RecreateToolbar(bool activate)
         toolBar->AddTool(ID_REVSRCH, wxT("RevSrch"), toolBarBitmaps[11], _("Reverse Search"), wxITEM_CHECK);
         toolBar->AddTool(ID_SRCH, _("Similar"), toolBarBitmaps[2], _("Return similar words"), wxITEM_CHECK);
         toolBar->AddSeparator();
-        toolBar->AddTool(ID_SETTINGS, _("Settings"), toolBarBitmaps[5], _("Settings"));
+        toolBar->AddTool(ID_SETTINGS, _("Preferences"), toolBarBitmaps[5], _("Preferences"));
         toolBar->AddTool(ID_QUIT, _("Quit"), toolBarBitmaps[3], _("Quit"));
 
         wxToolBarBase *tb = GetToolBar();
@@ -1226,9 +1216,9 @@ void xFarDicApp::RecreateTrToolbar()
     wxBitmap  bltbox = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);
     wxBitmap  bttos = wxArtProvider::GetBitmap(wxT("sound"), client, wxDefaultSize);
 
-    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(50,34));
-    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(50,34));
-    m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(50,34));
+    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(36,34));
+    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(36,34));
+    m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(36,34));
 
     if(!tts){
        m_ttos->Enable(FALSE);
@@ -1529,7 +1519,8 @@ void xFarDicApp::DoTranslate()
     }  
 
     //let actually translate!
-    translate();     
+    translate();  
+    m_text->SetFocus();   
 }
 
 wxString xFarDicApp::ShowAspell(wxArrayString sugList)
@@ -1563,7 +1554,7 @@ void xFarDicApp::ShowSettings()
         int z = pos_x + (( size_x - pos_x) / 2 );
         int w = pos_y + (( size_y - pos_y) / 2 );
 
-        setframe = new xFarDicSettings(this, _("xFarDic Settings"), wxPoint(z, w), wxDefaultSize
+        setframe = new xFarDicSettings(this, _("xFarDic Preferences"), wxPoint(z, w), wxDefaultSize
                          , m_locale, wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR | wxCLOSE_BOX);       
            
         setframe->Show(TRUE);
@@ -2213,7 +2204,10 @@ void xFarDicApp::AddToLeitnerBox()
             }
         }
     }
+
     pConfig->Write(wxT("/Options/LTBOX-A"), tmpstr);
+
+    m_text->SetFocus();
 
     if(!showLeitner){
          ltframe->UpdateBoxes(true);
@@ -2404,17 +2398,17 @@ void xFarDicApp::CreateLayout() {
                     0,
                     wxALL,
                     2);
-     wxStaticBoxSizer *staticSizer = new wxStaticBoxSizer(m_resbox,wxVERTICAL);
-     staticSizer->Add(m_label,
+     wxBoxSizer *verticalSizer = new wxBoxSizer(wxVERTICAL);
+     verticalSizer->Add(m_label,
                1, //make vertically stretchable
                wxEXPAND | //make horizontally stretchable
                wxALL,
-               5);
+               1);
      wxBoxSizer *topSizer = new wxBoxSizer(wxVERTICAL);
      topSizer->Add(horizontalSizer,
                0, //make vertically unstretchable
                wxEXPAND|wxALL);
-     topSizer->Add(staticSizer, 1, wxEXPAND|wxALL, 5);
+     topSizer->Add(verticalSizer, 1, wxEXPAND|wxALL, 1);
      SetSizer(topSizer);
      topSizer->Fit(this);
      topSizer->SetSizeHints(this);
@@ -2438,6 +2432,7 @@ void xFarDicApp::Speak() {
         espeak_Cancel();
     }
 
+    m_text->SetFocus();
     return;
 }
 

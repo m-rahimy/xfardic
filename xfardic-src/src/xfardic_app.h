@@ -162,7 +162,6 @@ private:
 
 private:
     wxTextCtrl       *m_label;
-    wxStaticBox      *m_resbox;
     wxBitmapButton   *m_translate,
                      *m_leitnerbox;
     //wxPanel *panel;

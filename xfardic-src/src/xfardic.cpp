@@ -130,8 +130,7 @@ bool MyApp::OnInit()
     //fprintf(stderr, "Going to starting Frame\n");    
 
     // create the main application window
-    frame = new xFarDicApp(_T("xFarDic ")XVERSION, /*wxPoint(150, 150)*/wxDefaultPosition, wxDefaultSize, m_locale,
-                           //wxMINIMIZE_BOX | wxSYSTEM_MENU | wxCLOSE_BOX | wxCAPTION );
+    frame = new xFarDicApp(_T("xFarDic ")XVERSION, wxDefaultPosition, wxDefaultSize, m_locale,
                            wxDEFAULT_FRAME_STYLE);
 
     //DEBUGGING

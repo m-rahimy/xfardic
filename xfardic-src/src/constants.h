@@ -31,7 +31,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-#define XVERSION  _T("0.9.99.4")
+#define XVERSION  _T("0.9.99.5")
 
 // IDs for the controls and the menu commands
 enum
@@ -45,6 +45,7 @@ enum
     xFarDic_First,
     xFarDic_Last,
     xFarDic_Select,
+    xFarDic_Options,
     xFarDic_Settings,
     xFarDic_Copy,
     xFarDic_Cut,
