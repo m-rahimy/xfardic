@@ -196,34 +196,34 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     menuFile->Append(pronounce);
     menuFile->AppendSeparator();
 
+    wxMenuItem *fwd = new wxMenuItem(menuFile,xFarDic_Forward, _("For&ward\tAlt-W"), _("Next word"));
+    fwd->SetBitmap(bforward16);
+    menuFile->Append(fwd);
+
+    wxMenuItem *back = new wxMenuItem(menuFile,xFarDic_Back, _("&Back\tAlt-B"), _("Previous word"));
+    back->SetBitmap(bback16);
+    menuFile->Append(back);
+
+    menuFile->AppendSeparator();
+
+    wxMenuItem *first = new wxMenuItem(menuFile,xFarDic_First, _("Fi&rst Word\tAlt+R"), _("First word"));
+    first->SetBitmap(bfirst);
+    menuFile->Append(first);
+
+    wxMenuItem *last = new wxMenuItem(menuFile,xFarDic_Last, _("&Last Word\tAlt+L"), _("Last word"));
+    last->SetBitmap(blast);   
+    menuFile->Append(last);
+
+    menuFile->Enable(xFarDic_Forward, FALSE);
+    menuFile->Enable(xFarDic_Back, FALSE);
+    menuFile->Enable(xFarDic_First, FALSE);
+    menuFile->Enable(xFarDic_Last, FALSE); 
+
+    menuFile->AppendSeparator();   
+
     wxMenuItem *quit = new wxMenuItem(menuFile,xFarDic_Quit, _("&Quit\tCtrl+Q"), _("Quit this program"));
     quit->SetBitmap(bquit16);
     menuFile->Append(quit);
-
-    gomenu = new wxMenu;
-
-    wxMenuItem *fwd = new wxMenuItem(gomenu,xFarDic_Forward, _("For&ward\tAlt-W"), _("Next word"));
-    fwd->SetBitmap(bforward16);
-    gomenu->Append(fwd);
-
-    wxMenuItem *back = new wxMenuItem(gomenu,xFarDic_Back, _("&Back\tAlt-B"), _("Previous word"));
-    back->SetBitmap(bback16);
-    gomenu->Append(back);
-
-    gomenu->AppendSeparator();
-
-    wxMenuItem *first = new wxMenuItem(gomenu,xFarDic_First, _("Fi&rst Word\tAlt+R"), _("First word"));
-    first->SetBitmap(bfirst);
-    gomenu->Append(first);
-
-    wxMenuItem *last = new wxMenuItem(gomenu,xFarDic_Last, _("&Last Word\tAlt+L"), _("Last word"));
-    last->SetBitmap(blast);   
-    gomenu->Append(last);
-
-    gomenu->Enable(xFarDic_Forward, FALSE);
-    gomenu->Enable(xFarDic_Back, FALSE);
-    gomenu->Enable(xFarDic_First, FALSE);
-    gomenu->Enable(xFarDic_Last, FALSE);    
 
     opmenu = new wxMenu;
     opmenu->Append(xFarDic_Select, _("Auto &Select\tAlt-S"), _("Auto select word"), wxITEM_CHECK);
@@ -262,7 +262,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
     edmenu->Append(xFarDic_Options, _T("&Options"), opmenu);  
 
-    wxMenuItem *settings = new wxMenuItem(edmenu,xFarDic_Settings, _("Preferences\tAlt+P"), _("Configure settings"));
+    wxMenuItem *settings = new wxMenuItem(edmenu,xFarDic_Settings, _("Preferences"), _("Configure settings"));
     settings->SetBitmap(bsettings16);
     edmenu->Append(settings);
   
@@ -272,7 +272,6 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     menuBar->Append(menuFile, _("&File"));
     menuBar->Append(edmenu, _("&Edit"));
     menuBar->Append(vimenu, _("&View"));
-    menuBar->Append(gomenu, _("Nav&igate"));
     menuBar->Append(toolsMenu, _("Too&ls"));
     menuBar->Append(helpMenu, _("&Help"));    
 
@@ -529,8 +528,8 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     RecreateTrToolbar();      
   
     if (wordList.GetCount() >0) {
-        gomenu->Enable(xFarDic_First, TRUE);
-        gomenu->Enable(xFarDic_Last, TRUE);
+        menuFile->Enable(xFarDic_First, TRUE);
+        menuFile->Enable(xFarDic_Last, TRUE);
     }
 
     if ( pConfig->Read(wxT("Auto-Select"), 1) != 0 ) {
@@ -1054,7 +1053,7 @@ void xFarDicApp::PopMenu()
     setfont->SetBitmap(bfont);
     menuFileT->Append(setfont);
 
-    wxMenuItem *settings = new wxMenuItem(menuFileT,xFarDic_Settings, _("Open Preferences\tAlt+P"));
+    wxMenuItem *settings = new wxMenuItem(menuFileT,xFarDic_Settings, _("Open Preferences"));
     settings->SetBitmap(bsettings);
     menuFileT->Append(settings);
     menuFileT->AppendSeparator();
@@ -1216,9 +1215,9 @@ void xFarDicApp::RecreateTrToolbar()
     wxBitmap  bltbox = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);
     wxBitmap  bttos = wxArtProvider::GetBitmap(wxT("sound"), client, wxDefaultSize);
 
-    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(36,34));
-    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(36,34));
-    m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(36,34));
+    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(40,34));
+    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(40,34));
+    m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(40,34));
 
     if(!tts){
        m_ttos->Enable(FALSE);
@@ -1437,7 +1436,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
             wxToolBarBase *tb = GetToolBar();
             tb->EnableTool(ID_BACK, TRUE);
         }     
-        gomenu->Enable(xFarDic_Back, TRUE);
+        menuFile->Enable(xFarDic_Back, TRUE);
         if (select) {
             wxString m_textVal(m_text->GetValue());
             m_text->SetSelection(0,m_textVal.Length());
@@ -1447,7 +1446,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
             wxToolBarBase *tb = GetToolBar();
             tb->EnableTool(ID_BACK, FALSE);
         }    
-        gomenu->Enable(xFarDic_Back, FALSE);    
+        menuFile->Enable(xFarDic_Back, FALSE);    
     }
 
     if (found && !revsrch && !((wordList.Index(m_text->GetValue(),false)) == wordList.Index(wordList.Last(),false))) {
@@ -1455,7 +1454,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
             wxToolBarBase *tb = GetToolBar();
             tb->EnableTool(ID_FORWARD, TRUE);
         }  
-        gomenu->Enable(xFarDic_Forward, TRUE);
+        menuFile->Enable(xFarDic_Forward, TRUE);
         if (select) {
             wxString m_textVal(m_text->GetValue());
             m_text->SetSelection(0,m_textVal.Length());
@@ -1465,7 +1464,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
             wxToolBarBase *tb = GetToolBar();
             tb->EnableTool(ID_FORWARD, FALSE);
         }    
-        gomenu->Enable(xFarDic_Forward, FALSE);    
+        menuFile->Enable(xFarDic_Forward, FALSE);    
     }
 
     if (select) {
