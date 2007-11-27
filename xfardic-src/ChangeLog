@@ -260,5 +260,6 @@ Implemented TTS engine based on Espeak, Thanks Saeed Taghavi.
 Several minor fixes and clean-ups.
 Added `Add to the leitner box` and `Pronounce` menu items and accelators.
 Improved leitner box implementation.
+Improved and simplified user interface.
 Several code clean-ups.
 
