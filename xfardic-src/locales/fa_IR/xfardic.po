@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xFarDic 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-15 13:29+0330\n"
+"POT-Creation-Date: 2007-11-27 10:23+0330\n"
 "PO-Revision-Date: 2006-12-14 13:17+0330\n"
 "Last-Translator: Alan Baghumian <alan@technotux.org>\n"
 "Language-Team: fa_IR <alan@technotux.org>\n"
@@ -103,55 +103,63 @@ msgid ""
 "send it back to the first box."
 msgstr ""
 
-#: ../src/leitner.cpp:159
+#: ../src/leitner.cpp:117 ../src/leitner.cpp:118 ../src/leitner.cpp:119
+#: ../src/leitner.cpp:120 ../src/leitner.cpp:121 ../src/leitner.cpp:696
+#: ../src/leitner.cpp:697 ../src/leitner.cpp:698 ../src/leitner.cpp:699
+#: ../src/leitner.cpp:700
+msgid "Word Count: "
+msgstr ""
+
+#: ../src/leitner.cpp:171
 msgid "Box A"
 msgstr "جعبه الف"
 
-#: ../src/leitner.cpp:160
+#: ../src/leitner.cpp:172
 msgid "Box B"
 msgstr "جعبه ب"
 
-#: ../src/leitner.cpp:161
+#: ../src/leitner.cpp:173
 msgid "Box C"
 msgstr "جعبه پ"
 
-#: ../src/leitner.cpp:162
+#: ../src/leitner.cpp:174
 msgid "Box D"
 msgstr "جعبه ت"
 
-#: ../src/leitner.cpp:163
+#: ../src/leitner.cpp:175
 msgid "Box E"
 msgstr "جعبه ث"
 
-#: ../src/leitner.cpp:329 ../src/leitner.cpp:360 ../src/leitner.cpp:381
-#: ../src/leitner.cpp:421 ../src/leitner.cpp:451 ../src/leitner.cpp:481
-#: ../src/leitner.cpp:511 ../src/leitner.cpp:541 ../src/leitner.cpp:571
-#: ../src/leitner.cpp:601
+#: ../src/leitner.cpp:249 ../src/leitner.cpp:272 ../src/leitner.cpp:295
+#: ../src/leitner.cpp:318 ../src/leitner.cpp:341 ../src/leitner.cpp:360
+#: ../src/leitner.cpp:391 ../src/leitner.cpp:412 ../src/leitner.cpp:452
+#: ../src/leitner.cpp:482 ../src/leitner.cpp:512 ../src/leitner.cpp:542
+#: ../src/leitner.cpp:572 ../src/leitner.cpp:602 ../src/leitner.cpp:632
 msgid "Please select a word.\n"
 msgstr "لطفا یک واژه را انتخاب نمایید.\n"
 
-#: ../src/leitner.cpp:345
+#: ../src/leitner.cpp:376
 msgid "Box B is full.\n"
 msgstr "ظرفیت جعبه ب تکمیل است.\n"
 
-#: ../src/leitner.cpp:397
+#: ../src/leitner.cpp:428
 msgid "Are you sure that you want to clear the box contents?\n"
 msgstr "آیا از پاک کردن محتویات جعبه اطمینان دارید؟\n"
 
-#: ../src/leitner.cpp:436 ../src/leitner.cpp:496 ../src/leitner.cpp:556
-#: ../src/leitner.cpp:616
+#: ../src/leitner.cpp:467 ../src/leitner.cpp:527 ../src/leitner.cpp:587
+#: ../src/leitner.cpp:647
 msgid "Box A is full.\n"
 msgstr "ظرفیت جعبه الف تکمیل است.\n"
 
-#: ../src/leitner.cpp:466
+#: ../src/leitner.cpp:497
 msgid "Box C is full.\n"
 msgstr "ظرفیت جعبه پ تکمیل است.\n"
 
-#: ../src/leitner.cpp:526
+#: ../src/leitner.cpp:557
 msgid "Box D is full.\n"
 msgstr "ظرفیت جعبه ت تکمیل است.\n"
 
-#: ../src/leitner.cpp:586
+#: ../src/leitner.cpp:617
 msgid "Box E is full.\n"
 msgstr "ظرفیت جعبه ث تکمیل است.\n"
 
@@ -376,45 +384,45 @@ msgstr ""
 msgid "Pronounce\tAlt-P"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:199 ../src/xfardic_app.cpp:1077
-msgid "&Quit\tCtrl+Q"
-msgstr "خروج\tCtrl+Q"
-
 #: ../src/xfardic_app.cpp:199
-msgid "Quit this program"
-msgstr "خروج از برنامه"
-
-#: ../src/xfardic_app.cpp:205
 msgid "For&ward\tAlt-W"
 msgstr "مرور به جلو\tAlt-W"
 
-#: ../src/xfardic_app.cpp:205
+#: ../src/xfardic_app.cpp:199
 msgid "Next word"
 msgstr "واژه بعدی"
 
-#: ../src/xfardic_app.cpp:209
+#: ../src/xfardic_app.cpp:203
 msgid "&Back\tAlt-B"
 msgstr "مرور به عقب\tAlt-B"
 
-#: ../src/xfardic_app.cpp:209
+#: ../src/xfardic_app.cpp:203
 msgid "Previous word"
 msgstr "واژه قبلی"
 
-#: ../src/xfardic_app.cpp:215
+#: ../src/xfardic_app.cpp:209
 msgid "Fi&rst Word\tAlt+R"
 msgstr "نخستین واژه\tAlt+R"
 
-#: ../src/xfardic_app.cpp:215
+#: ../src/xfardic_app.cpp:209
 msgid "First word"
 msgstr "نخستین واژه"
 
-#: ../src/xfardic_app.cpp:219
+#: ../src/xfardic_app.cpp:213
 msgid "&Last Word\tAlt+L"
 msgstr "آخرین واژه\tAlt+L"
 
-#: ../src/xfardic_app.cpp:219
+#: ../src/xfardic_app.cpp:213
 msgid "Last word"
 msgstr "آخرین واژه"
+
+#: ../src/xfardic_app.cpp:224 ../src/xfardic_app.cpp:1066
+msgid "&Quit\tCtrl+Q"
+msgstr "خروج\tCtrl+Q"
+
+#: ../src/xfardic_app.cpp:224
+msgid "Quit this program"
+msgstr "خروج از برنامه"
 
 #: ../src/xfardic_app.cpp:229
 msgid "Auto &Select\tAlt-S"
@@ -444,7 +452,7 @@ msgstr "حس‌گر انتخاب فعال شود\tCtrl-W"
 msgid "Return Similar Words\tCtrl-S"
 msgstr "برگردان واژه‌های مشابه\tCtrl-S"
 
-#: ../src/xfardic_app.cpp:232 ../src/xfardic_app.cpp:1187
+#: ../src/xfardic_app.cpp:232 ../src/xfardic_app.cpp:1176
 msgid "Return similar words"
 msgstr "برگردان واژه‌های مشابه"
 
@@ -480,180 +488,168 @@ msgstr "تنظیم قلم جعبه نتایج\tCtrl+F"
 msgid "Set result box font"
 msgstr "تنظیم قلم جعبه نتایج"
 
-#: ../src/xfardic_app.cpp:243
-msgid "Setti&ngs\tAlt-N"
-msgstr "تنظیمات\tAlt-N"
-
-#: ../src/xfardic_app.cpp:243
-msgid "Configure settings"
-msgstr "انجام تنظیمات"
-
-#: ../src/xfardic_app.cpp:249
+#: ../src/xfardic_app.cpp:245
 msgid "C&ut\tCtrl-X"
 msgstr "بریدن\tCtrl-X"
 
-#: ../src/xfardic_app.cpp:249
+#: ../src/xfardic_app.cpp:245
 msgid "Cut input text"
 msgstr "بریدن متن ورودی"
 
-#: ../src/xfardic_app.cpp:253
+#: ../src/xfardic_app.cpp:249
 msgid "&Copy\tCtrl-C"
 msgstr "کپی\tCtrl-C"
 
-#: ../src/xfardic_app.cpp:253
+#: ../src/xfardic_app.cpp:249
 msgid "Copy result to clipboard"
 msgstr "کپی نتیجه در حافظه"
 
-#: ../src/xfardic_app.cpp:257 ../src/xfardic_app.cpp:1059
+#: ../src/xfardic_app.cpp:253 ../src/xfardic_app.cpp:1048
 msgid "&Paste and Translate\tCtrl-V"
 msgstr "چسباندن و برگردان\tCtrl-V"
 
-#: ../src/xfardic_app.cpp:257
+#: ../src/xfardic_app.cpp:253
 msgid "Paste from clipboard"
 msgstr "چسباندن از حافظه"
 
-#: ../src/xfardic_app.cpp:262
+#: ../src/xfardic_app.cpp:258
 msgid "Clear History\tCtrl-D"
 msgstr "پاک کردن تاریخچه\tCtrl-D"
 
-#: ../src/xfardic_app.cpp:262
+#: ../src/xfardic_app.cpp:258
 msgid "Clear history"
 msgstr "پاک کردن تاریخچه"
 
-#: ../src/xfardic_app.cpp:269
-msgid "&Word"
+#: ../src/xfardic_app.cpp:265 ../src/xfardic_app.cpp:1178
+msgid "Preferences"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:270
+#: ../src/xfardic_app.cpp:265
+msgid "Configure settings"
+msgstr "انجام تنظیمات"
+
+#: ../src/xfardic_app.cpp:272
+msgid "&File"
+msgstr "پرونده"
+
+#: ../src/xfardic_app.cpp:273
 msgid "&Edit"
 msgstr "ویرایش"
 
-#: ../src/xfardic_app.cpp:271
+#: ../src/xfardic_app.cpp:274
 msgid "&View"
 msgstr "نمایش"
 
-#: ../src/xfardic_app.cpp:272
-msgid "Nav&igate"
-msgstr "مرور"
-
-#: ../src/xfardic_app.cpp:273
+#: ../src/xfardic_app.cpp:275
 msgid "Too&ls"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:274
-msgid "&Options"
-msgstr "گزینه‌ها"
-
-#: ../src/xfardic_app.cpp:275
+#: ../src/xfardic_app.cpp:276
 msgid "&Help"
 msgstr "کمک"
 
-#: ../src/xfardic_app.cpp:964
+#: ../src/xfardic_app.cpp:953
 msgid "Input text is too long.\n"
 msgstr "متن ورودی بیش از حد طولانی است.\n"
 
-#: ../src/xfardic_app.cpp:1063
+#: ../src/xfardic_app.cpp:1052
 msgid "Set Result Box Font\tCtrl+F"
 msgstr "تنظیم قلم جعبه خروجی\tCtrl+F"
 
-#: ../src/xfardic_app.cpp:1067
-msgid "Open Setti&ngs\tAlt+N"
-msgstr "پنجره تنظیمات\tAlt+N"
+#: ../src/xfardic_app.cpp:1056
+msgid "Open Preferences"
+msgstr ""
 
-#: ../src/xfardic_app.cpp:1072
+#: ../src/xfardic_app.cpp:1061
 msgid "&About xFarDic\tF1"
 msgstr "درباره xFarDic\tF1"
 
-#: ../src/xfardic_app.cpp:1175
+#: ../src/xfardic_app.cpp:1164
 msgid "Back"
 msgstr "قبلی"
 
-#: ../src/xfardic_app.cpp:1175
+#: ../src/xfardic_app.cpp:1164
 msgid "Previous Word"
 msgstr "واژه قبلی"
 
-#: ../src/xfardic_app.cpp:1176
+#: ../src/xfardic_app.cpp:1165
 msgid "Fwd"
 msgstr "بعدی"
 
-#: ../src/xfardic_app.cpp:1176
+#: ../src/xfardic_app.cpp:1165
 msgid "Next Word"
 msgstr "واژه بعدی"
 
-#: ../src/xfardic_app.cpp:1178
+#: ../src/xfardic_app.cpp:1167
 msgid "Cut"
 msgstr "بریدن"
 
-#: ../src/xfardic_app.cpp:1179
+#: ../src/xfardic_app.cpp:1168
 msgid "Copy"
 msgstr "کپی"
 
-#: ../src/xfardic_app.cpp:1179
+#: ../src/xfardic_app.cpp:1168
 msgid "Copy Result"
 msgstr "کپی نتیجه"
 
-#: ../src/xfardic_app.cpp:1180
+#: ../src/xfardic_app.cpp:1169
 msgid "Paste"
 msgstr "چسباندن"
 
-#: ../src/xfardic_app.cpp:1180
+#: ../src/xfardic_app.cpp:1169
 msgid "Paste and Translate"
 msgstr "چسباندن و برگردان"
 
-#: ../src/xfardic_app.cpp:1181
+#: ../src/xfardic_app.cpp:1170
 msgid "Trash"
 msgstr "پاک کردن تاریخچه"
 
-#: ../src/xfardic_app.cpp:1181
+#: ../src/xfardic_app.cpp:1170
 msgid "Clear History"
 msgstr "پاک کردن تاریخچه"
 
-#: ../src/xfardic_app.cpp:1184
+#: ../src/xfardic_app.cpp:1173
 msgid "Select"
 msgstr "انتخاب"
 
-#: ../src/xfardic_app.cpp:1184
+#: ../src/xfardic_app.cpp:1173
 msgid "Auto Select Text"
 msgstr "انتخاب خودکار متن"
 
-#: ../src/xfardic_app.cpp:1185
+#: ../src/xfardic_app.cpp:1174
 msgid "Spell"
 msgstr "غلط یاب"
 
-#: ../src/xfardic_app.cpp:1185
+#: ../src/xfardic_app.cpp:1174
 msgid "Spell Checking"
 msgstr "غلط یاب املایی"
 
-#: ../src/xfardic_app.cpp:1186
+#: ../src/xfardic_app.cpp:1175
 msgid "Reverse Search"
 msgstr "جستجوی نادقیق برعکس"
 
-#: ../src/xfardic_app.cpp:1187
+#: ../src/xfardic_app.cpp:1176
 msgid "Similar"
 msgstr "مشابه"
 
-#: ../src/xfardic_app.cpp:1189
-msgid "Settings"
-msgstr "تنظیمات"
-
-#: ../src/xfardic_app.cpp:1190
+#: ../src/xfardic_app.cpp:1179
 msgid "Quit"
 msgstr "خروج"
 
-#: ../src/xfardic_app.cpp:1269
+#: ../src/xfardic_app.cpp:1258
 msgid "Please enter clause.\n"
 msgstr "لطفا یک واژه وارد نمایید.\n"
 
-#: ../src/xfardic_app.cpp:1283 ../src/xfardic_app.cpp:1394
+#: ../src/xfardic_app.cpp:1272 ../src/xfardic_app.cpp:1383
 msgid "Please wait..."
 msgstr "لطفا صبر کنید..."
 
-#: ../src/xfardic_app.cpp:1326 ../src/xfardic_app.cpp:1385
-#: ../src/xfardic_app.cpp:1438 ../src/xfardic_app.cpp:1487
+#: ../src/xfardic_app.cpp:1315 ../src/xfardic_app.cpp:1374
+#: ../src/xfardic_app.cpp:1427 ../src/xfardic_app.cpp:1476
 msgid "Phrase not found."
 msgstr "واژه یافت نشد."
 
-#: ../src/xfardic_app.cpp:1537
+#: ../src/xfardic_app.cpp:1527
 msgid ""
 "xFarDic spell checker found error(s) on your typed word.\n"
 " Please choose correct word from list and then click OK."
@@ -661,23 +657,24 @@ msgstr ""
 "غلط یاب املایی ایکس‌فاردیک خطاهایی را در واژه تایپ شده شما پیدا کرد.\n"
 " لطفا واژه صحیح را از لیست انتخاب کنید."
 
-#: ../src/xfardic_app.cpp:1537
+#: ../src/xfardic_app.cpp:1527
 msgid "xFarDic Spell Checker"
 msgstr "غلط یاب املایی ایکس‌فاردیک"
 
-#: ../src/xfardic_app.cpp:1566
-msgid "xFarDic Settings"
+#: ../src/xfardic_app.cpp:1556
+#, fuzzy
+msgid "xFarDic Preferences"
 msgstr "تنظیمات ایکس‌فاردیک"
 
-#: ../src/xfardic_app.cpp:1589
+#: ../src/xfardic_app.cpp:1579
 msgid "About xFarDic"
 msgstr "درباره ایکس‌فاردیک"
 
-#: ../src/xfardic_app.cpp:1616
+#: ../src/xfardic_app.cpp:1602
 msgid "xFarDic - Leitner Box"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1789
+#: ../src/xfardic_app.cpp:1775
 msgid ""
 "It seems that Aspell is not installed.\n"
 "xFarDic will not work correctly."
@@ -685,7 +682,7 @@ msgstr ""
 "به نظر می‌رسد که Aspell نصب نشده است.\n"
 "ایکس‌فاردیک درست کار نخواهد کرد."
 
-#: ../src/xfardic_app.cpp:1866
+#: ../src/xfardic_app.cpp:1852
 msgid ""
 "Parse Error. Invalid Document.\n"
 " It is possible that XML-DB is not installed.\n"
@@ -695,7 +692,7 @@ msgstr ""
 " ممکن است بانک اطلاعاتی نصب نشده باشد.\n"
 " مسیر بانک اطلاعاتی را از پنجره تنظیمات تعیین کنید."
 
-#: ../src/xfardic_app.cpp:2196
+#: ../src/xfardic_app.cpp:2182
 msgid ""
 "Selected word already exists in the box\n"
 "or not found in the installed database(s).\n"
@@ -703,11 +700,11 @@ msgstr ""
 "کلمه انتخاب شده در حال حاضر موجود است\n"
 "یا در بانک‌های وازه نصب شده یافت نشده است.\n"
 
-#: ../src/xfardic_app.cpp:2202
+#: ../src/xfardic_app.cpp:2188
 msgid "The leitner box is full.\n"
 msgstr "ظرفیت جعبه لایتنر تکمیل است.\n"
 
-#: ../src/xfardic_app.cpp:2297
+#: ../src/xfardic_app.cpp:2290
 msgid ""
 "Creating the swap file. Please wait.\n"
 "This will take a while..."
@@ -723,5 +720,17 @@ msgstr "نمایش این پیام راهنما"
 msgid "Another program instance is already running, aborting."
 msgstr "نسخه دیگری از برنامه در حال اجراست."
 
-#~ msgid "&File"
-#~ msgstr "پرونده"
+#~ msgid "Setti&ngs\tAlt-N"
+#~ msgstr "تنظیمات\tAlt-N"
+
+#~ msgid "Nav&igate"
+#~ msgstr "مرور"
+
+#~ msgid "&Options"
+#~ msgstr "گزینه‌ها"
+
+#~ msgid "Open Setti&ngs\tAlt+N"
+#~ msgstr "پنجره تنظیمات\tAlt+N"
+
+#~ msgid "Settings"
+#~ msgstr "تنظیمات"
