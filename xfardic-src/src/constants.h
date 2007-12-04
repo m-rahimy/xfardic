@@ -31,7 +31,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-#define XVERSION  _T("0.9.99.5")
+#define XVERSION  _T("0.9.99.6")
 
 // IDs for the controls and the menu commands
 enum
@@ -157,6 +157,11 @@ const int  ID_CHK_SWAP         = 169;
 const int  ID_BUTTON_TTOS      = 170;
 const int  ID_CHK_SPEAK        = 171;
 const int  ID_CHK_TTS          = 172;
+const int  ID_BTN_SPK_A        = 173;
+const int  ID_BTN_SPK_B        = 174;
+const int  ID_BTN_SPK_C        = 175;
+const int  ID_BTN_SPK_D        = 176;
+const int  ID_BTN_SPK_E        = 177;
 
 #endif
 

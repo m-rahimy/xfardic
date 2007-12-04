@@ -48,7 +48,13 @@ public:
     void OnTranslateB(wxCommandEvent& event);    
     void OnTranslateC(wxCommandEvent& event);    
     void OnTranslateD(wxCommandEvent& event);    
-    void OnTranslateE(wxCommandEvent& event);   
+    void OnTranslateE(wxCommandEvent& event);
+    /// Pronounce buttons event handlers
+    void OnSpeakA(wxCommandEvent& event);
+    void OnSpeakB(wxCommandEvent& event);    
+    void OnSpeakC(wxCommandEvent& event);    
+    void OnSpeakD(wxCommandEvent& event);    
+    void OnSpeakE(wxCommandEvent& event);   
     /// Next buttons event handlers
     void OnNextA(wxCommandEvent& event);
     void OnNextB(wxCommandEvent& event);    
@@ -69,6 +75,8 @@ public:
     void SubmitChanges();
     /// Updates boxes
     void UpdateBoxes(bool reload = FALSE); 
+    /// Pronounce the word
+    void Speak(wxString strSpk);
     /// Leitner window constructor
     ~xFarDicLeitner(); 
 
@@ -121,7 +129,12 @@ private:
                    *m_dtrans,
                    *m_etrans,
                    *m_remove,
-                   *m_confirm;
+                   *m_confirm,
+                   *m_aspeak,
+                   *m_bspeak,
+                   *m_cspeak,
+                   *m_dspeak,
+                   *m_espeak;
 
     wxStaticText *boxatext,
                  *boxbtext,
@@ -135,7 +148,9 @@ private:
         bbcap,
         bccap,
         bdcap,
-        becap;  
+        becap; 
+
+    bool tts; 
    
     DECLARE_EVENT_TABLE()
 };

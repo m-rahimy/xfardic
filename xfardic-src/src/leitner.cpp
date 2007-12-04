@@ -42,6 +42,11 @@ BEGIN_EVENT_TABLE(xFarDicLeitner, wxFrame)
     EVT_BUTTON(ID_BTN_BACK_C, xFarDicLeitner::OnBackC)
     EVT_BUTTON(ID_BTN_BACK_D, xFarDicLeitner::OnBackD)
     EVT_BUTTON(ID_BTN_BACK_E, xFarDicLeitner::OnBackE)
+    EVT_BUTTON(ID_BTN_SPK_A, xFarDicLeitner::OnSpeakA)
+    EVT_BUTTON(ID_BTN_SPK_B, xFarDicLeitner::OnSpeakB)
+    EVT_BUTTON(ID_BTN_SPK_C, xFarDicLeitner::OnSpeakC)
+    EVT_BUTTON(ID_BTN_SPK_D, xFarDicLeitner::OnSpeakD)
+    EVT_BUTTON(ID_BTN_SPK_E, xFarDicLeitner::OnSpeakE)
     EVT_BUTTON(ID_BTN_REMOVE, xFarDicLeitner::OnRemoveA)
 END_EVENT_TABLE()
 
@@ -71,6 +76,20 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     pConfig->SetPath(_T("/Options"));
 
     bacap = pConfig->Read(_T("Leitner-Base"), 10);
+
+    // First initialize Espeak engine
+    tts = pConfig->Read(_T("TTS"), 0l);
+    if (tts) { 
+        espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL,0);
+
+        espeak_SetParameter(espeakRATE, 125,0);
+        espeak_SetParameter(espeakVOLUME, 150,0);
+        espeak_SetParameter(espeakPITCH, 55,0);
+
+        // American English
+        wxString voiceName=wxT("us-mbrola-3");
+        espeak_SetVoiceByName((const char *)voiceName.mb_str(wxConvUTF8));
+    }
 
     // Box capacity calculation
     bbcap = bacap * 2;
@@ -132,6 +151,7 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     wxBitmap  trans = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
     wxBitmap  del = wxArtProvider::GetBitmap(wxART_DEL_BOOKMARK, client, wxDefaultSize);
     wxBitmap  confirm = wxArtProvider::GetBitmap( wxART_TIP, client, wxDefaultSize);
+    wxBitmap  bttos = wxArtProvider::GetBitmap(wxT("sound"), client, wxDefaultSize);
 
     m_anext = new wxBitmapButton(bapanel, ID_BTN_NEXT_A, next, wxDefaultPosition,wxSize(80,36));
     m_bnext = new wxBitmapButton(bbpanel, ID_BTN_NEXT_B, next, wxDefaultPosition,wxSize(80,36));
@@ -150,6 +170,20 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     m_ctrans = new wxBitmapButton(bcpanel, ID_BTN_TRANS_C, trans, wxDefaultPosition,wxSize(80,36));
     m_dtrans = new wxBitmapButton(bdpanel, ID_BTN_TRANS_D, trans, wxDefaultPosition,wxSize(80,36));
     m_etrans = new wxBitmapButton(bepanel, ID_BTN_TRANS_E, trans, wxDefaultPosition,wxSize(80,36));
+
+    m_aspeak = new wxBitmapButton(bapanel, ID_BTN_SPK_A, bttos, wxDefaultPosition,wxSize(80,36));
+    m_bspeak = new wxBitmapButton(bbpanel, ID_BTN_SPK_B, bttos, wxDefaultPosition,wxSize(80,36));
+    m_cspeak = new wxBitmapButton(bcpanel, ID_BTN_SPK_C, bttos, wxDefaultPosition,wxSize(80,36));
+    m_dspeak = new wxBitmapButton(bdpanel, ID_BTN_SPK_D, bttos, wxDefaultPosition,wxSize(80,36));
+    m_espeak = new wxBitmapButton(bepanel, ID_BTN_SPK_E, bttos, wxDefaultPosition,wxSize(80,36));
+
+    if (! tts){
+       m_aspeak->Enable(FALSE);
+       m_bspeak->Enable(FALSE);
+       m_cspeak->Enable(FALSE);
+       m_dspeak->Enable(FALSE);
+       m_espeak->Enable(FALSE);
+    }
 
     // Quantity Checks
     if (boxacontents.GetCount() < bacap) {
@@ -346,6 +380,86 @@ void xFarDicLeitner::OnTranslateE(wxCommandEvent& event)
     if (tmpStr.Len()>0) {                  
         pConfig->SetPath(_T("/"));
         pConfig->Write(_T("/Options/Temp-String"), tmpStr);        
+    }
+}
+
+void xFarDicLeitner::OnSpeakA(wxCommandEvent& event)
+{
+    wxArrayInt selection;
+    wxString msg;
+    
+    boxa->GetSelections(selection);
+
+    if (selection.GetCount()>0) {
+        Speak(boxa->GetString(selection[0]));
+    }else{
+        msg.Printf( _("Please select a word.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+}
+
+void xFarDicLeitner::OnSpeakB(wxCommandEvent& event)
+{
+    wxArrayInt selection;
+    wxString msg;
+    
+    boxb->GetSelections(selection);
+
+    if (selection.GetCount()>0) {
+        Speak(boxb->GetString(selection[0]));
+    }else{
+        msg.Printf( _("Please select a word.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+}
+
+void xFarDicLeitner::OnSpeakC(wxCommandEvent& event)
+{
+    wxArrayInt selection;
+    wxString msg;
+    
+    boxc->GetSelections(selection);
+
+    if (selection.GetCount()>0) {
+        Speak(boxc->GetString(selection[0]));
+    }else{
+        msg.Printf( _("Please select a word.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+}
+
+void xFarDicLeitner::OnSpeakD(wxCommandEvent& event)
+{
+    wxArrayInt selection;
+    wxString msg;
+    
+    boxd->GetSelections(selection);
+
+    if (selection.GetCount()>0) {
+        Speak(boxd->GetString(selection[0]));
+    }else{
+        msg.Printf( _("Please select a word.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        return;
+    }
+}
+
+void xFarDicLeitner::OnSpeakE(wxCommandEvent& event)
+{
+    wxArrayInt selection;
+    wxString msg;
+    
+    boxe->GetSelections(selection);
+
+    if (selection.GetCount()>0) {
+        Speak(boxe->GetString(selection[0]));
+    }else{
+        msg.Printf( _("Please select a word.\n"));
+        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+        return;
     }
 }
 
@@ -781,60 +895,82 @@ void xFarDicLeitner::SubmitChanges()
     pConfig->Write(_T("/Options/LTBOX-D"), tmpStr);
 }
 
+void xFarDicLeitner::Speak(wxString strSpk) {
+    if (tts) {
+        // Espeak playback implementation
+        int synth_flags = espeakCHARS_AUTO | espeakPHONEMES | espeakENDPAUSE;
+        int size;
+
+        size = strlen(strSpk.mb_str(wxConvUTF8));
+
+        espeak_Synth(strSpk.mb_str(wxConvUTF8), size+1 ,0 ,POS_CHARACTER, 0, synth_flags, NULL, NULL);
+        espeak_Synchronize();
+
+        espeak_Cancel();
+    }
+
+    return;
+}
+
 void xFarDicLeitner::CreateLayout() {
      wxBoxSizer *topsizer = new wxBoxSizer( wxVERTICAL );
 
      wxBoxSizer *logoandtextsizer = new wxBoxSizer(wxHORIZONTAL);
      logoandtextsizer->Add(staticBitmap, 0, wxALIGN_LEFT|wxALL, 5);
      logoandtextsizer->Add(lttext, 0, wxALIGN_LEFT|wxALL, 5);
-     topsizer->Add(logoandtextsizer, 0, wxEXPAND|wxALL, 5);
+     topsizer->Add(logoandtextsizer, 0, wxEXPAND|wxALL, 3);
      
      topsizer->Add(layout, 1, wxALL|wxEXPAND, 5);
 
      wxBoxSizer *bapanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bapanelsizer->Add(boxa, 1, wxEXPAND|wxALL, 5);
+     bapanelsizer->Add(boxa, 1, wxEXPAND|wxALL, 3);
      wxBoxSizer *babuttonssizer = new wxBoxSizer(wxVERTICAL);
      babuttonssizer->Add(boxatext, 1, wxTOP, 1);
-     babuttonssizer->Add(m_anext ,1 ,wxEXPAND|wxALL, 5);
-     babuttonssizer->Add(m_remove ,1 ,wxEXPAND|wxALL, 5);
-     babuttonssizer->Add(m_atrans ,1 ,wxEXPAND|wxALL, 5);
-     bapanelsizer->Add(babuttonssizer, 0, wxEXPAND|wxALL, 5);
+     babuttonssizer->Add(m_anext ,1 ,wxEXPAND|wxALL, 3);
+     babuttonssizer->Add(m_remove ,1 ,wxEXPAND|wxALL, 3);
+     babuttonssizer->Add(m_atrans ,1 ,wxEXPAND|wxALL, 3);
+     babuttonssizer->Add(m_aspeak ,1 ,wxEXPAND|wxALL, 3);
+     bapanelsizer->Add(babuttonssizer, 0, wxEXPAND|wxALL, 3);
 
      wxBoxSizer *bbpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bbpanelsizer->Add(boxb, 1, wxEXPAND|wxALL, 5);
+     bbpanelsizer->Add(boxb, 1, wxEXPAND|wxALL, 3);
      wxBoxSizer *bbbuttonssizer = new wxBoxSizer(wxVERTICAL);
      bbbuttonssizer->Add(boxbtext, 1, wxTOP, 1);
-     bbbuttonssizer->Add(m_bnext ,1 ,wxEXPAND|wxALL, 5);
-     bbbuttonssizer->Add(m_bback ,1 ,wxEXPAND|wxALL, 5);
-     bbbuttonssizer->Add(m_btrans ,1 ,wxEXPAND|wxALL, 5);
-     bbpanelsizer->Add(bbbuttonssizer, 0, wxEXPAND|wxALL, 5);
+     bbbuttonssizer->Add(m_bnext ,1 ,wxEXPAND|wxALL, 3);
+     bbbuttonssizer->Add(m_bback ,1 ,wxEXPAND|wxALL, 3);
+     bbbuttonssizer->Add(m_btrans ,1 ,wxEXPAND|wxALL, 3);
+     bbbuttonssizer->Add(m_bspeak ,1 ,wxEXPAND|wxALL, 3);
+     bbpanelsizer->Add(bbbuttonssizer, 0, wxEXPAND|wxALL, 3);
 
      wxBoxSizer *bcpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bcpanelsizer->Add(boxc, 1, wxEXPAND|wxALL, 5);
+     bcpanelsizer->Add(boxc, 1, wxEXPAND|wxALL, 3);
      wxBoxSizer *bcbuttonssizer = new wxBoxSizer(wxVERTICAL);
      bcbuttonssizer->Add(boxctext, 1, wxTOP, 1);
-     bcbuttonssizer->Add(m_cnext ,1 ,wxEXPAND|wxALL, 5);
-     bcbuttonssizer->Add(m_cback ,1 ,wxEXPAND|wxALL, 5);
-     bcbuttonssizer->Add(m_ctrans ,1 ,wxEXPAND|wxALL, 5);
-     bcpanelsizer->Add(bcbuttonssizer, 0, wxEXPAND|wxALL, 5);
+     bcbuttonssizer->Add(m_cnext ,1 ,wxEXPAND|wxALL, 3);
+     bcbuttonssizer->Add(m_cback ,1 ,wxEXPAND|wxALL, 3);
+     bcbuttonssizer->Add(m_ctrans ,1 ,wxEXPAND|wxALL, 3);
+     bcbuttonssizer->Add(m_cspeak ,1 ,wxEXPAND|wxALL, 3);
+     bcpanelsizer->Add(bcbuttonssizer, 0, wxEXPAND|wxALL, 3);
 
      wxBoxSizer *bdpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bdpanelsizer->Add(boxd, 1, wxEXPAND|wxALL, 5);
+     bdpanelsizer->Add(boxd, 1, wxEXPAND|wxALL, 3);
      wxBoxSizer *bdbuttonssizer = new wxBoxSizer(wxVERTICAL);
      bdbuttonssizer->Add(boxdtext, 1, wxTOP, 1);
-     bdbuttonssizer->Add(m_dnext ,1 ,wxEXPAND|wxALL, 5);
-     bdbuttonssizer->Add(m_dback ,1 ,wxEXPAND|wxALL, 5);
-     bdbuttonssizer->Add(m_dtrans ,1 ,wxEXPAND|wxALL, 5);
-     bdpanelsizer->Add(bdbuttonssizer, 0, wxEXPAND|wxALL, 5);
+     bdbuttonssizer->Add(m_dnext ,1 ,wxEXPAND|wxALL, 3);
+     bdbuttonssizer->Add(m_dback ,1 ,wxEXPAND|wxALL, 3);
+     bdbuttonssizer->Add(m_dtrans ,1 ,wxEXPAND|wxALL, 3);
+     bdbuttonssizer->Add(m_dspeak ,1 ,wxEXPAND|wxALL, 3);
+     bdpanelsizer->Add(bdbuttonssizer, 0, wxEXPAND|wxALL, 3);
 
      wxBoxSizer *bepanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bepanelsizer->Add(boxe, 1, wxEXPAND|wxALL, 5);
+     bepanelsizer->Add(boxe, 1, wxEXPAND|wxALL, 3);
      wxBoxSizer *bebuttonssizer = new wxBoxSizer(wxVERTICAL);
      bebuttonssizer->Add(boxetext, 1, wxTOP, 1);
-     bebuttonssizer->Add(m_eback ,1 ,wxEXPAND|wxALL, 5);
-     bebuttonssizer->Add(m_confirm ,1 ,wxEXPAND|wxALL, 5);
-     bebuttonssizer->Add(m_etrans ,1 ,wxEXPAND|wxALL, 5);
-     bepanelsizer->Add(bebuttonssizer, 0, wxEXPAND|wxALL, 5);
+     bebuttonssizer->Add(m_eback ,1 ,wxEXPAND|wxALL, 3);
+     bebuttonssizer->Add(m_confirm ,1 ,wxEXPAND|wxALL, 3);
+     bebuttonssizer->Add(m_etrans ,1 ,wxEXPAND|wxALL, 3);
+     bebuttonssizer->Add(m_espeak ,1 ,wxEXPAND|wxALL, 3);
+     bepanelsizer->Add(bebuttonssizer, 0, wxEXPAND|wxALL, 3);
 
      bapanel->SetAutoLayout( true );
      bapanel->SetSizer( bapanelsizer );
@@ -852,7 +988,7 @@ void xFarDicLeitner::CreateLayout() {
      bottomsizer->Add(m_clear, 0, wxALIGN_RIGHT|wxALL, 5);
      bottomsizer->Add(m_ok, 0, wxALIGN_RIGHT|wxALL, 5);
      
-     topsizer->Add(bottomsizer, 0, wxEXPAND|wxALL, 5);
+     topsizer->Add(bottomsizer, 0, wxEXPAND|wxALL, 3);
 
      SetSizer( topsizer );
      topsizer->SetSizeHints( this );
