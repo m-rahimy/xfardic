@@ -80,15 +80,8 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     // First initialize Espeak engine
     tts = pConfig->Read(_T("TTS"), 0l);
     if (tts) { 
-        espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL,0);
-
-        espeak_SetParameter(espeakRATE, 125,0);
-        espeak_SetParameter(espeakVOLUME, 150,0);
-        espeak_SetParameter(espeakPITCH, 55,0);
-
-        // American English
-        wxString voiceName=wxT("us-mbrola-3");
-        espeak_SetVoiceByName((const char *)voiceName.mb_str(wxConvUTF8));
+        pronounce = new xFarDicPronounce();
+        pronounce->Init();
     }
 
     // Box capacity calculation
@@ -99,7 +92,7 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
 
     wxArtClient client;
 
-    wxBitmap  logo = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxSize(32,35));
+    wxBitmap logo = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxSize(32,35));
 
     staticBitmap = new wxStaticBitmap (this, -1, logo, wxPoint(10, 10));
 
@@ -391,7 +384,7 @@ void xFarDicLeitner::OnSpeakA(wxCommandEvent& event)
     boxa->GetSelections(selection);
 
     if (selection.GetCount()>0) {
-        Speak(boxa->GetString(selection[0]));
+        pronounce->Pronounce(boxa->GetString(selection[0]));
     }else{
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
@@ -407,7 +400,7 @@ void xFarDicLeitner::OnSpeakB(wxCommandEvent& event)
     boxb->GetSelections(selection);
 
     if (selection.GetCount()>0) {
-        Speak(boxb->GetString(selection[0]));
+        pronounce->Pronounce(boxb->GetString(selection[0]));
     }else{
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
@@ -423,7 +416,7 @@ void xFarDicLeitner::OnSpeakC(wxCommandEvent& event)
     boxc->GetSelections(selection);
 
     if (selection.GetCount()>0) {
-        Speak(boxc->GetString(selection[0]));
+        pronounce->Pronounce(boxc->GetString(selection[0]));
     }else{
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
@@ -439,7 +432,7 @@ void xFarDicLeitner::OnSpeakD(wxCommandEvent& event)
     boxd->GetSelections(selection);
 
     if (selection.GetCount()>0) {
-        Speak(boxd->GetString(selection[0]));
+        pronounce->Pronounce(boxd->GetString(selection[0]));
     }else{
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
@@ -455,7 +448,7 @@ void xFarDicLeitner::OnSpeakE(wxCommandEvent& event)
     boxe->GetSelections(selection);
 
     if (selection.GetCount()>0) {
-        Speak(boxe->GetString(selection[0]));
+        pronounce->Pronounce(boxe->GetString(selection[0]));
     }else{
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
@@ -895,23 +888,6 @@ void xFarDicLeitner::SubmitChanges()
     pConfig->Write(_T("/Options/LTBOX-D"), tmpStr);
 }
 
-void xFarDicLeitner::Speak(wxString strSpk) {
-    if (tts) {
-        // Espeak playback implementation
-        int synth_flags = espeakCHARS_AUTO | espeakPHONEMES | espeakENDPAUSE;
-        int size;
-
-        size = strlen(strSpk.mb_str(wxConvUTF8));
-
-        espeak_Synth(strSpk.mb_str(wxConvUTF8), size+1 ,0 ,POS_CHARACTER, 0, synth_flags, NULL, NULL);
-        espeak_Synchronize();
-
-        espeak_Cancel();
-    }
-
-    return;
-}
-
 void xFarDicLeitner::CreateLayout() {
      wxBoxSizer *topsizer = new wxBoxSizer( wxVERTICAL );
 
@@ -925,52 +901,52 @@ void xFarDicLeitner::CreateLayout() {
      wxBoxSizer *bapanelsizer = new wxBoxSizer(wxHORIZONTAL);
      bapanelsizer->Add(boxa, 1, wxEXPAND|wxALL, 3);
      wxBoxSizer *babuttonssizer = new wxBoxSizer(wxVERTICAL);
-     babuttonssizer->Add(boxatext, 1, wxTOP, 1);
-     babuttonssizer->Add(m_anext ,1 ,wxEXPAND|wxALL, 3);
-     babuttonssizer->Add(m_remove ,1 ,wxEXPAND|wxALL, 3);
-     babuttonssizer->Add(m_atrans ,1 ,wxEXPAND|wxALL, 3);
-     babuttonssizer->Add(m_aspeak ,1 ,wxEXPAND|wxALL, 3);
-     bapanelsizer->Add(babuttonssizer, 0, wxEXPAND|wxALL, 3);
+     babuttonssizer->Add(boxatext, 1, wxEXPAND|wxTOP|wxLEFT|wxRIGHT, 3);
+     babuttonssizer->Add(m_anext ,1 , wxALIGN_CENTER|wxALL, 3);
+     babuttonssizer->Add(m_remove ,1 ,wxALIGN_CENTER|wxALL, 3);
+     babuttonssizer->Add(m_atrans ,1 ,wxALIGN_CENTER|wxALL, 3);
+     babuttonssizer->Add(m_aspeak ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bapanelsizer->Add(babuttonssizer, 0, wxEXPAND|wxALL, 0);
 
      wxBoxSizer *bbpanelsizer = new wxBoxSizer(wxHORIZONTAL);
      bbpanelsizer->Add(boxb, 1, wxEXPAND|wxALL, 3);
      wxBoxSizer *bbbuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bbbuttonssizer->Add(boxbtext, 1, wxTOP, 1);
-     bbbuttonssizer->Add(m_bnext ,1 ,wxEXPAND|wxALL, 3);
-     bbbuttonssizer->Add(m_bback ,1 ,wxEXPAND|wxALL, 3);
-     bbbuttonssizer->Add(m_btrans ,1 ,wxEXPAND|wxALL, 3);
-     bbbuttonssizer->Add(m_bspeak ,1 ,wxEXPAND|wxALL, 3);
-     bbpanelsizer->Add(bbbuttonssizer, 0, wxEXPAND|wxALL, 3);
+     bbbuttonssizer->Add(boxbtext, 1,wxEXPAND|wxTOP|wxLEFT|wxRIGHT, 3);
+     bbbuttonssizer->Add(m_bnext ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bbbuttonssizer->Add(m_bback ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bbbuttonssizer->Add(m_btrans ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bbbuttonssizer->Add(m_bspeak ,1 ,wxALIGN_CENTER||wxALL, 3);
+     bbpanelsizer->Add(bbbuttonssizer, 0, wxEXPAND|wxALL, 0);
 
      wxBoxSizer *bcpanelsizer = new wxBoxSizer(wxHORIZONTAL);
      bcpanelsizer->Add(boxc, 1, wxEXPAND|wxALL, 3);
      wxBoxSizer *bcbuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bcbuttonssizer->Add(boxctext, 1, wxTOP, 1);
-     bcbuttonssizer->Add(m_cnext ,1 ,wxEXPAND|wxALL, 3);
-     bcbuttonssizer->Add(m_cback ,1 ,wxEXPAND|wxALL, 3);
-     bcbuttonssizer->Add(m_ctrans ,1 ,wxEXPAND|wxALL, 3);
-     bcbuttonssizer->Add(m_cspeak ,1 ,wxEXPAND|wxALL, 3);
-     bcpanelsizer->Add(bcbuttonssizer, 0, wxEXPAND|wxALL, 3);
+     bcbuttonssizer->Add(boxctext, 1, wxEXPAND|wxTOP|wxLEFT|wxRIGHT, 3);
+     bcbuttonssizer->Add(m_cnext ,1 ,wxALIGN_CENTER||wxALL, 3);
+     bcbuttonssizer->Add(m_cback ,1 ,wxALIGN_CENTER||wxALL, 3);
+     bcbuttonssizer->Add(m_ctrans ,1 ,wxALIGN_CENTER||wxALL, 3);
+     bcbuttonssizer->Add(m_cspeak ,1 ,wxALIGN_CENTER||wxALL, 3);
+     bcpanelsizer->Add(bcbuttonssizer, 0, wxEXPAND|wxALL, 0);
 
      wxBoxSizer *bdpanelsizer = new wxBoxSizer(wxHORIZONTAL);
      bdpanelsizer->Add(boxd, 1, wxEXPAND|wxALL, 3);
      wxBoxSizer *bdbuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bdbuttonssizer->Add(boxdtext, 1, wxTOP, 1);
-     bdbuttonssizer->Add(m_dnext ,1 ,wxEXPAND|wxALL, 3);
-     bdbuttonssizer->Add(m_dback ,1 ,wxEXPAND|wxALL, 3);
-     bdbuttonssizer->Add(m_dtrans ,1 ,wxEXPAND|wxALL, 3);
-     bdbuttonssizer->Add(m_dspeak ,1 ,wxEXPAND|wxALL, 3);
-     bdpanelsizer->Add(bdbuttonssizer, 0, wxEXPAND|wxALL, 3);
+     bdbuttonssizer->Add(boxdtext, 1, wxEXPAND|wxTOP|wxLEFT|wxRIGHT, 3);
+     bdbuttonssizer->Add(m_dnext ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bdbuttonssizer->Add(m_dback ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bdbuttonssizer->Add(m_dtrans ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bdbuttonssizer->Add(m_dspeak ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bdpanelsizer->Add(bdbuttonssizer, 0, wxEXPAND|wxALL, 0);
 
      wxBoxSizer *bepanelsizer = new wxBoxSizer(wxHORIZONTAL);
      bepanelsizer->Add(boxe, 1, wxEXPAND|wxALL, 3);
      wxBoxSizer *bebuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bebuttonssizer->Add(boxetext, 1, wxTOP, 1);
-     bebuttonssizer->Add(m_eback ,1 ,wxEXPAND|wxALL, 3);
-     bebuttonssizer->Add(m_confirm ,1 ,wxEXPAND|wxALL, 3);
-     bebuttonssizer->Add(m_etrans ,1 ,wxEXPAND|wxALL, 3);
-     bebuttonssizer->Add(m_espeak ,1 ,wxEXPAND|wxALL, 3);
-     bepanelsizer->Add(bebuttonssizer, 0, wxEXPAND|wxALL, 3);
+     bebuttonssizer->Add(boxetext, 1, wxEXPAND|wxTOP|wxLEFT|wxRIGHT, 3);
+     bebuttonssizer->Add(m_eback ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bebuttonssizer->Add(m_confirm ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bebuttonssizer->Add(m_etrans ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bebuttonssizer->Add(m_espeak ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bepanelsizer->Add(bebuttonssizer, 0, wxEXPAND|wxALL, 0);
 
      bapanel->SetAutoLayout( true );
      bapanel->SetSizer( bapanelsizer );

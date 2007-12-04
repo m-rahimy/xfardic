@@ -28,6 +28,7 @@
 #define __LEITNER_H
 
 #include "xfardic.h"
+#include "pronounce.h"
 
 class xFarDicApp;
 
@@ -75,8 +76,6 @@ public:
     void SubmitChanges();
     /// Updates boxes
     void UpdateBoxes(bool reload = FALSE); 
-    /// Pronounce the word
-    void Speak(wxString strSpk);
     /// Leitner window constructor
     ~xFarDicLeitner(); 
 
@@ -143,6 +142,8 @@ private:
                  *boxetext;
 
     wxNotebook *layout;
+
+    xFarDicPronounce *pronounce;
 
     int bacap,
         bbcap,

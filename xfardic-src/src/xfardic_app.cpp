@@ -341,15 +341,8 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     // First initialize Espeak engine
     tts = pConfig->Read(_T("TTS"), 0l);
     if (tts) { 
-        espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL,0);
-
-        espeak_SetParameter(espeakRATE, 125,0);
-        espeak_SetParameter(espeakVOLUME, 150,0);
-        espeak_SetParameter(espeakPITCH, 55,0);
-
-        // American English
-        wxString voiceName=wxT("us-mbrola-3");
-        espeak_SetVoiceByName((const char *)voiceName.mb_str(wxConvUTF8));
+        pron = new xFarDicPronounce();
+        pron->Init();
     }
  
     // if there are defined xdbs     
@@ -1894,7 +1887,7 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning)
             return 1;
         }
         if(speak){
-            Speak();
+           pron->Pronounce(m_text->GetValue());
         }
     }
 
@@ -2414,24 +2407,8 @@ void xFarDicApp::CreateLayout() {
 }
 
 void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {     
-    Speak();
+    pron->Pronounce(m_text->GetValue());
 }
 
-void xFarDicApp::Speak() {
-    if (tts) {
-        // Espeak playback implementation
-        int synth_flags = espeakCHARS_AUTO | espeakPHONEMES | espeakENDPAUSE;
-        int size;
 
-        size = strlen(m_text->GetValue().mb_str(wxConvUTF8));
-
-        espeak_Synth(m_text->GetValue().mb_str(wxConvUTF8), size+1 ,0 ,POS_CHARACTER, 0, synth_flags, NULL, NULL);
-        espeak_Synchronize();
-
-        espeak_Cancel();
-    }
-
-    m_text->SetFocus();
-    return;
-}
 

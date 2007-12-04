@@ -32,6 +32,7 @@
 #include "settings.h"
 #include "selection.h"
 #include "leitner.h"
+#include "pronounce.h"
 
 /// xFarDic Application Main Class
 class xFarDicApp : public wxFrame
@@ -147,8 +148,6 @@ public:
     void LoadLeitnerBox();
     /// Updates ltbox contents from config file
     void LoadLeitnerBoxContents();
-    /// Speaks input box value
-    void Speak();
     /// Add word to the leitner box
     void AddToLeitnerBox();
 
@@ -197,6 +196,7 @@ private:
     xFarDicAbout     *abframe;
     xFarDicSettings  *setframe;
     xFarDicLeitner   *ltframe;
+    xFarDicPronounce *pron;
     int              entryq;        
     wxFont           m_font;
     wxFontData       retData;
