@@ -649,12 +649,12 @@ bool xFarDicSettings::CheckPath(wxString dbpath)
 void xFarDicSettings::CreateLayout() {
 
 	wxBoxSizer *logoandtextSizer = new wxBoxSizer(wxHORIZONTAL);
-	logoandtextSizer->Add(settingsBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	logoandtextSizer->Add(effecttext, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	logoandtextSizer->Add(settingsBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	logoandtextSizer->Add(effecttext, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
 	wxStaticBoxSizer *staticBoxSizer = new wxStaticBoxSizer(m_setbox,wxVERTICAL);
-	staticBoxSizer->Add(logoandtextSizer,0,wxEXPAND|wxALL,5);
-	staticBoxSizer->Add(layout,1,wxEXPAND|wxALL,5);
+	staticBoxSizer->Add(logoandtextSizer,0,wxEXPAND|wxALL,2);
+	staticBoxSizer->Add(layout,1,wxEXPAND|wxALL,2);
 
 	wxGridSizer *setpanelSizer = new wxGridSizer(9,2,0,0);
 	setpanelSizer->Add(langtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
@@ -680,21 +680,21 @@ void xFarDicSettings::CreateLayout() {
 
 	wxBoxSizer *dbpanelSizer = new wxBoxSizer(wxHORIZONTAL);
 	wxBoxSizer *dbpanelrightSizer = new wxBoxSizer(wxVERTICAL);
-	dbpanelrightSizer->Add(dbpath, 1, wxEXPAND|wxALL, 5);
+	dbpanelrightSizer->Add(dbpath, 1, wxEXPAND|wxALL, 2);
 	wxBoxSizer *dbpanelrightSizerbuttons = new wxBoxSizer(wxHORIZONTAL);
-	dbpanelrightSizerbuttons->Add(dbdir, 0, wxEXPAND|wxALL, 5);
-	dbpanelrightSizerbuttons->Add(dbinfo, 0, wxEXPAND|wxALL, 5);
+	dbpanelrightSizerbuttons->Add(dbdir, 0, wxEXPAND|wxALL, 2);
+	dbpanelrightSizerbuttons->Add(dbinfo, 0, wxEXPAND|wxALL, 2);
 	wxBoxSizer *dbpanelrightSizerfirsttext = new wxBoxSizer(wxHORIZONTAL);
-	dbpanelrightSizerfirsttext->Add(notelogoBitmap1, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	dbpanelrightSizerfirsttext->Add(dbnote, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	dbpanelrightSizerfirsttext->Add(notelogoBitmap1, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	dbpanelrightSizerfirsttext->Add(dbnote, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 	wxBoxSizer *dbpanelrightSizersecondtext = new wxBoxSizer(wxHORIZONTAL);
-	dbpanelrightSizersecondtext->Add(notelogoBitmap2, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	dbpanelrightSizersecondtext->Add(swapnote, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
-	dbpanelrightSizer->Add(dbpanelrightSizerbuttons, 0, wxEXPAND|wxALL, 5);
-	dbpanelrightSizer->Add(dbpanelrightSizerfirsttext, 0, wxEXPAND|wxALL, 5);
-	dbpanelrightSizer->Add(dbpanelrightSizersecondtext, 0, wxEXPAND|wxALL, 5);
-	dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 5);
-	dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 5);
+	dbpanelrightSizersecondtext->Add(notelogoBitmap2, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	dbpanelrightSizersecondtext->Add(swapnote, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	dbpanelrightSizer->Add(dbpanelrightSizerbuttons, 0, wxEXPAND|wxALL, 2);
+	dbpanelrightSizer->Add(dbpanelrightSizerfirsttext, 0, wxEXPAND|wxALL, 2);
+	dbpanelrightSizer->Add(dbpanelrightSizersecondtext, 0, wxEXPAND|wxALL, 2);
+	dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 2);
+	dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 2);
 
 	setpanel->SetAutoLayout(true);
 	setpanel->SetSizer( setpanelSizer );
@@ -703,11 +703,11 @@ void xFarDicSettings::CreateLayout() {
 
 	wxBoxSizer *bottomSizer = new wxBoxSizer(wxHORIZONTAL);
 	bottomSizer->AddStretchSpacer(1);
-	bottomSizer->Add(m_ok, 0, wxALIGN_RIGHT, 5);
-	bottomSizer->Add(m_apply, 0, wxALIGN_RIGHT, 5);
-	bottomSizer->Add(m_cancel, 0, wxALIGN_RIGHT, 5);	
+	bottomSizer->Add(m_ok, 0, wxALIGN_RIGHT, 2);
+	bottomSizer->Add(m_apply, 0, wxALIGN_RIGHT, 2);
+	bottomSizer->Add(m_cancel, 0, wxALIGN_RIGHT, 2);	
 	
-	staticBoxSizer->Add(bottomSizer,0,wxEXPAND|wxALL,5);
+	staticBoxSizer->Add(bottomSizer,0,wxEXPAND|wxALL,2);
 
 	wxBoxSizer *topSizer = new wxBoxSizer(wxVERTICAL);
 	topSizer->Add(staticBoxSizer,
