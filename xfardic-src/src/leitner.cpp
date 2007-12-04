@@ -915,17 +915,17 @@ void xFarDicLeitner::CreateLayout() {
      bbbuttonssizer->Add(m_bnext ,1 ,wxALIGN_CENTER|wxALL, 3);
      bbbuttonssizer->Add(m_bback ,1 ,wxALIGN_CENTER|wxALL, 3);
      bbbuttonssizer->Add(m_btrans ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bbbuttonssizer->Add(m_bspeak ,1 ,wxALIGN_CENTER||wxALL, 3);
+     bbbuttonssizer->Add(m_bspeak ,1 ,wxALIGN_CENTER|wxALL, 3);
      bbpanelsizer->Add(bbbuttonssizer, 0, wxEXPAND|wxALL, 0);
 
      wxBoxSizer *bcpanelsizer = new wxBoxSizer(wxHORIZONTAL);
      bcpanelsizer->Add(boxc, 1, wxEXPAND|wxALL, 3);
      wxBoxSizer *bcbuttonssizer = new wxBoxSizer(wxVERTICAL);
      bcbuttonssizer->Add(boxctext, 1, wxEXPAND|wxTOP|wxLEFT|wxRIGHT, 3);
-     bcbuttonssizer->Add(m_cnext ,1 ,wxALIGN_CENTER||wxALL, 3);
-     bcbuttonssizer->Add(m_cback ,1 ,wxALIGN_CENTER||wxALL, 3);
-     bcbuttonssizer->Add(m_ctrans ,1 ,wxALIGN_CENTER||wxALL, 3);
-     bcbuttonssizer->Add(m_cspeak ,1 ,wxALIGN_CENTER||wxALL, 3);
+     bcbuttonssizer->Add(m_cnext ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bcbuttonssizer->Add(m_cback ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bcbuttonssizer->Add(m_ctrans ,1 ,wxALIGN_CENTER|wxALL, 3);
+     bcbuttonssizer->Add(m_cspeak ,1 ,wxALIGN_CENTER|wxALL, 3);
      bcpanelsizer->Add(bcbuttonssizer, 0, wxEXPAND|wxALL, 0);
 
      wxBoxSizer *bdpanelsizer = new wxBoxSizer(wxHORIZONTAL);
