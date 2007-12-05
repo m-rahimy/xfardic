@@ -1880,7 +1880,7 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning)
     
     notify_notification_set_timeout (n, timeout); // timeout, 0 will disable that
     
-    if (!swapupdate || !this->IsTopLevel()) {
+    if (!swapupdate) {
         if (!notify_notification_show (n, NULL)) {
             // DEBUGGING
             // fprintf(stderr, "failed to send notification\n");
