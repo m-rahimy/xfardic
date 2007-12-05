@@ -281,7 +281,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 #endif // wxUSE_MENUS
 
     m_label = new wxTextCtrl(this, ID_RES_CTRL, _T(""), wxDefaultPosition,
-                    wxSize(493, 185), 
+                    wxSize(505, 190), 
                     wxTE_MULTILINE | wxTE_READONLY);   
 
     //Get Configuration From Config File
@@ -1880,7 +1880,7 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning)
     
     notify_notification_set_timeout (n, timeout); // timeout, 0 will disable that
     
-    if (!swapupdate) {
+    if (!swapupdate || !this->IsTopLevel()) {
         if (!notify_notification_show (n, NULL)) {
             // DEBUGGING
             // fprintf(stderr, "failed to send notification\n");
