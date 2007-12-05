@@ -1208,9 +1208,9 @@ void xFarDicApp::RecreateTrToolbar()
     wxBitmap  bltbox = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxDefaultSize);
     wxBitmap  bttos = wxArtProvider::GetBitmap(wxT("sound"), client, wxDefaultSize);
 
-    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(40,34));
-    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(40,34));
-    m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(40,34));
+    m_translate = new wxBitmapButton(this, ID_BUTTON_TRANSLATE, btranslate, wxDefaultPosition, wxSize(45,34));
+    m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(45,34));
+    m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(45,34));
 
     if(!tts){
        m_ttos->Enable(FALSE);
@@ -2381,15 +2381,15 @@ void xFarDicApp::CreateLayout() {
      horizontalSizer->Add(m_translate,
                     0, //make horizontally unstretchable
                     wxALL,
-                    2);
+                    1);
      horizontalSizer->Add(m_leitnerbox,
                     0,
                     wxALL,
-                    2);
+                    1);
      horizontalSizer->Add(m_ttos,
                     0,
                     wxALL,
-                    2);
+                    1);
      wxBoxSizer *verticalSizer = new wxBoxSizer(wxVERTICAL);
      verticalSizer->Add(m_label,
                1, //make vertically stretchable
