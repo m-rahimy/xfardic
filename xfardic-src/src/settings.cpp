@@ -71,8 +71,6 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     wicon.CopyFromBitmap(micon);
     SetIcon(wicon);     
 
-    m_setbox = new wxStaticBox(this, ID_SETBOX, _T(""));
-
     wxArtClient client;
 
     wxBitmap  logo = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxSize(32,35));
@@ -284,11 +282,9 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     dbdir = new wxButton(dbpanel, wxID_ADD, _("Add"), wxDefaultPosition,wxSize(80,36));
     dbinfo = new wxButton(dbpanel, wxID_HELP, _("DB info"), wxDefaultPosition,wxSize(80,36));
    
-    notelogoBitmap1 = new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 175));
+    notelogoBitmap = new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 175));
 
     dbnote = new wxStaticText(dbpanel, -1, _("Ctrl+Click to enable or disable available database(s)."));
-
-    notelogoBitmap2 = new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 215));
 
     swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 55% and performance by 15%."));
 
@@ -652,9 +648,9 @@ void xFarDicSettings::CreateLayout() {
 	logoandtextSizer->Add(settingsBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 	logoandtextSizer->Add(effecttext, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
-	wxStaticBoxSizer *staticBoxSizer = new wxStaticBoxSizer(m_setbox,wxVERTICAL);
-	staticBoxSizer->Add(logoandtextSizer,0,wxEXPAND|wxALL,2);
-	staticBoxSizer->Add(layout,1,wxEXPAND|wxALL,2);
+	wxBoxSizer *masterSizer = new wxBoxSizer(wxVERTICAL);
+	masterSizer->Add(logoandtextSizer,0,wxEXPAND|wxALL,2);
+	masterSizer->Add(layout,1,wxEXPAND|wxALL,2);
 
 	wxGridSizer *setpanelSizer = new wxGridSizer(9,2,0,0);
 	setpanelSizer->Add(langtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
@@ -685,16 +681,16 @@ void xFarDicSettings::CreateLayout() {
 	dbpanelrightSizerbuttons->Add(dbdir, 0, wxEXPAND|wxALL, 2);
 	dbpanelrightSizerbuttons->Add(dbinfo, 0, wxEXPAND|wxALL, 2);
 	wxBoxSizer *dbpanelrightSizerfirsttext = new wxBoxSizer(wxHORIZONTAL);
-	dbpanelrightSizerfirsttext->Add(notelogoBitmap1, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	dbpanelrightSizerfirsttext->Add(notelogoBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 	dbpanelrightSizerfirsttext->Add(dbnote, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 	wxBoxSizer *dbpanelrightSizersecondtext = new wxBoxSizer(wxHORIZONTAL);
-	dbpanelrightSizersecondtext->Add(notelogoBitmap2, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+	dbpanelrightSizersecondtext->Add(notelogoBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 	dbpanelrightSizersecondtext->Add(swapnote, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 	dbpanelrightSizer->Add(dbpanelrightSizerbuttons, 0, wxEXPAND|wxALL, 2);
 	dbpanelrightSizer->Add(dbpanelrightSizerfirsttext, 0, wxEXPAND|wxALL, 2);
 	dbpanelrightSizer->Add(dbpanelrightSizersecondtext, 0, wxEXPAND|wxALL, 2);
 	dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 2);
-	dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 2);
+	dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 0);
 
 	setpanel->SetAutoLayout(true);
 	setpanel->SetSizer( setpanelSizer );
@@ -707,13 +703,13 @@ void xFarDicSettings::CreateLayout() {
 	bottomSizer->Add(m_apply, 0, wxALIGN_RIGHT, 2);
 	bottomSizer->Add(m_cancel, 0, wxALIGN_RIGHT, 2);	
 	
-	staticBoxSizer->Add(bottomSizer,0,wxEXPAND|wxALL,2);
+	masterSizer->Add(bottomSizer,0,wxEXPAND|wxALL,2);
 
 	wxBoxSizer *topSizer = new wxBoxSizer(wxVERTICAL);
-	topSizer->Add(staticBoxSizer,
+	topSizer->Add(masterSizer,
 			1, //make vertically stretchable
 			wxEXPAND|wxALL,
-			5);
+			3);
 
 	SetSizer(topSizer);
 	topSizer->Fit(this);

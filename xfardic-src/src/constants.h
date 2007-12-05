@@ -105,7 +105,6 @@ const int  ID_CUT              = 117;
 const int  ID_COPY             = 118;
 const int  ID_PASTE            = 119;
 const int  ID_SPIN_ENTRY       = 120;
-const int  ID_SETBOX           = 121;
 const int  ID_SETBOXSMALL      = 122;
 const int  ID_CHK_WINPOS       = 123;
 const int  ID_RES_CTRL         = 124;

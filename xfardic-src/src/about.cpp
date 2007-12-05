@@ -114,14 +114,14 @@ void xFarDicAbout::CreateLayout() {
      topsizer->Add(staticBitmap, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 0);
      topsizer->Add(m_titlabel, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 0);
      
-     topsizer->Add(layout, 1, wxALL|wxEXPAND, 5);
+     topsizer->Add(layout, 1, wxALL|wxEXPAND, 2);
 
      wxSizer *infopanelsizer = new wxBoxSizer(wxVERTICAL);
-     infopanelsizer->Add( m_infolabel, 1, wxEXPAND|wxALL, 5);
+     infopanelsizer->Add( m_infolabel, 1, wxEXPAND|wxALL, 2);
      wxSizer *autpanelsizer = new wxBoxSizer(wxVERTICAL);
-     autpanelsizer->Add( m_autlabel, 1, wxEXPAND|wxALL, 5);
+     autpanelsizer->Add( m_autlabel, 1, wxEXPAND|wxALL, 2);
      wxSizer *licpanelsizer = new wxBoxSizer(wxVERTICAL);
-     licpanelsizer->Add( m_liclabel, 1, wxEXPAND|wxALL, 5);
+     licpanelsizer->Add( m_liclabel, 1, wxEXPAND|wxALL, 2);
 
      infopanel->SetAutoLayout( true );
      infopanel->SetSizer( infopanelsizer );
@@ -130,7 +130,7 @@ void xFarDicAbout::CreateLayout() {
      licpanel->SetAutoLayout( true );
      licpanel->SetSizer( licpanelsizer );
 
-     topsizer->Add(m_ok, 0, wxALIGN_RIGHT|wxALL, 5);
+     topsizer->Add(m_ok, 0, wxALIGN_RIGHT|wxALL, 2);
 
      SetSizer( topsizer );
      topsizer->SetSizeHints( this );

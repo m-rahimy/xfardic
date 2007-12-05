@@ -90,15 +90,13 @@ private:
      wxStaticText *dbtext;
      wxStaticText *dbnote;
      wxStaticText *swapnote;
-     wxStaticBitmap *notelogoBitmap1;
-     wxStaticBitmap *notelogoBitmap2;
+     wxStaticBitmap *notelogoBitmap;
 
 private:
     // any class wishing to process wxWindows events must use this macro
     wxButton    *m_ok;
     wxButton    *m_apply;
     wxButton    *m_cancel;
-    wxStaticBox *m_setbox;
     wxPanel     *setpanel,
                 *dbpanel;
     wxCheckBox  *chk_select,
