@@ -1660,8 +1660,7 @@ void xFarDicApp::DoQuit()
 
     //Kill Espeak
     if(tts){
-      espeak_Cancel();
-      espeak_Terminate();
+      pron->Kill();
     }
     
     //Stop selection system

@@ -64,3 +64,9 @@ void xFarDicPronounce::Pronounce(wxString strSpk)
     return;
 }
 
+void xFarDicPronounce::Kill()
+{
+      espeak_Cancel();
+      espeak_Terminate();
+}
+

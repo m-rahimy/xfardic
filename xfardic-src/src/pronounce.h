@@ -39,6 +39,8 @@ public:
     void Init();
     /// Pronounce
     void Pronounce(wxString strSpk);
+    /// Kill Espeak
+    void Kill();
 
 private:
     bool tts;

@@ -207,6 +207,7 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
 void xFarDicLeitner::OnOK(wxCommandEvent& WXUNUSED(event))
 {
     SubmitChanges();
+    pronounce->Kill();
     Close(TRUE);
 }
 
