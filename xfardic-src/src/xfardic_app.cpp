@@ -1682,13 +1682,17 @@ void xFarDicApp::OnClose(wxCloseEvent& WXUNUSED(event))
 
 void xFarDicApp::OnBack(wxCommandEvent& WXUNUSED(event))
 {
-    translate(wordList.Item((wordList.Index(m_text->GetValue(),false))-1),TRUE);        
+    if(wordList.Index(m_text->GetValue(),false) != wxNOT_FOUND ){
+        translate(wordList.Item((wordList.Index(m_text->GetValue(),false))-1),TRUE);
+    }
     return;
 }
 
 void xFarDicApp::OnForward(wxCommandEvent& WXUNUSED(event))
-{               
-    translate(wordList.Item((wordList.Index(m_text->GetValue(),false))+1),TRUE);
+{     
+    if(wordList.Index(m_text->GetValue(),false) != wxNOT_FOUND ){          
+        translate(wordList.Item((wordList.Index(m_text->GetValue(),false))+1),TRUE);
+    }
     return;
 }
 
