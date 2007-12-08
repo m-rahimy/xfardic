@@ -80,5 +80,10 @@ using namespace std;
 
 #include "constants.h"
 
+extern bool showAspell;
+extern bool showAbout;
+extern bool showLeitner;
+extern bool showSettings;
+
 #endif
 

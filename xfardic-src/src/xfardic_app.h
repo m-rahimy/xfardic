@@ -154,12 +154,14 @@ public:
     wxLocale& m_locale;
     bool   hide;
     wxComboBox       *m_text;
+    xFarDicAbout     *abframe;
+    xFarDicSettings  *setframe;
+    xFarDicLeitner   *ltframe;
 
 private:
-     void CreateLayout();
-     wxBitmapButton *m_ttos;
+    void CreateLayout();
+    wxBitmapButton *m_ttos;
 
-private:
     wxTextCtrl       *m_label;
     wxBitmapButton   *m_translate,
                      *m_leitnerbox;
@@ -193,9 +195,6 @@ private:
             *toolsMenu;
 
     wxMenuBar        *menuBar;   
-    xFarDicAbout     *abframe;
-    xFarDicSettings  *setframe;
-    xFarDicLeitner   *ltframe;
     xFarDicPronounce *pron;
     int              entryq;        
     wxFont           m_font;

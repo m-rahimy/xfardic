@@ -263,4 +263,5 @@ Added pronounce buttons to the leitner box window.
 Improved leitner box implementation.
 Improved and simplified user interface.
 Fixed a crasher bug on back/forward actions.
+Fixed a bug related to focusing/unfocusing windows.
 

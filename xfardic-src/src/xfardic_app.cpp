@@ -44,11 +44,6 @@ wxMBConv *CharsetConv = &wxConvUTF8;
         index++; \
     }
 
-extern bool showAspell;
-extern bool showAbout;
-extern bool showLeitner;
-extern bool showSettings;
-
 BEGIN_EVENT_TABLE(xFarDicApp, wxFrame)    
     EVT_MENU(xFarDic_Translate,  xFarDicApp::OnTranslate)
     EVT_MENU(xFarDic_AddLeitner, xFarDicApp::OnLeitnerBox)

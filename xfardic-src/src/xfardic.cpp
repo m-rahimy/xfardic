@@ -194,15 +194,34 @@ void MyApp::OnTaskLeftDown(wxTaskBarIconEvent& WXUNUSED(event))
 
     if (frame->IsIconized()) {
         if (frame->hide) {
-            frame->Show(TRUE);  
-        } else {
-            frame->Raise();
-            frame->SetFocus();                                                                                    
+            frame->Show(TRUE);
+            if(!showLeitner){
+               frame->ltframe->Show(TRUE);
+            }
+            if(!showAbout){
+               frame->abframe->Show(TRUE);
+            }
+            if(!showSettings){
+               frame->setframe->Show(TRUE);
+            }
         }
+        frame->Raise();
+        frame->SetFocus();                                                                                    
     } else {
         if (frame->hide) {
-            frame->Show(FALSE);                                                                                       
-        }        
+            frame->Show(FALSE);
+            if(!showLeitner){
+               frame->ltframe->Show(FALSE);
+            }
+            if(!showAbout){
+               frame->abframe->Show(FALSE);
+            }
+            if(!showSettings){
+               frame->setframe->Show(FALSE);
+            }
+        }else{
+            frame->Iconize();
+        }
     }                                     
     //DEBUGGING
     //fprintf(stderr, "task left click\n");
