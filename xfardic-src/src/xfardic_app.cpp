@@ -287,6 +287,10 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     swap = pConfig->Read(_T("Swap"), 0l);
     swapupdate = pConfig->Read(_T("Swap-Update"), 0l); 
 
+    if (!swap && swapupdate) {
+        swapupdate = FALSE;
+    }
+
     // Check if swap file exists
     wxFile swapfile;
     wxString swappath = wxGetHomeDir()+wxT("/.xfardic.swap");

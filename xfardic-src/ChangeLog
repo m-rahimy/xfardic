@@ -264,4 +264,5 @@ Improved leitner box implementation.
 Improved and simplified user interface.
 Fixed a crasher bug on back/forward actions.
 Fixed a bug related to focusing/unfocusing windows.
+Do not update swap while swap is disabled.
 
