@@ -308,11 +308,11 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         delete tbar;
         // End Nasty hack
         vimenu->Check( xFarDic_ViewToolBar, FALSE );      
-        vtool = false;
+        vtool = FALSE;
     } else {    
         RecreateToolbar();    
         vimenu->Check( xFarDic_ViewToolBar, TRUE );      
-        vtool = true;
+        vtool = TRUE;
     } 
 
     wxString fontface = pConfig->Read(_T("Font-Face"));        
@@ -376,6 +376,9 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
                 }
             }
 
+            // Sort DB list
+            paths.Sort();
+
             for (int x=0; x < paths.GetCount(); x++) {            
                 if (paths.Item(x).Len()!=0) {
                     initDB((const char *)paths.Item(x).mb_str(wxConvUTF8));        
@@ -395,7 +398,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
         splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
         
-        fs.ChangePathTo(wxGetHomeDir(), true);
+        fs.ChangePathTo(wxGetHomeDir(), TRUE);
 
         tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
         tmpfname = tmpstr;
@@ -404,7 +407,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
         if (tmpstr.Len() > 0) {        
-            if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+            if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
                 if (tmpfname.Len()>0) {    
                     filenames.Add(tmpfname);            
                 }
@@ -418,7 +421,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
                       //DEBUGGING
                        //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
-                if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+                if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
                     if (tmpstr.Len() > 0) {    
                         if (tmpfname.Len()>0) {    
                             filenames.Add(tmpfname);            
@@ -429,7 +432,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
             }
         }
 
-        fs.ChangePathTo(wxT("/usr/share/xfardic-xdb/"), true);
+        fs.ChangePathTo(wxT("/usr/share/xfardic-xdb/"), TRUE);
 
         tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
         tmpfname = tmpstr;
@@ -438,7 +441,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
         if (tmpstr.Len() > 0) {        
-            if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+            if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
                 if (tmpfname.Len()>0) {    
                     filenames.Add(tmpfname);            
                 }
@@ -451,7 +454,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
                 //DEBUGGING
                 //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
-                if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+                if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
                     if (tmpstr.Len() > 0) {    
                         if (tmpfname.Len()>0) {    
                             filenames.Add(tmpfname);            
@@ -462,7 +465,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
             }
         }
 
-        fs.ChangePathTo(wxT("/usr/local/share/xfardic-xdb/"), true);
+        fs.ChangePathTo(wxT("/usr/local/share/xfardic-xdb/"), TRUE);
 
         tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
         tmpfname = tmpstr;
@@ -471,7 +474,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
         if (tmpstr.Len() > 0) {        
-            if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+            if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
                 if (tmpfname.Len()>0) {    
                     filenames.Add(tmpfname);            
                 }
@@ -484,7 +487,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
                 //DEBUGGING
                 //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
-                if (filenames.Index(tmpfname,false) == wxNOT_FOUND) {
+                if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
                     if (tmpstr.Len() > 0) {
                         if (tmpfname.Len()>0) {    
                             filenames.Add(tmpfname);            
@@ -525,81 +528,81 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     }
 
     if ( pConfig->Read(wxT("Auto-Select"), 1) != 0 ) {
-        select = true;
+        select = TRUE;
         opmenu->Check( xFarDic_Select, TRUE );
         if (vtool) {
             wxToolBarBase *tb = GetToolBar();
             tb->ToggleTool( ID_SELECT, TRUE );     
         }    
     } else {
-        select = false;
+        select = FALSE;
     }
     
     if ( pConfig->Read(wxT("Spell"), 1) != 0 ) {
-        spell = true;      
+        spell = TRUE;      
         opmenu->Check( xFarDic_Spell, TRUE );      
         if (vtool) {
             wxToolBarBase *tb = GetToolBar();
             tb->ToggleTool( ID_SPELL, TRUE );     
         }    
     } else {
-        spell = false;
+        spell = FALSE;
     }   
 
     if ( pConfig->Read(wxT("RevSrch"), 0l) != 0 ) {
-        revsrch = true;      
+        revsrch = TRUE;      
         opmenu->Check( xFarDic_RevSrch, TRUE );      
         if (vtool) {
             wxToolBarBase *tb = GetToolBar();
             tb->ToggleTool( ID_REVSRCH, TRUE );     
         }    
     } else {
-        revsrch = false;
+        revsrch = FALSE;
     }   
 
     if ( pConfig->Read(wxT("Watcher"), 1) != 0 ) {
-        watcher = true;      
+        watcher = TRUE;      
         opmenu->Check( xFarDic_Watcher, TRUE );  
     } else {
-        watcher = false;
+        watcher = FALSE;
     }   
 
     if ( pConfig->Read(wxT("Speak"), 0l) != 0 ) {
-        speak = true;      
+        speak = TRUE;      
     } else {
-        speak = false;
+        speak = FALSE;
     }   
 
     if ( pConfig->Read(wxT("Scanner"), 1) != 0 ) {
-        scanner = true;     
+        scanner = TRUE;     
         opmenu->Check( xFarDic_Scanner, TRUE );
     
         // Initiating word scanning system
         oSelection.Init();
         oSelection.start();    
     } else {
-        scanner = false;
+        scanner = FALSE;
 
         // Speak if scanner is enabled
-        speak = false;
+        speak = FALSE;
     }   
 
     if ( pConfig->Read(wxT("Hide"), 0l) != 0 ) {
-        hide = true;      
+        hide = TRUE;      
         opmenu->Check( xFarDic_Hide, TRUE );  
     } else {
-        hide = false;
+        hide = FALSE;
     }   
 
     if ( pConfig->Read(wxT("Srch-Similar"), 0l) != 0 ) {
-        srch = true;      
+        srch = TRUE;      
         opmenu->Check( xFarDic_Srch, TRUE );      
         if (vtool) {
             wxToolBarBase *tb = GetToolBar();
             tb->ToggleTool( ID_SRCH, TRUE );     
         }        
     } else {
-        srch = false;
+        srch = FALSE;
     }   
     
     // restore frame position
@@ -611,9 +614,9 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     int save_cache = pConfig->Read(wxT("Save-Cache"), 1);
 
     if ( save_cache != 0) {
-        cache = true;
+        cache = TRUE;
     } else {
-        cache = false;
+        cache = FALSE;
     }    
 
     entryq = pConfig->Read(wxT("Num-Entries"), 10);
@@ -673,7 +676,7 @@ void xFarDicApp::ViewToolbar(wxCommandEvent& WXUNUSED(event))
     pConfig->SetPath(wxT("/"));
     
     if ( !vtool ) {
-        vtool = true;
+        vtool = TRUE;
         delete tbar;
         RecreateToolbar();    
         vimenu->Check( xFarDic_ViewToolBar, TRUE );        
@@ -682,7 +685,7 @@ void xFarDicApp::ViewToolbar(wxCommandEvent& WXUNUSED(event))
 
     } else {
         
-        vtool = false;
+        vtool = FALSE;
         int y = tbar->GetSize().y;    
         delete tbar;
         vimenu->Check( xFarDic_ViewToolBar, FALSE );        
@@ -721,8 +724,8 @@ void xFarDicApp::OnSelect(wxCommandEvent& WXUNUSED(event))
       
     pConfig->SetPath(wxT("/"));
 
-    if ( select == true ) {
-        select = false;
+    if ( select == TRUE ) {
+        select = FALSE;
         if (vtool) {
             wxToolBarBase *tb = GetToolBar();
             tb->ToggleTool( ID_SELECT, FALSE );
@@ -733,7 +736,7 @@ void xFarDicApp::OnSelect(wxCommandEvent& WXUNUSED(event))
         pConfig->Write(wxT("/Options/Auto-Select"), 0);
 
     } else {
-        select = true;
+        select = TRUE;
         if (vtool) {
             wxToolBarBase *tb = GetToolBar();
             tb->ToggleTool( ID_SELECT, TRUE );
@@ -755,15 +758,15 @@ void xFarDicApp::OnSrch(wxCommandEvent& WXUNUSED(event))
       
     pConfig->SetPath(wxT("/"));
 
-    if ( srch == true ) {
-        srch = false;
+    if ( srch == TRUE ) {
+        srch = FALSE;
         wxToolBarBase *tb = GetToolBar();
         opmenu->Check( xFarDic_Srch, FALSE );
         tb->ToggleTool( ID_SRCH, FALSE );
         pConfig->Write(wxT("/Options/Srch-Similar"), 0);
 
     } else {
-        srch = true;
+        srch = TRUE;
         wxToolBarBase *tb = GetToolBar();
         opmenu->Check( xFarDic_Srch, TRUE );
         tb->ToggleTool( ID_SRCH, TRUE );    
@@ -789,15 +792,15 @@ void xFarDicApp::DoOnSpell()
 
     pConfig->SetPath(wxT("/"));
 
-    if ( spell == true ) {
-        spell = false;
+    if ( spell == TRUE ) {
+        spell = FALSE;
         wxToolBarBase *tb = GetToolBar();
         opmenu->Check( xFarDic_Spell, FALSE );
         tb->ToggleTool( ID_SPELL, FALSE );
         pConfig->Write(wxT("/Options/Spell"), 0);
 
     } else {
-        spell = true;
+        spell = TRUE;
         wxToolBarBase *tb = GetToolBar();
         opmenu->Check( xFarDic_Spell, TRUE );
         tb->ToggleTool( ID_SPELL, TRUE );    
@@ -823,15 +826,15 @@ void xFarDicApp::DoOnRevSrch()
       
     pConfig->SetPath(wxT("/"));
 
-    if ( revsrch == true ) {
-        revsrch = false;
+    if ( revsrch == TRUE ) {
+        revsrch = FALSE;
         wxToolBarBase *tb = GetToolBar();
         opmenu->Check( xFarDic_RevSrch, FALSE );
         tb->ToggleTool( ID_REVSRCH, FALSE );
         pConfig->Write(wxT("/Options/RevSrch"), 0);
 
     } else {
-        revsrch = true;
+        revsrch = TRUE;
         wxToolBarBase *tb = GetToolBar();
         opmenu->Check( xFarDic_RevSrch, TRUE );
         tb->ToggleTool( ID_REVSRCH, TRUE );    
@@ -849,12 +852,12 @@ void xFarDicApp::OnWatcher(wxCommandEvent& WXUNUSED(event))
       
     pConfig->SetPath(wxT("/"));
 
-    if ( watcher == true ) {
-        watcher = false;
+    if ( watcher == TRUE ) {
+        watcher = FALSE;
         opmenu->Check( xFarDic_Watcher, FALSE );
         pConfig->Write(wxT("/Options/Watcher"), 0);
     } else {
-        watcher = true;
+        watcher = TRUE;
         opmenu->Check( xFarDic_Watcher, TRUE );
         pConfig->Write(wxT("/Options/Watcher"), 1);
     }
@@ -870,15 +873,15 @@ void xFarDicApp::OnScanner(wxCommandEvent& WXUNUSED(event))
       
     pConfig->SetPath(wxT("/"));
     
-    if ( scanner == true ) {
-        scanner = false;
+    if ( scanner == TRUE ) {
+        scanner = FALSE;
 
         //Speak if scanner is enabled
-        speak = false;
+        speak = FALSE;
         opmenu->Check( xFarDic_Scanner, FALSE );
         pConfig->Write(wxT("/Options/Scanner"), 0);
     } else {
-        scanner = true;
+        scanner = TRUE;
         opmenu->Check( xFarDic_Scanner, TRUE );
         pConfig->Write(wxT("/Options/Scanner"), 1);
     }
@@ -894,12 +897,12 @@ void xFarDicApp::OnHide(wxCommandEvent& WXUNUSED(event))
       
     pConfig->SetPath(wxT("/"));
   
-    if ( hide == true ) {
-        hide = false;
+    if ( hide == TRUE ) {
+        hide = FALSE;
         opmenu->Check( xFarDic_Hide, FALSE );
         pConfig->Write(wxT("/Options/Hide"), 0);
     } else {
-        hide = true;
+        hide = TRUE;
         opmenu->Check( xFarDic_Hide, TRUE );
         pConfig->Write(wxT("/Options/Hide"), 1);
     }
@@ -1002,7 +1005,7 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
 
     if (watcher && !swapupdate) {
         if (watcher_now.Len() > 0) {
-            if (!watcher_now.IsSameAs(watcher_last, TRUE) && !watcher_now.IsSameAs(scanner_last, TRUE) && 
+            if (!watcher_now.IsSameAs(watcher_last, FALSE) && !watcher_now.IsSameAs(scanner_last, FALSE) && 
                 CheckSpell(watcher_now,0) && watcher_now.IsAscii() && watcher_now.IsWord()) {        
 
                 m_text->SetValue(watcher_now);
@@ -1016,10 +1019,10 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
 
     if (scanner && !swapupdate) {
         if (scanner_now.Len() > 0 && scanner_now != m_text->GetValue()) {
-            if (!scanner_now.IsSameAs(scanner_last, TRUE) && !scanner_now.IsSameAs(watcher_last, TRUE) && 
+            if (!scanner_now.IsSameAs(scanner_last, FALSE) && !scanner_now.IsSameAs(watcher_last, FALSE) && 
                CheckSpell(scanner_now,0) && scanner_now.IsAscii() && scanner_now.IsWord()) {        
                 m_text->SetValue(scanner_now);
-                translate(scanner_now,false,true);                    
+                translate(scanner_now,FALSE,TRUE);                    
             }
         }
     }
@@ -1232,7 +1235,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
         m_textVal = m_text->GetValue();    
     }
 
-    found = false;
+    found = FALSE;
     
     m_textVal.Trim( TRUE );
     m_textVal.Trim( FALSE );
@@ -1268,7 +1271,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
         while (y < wordList.GetCount()) {
             tmpsrchII = wordList.Item(y);
             if (tmpsrchII.Contains(m_textVal)) {
-                found = true;
+                found = TRUE;
                 if (!swap) {
                     tmpstr += meanList.Item(y) + _T(" = ") + tmpsrchII + _T("\n\n");            
                 } else {
@@ -1309,17 +1312,21 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
     } else {
         
         if (!revsrch) {
-            if (wordList.Index(m_textVal,false) != wxNOT_FOUND) {
+            if (wordList.Index(m_textVal,FALSE) != wxNOT_FOUND) {
                 wxString tmpsrchIII;
                 int j=0;
                 tmpstr = _T("");
-                found = true;
+                found = TRUE;
                 
                 if (m_label->GetValue()) {
                     if (!swap) {
                         while (j < wordList.GetCount()) {
                             tmpsrchIII = wordList.Item(j);
-                            if (tmpsrchIII.IsSameAs(m_textVal)) {
+                            if (tmpsrchIII.IsSameAs(m_textVal, FALSE)) {
+                                // DEBUGGING
+                                // fprintf(stderr, "%s\n", (const char *)wordList.Item(j).mb_str(wxConvUTF8));  
+                                // fprintf(stderr, "j:%d\n", j);
+                                // fprintf(stderr, "%s\n", (const char *)meanList.Item(j).mb_str(wxConvUTF8));  
                                 tmpstr += meanList.Item(j) + _T("\n\n");
                             }        
                             j++;
@@ -1340,7 +1347,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
                     m_label->Clear();
                     m_label->SetFont(m_font);    
                     m_label->WriteText(tmpstr);               
-                    m_text->SetValue(wordList.Item(wordList.Index(m_textVal,false)));    
+                    m_text->SetValue(wordList.Item(wordList.Index(m_textVal,FALSE)));    
                 }
                
                 if (atrans == FALSE) {
@@ -1362,7 +1369,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
                     }
                 }
             } else {
-                found = false;
+                found = FALSE;
                 m_label->SetValue(_("Phrase not found."));            
             }    
         } else {
@@ -1378,7 +1385,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
                 while (x < meanList.GetCount()) {
                     tmpsrch = meanList.Item(x);
                     if (tmpsrch.Contains(m_textVal)) {
-                        found = true;                
+                        found = TRUE;                
                         tmpstr += tmpsrch + _T(" = ") + wordList.Item(x) + _T("\n\n");
                     }
                     x++;
@@ -1403,7 +1410,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
                 //fprintf(stderr, "returned meanings:%d\n", nrow);
 
                 if (nrow > 0) {
-                    found = true;
+                    found = TRUE;
                 }
                     
                 for (int x=1; x <= nrow; x++) {            
@@ -1421,8 +1428,8 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
         }
     }
            
-    if (found && !revsrch && wordList.Index(m_text->GetValue(),false) > 0 && 
-        !(1-(wordList.Index(m_text->GetValue(),false)) == 0)) {
+    if (found && !revsrch && wordList.Index(m_text->GetValue(),FALSE) > 0 && 
+        !(1-(wordList.Index(m_text->GetValue(),FALSE)) == 0)) {
 
         if (vtool) {
             wxToolBarBase *tb = GetToolBar();
@@ -1441,7 +1448,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
         menuFile->Enable(xFarDic_Back, FALSE);    
     }
 
-    if (found && !revsrch && !((wordList.Index(m_text->GetValue(),false)) == wordList.Index(wordList.Last(),false))) {
+    if (found && !revsrch && !((wordList.Index(m_text->GetValue(),FALSE)) == wordList.Index(wordList.Last(),FALSE))) {
         if (vtool) {
             wxToolBarBase *tb = GetToolBar();
             tb->EnableTool(ID_FORWARD, TRUE);
@@ -1519,7 +1526,7 @@ wxString xFarDicApp::ShowAspell(wxArrayString sugList)
     wxSingleChoiceDialog aspelldialog(this, _("xFarDic spell checker found error(s) on your typed word.\n Please choose correct word from list and then click OK."), _("xFarDic Spell Checker"), sugList);
 
     if (aspelldialog.ShowModal() == wxID_OK) {
-       return aspelldialog.GetStringSelection();
+        return aspelldialog.GetStringSelection();
     } else {
         return wxEmptyString;
     }                
@@ -1549,7 +1556,7 @@ void xFarDicApp::ShowSettings()
                          , m_locale, wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR | wxCLOSE_BOX);       
            
         setframe->Show(TRUE);
-        showSettings = false;
+        showSettings = FALSE;
     }
 }
 
@@ -1572,7 +1579,7 @@ void xFarDicApp::ShowAbout()
                          , m_locale, wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR | wxCLOSE_BOX);
       
         abframe->Show(TRUE);
-        showAbout = false;
+        showAbout = FALSE;
     }  
 }
 
@@ -1595,7 +1602,7 @@ void xFarDicApp::ShowLeitner()
                          , m_locale, wxSYSTEM_MENU | wxCAPTION | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR | wxCLOSE_BOX);
       
         ltframe->Show(TRUE);
-        showLeitner = false;
+        showLeitner = FALSE;
     }  
 }
 
@@ -1623,7 +1630,7 @@ void xFarDicApp::DoQuit()
     
         bool bCont = pConfig->GetFirstEntry(str, dummy);
         for (int i=0; i<=textcount; i++) {
-            pConfig->DeleteEntry(str, false);     
+            pConfig->DeleteEntry(str, FALSE);     
             str = _T("");           
             pConfig->GetFirstEntry(str, dummy);
             counter++;
@@ -1672,7 +1679,7 @@ void xFarDicApp::DoQuit()
 /// Close event handles
 void xFarDicApp::OnClose(wxCloseEvent& WXUNUSED(event))
 {
-    if (hide == true) {
+    if (hide == TRUE) {
         this->Show(FALSE);
     } else {
         DoQuit();
@@ -1681,16 +1688,16 @@ void xFarDicApp::OnClose(wxCloseEvent& WXUNUSED(event))
 
 void xFarDicApp::OnBack(wxCommandEvent& WXUNUSED(event))
 {
-    if(wordList.Index(m_text->GetValue(),false) != wxNOT_FOUND ){
-        translate(wordList.Item((wordList.Index(m_text->GetValue(),false))-1),TRUE);
+    if(wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ){
+        translate(wordList.Item((wordList.Index(m_text->GetValue(),FALSE))-1),TRUE);
     }
     return;
 }
 
 void xFarDicApp::OnForward(wxCommandEvent& WXUNUSED(event))
 {     
-    if(wordList.Index(m_text->GetValue(),false) != wxNOT_FOUND ){          
-        translate(wordList.Item((wordList.Index(m_text->GetValue(),false))+1),TRUE);
+    if(wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ){          
+        translate(wordList.Item((wordList.Index(m_text->GetValue(),FALSE))+1),TRUE);
     }
     return;
 }
@@ -1731,7 +1738,7 @@ void xFarDicApp::OnLeitner(wxCommandEvent& WXUNUSED(event))
 
 void xFarDicApp::Hide(wxIconizeEvent& event)
 {    
-    if (event.Iconized() && hide == true) {
+    if (event.Iconized() && hide == TRUE) {
         this->Show(FALSE);
     } else {
         this->Show(TRUE);                                                                                       
@@ -1769,7 +1776,7 @@ bool xFarDicApp::CheckSpell(wxString chkStr, bool suggest)
             wxString msg;
             msg.Printf(_("It seems that Aspell is not installed.\nxFarDic will not work correctly."));
             wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_WARNING, this);
-            aspelli = true;
+            aspelli = TRUE;
         }
         spell =0;
         return 2;
@@ -1789,7 +1796,7 @@ bool xFarDicApp::CheckSpell(wxString chkStr, bool suggest)
         while ((word = aspell_string_enumeration_next(elements)) != NULL ) {
             // add words to suggestion list         
             size_t copies =1;
-            if (wordList.Index(UTF8_STR(word),false) != wxNOT_FOUND) {
+            if (wordList.Index(UTF8_STR(word),FALSE) != wxNOT_FOUND) {
                 sugList.Add(UTF8_STR(word),copies);    
             }
         }
@@ -1801,14 +1808,15 @@ bool xFarDicApp::CheckSpell(wxString chkStr, bool suggest)
 
 bool xFarDicApp::initDB(const char *filename) {    
     int ret, counter, returnvalue;
-    wxString tmpstr, path, insertSQL;
+    size_t copies = 1;      
+    wxString msg, tmpstr, path, insertSQL;
     wxFile xmldb;
     
     // Check if xdb file exists before parsing
     if (!xmldb.Exists(UTF8_STR(filename))) {
         // DEBUGGING
         // fprintf(stderr, "%s\n", filename);
-        return false;
+        return FALSE;
     }
    
     counter =0;     
@@ -1818,17 +1826,15 @@ bool xFarDicApp::initDB(const char *filename) {
         ret = xmlTextReaderRead(reader);
         while (ret == 1) {
             if (xmlTextReaderNodeType(reader) == 3) {
-                counter++;            
-                if (counter > 2) {                                    
-                    if (counter % 2 > 0) {            
-                       size_t copies =1;               
-                       tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));           
-                              wordList.Add(tmpstr.Lower(),copies);                
+                counter++; 
+                if (counter > 2) {                                                    
+                    if (counter % 2 > 0) {                                    
+                       tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));  
+                       wordList.Add(tmpstr.Lower(),copies);                
                     } else {
-                       size_t copies =1;
                        if (!swap || swapupdate) {
-                           tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader));                           
-                                  meanList.Add(tmpstr.Lower(),copies);
+                           tmpstr = UTF8_STR((char *)xmlTextReaderValue(reader)); 
+                           meanList.Add(tmpstr.Lower(),copies);
                        }
                     }
                 }        
@@ -1837,16 +1843,25 @@ bool xFarDicApp::initDB(const char *filename) {
             ret = xmlTextReaderRead(reader);
             // DEBUGGING      
             // fprintf(stderr, "%d\n", ret);
-        } // End while      
+        } // End while
+
+        if (meanList.GetCount() != wordList.GetCount()) {
+           msg.Printf( _("Parse Error.\n It seems that XML DB contains some errors."));
+           wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_STOP, this);
+           return FALSE;
+        }
+          
+        // DEBUGGING      
+        // fprintf(stderr, "Total Meanings:%d\n", meanList.GetCount());
+        // fprintf(stderr, "Total Words:%d\n", wordList.GetCount());
         
         xmlFreeTextReader(reader);
         xmlCleanupParser();
-        return true;
-    } else {
-        wxString msg;
+        return TRUE;
+    } else {        
         msg.Printf( _("Parse Error. Invalid Document.\n It is possible that XML-DB is not installed.\n Set XML DB path in settings window."));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_STOP, this);
-        return false;
+        return FALSE;
     }
 }
 
@@ -1864,8 +1879,8 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning)
        timeout = timeout*1000;
     }
 
-    if (meaning.Len() > 1500) {
-        meaning.Truncate(1500);
+    if (meaning.Len() > 1100) {
+        meaning.Truncate(1100);
         meaning = meaning + _T("...");
     }
 
@@ -2038,29 +2053,29 @@ wxString xFarDicApp::ProcessWord(wxString word){
     }
 
     // Check for Last ning
-    if (word.Right(4) == _T("ning") && (wordList.Index(word,false) == wxNOT_FOUND)) {
-        if (wordList.Index(word.Left(word.Len()-4),false) != wxNOT_FOUND) {
+    if (word.Right(4) == _T("ning") && (wordList.Index(word,FALSE) == wxNOT_FOUND)) {
+        if (wordList.Index(word.Left(word.Len()-4),FALSE) != wxNOT_FOUND) {
             return word.Left(word.Len()-4);
         }
     }
 
     // Check for Last zation
-    if (word.Right(6) == _T("zation") && (wordList.Index(word,false) == wxNOT_FOUND)) {
-        if (wordList.Index(word.Left(word.Len()-5)+_T("e"),false) != wxNOT_FOUND) {
+    if (word.Right(6) == _T("zation") && (wordList.Index(word,FALSE) == wxNOT_FOUND)) {
+        if (wordList.Index(word.Left(word.Len()-5)+_T("e"),FALSE) != wxNOT_FOUND) {
             return word.Left(word.Len()-5)+_T("e");
         }
     }
 
     // Check for Last ment
-    if (word.Right(4) == _T("ment") && (wordList.Index(word,false) == wxNOT_FOUND)) {
-        if (wordList.Index(word.Left(word.Len()-4),false) != wxNOT_FOUND) {
+    if (word.Right(4) == _T("ment") && (wordList.Index(word,FALSE) == wxNOT_FOUND)) {
+        if (wordList.Index(word.Left(word.Len()-4),FALSE) != wxNOT_FOUND) {
             return word.Left(word.Len()-4);
         }
     }
 
     // Check for Last ing
-    if (word.Right(3) == _T("ing") && (wordList.Index(word,false) == wxNOT_FOUND)) {
-        if (wordList.Index(word.Left(word.Len()-3)+_T("e"),false) != wxNOT_FOUND) {
+    if (word.Right(3) == _T("ing") && (wordList.Index(word,FALSE) == wxNOT_FOUND)) {
+        if (wordList.Index(word.Left(word.Len()-3)+_T("e"),FALSE) != wxNOT_FOUND) {
             return word.Left(word.Len()-3)+_T("e");
         } else {
             return word.Left(word.Len()-3);
@@ -2068,20 +2083,20 @@ wxString xFarDicApp::ProcessWord(wxString word){
     }
 
     // Check for Last s
-    if (word.Right(1) == _T("s") && (wordList.Index(word,false) == wxNOT_FOUND) && 
-        (wordList.Index(word.Left(word.Len()-1),false) != wxNOT_FOUND)) {
+    if (word.Right(1) == _T("s") && (wordList.Index(word,FALSE) == wxNOT_FOUND) && 
+        (wordList.Index(word.Left(word.Len()-1),FALSE) != wxNOT_FOUND)) {
         return word.Left(word.Len()-1);
     }
 
     // Check for Last ly
-    if (word.Right(2) == _T("ly") && (wordList.Index(word,false) == wxNOT_FOUND) && 
-        (wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND)) {
+    if (word.Right(2) == _T("ly") && (wordList.Index(word,FALSE) == wxNOT_FOUND) && 
+        (wordList.Index(word.Left(word.Len()-2),FALSE) != wxNOT_FOUND)) {
         return word.Left(word.Len()-2);
     }
 
     // Check for Last ed
     if (word.Right(2) == _T("ed")) {
-        if (wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND) {
+        if (wordList.Index(word.Left(word.Len()-2),FALSE) != wxNOT_FOUND) {
             return word.Left(word.Len()-2);
         } else {
             return word.Left(word.Len()-1);
@@ -2089,14 +2104,14 @@ wxString xFarDicApp::ProcessWord(wxString word){
     }
 
     // Check for Last es
-    if (word.Right(2) == _T("es") && (wordList.Index(word,false) == wxNOT_FOUND) && 
-        (wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND)) {
+    if (word.Right(2) == _T("es") && (wordList.Index(word,FALSE) == wxNOT_FOUND) && 
+        (wordList.Index(word.Left(word.Len()-2),FALSE) != wxNOT_FOUND)) {
         return word.Left(word.Len()-2);        
     }
 
     // Check for Last er
-    if (word.Right(2) == _T("er") && (wordList.Index(word,false) == wxNOT_FOUND) && 
-        (wordList.Index(word.Left(word.Len()-2),false) != wxNOT_FOUND)) {
+    if (word.Right(2) == _T("er") && (wordList.Index(word,FALSE) == wxNOT_FOUND) && 
+        (wordList.Index(word.Left(word.Len()-2),FALSE) != wxNOT_FOUND)) {
         return word.Left(word.Len()-2);
     }
 
@@ -2170,8 +2185,8 @@ void xFarDicApp::AddToLeitnerBox()
     ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
 
     if (ltbox.GetCount() < ltbaselimit) {
-        if (ltbox.Index(m_text->GetValue(),false) == wxNOT_FOUND && 
-            wordList.Index(m_text->GetValue(),false) != wxNOT_FOUND) {
+        if (ltbox.Index(m_text->GetValue(),FALSE) == wxNOT_FOUND && 
+            wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND) {
             ltbox.Add(m_text->GetValue());
         } else {
             msg.Printf( _("Selected word already exists in the box\nor not found in the installed database(s).\n"));
@@ -2204,7 +2219,7 @@ void xFarDicApp::AddToLeitnerBox()
     m_text->SetFocus();
 
     if(!showLeitner){
-         ltframe->UpdateBoxes(true);
+         ltframe->UpdateBoxes(TRUE);
     }
 }
 
@@ -2318,7 +2333,7 @@ bool xFarDicApp::UpdateSwap()
     // DEBUGGING
     //fprintf(stderr, "Finished swap file update/create\n");  
 
-    return true;    
+    return TRUE;    
 }
 
 void xFarDicApp::LoadLeitnerBoxContents()

@@ -54,8 +54,8 @@ void Selection::create_selection_widget()
 
 void Selection::Init()
 {
-    UTF8_STRING_Atom = gdk_atom_intern("UTF8_STRING",false);
-    COMPOUND_TEXT_Atom = gdk_atom_intern("COMPOUND_TEXT",false);
+    UTF8_STRING_Atom = gdk_atom_intern("UTF8_STRING",FALSE);
+    COMPOUND_TEXT_Atom = gdk_atom_intern("COMPOUND_TEXT",FALSE);
 
     create_selection_widget();
 }
@@ -109,7 +109,7 @@ gint Selection::TimeOutCallback(gpointer data)
                                GDK_CURRENT_TIME);
     }
 
-    return true;
+    return TRUE;
 }
 
 void Selection::SelectionReceivedCallback(GtkWidget* widget,GtkSelectionData *selection_data, guint time, Selection *oSelection)

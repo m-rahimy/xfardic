@@ -50,11 +50,11 @@ BEGIN_EVENT_TABLE(xFarDicLeitner, wxFrame)
     EVT_BUTTON(ID_BTN_REMOVE, xFarDicLeitner::OnRemoveA)
 END_EVENT_TABLE()
 
-bool showLeitner = true;
+bool showLeitner = TRUE;
 
 xFarDicLeitner::~xFarDicLeitner()
 { 
-  showLeitner = true;
+  showLeitner = TRUE;
 }
 
 /// Leitner Windows creation function
@@ -472,10 +472,10 @@ void xFarDicLeitner::OnNextA(wxCommandEvent& event)
         
         if (boxbcontents.GetCount() < bbcap) {        
             tmpStr = boxa->GetString(selection[0]);
-            if (boxbcontents.Index(tmpStr,false) == wxNOT_FOUND) {
+            if (boxbcontents.Index(tmpStr,FALSE) == wxNOT_FOUND) {
                 boxbcontents.Add(tmpStr);
             }
-            boxacontents.RemoveAt(boxacontents.Index(tmpStr,false),1);
+            boxacontents.RemoveAt(boxacontents.Index(tmpStr,FALSE),1);
 
             UpdateBoxes();
 
@@ -502,7 +502,7 @@ void xFarDicLeitner::OnRemoveA(wxCommandEvent& event)
 
     } else {
         tmpStr = boxa->GetString(selection[0]);
-        boxacontents.RemoveAt(boxacontents.Index(tmpStr,false),1);
+        boxacontents.RemoveAt(boxacontents.Index(tmpStr,FALSE),1);
 
         UpdateBoxes();
         SubmitChanges();            
@@ -522,7 +522,7 @@ void xFarDicLeitner::OnConfirm(wxCommandEvent& event)
         return;
     } else {
         tmpStr = boxe->GetString(selection[0]);
-        boxecontents.RemoveAt(boxecontents.Index(tmpStr,false),1);
+        boxecontents.RemoveAt(boxecontents.Index(tmpStr,FALSE),1);
 
         UpdateBoxes();
         SubmitChanges();            
@@ -563,10 +563,10 @@ void xFarDicLeitner::OnBackB(wxCommandEvent& event)
     } else {
         if (boxacontents.GetCount() < bacap) {        
             tmpStr = boxb->GetString(selection[0]);
-            if (boxacontents.Index(tmpStr,false) == wxNOT_FOUND) {
+            if (boxacontents.Index(tmpStr,FALSE) == wxNOT_FOUND) {
                 boxacontents.Add(tmpStr);
             }
-            boxbcontents.RemoveAt(boxbcontents.Index(tmpStr,false),1);
+            boxbcontents.RemoveAt(boxbcontents.Index(tmpStr,FALSE),1);
 
             UpdateBoxes();
 
@@ -593,10 +593,10 @@ void xFarDicLeitner::OnNextB(wxCommandEvent& event)
     } else {
         if (boxccontents.GetCount() < bccap) {        
             tmpStr = boxb->GetString(selection[0]);
-            if (boxccontents.Index(tmpStr,false) == wxNOT_FOUND) {
+            if (boxccontents.Index(tmpStr,FALSE) == wxNOT_FOUND) {
                 boxccontents.Add(tmpStr);
             }
-            boxbcontents.RemoveAt(boxbcontents.Index(tmpStr,false),1);
+            boxbcontents.RemoveAt(boxbcontents.Index(tmpStr,FALSE),1);
 
             UpdateBoxes();
 
@@ -623,10 +623,10 @@ void xFarDicLeitner::OnBackC(wxCommandEvent& event)
     } else {
         if (boxacontents.GetCount() < bacap) {        
             tmpStr = boxc->GetString(selection[0]);
-            if (boxacontents.Index(tmpStr,false) == wxNOT_FOUND) {
+            if (boxacontents.Index(tmpStr,FALSE) == wxNOT_FOUND) {
                 boxacontents.Add(tmpStr);
             }
-            boxccontents.RemoveAt(boxccontents.Index(tmpStr,false),1);
+            boxccontents.RemoveAt(boxccontents.Index(tmpStr,FALSE),1);
 
             UpdateBoxes();
 
@@ -653,10 +653,10 @@ void xFarDicLeitner::OnNextC(wxCommandEvent& event)
     } else {
         if (boxdcontents.GetCount() < bdcap) {        
             tmpStr = boxc->GetString(selection[0]);
-            if (boxdcontents.Index(tmpStr,false) == wxNOT_FOUND) {
+            if (boxdcontents.Index(tmpStr,FALSE) == wxNOT_FOUND) {
                 boxdcontents.Add(tmpStr);
             }
-            boxccontents.RemoveAt(boxccontents.Index(tmpStr,false),1);
+            boxccontents.RemoveAt(boxccontents.Index(tmpStr,FALSE),1);
 
             UpdateBoxes();
 
@@ -683,10 +683,10 @@ void xFarDicLeitner::OnBackD(wxCommandEvent& event)
     } else {
         if (boxacontents.GetCount() < bacap) {        
             tmpStr = boxd->GetString(selection[0]);
-            if (boxacontents.Index(tmpStr,false) == wxNOT_FOUND) {
+            if (boxacontents.Index(tmpStr,FALSE) == wxNOT_FOUND) {
                 boxacontents.Add(tmpStr);
             }
-            boxdcontents.RemoveAt(boxdcontents.Index(tmpStr,false),1);
+            boxdcontents.RemoveAt(boxdcontents.Index(tmpStr,FALSE),1);
 
             UpdateBoxes();
 
@@ -713,10 +713,10 @@ void xFarDicLeitner::OnNextD(wxCommandEvent& event)
     } else {
         if (boxecontents.GetCount() < becap) {        
             tmpStr = boxd->GetString(selection[0]);
-            if (boxecontents.Index(tmpStr,false) == wxNOT_FOUND) {
+            if (boxecontents.Index(tmpStr,FALSE) == wxNOT_FOUND) {
                 boxecontents.Add(tmpStr);
             }
-            boxdcontents.RemoveAt(boxdcontents.Index(tmpStr,false),1);
+            boxdcontents.RemoveAt(boxdcontents.Index(tmpStr,FALSE),1);
 
             UpdateBoxes();
 
@@ -743,10 +743,10 @@ void xFarDicLeitner::OnBackE(wxCommandEvent& event)
     } else {
         if (boxacontents.GetCount() < bacap) {        
             tmpStr = boxe->GetString(selection[0]);
-            if (boxacontents.Index(tmpStr,false) == wxNOT_FOUND) {
+            if (boxacontents.Index(tmpStr,FALSE) == wxNOT_FOUND) {
                 boxacontents.Add(tmpStr);
             }
-            boxecontents.RemoveAt(boxecontents.Index(tmpStr,false),1);
+            boxecontents.RemoveAt(boxecontents.Index(tmpStr,FALSE),1);
 
             UpdateBoxes();
 
@@ -949,15 +949,15 @@ void xFarDicLeitner::CreateLayout() {
      bebuttonssizer->Add(m_espeak ,1 ,wxALIGN_CENTER|wxALL, 3);
      bepanelsizer->Add(bebuttonssizer, 0, wxEXPAND|wxALL, 0);
 
-     bapanel->SetAutoLayout( true );
+     bapanel->SetAutoLayout( TRUE );
      bapanel->SetSizer( bapanelsizer );
-     bbpanel->SetAutoLayout( true );
+     bbpanel->SetAutoLayout( TRUE );
      bbpanel->SetSizer( bbpanelsizer );
-     bcpanel->SetAutoLayout( true );
+     bcpanel->SetAutoLayout( TRUE );
      bcpanel->SetSizer( bcpanelsizer );
-     bdpanel->SetAutoLayout( true );
+     bdpanel->SetAutoLayout( TRUE );
      bdpanel->SetSizer( bdpanelsizer );
-     bepanel->SetAutoLayout( true );
+     bepanel->SetAutoLayout( TRUE );
      bepanel->SetSizer( bepanelsizer );
 
      wxBoxSizer *bottomsizer = new wxBoxSizer(wxHORIZONTAL);

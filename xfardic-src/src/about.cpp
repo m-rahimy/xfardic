@@ -30,7 +30,7 @@ BEGIN_EVENT_TABLE(xFarDicAbout, wxFrame)
     EVT_BUTTON(wxID_CLOSE, xFarDicAbout::OnClose)    
 END_EVENT_TABLE()
 
-bool showAbout = true;
+bool showAbout = TRUE;
 
 /// OK Button Click event handler.
 void xFarDicAbout::OnClose(wxCommandEvent& WXUNUSED(event))
@@ -40,7 +40,7 @@ void xFarDicAbout::OnClose(wxCommandEvent& WXUNUSED(event))
 
 xFarDicAbout::~xFarDicAbout()
 { 
-  showAbout = true;
+  showAbout = TRUE;
 }
 
 /// About Windows creation function
@@ -123,11 +123,11 @@ void xFarDicAbout::CreateLayout() {
      wxSizer *licpanelsizer = new wxBoxSizer(wxVERTICAL);
      licpanelsizer->Add( m_liclabel, 1, wxEXPAND|wxALL, 2);
 
-     infopanel->SetAutoLayout( true );
+     infopanel->SetAutoLayout( TRUE );
      infopanel->SetSizer( infopanelsizer );
-     autpanel->SetAutoLayout( true );
+     autpanel->SetAutoLayout( TRUE );
      autpanel->SetSizer( autpanelsizer );
-     licpanel->SetAutoLayout( true );
+     licpanel->SetAutoLayout( TRUE );
      licpanel->SetSizer( licpanelsizer );
 
      topsizer->Add(m_ok, 0, wxALIGN_RIGHT|wxALL, 2);

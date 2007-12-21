@@ -54,7 +54,7 @@ BEGIN_EVENT_TABLE(xFarDicSettings, wxFrame)
     EVT_LISTBOX(ID_DB_PATH, xFarDicSettings::OnPathUpdate)
 END_EVENT_TABLE()
 
-bool showSettings = true;
+bool showSettings = TRUE;
 
 /// Settings window creation function
 xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const wxPoint& pos, const wxSize& size, wxLocale& locale, long style)
@@ -85,8 +85,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     setpanel =  new wxPanel(layout);
     dbpanel =  new wxPanel(layout);
 
-    submit = false;
-    swapupdate = false;
+    submit = FALSE;
+    swapupdate = FALSE;
 
     size_t copies =1;
     langlist.Add(_("Persian"), copies);
@@ -243,7 +243,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
                         if (CheckPath(path.Mid(0,seppos[x]))) {
                             dbs.Add(path.Mid(0,seppos[x]));
                         } else {
-                            submit = true;
+                            submit = TRUE;
                         }
                     }
                 } else if (x == seppos.GetCount()) {
@@ -252,7 +252,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
                         if (CheckPath(path.Mid(seppos[x-1]+1,path.Len()))) {
                             dbs.Add(path.Mid(seppos[x-1]+1,path.Len()));
                         } else {
-                            submit = true;
+                            submit = TRUE;
                         }
                     }
                 } else {
@@ -261,7 +261,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
                         if (CheckPath(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1))) {
                             dbs.Add(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1));
                         } else {
-                            submit = true;
+                            submit = TRUE;
                         }
                     }
                 }
@@ -270,7 +270,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
             if (CheckPath(path)) {
                 dbs.Add(path);
             } else {
-                submit = true;
+                submit = TRUE;
             }
         }    
     }
@@ -302,7 +302,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     layout->AddPage(dbpanel, _("Databases")); 
 
     //if there are changes on DBs, auto-submit changes
-    if (submit == true) {
+    if (submit == TRUE) {
         SubmitChanges();
     } 
  
@@ -313,7 +313,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 xFarDicSettings::~xFarDicSettings()
 {
     langlist.Clear();
-    showSettings = true;
+    showSettings = TRUE;
 }
 
 /// OK button click event handler.
@@ -496,7 +496,7 @@ void xFarDicSettings::OnSetDB(wxCommandEvent& WXUNUSED(event))
                            dbpath->SetStringSelection(path);
                            dbinfo->Enable(TRUE);
                             m_apply->Enable(TRUE);    
-                           swapupdate = true;
+                           swapupdate = TRUE;
         }
     }
 }
@@ -545,7 +545,7 @@ void xFarDicSettings::OnPathUpdate(wxCommandEvent& WXUNUSED(event))
         dbinfo->Enable(FALSE);
     }
 
-    swapupdate = true;   
+    swapupdate = TRUE;   
 
     // DEBUGGING
     //fprintf(stderr, "%s\n", (const char *)path.mb_str(wxConvUTF8));
@@ -618,7 +618,7 @@ bool xFarDicSettings::DB(const char *filename) {
          
         xmlFreeTextReader(reader);               
         xmlCleanupParser();
-        return true;
+        return TRUE;
 
     } else {
 
@@ -626,7 +626,7 @@ bool xFarDicSettings::DB(const char *filename) {
         msg.Printf( _("Parse Error. Invalid Document.\n"));
         //fprintf(stderr, "Unable to open %s\n", filename);
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_STOP, this);
-        return false;
+        return FALSE;
     }
 }
 
@@ -636,9 +636,9 @@ bool xFarDicSettings::CheckPath(wxString dbpath)
     
     // Check if xdb file exists before parsing
     if (xmldb.Exists(dbpath)) {
-        return true;
+        return TRUE;
     } else {
-        return false;
+        return FALSE;
     }
 }
 
@@ -692,9 +692,9 @@ void xFarDicSettings::CreateLayout() {
 	dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 2);
 	dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 0);
 
-	setpanel->SetAutoLayout(true);
+	setpanel->SetAutoLayout(TRUE);
 	setpanel->SetSizer( setpanelSizer );
-	dbpanel->SetAutoLayout(true);
+	dbpanel->SetAutoLayout(TRUE);
 	dbpanel->SetSizer( dbpanelSizer );
 
 	wxBoxSizer *bottomSizer = new wxBoxSizer(wxHORIZONTAL);
