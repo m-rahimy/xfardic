@@ -1,6 +1,6 @@
 // +-------------------------------------------------------------------------+
 // | xFarDic Multilingual Dictionary                                         |
-// | Copyright (C) 2004-2007 by the xFarDic Development Team.                |
+// | Copyright (C) 2004-2008 by the xFarDic Development Team.                |
 // | http://www.xfardic.org/                                                 |
 // +-------------------------------------------------------------------------+
 // | License:                                                                |
@@ -284,6 +284,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
     pConfig->SetPath(wxT("/Options"));
 
+    db_sort_order = pConfig->Read(_T("DB-Sort"), 0l);
     swap = pConfig->Read(_T("Swap"), 0l);
     swapupdate = pConfig->Read(_T("Swap-Update"), 0l); 
 
@@ -377,7 +378,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
             }
 
             // Sort DB list
-            paths.Sort();
+            paths.Sort(db_sort_order);
 
             for (int x=0; x < paths.GetCount(); x++) {            
                 if (paths.Item(x).Len()!=0) {
@@ -1482,7 +1483,7 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
     if (notify) {
         ShowNotification(m_textVal, m_label->GetValue());
     }
-  
+
     return found;
 }
 

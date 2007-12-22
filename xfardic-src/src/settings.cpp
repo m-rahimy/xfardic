@@ -1,6 +1,6 @@
 // +-------------------------------------------------------------------------+
 // | xFarDic Multilingual Dictionary                                         |
-// | Copyright (C) 2004-2007 by the xFarDic Development Team.                |
+// | Copyright (C) 2004-2008 by the xFarDic Development Team.                |
 // | http://www.xfardic.org/                                                 |
 // +-------------------------------------------------------------------------+
 // | License:                                                                |
@@ -33,6 +33,8 @@ BEGIN_EVENT_TABLE(xFarDicSettings, wxFrame)
     EVT_BUTTON(wxID_OK, xFarDicSettings::OnOK)
     EVT_BUTTON(wxID_APPLY, xFarDicSettings::OnApply)
     EVT_BUTTON(wxID_CANCEL, xFarDicSettings::OnCancel)
+    EVT_BUTTON(wxID_UP, xFarDicSettings::OnUp)
+    EVT_BUTTON(wxID_DOWN, xFarDicSettings::OnDown)
     EVT_BUTTON(wxID_ADD, xFarDicSettings::OnSetDB)
     EVT_BUTTON(wxID_HELP, xFarDicSettings::OnDBinfo)
     EVT_CHECKBOX(ID_CHK_SELECT, xFarDicSettings::EnableApply)
@@ -277,12 +279,25 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 
     dbtext = new wxStaticText(dbpanel, -1, _("XML DB Path:"));
 
-    dbpath = new wxListBox(dbpanel, ID_DB_PATH, wxDefaultPosition, wxDefaultSize, dbs, wxLB_EXTENDED |wxLB_NEEDED_SB);    
-
     dbdir = new wxButton(dbpanel, wxID_ADD, _("Add"), wxDefaultPosition,wxSize(80,36));
     dbinfo = new wxButton(dbpanel, wxID_HELP, _("DB info"), wxDefaultPosition,wxSize(80,36));
+    sort_up = new wxButton(dbpanel, wxID_UP, _(""), wxDefaultPosition,wxSize(80,36));
+    sort_down = new wxButton(dbpanel, wxID_DOWN, _(""), wxDefaultPosition,wxSize(80,36));
+
+    if ( pConfig->Read(_T("DB-Sort"), 0l) == 1 ) {
+      sort_up->Enable(FALSE);
+      sort_down->Enable(TRUE);
+      db_sort_order = TRUE;
+    } else {
+      sort_up->Enable(TRUE);
+      sort_down->Enable(FALSE);
+      db_sort_order = TRUE;
+    }  
+
+    dbpath = new wxListBox(dbpanel, ID_DB_PATH, wxDefaultPosition, wxDefaultSize, dbs, wxLB_EXTENDED |wxLB_NEEDED_SB);    
    
-    notelogoBitmap = new wxStaticBitmap (dbpanel, -1, notelogo, wxPoint(110, 175));
+    notelogoBitmap1 = new wxStaticBitmap (dbpanel, -1, notelogo, wxDefaultPosition);
+    notelogoBitmap2 = new wxStaticBitmap (dbpanel, -1, notelogo, wxDefaultPosition);
 
     dbnote = new wxStaticText(dbpanel, -1, _("Ctrl+Click to enable or disable available database(s)."));
 
@@ -327,6 +342,52 @@ void xFarDicSettings::OnOK(wxCommandEvent& WXUNUSED(event))
 void xFarDicSettings::OnCancel(wxCommandEvent& WXUNUSED(event))
 {
      Close(TRUE);
+}
+
+/// Up button click event handler.
+void xFarDicSettings::OnUp(wxCommandEvent& WXUNUSED(event))
+{
+    db_sort_order = TRUE;
+    dbs.Sort(db_sort_order);
+    dbpath->Set(dbs);
+    // Select items
+    for (int x=0; x < dbs.GetCount(); x++) {
+         dbpath->SetSelection(x);    
+    }
+
+    dbpath->GetSelections(dbcount);
+
+    if (dbcount.GetCount()>0) {          
+        dbinfo->Enable(TRUE);
+    } else {
+        dbinfo->Enable(FALSE);
+    }
+
+    sort_up->Enable(FALSE);
+    sort_down->Enable(TRUE);
+}
+
+/// Down button click event handler.
+void xFarDicSettings::OnDown(wxCommandEvent& WXUNUSED(event))
+{
+    db_sort_order = FALSE;
+    dbs.Sort(db_sort_order);
+    dbpath->Set(dbs);
+    // Select items
+    for (int x=0; x < dbs.GetCount(); x++) {
+         dbpath->SetSelection(x);    
+    }
+
+    dbpath->GetSelections(dbcount);
+
+    if (dbcount.GetCount()>0) {          
+        dbinfo->Enable(TRUE);
+    } else {
+        dbinfo->Enable(FALSE);
+    }
+
+    sort_up->Enable(TRUE);
+    sort_down->Enable(FALSE);
 }
 
 /// Submit config changes to the config file
@@ -427,6 +488,12 @@ void xFarDicSettings::SubmitChanges()
         pConfig->Write(wxT("/Options/Swap"), 1);
     } else {
         pConfig->Write(wxT("/Options/Swap"), 0);
+    }
+
+    if (db_sort_order) {
+        pConfig->Write(wxT("/Options/DB-Sort"), 1);
+    } else {
+        pConfig->Write(wxT("/Options/DB-Sort"), 0);
     }
 
     if (chk_winpos->GetValue()) {
@@ -534,21 +601,17 @@ void xFarDicSettings::EnableTTS(wxCommandEvent& WXUNUSED(event))
 
 void xFarDicSettings::OnPathUpdate(wxCommandEvent& WXUNUSED(event))
 {     
-    wxString path;
     m_apply->Enable(TRUE);
     
-    path = dbpath->GetStringSelection();
-   
-    if (path.Len() > 0) {    
+    dbpath->GetSelections(dbcount);
+
+    if (dbcount.GetCount()>0) {          
         dbinfo->Enable(TRUE);
     } else {
         dbinfo->Enable(FALSE);
     }
 
-    swapupdate = TRUE;   
-
-    // DEBUGGING
-    //fprintf(stderr, "%s\n", (const char *)path.mb_str(wxConvUTF8));
+    swapupdate = TRUE;    
 }
 
 void xFarDicSettings::EnableSpApply(wxSpinEvent& WXUNUSED(event))
@@ -569,10 +632,15 @@ void xFarDicSettings::OnDBinfo(wxCommandEvent& WXUNUSED(event))
             path = dbpath->GetString(x);                                    
             DB((const char *)path.mb_str(wxConvUTF8));
             if (dbname.Len()!=0 || author.Len()!=0 || version.Len()!=0 || inputlang.Len()!=0) {
-                msg += _("DB Name  : ")+dbname+_T("\n\n");
-                msg += _("DB Author : ")+author+_T("\n\n");
-                msg += _("DB Version: ")+version+_T("\n\n");
-                msg += _("Input Lang: ")+inputlang+_T("\n\n\n");
+                msg += _("DB Name  : ")+dbname+_T("\n");
+                msg += _("DB Author : ")+author+_T("\n");
+                msg += _("DB Version: ")+version+_T("\n");
+
+                if(x+1 == dbcount.GetCount()){
+                   msg += _("Input Lang: ")+inputlang;
+                }else{
+                   msg += _("Input Lang: ")+inputlang+_T("\n\n");
+                }
             } else {
                 msg = _("No information found.");
             }
@@ -644,75 +712,76 @@ bool xFarDicSettings::CheckPath(wxString dbpath)
 
 void xFarDicSettings::CreateLayout() {
 
-	wxBoxSizer *logoandtextSizer = new wxBoxSizer(wxHORIZONTAL);
-	logoandtextSizer->Add(settingsBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	logoandtextSizer->Add(effecttext, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    wxBoxSizer *logoandtextSizer = new wxBoxSizer(wxHORIZONTAL);
+    logoandtextSizer->Add(settingsBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    logoandtextSizer->Add(effecttext, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
-	wxBoxSizer *masterSizer = new wxBoxSizer(wxVERTICAL);
-	masterSizer->Add(logoandtextSizer,0,wxEXPAND|wxALL,2);
-	masterSizer->Add(layout,1,wxEXPAND|wxALL,2);
+    wxBoxSizer *masterSizer = new wxBoxSizer(wxVERTICAL);
+    masterSizer->Add(logoandtextSizer,0,wxEXPAND|wxALL,2);
+    masterSizer->Add(layout,1,wxEXPAND|wxALL,2);
 
-	wxGridSizer *setpanelSizer = new wxGridSizer(9,2,0,0);
-	setpanelSizer->Add(langtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(lang , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(settext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(numEntry , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(timeouttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(scantimeout , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(leitnertext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(leitner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_select , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_watcher , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_hide , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_speak , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_scanner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_revsrch , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_srchsim , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_winpos , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_spell , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_cache , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_swap , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	setpanelSizer->Add(chk_tts , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    wxGridSizer *setpanelSizer = new wxGridSizer(9,2,0,0);
+    setpanelSizer->Add(langtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(lang , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(settext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(numEntry , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(timeouttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(scantimeout , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(leitnertext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(leitner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_select , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_watcher , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_hide , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_speak , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_scanner , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_revsrch , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_srchsim , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_winpos , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_spell , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_cache , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_swap , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(chk_tts , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
-	wxBoxSizer *dbpanelSizer = new wxBoxSizer(wxHORIZONTAL);
-	wxBoxSizer *dbpanelrightSizer = new wxBoxSizer(wxVERTICAL);
-	dbpanelrightSizer->Add(dbpath, 1, wxEXPAND|wxALL, 2);
-	wxBoxSizer *dbpanelrightSizerbuttons = new wxBoxSizer(wxHORIZONTAL);
-	dbpanelrightSizerbuttons->Add(dbdir, 0, wxEXPAND|wxALL, 2);
-	dbpanelrightSizerbuttons->Add(dbinfo, 0, wxEXPAND|wxALL, 2);
-	wxBoxSizer *dbpanelrightSizerfirsttext = new wxBoxSizer(wxHORIZONTAL);
-	dbpanelrightSizerfirsttext->Add(notelogoBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	dbpanelrightSizerfirsttext->Add(dbnote, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	wxBoxSizer *dbpanelrightSizersecondtext = new wxBoxSizer(wxHORIZONTAL);
-	dbpanelrightSizersecondtext->Add(notelogoBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	dbpanelrightSizersecondtext->Add(swapnote, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-	dbpanelrightSizer->Add(dbpanelrightSizerbuttons, 0, wxEXPAND|wxALL, 2);
-	dbpanelrightSizer->Add(dbpanelrightSizerfirsttext, 0, wxEXPAND|wxALL, 2);
-	dbpanelrightSizer->Add(dbpanelrightSizersecondtext, 0, wxEXPAND|wxALL, 2);
-	dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 2);
-	dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 0);
+    wxBoxSizer *dbpanelSizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer *dbpanelrightSizer = new wxBoxSizer(wxVERTICAL);
+    dbpanelrightSizer->Add(dbpath, 1, wxEXPAND|wxALL, 2);
+    wxBoxSizer *dbpanelrightSizerbuttons = new wxBoxSizer(wxHORIZONTAL);
+    dbpanelrightSizerbuttons->Add(dbdir, 0, wxEXPAND|wxALL, 2);
+    dbpanelrightSizerbuttons->Add(dbinfo, 0, wxEXPAND|wxALL, 2);
+    dbpanelrightSizerbuttons->Add(sort_up, 0, wxEXPAND|wxALL, 2);
+    dbpanelrightSizerbuttons->Add(sort_down, 0, wxEXPAND|wxALL, 2);
+    wxBoxSizer *dbpanelrightSizerfirsttext = new wxBoxSizer(wxHORIZONTAL);
+    dbpanelrightSizerfirsttext->Add(notelogoBitmap1, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    dbpanelrightSizerfirsttext->Add(dbnote, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    wxBoxSizer *dbpanelrightSizersecondtext = new wxBoxSizer(wxHORIZONTAL);
+    dbpanelrightSizersecondtext->Add(notelogoBitmap2, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    dbpanelrightSizersecondtext->Add(swapnote, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    dbpanelrightSizer->Add(dbpanelrightSizerbuttons, 0, wxEXPAND|wxALL, 2);
+    dbpanelrightSizer->Add(dbpanelrightSizerfirsttext, 0, wxEXPAND|wxALL, 2);
+    dbpanelrightSizer->Add(dbpanelrightSizersecondtext, 0, wxEXPAND|wxALL, 2);
+    dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 2);
+    dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 0);
 
-	setpanel->SetAutoLayout(TRUE);
-	setpanel->SetSizer( setpanelSizer );
-	dbpanel->SetAutoLayout(TRUE);
-	dbpanel->SetSizer( dbpanelSizer );
+    setpanel->SetAutoLayout(TRUE);
+    setpanel->SetSizer( setpanelSizer );
+    dbpanel->SetAutoLayout(TRUE);
+    dbpanel->SetSizer( dbpanelSizer );
 
-	wxBoxSizer *bottomSizer = new wxBoxSizer(wxHORIZONTAL);
-	bottomSizer->AddStretchSpacer(1);
-	bottomSizer->Add(m_ok, 0, wxALIGN_RIGHT, 2);
-	bottomSizer->Add(m_apply, 0, wxALIGN_RIGHT, 2);
-	bottomSizer->Add(m_cancel, 0, wxALIGN_RIGHT, 2);	
-	
-	masterSizer->Add(bottomSizer,0,wxEXPAND|wxALL,2);
+    wxBoxSizer *bottomSizer = new wxBoxSizer(wxHORIZONTAL);
+    bottomSizer->AddStretchSpacer(1);
+    bottomSizer->Add(m_ok, 0, wxALIGN_RIGHT, 2);
+    bottomSizer->Add(m_apply, 0, wxALIGN_RIGHT, 2);
+    bottomSizer->Add(m_cancel, 0, wxALIGN_RIGHT, 2);    
+    
+    masterSizer->Add(bottomSizer,0,wxEXPAND|wxALL,2);
 
-	wxBoxSizer *topSizer = new wxBoxSizer(wxVERTICAL);
-	topSizer->Add(masterSizer,
-			1, //make vertically stretchable
-			wxEXPAND|wxALL,
-			3);
+    wxBoxSizer *topSizer = new wxBoxSizer(wxVERTICAL);
+    topSizer->Add(masterSizer,
+            1, //make vertically stretchable
+            wxEXPAND|wxALL,
+            3);
 
-	SetSizer(topSizer);
-	topSizer->Fit(this);
-	topSizer->SetSizeHints(this);
+    SetSizer(topSizer);
+    topSizer->Fit(this);
+    topSizer->SetSizeHints(this);
 }
-

@@ -1,6 +1,6 @@
 // +-------------------------------------------------------------------------+
 // | xFarDic Multilingual Dictionary                                         |
-// | Copyright (C) 2004-2007 by the xFarDic Development Team.                |
+// | Copyright (C) 2004-2008 by the xFarDic Development Team.                |
 // | http://www.xfardic.org/                                                 |
 // +-------------------------------------------------------------------------+
 // | License:                                                                |
@@ -182,7 +182,8 @@ private:
             aspelli,
             swap,
             swapupdate,
-            update;
+            update,
+            db_sort_order;
 
     size_t  m_rows;
 

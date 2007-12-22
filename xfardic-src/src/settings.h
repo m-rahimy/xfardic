@@ -1,6 +1,6 @@
 // +-------------------------------------------------------------------------+
 // | xFarDic Multilingual Dictionary                                         |
-// | Copyright (C) 2004-2007 by the xFarDic Development Team.                |
+// | Copyright (C) 2004-2008 by the xFarDic Development Team.                |
 // | http://www.xfardic.org/                                                 |
 // +-------------------------------------------------------------------------+
 // | License:                                                                |
@@ -48,6 +48,10 @@ public:
     void OnSetDB(wxCommandEvent& event); 
     /// Return DB info
     void OnDBinfo(wxCommandEvent& event); 
+    /// Up button process handler
+    void OnUp(wxCommandEvent& event);  
+    /// Down button process handler
+    void OnDown(wxCommandEvent& event);  
     /// Select check box event handler
     void OnChkSelect(wxCommandEvent& event); 
     /// Win-Pos check box event handler
@@ -77,26 +81,34 @@ public:
     /// constructor
     ~xFarDicSettings();    
 
-   wxLocale& m_locale;
+    wxLocale& m_locale;
 
 private:
-     void CreateLayout();
-     wxStaticBitmap *settingsBitmap;
-     wxStaticText *effecttext;
-     wxStaticText *langtext;
-     wxStaticText *settext;
-     wxStaticText *timeouttext;
-     wxStaticText *leitnertext;
-     wxStaticText *dbtext;
-     wxStaticText *dbnote;
-     wxStaticText *swapnote;
-     wxStaticBitmap *notelogoBitmap;
+    void CreateLayout();
 
-private:
-    // any class wishing to process wxWindows events must use this macro
-    wxButton    *m_ok;
-    wxButton    *m_apply;
-    wxButton    *m_cancel;
+    bool db_sort_order;    
+
+    wxStaticBitmap *settingsBitmap,
+                   *notelogoBitmap1,
+                   *notelogoBitmap2;
+
+    wxStaticText *effecttext,
+                 *langtext,
+                 *settext,
+                 *timeouttext,
+                 *leitnertext,
+                 *dbtext,
+                 *dbnote,
+                 *swapnote;
+
+    wxButton    *m_ok,
+                *m_apply,
+                *m_cancel,
+                *dbinfo,
+                *dbdir,
+                *sort_up,
+                *sort_down;
+
     wxPanel     *setpanel,
                 *dbpanel;
     wxCheckBox  *chk_select,
@@ -113,23 +125,24 @@ private:
                 *chk_tts;
 
     wxChoice      *lang;
-    wxArrayString langlist;
+    wxArrayString langlist,
+                  dbs;
     wxSpinCtrl    *numEntry,
                   *scantimeout,
                   *leitner;
-
-    wxButton      *dbinfo;
-    wxButton      *dbdir;
+    
     wxListBox     *dbpath;
-    wxString      strSel;
-    wxString      dbname;
-    wxString      author;
-    wxString      inputlang;
-    wxString      version, tmppath; 
+
+    wxString      strSel,
+                  dbname,
+                  author,
+                  inputlang,
+                  version,
+                  tmppath; 
 
     xmlTextReaderPtr reader;
-    wxArrayString    dbs;
-    wxArrayInt       dbcount, seppos;
+    wxArrayInt       dbcount,
+                     seppos;
     wxNotebook       *layout;
 
     DECLARE_EVENT_TABLE()
