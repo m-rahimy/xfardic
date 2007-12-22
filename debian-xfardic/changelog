@@ -1,6 +1,6 @@
-xfardic (0.9.99.1-1) unstable; urgency=low
+xfardic (0.10.0-1) unstable; urgency=low
 
   * Initial Release (Closes: #282457).
 
- -- Alan Baghumian <alan@technotux.org>  Thu, 27 Jul 2007 12:35:21 +0330
+ -- Alan Baghumian <alan@technotux.org>  Sat, 22 Dec 2007 20:08:49 +0330
 

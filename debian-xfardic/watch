@@ -1,6 +1,5 @@
-# Compulsory line, this is a version 3 file
 version=3
-http://qa.debian.org/watch/sf.php?project=xfardic xfardic-([\d.]*)-src.tar.gz
+http://heanet.dl.sourceforge.net/sourceforge/xfardic/xfardic-([\d.]*[a-z])-src.tar.gz
 
 
 
