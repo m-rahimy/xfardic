@@ -301,7 +301,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 
     dbnote = new wxStaticText(dbpanel, -1, _("Ctrl+Click to enable or disable available database(s)."));
 
-    swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 55% and performance by 15%."));
+    swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 60% and performance by 15%."));
 
     if (path.Len()!=0) {
         for (int x=0; x < dbs.GetCount(); x++) {
