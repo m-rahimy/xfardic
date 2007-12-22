@@ -254,15 +254,18 @@ New splash screen with SVG version.
 Fixed crash on UpdateSwap().
 Several code clean-ups.
 //////////////////////////////////////////////////////////////////////////////////////
-0.10.0   -- 2007-12-XX
+0.10.0   -- 2007-12-22
 Implemented dynamic sizers, Thanks Saeed Taghavi.
 Implemented TTS engine based on Espeak, Thanks Saeed Taghavi.
-Several minor fixes and clean-ups.
+Implemented database sorting buttons.
+Several minor fixes and code clean-ups.
 Added `Add to the leitner box` and `Pronounce` menu items and accelators.
 Added pronounce buttons to the leitner box window.
 Improved leitner box implementation.
 Improved and simplified user interface.
 Fixed a crasher bug on back/forward actions.
 Fixed a bug related to focusing/unfocusing windows.
+Fixed a bug in UpdateDBPaths function of settings window.
 Do not update swap while swap is disabled.
+More limited display on notification window.
 

@@ -281,8 +281,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 
     dbdir = new wxButton(dbpanel, wxID_ADD, _("Add"), wxDefaultPosition,wxSize(80,36));
     dbinfo = new wxButton(dbpanel, wxID_HELP, _("DB info"), wxDefaultPosition,wxSize(80,36));
-    sort_up = new wxButton(dbpanel, wxID_UP, _(""), wxDefaultPosition,wxSize(80,36));
-    sort_down = new wxButton(dbpanel, wxID_DOWN, _(""), wxDefaultPosition,wxSize(80,36));
+    sort_up = new wxButton(dbpanel, wxID_UP, _("Up"), wxDefaultPosition,wxSize(80,36));
+    sort_down = new wxButton(dbpanel, wxID_DOWN, _("Down"), wxDefaultPosition,wxSize(80,36));
 
     if ( pConfig->Read(_T("DB-Sort"), 0l) == 1 ) {
       sort_up->Enable(FALSE);
