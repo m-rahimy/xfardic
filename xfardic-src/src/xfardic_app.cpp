@@ -382,7 +382,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
             for (int x=0; x < paths.GetCount(); x++) {            
                 if (paths.Item(x).Len()!=0) {
-                    initDB((const char *)paths.Item(x).mb_str(wxConvUTF8));        
+                   initDB((const char *)paths.Item(x).mb_str(wxConvUTF8));        
                 }        
             }           
       
@@ -1845,13 +1845,7 @@ bool xFarDicApp::initDB(const char *filename) {
             // DEBUGGING      
             // fprintf(stderr, "%d\n", ret);
         } // End while
-
-        if (meanList.GetCount() != wordList.GetCount()) {
-           msg.Printf( _("Parse Error.\n It seems that XML DB contains some errors."));
-           wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_STOP, this);
-           return FALSE;
-        }
-          
+         
         // DEBUGGING      
         // fprintf(stderr, "Total Meanings:%d\n", meanList.GetCount());
         // fprintf(stderr, "Total Words:%d\n", wordList.GetCount());
