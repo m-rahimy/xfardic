@@ -148,7 +148,6 @@ appicon_DATA = splash.png \
 		xfardic.png
 
 mainicon_DATA = xfardic-logo.svg
-
 EXTRA_DIST = $(appicon_DATA) 
 all: all-am
 
@@ -192,15 +191,6 @@ install-appiconDATA: $(appicon_DATA)
 	  echo " $(appiconDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(appicondir)/$$f'"; \
 	  $(appiconDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(appicondir)/$$f"; \
 	done
-install-mainiconDATA: $(mainicon_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(mainicondir)" || $(mkdir_p) "$(DESTDIR)$(mainicondir)"
-	@list='$(appicon_DATA)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f=$(am__strip_dir) \
-	  echo " $(appiconDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(mainicondir)/$$f'"; \
-	  $(appiconDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(mainicondir)/$$f"; \
-	done
 
 uninstall-appiconDATA:
 	@$(NORMAL_UNINSTALL)
@@ -208,6 +198,15 @@ uninstall-appiconDATA:
 	  f=$(am__strip_dir) \
 	  echo " rm -f '$(DESTDIR)$(appicondir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(appicondir)/$$f"; \
+	done
+install-mainiconDATA: $(mainicon_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(mainicondir)" || $(mkdir_p) "$(DESTDIR)$(mainicondir)"
+	@list='$(mainicon_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(mainiconDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(mainicondir)/$$f'"; \
+	  $(mainiconDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(mainicondir)/$$f"; \
 	done
 
 uninstall-mainiconDATA:
