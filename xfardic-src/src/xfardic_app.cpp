@@ -342,7 +342,9 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     tts = pConfig->Read(_T("TTS"), 0l);
     if (tts) { 
         pron = new xFarDicPronounce();
-        pron->Init();
+        pron->Init();        
+    }else{
+        menuFile->Enable(xFarDic_Pronounce, FALSE); 
     }
  
     // if there are defined xdbs     

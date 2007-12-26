@@ -160,11 +160,11 @@ public:
 
 private:
     void CreateLayout();
-    wxBitmapButton *m_ttos;
 
     wxTextCtrl       *m_label;
     wxBitmapButton   *m_translate,
-                     *m_leitnerbox;
+                     *m_leitnerbox,
+                     *m_ttos;
     //wxPanel *panel;
     bool    m_smallToolbar,
             m_horzToolbar,
