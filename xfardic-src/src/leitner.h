@@ -28,7 +28,10 @@
 #define __LEITNER_H
 
 #include "xfardic.h"
+
+#ifdef HAVE_SPEAKLIB
 #include "pronounce.h"
+#endif
 
 class xFarDicApp;
 
@@ -143,7 +146,9 @@ private:
 
     wxNotebook *layout;
 
+#ifdef HAVE_SPEAKLIB
     xFarDicPronounce *pronounce;
+#endif
 
     int bacap,
         bbcap,

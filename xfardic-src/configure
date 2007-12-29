@@ -1252,6 +1252,7 @@ Optional Features:
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-speaklib         Use speaklib if available (default=yes)
   --with-libxml2-include      directory containing the libxml2 header files
 
 Some influential environment variables:
@@ -3720,6 +3721,23 @@ fi
 
 
 
+if test "x$prefix" = "xNONE"; then
+	prefix=/usr
+fi
+
+
+# Check whether --with-speaklib was given.
+if test "${with_speaklib+set}" = set; then
+  withval=$with_speaklib;
+	with_speaklib=$withval
+
+else
+
+	with_speaklib=yes
+
+fi
+
+
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
@@ -4045,23 +4063,31 @@ else
     echo "checking for libnotify.h...yes"
 fi
 
-LIBESPEAK_INCLUDEDIR=""
-for d in 			\
-    /usr/include/espeak\
-    $prefix/include/espeak\
-    /usr/include
-do
-    if test -f "$d/speak_lib.h" ; then
-	LIBESPEAK_INCLUDEDIR="$d"
-	break
-    fi
-done
-if test "x$LIBESPEAK_INCLUDEDIR" = "x"; then
-    { { echo "$as_me:$LINENO: error: You should have Espeak header files! Install libespeak-dev" >&5
+# speaklib configuration
+if test x$with_speaklib != xno; then
+    LIBESPEAK_INCLUDEDIR=""
+    for d in 			\
+        /usr/include/espeak\
+        $prefix/include/espeak\
+        /usr/include
+    do
+        if test -f "$d/speak_lib.h" ; then
+	    LIBESPEAK_INCLUDEDIR="$d"
+	    break
+        fi
+    done
+    if test "x$LIBESPEAK_INCLUDEDIR" = "x"; then
+        { { echo "$as_me:$LINENO: error: You should have Espeak header files! Install libespeak-dev" >&5
 echo "$as_me: error: You should have Espeak header files! Install libespeak-dev" >&2;}
    { (exit 1); exit 1; }; }
-else
-    echo "checking for speak_lib.h...yes"
+    else
+        echo "checking for speak_lib.h...yes"
+    fi
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_SPEAKLIB 1
+_ACEOF
+
 fi
 
 LIBSQLITE3_INCLUDEDIR=""
@@ -5344,4 +5370,10 @@ if test "$no_create" != yes; then
   $ac_cs_success || { (exit 1); exit 1; }
 fi
 
+
+echo ""
+echo "================ Final configuration ==================="
+echo "    Installing into prefix   : $prefix"
+echo "    Enable Espeak TTS engine : $with_speaklib"
+echo ""
 

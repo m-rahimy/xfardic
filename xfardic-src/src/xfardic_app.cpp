@@ -339,13 +339,19 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     path = path.Trim(FALSE);
 
     // First initialize Espeak engine
+#ifdef HAVE_SPEAKLIB
     tts = pConfig->Read(_T("TTS"), 0l);
-    if (tts) { 
+
+    if (tts) {
         pron = new xFarDicPronounce();
         pron->Init();        
     }else{
         menuFile->Enable(xFarDic_Pronounce, FALSE); 
     }
+#else
+    menuFile->Enable(xFarDic_Pronounce, FALSE);
+    tts = FALSE;
+#endif
  
     // if there are defined xdbs     
     if (path.Len() > 0) {
@@ -1667,10 +1673,12 @@ void xFarDicApp::DoQuit()
         pConfig->Write(wxT("/Options/y"), 0);      
     }    
 
+#ifdef HAVE_SPEAKLIB
     //Kill Espeak
     if(tts){
       pron->Kill();
     }
+#endif
     
     //Stop selection system
     oSelection.End();       
@@ -1900,9 +1908,11 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning)
             // fprintf(stderr, "failed to send notification\n");
             return 1;
         }
+#ifdef HAVE_SPEAKLIB
         if(speak){
            pron->Pronounce(m_text->GetValue());
         }
+#endif
     }
 
     delete wxConfigBase::Set((wxConfigBase *) NULL);
@@ -2420,8 +2430,10 @@ void xFarDicApp::CreateLayout() {
      topSizer->SetSizeHints(this);
 }
 
-void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {     
+void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {
+#ifdef HAVE_SPEAKLIB    
     pron->Pronounce(m_text->GetValue());
+#endif
 }
 
 

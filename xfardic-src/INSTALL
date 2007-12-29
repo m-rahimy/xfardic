@@ -31,3 +31,13 @@ Other needed packages are:
 On Debian/Ubuntu issue following command to install required libs:
 
 # apt-get install libwxgtk2.6-dev libaspell-dev libxml2-dev libgnome-desktop-dev libnotify-dev libsqlite3-dev
+
+ESpeak Build Note
+=====================
+Atleast ESpeak 1.29 is needed to use/build xFarDic without problem. 
+If you do not have ESpeak headers installed, or an old version is
+available, disable TTS support using --with-speaklib=no configure 
+switch:
+
+$ ./configure --prefix=/usr --with-speaklib=no
+

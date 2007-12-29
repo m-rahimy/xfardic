@@ -32,6 +32,7 @@ void xFarDicPronounce::Init()
     pConfig->SetPath(_T("/Options"));
 
     // First initialize Espeak engine
+#ifdef HAVE_SPEAKLIB
     tts = pConfig->Read(_T("TTS"), 0l);
     if (tts) { 
         espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL,0);
@@ -44,10 +45,14 @@ void xFarDicPronounce::Init()
         wxString voiceName=wxT("us-mbrola-3");
         espeak_SetVoiceByName((const char *)voiceName.mb_str(wxConvUTF8));
     }
+#else
+    tts = FALSE;
+#endif
 }
 
 void xFarDicPronounce::Pronounce(wxString strSpk)
 {
+#ifdef HAVE_SPEAKLIB
    if (tts) {
         // Espeak playback implementation
         int synth_flags = espeakCHARS_AUTO | espeakPHONEMES | espeakENDPAUSE;
@@ -60,13 +65,16 @@ void xFarDicPronounce::Pronounce(wxString strSpk)
 
         espeak_Cancel();
     }
+#endif
 
     return;
 }
 
 void xFarDicPronounce::Kill()
 {
+#ifdef HAVE_SPEAKLIB
       espeak_Cancel();
       espeak_Terminate();
+#endif
 }
 

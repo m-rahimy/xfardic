@@ -174,23 +174,30 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
       chk_watcher->SetValue(FALSE);
     }
 
+#ifdef HAVE_SPEAKLIB
     if ( pConfig->Read(_T("TTS"), 0l) != 0 ) {
       chk_tts->SetValue(TRUE);
     } else {
       chk_tts->SetValue(FALSE);
-    }  
+    }
 
     if ( pConfig->Read(_T("Speak"), 0l) != 0 ) {
       chk_speak->SetValue(TRUE);
     } else {
       chk_speak->SetValue(FALSE);
-    }    
-
+    }   
+#else
+    chk_tts->Enable(FALSE);
+    chk_speak->Enable(FALSE);
+#endif 
+ 
     if ( pConfig->Read(_T("Scanner"), 1) != 0 ) {
       chk_scanner->SetValue(TRUE);
+#ifdef HAVE_SPEAKLIB
       if(!chk_tts->GetValue()){
           chk_speak->Enable(FALSE);
       }
+#endif
     } else {
       chk_scanner->SetValue(FALSE);
       chk_speak->Enable(FALSE);
@@ -454,11 +461,13 @@ void xFarDicSettings::SubmitChanges()
         pConfig->Write(wxT("/Options/Scanner"), 0);
     }
 
+#ifdef HAVE_SPEAKLIB
     if (chk_tts->GetValue()) {
         pConfig->Write(wxT("/Options/TTS"), 1);
     } else {
         pConfig->Write(wxT("/Options/TTS"), 0);
     }
+#endif
 
     if (chk_speak->GetValue()) {
         pConfig->Write(wxT("/Options/Speak"), 1);
@@ -576,7 +585,8 @@ void xFarDicSettings::EnableApply(wxCommandEvent& WXUNUSED(event))
 void xFarDicSettings::EnableScanner(wxCommandEvent& WXUNUSED(event))
 {
     m_apply->Enable(TRUE);
-   
+
+#ifdef HAVE_SPEAKLIB   
     if (chk_scanner->GetValue()) {
         if(chk_tts->GetValue()){
            chk_speak->Enable(TRUE);
@@ -584,12 +594,14 @@ void xFarDicSettings::EnableScanner(wxCommandEvent& WXUNUSED(event))
     }else{
         chk_speak->Enable(FALSE);
     }
+#endif
 }
 
 void xFarDicSettings::EnableTTS(wxCommandEvent& WXUNUSED(event))
 {
     m_apply->Enable(TRUE);
-   
+
+#ifdef HAVE_SPEAKLIB   
     if (chk_tts->GetValue()) {
         if(chk_scanner->GetValue()){
            chk_speak->Enable(TRUE);
@@ -597,6 +609,7 @@ void xFarDicSettings::EnableTTS(wxCommandEvent& WXUNUSED(event))
     }else{
         chk_speak->Enable(FALSE);
     }
+#endif
 }
 
 void xFarDicSettings::OnPathUpdate(wxCommandEvent& WXUNUSED(event))

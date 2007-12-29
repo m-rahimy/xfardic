@@ -32,7 +32,10 @@
 #include "settings.h"
 #include "selection.h"
 #include "leitner.h"
+
+#ifdef HAVE_SPEAKLIB
 #include "pronounce.h"
+#endif
 
 /// xFarDic Application Main Class
 class xFarDicApp : public wxFrame
@@ -195,8 +198,12 @@ private:
             *menuFile,
             *toolsMenu;
 
-    wxMenuBar        *menuBar;   
+    wxMenuBar        *menuBar;
+
+#ifdef HAVE_SPEAKLIB
     xFarDicPronounce *pron;
+#endif
+
     int              entryq;        
     wxFont           m_font;
     wxFontData       retData;

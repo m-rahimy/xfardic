@@ -78,11 +78,15 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     bacap = pConfig->Read(_T("Leitner-Base"), 10);
 
     // First initialize Espeak engine
+#ifdef HAVE_SPEAKLIB
     tts = pConfig->Read(_T("TTS"), 0l);
     if (tts) { 
         pronounce = new xFarDicPronounce();
         pronounce->Init();
     }
+#else
+    tts = FALSE;
+#endif   
 
     // Box capacity calculation
     bbcap = bacap * 2;
@@ -207,7 +211,11 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
 void xFarDicLeitner::OnOK(wxCommandEvent& WXUNUSED(event))
 {
     SubmitChanges();
-    pronounce->Kill();
+#ifdef HAVE_SPEAKLIB
+    if(tts){
+       pronounce->Kill();
+    }
+#endif
     Close(TRUE);
 }
 
@@ -383,7 +391,7 @@ void xFarDicLeitner::OnSpeakA(wxCommandEvent& event)
     wxString msg;
     
     boxa->GetSelections(selection);
-
+#ifdef HAVE_SPEAKLIB
     if (selection.GetCount()>0) {
         pronounce->Pronounce(boxa->GetString(selection[0]));
     }else{
@@ -391,6 +399,7 @@ void xFarDicLeitner::OnSpeakA(wxCommandEvent& event)
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
     }
+#endif
 }
 
 void xFarDicLeitner::OnSpeakB(wxCommandEvent& event)
@@ -399,7 +408,7 @@ void xFarDicLeitner::OnSpeakB(wxCommandEvent& event)
     wxString msg;
     
     boxb->GetSelections(selection);
-
+#ifdef HAVE_SPEAKLIB
     if (selection.GetCount()>0) {
         pronounce->Pronounce(boxb->GetString(selection[0]));
     }else{
@@ -407,6 +416,7 @@ void xFarDicLeitner::OnSpeakB(wxCommandEvent& event)
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
     }
+#endif
 }
 
 void xFarDicLeitner::OnSpeakC(wxCommandEvent& event)
@@ -415,7 +425,7 @@ void xFarDicLeitner::OnSpeakC(wxCommandEvent& event)
     wxString msg;
     
     boxc->GetSelections(selection);
-
+#ifdef HAVE_SPEAKLIB
     if (selection.GetCount()>0) {
         pronounce->Pronounce(boxc->GetString(selection[0]));
     }else{
@@ -423,6 +433,7 @@ void xFarDicLeitner::OnSpeakC(wxCommandEvent& event)
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
     }
+#endif
 }
 
 void xFarDicLeitner::OnSpeakD(wxCommandEvent& event)
@@ -431,7 +442,7 @@ void xFarDicLeitner::OnSpeakD(wxCommandEvent& event)
     wxString msg;
     
     boxd->GetSelections(selection);
-
+#ifdef HAVE_SPEAKLIB
     if (selection.GetCount()>0) {
         pronounce->Pronounce(boxd->GetString(selection[0]));
     }else{
@@ -439,6 +450,7 @@ void xFarDicLeitner::OnSpeakD(wxCommandEvent& event)
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
     }
+#endif
 }
 
 void xFarDicLeitner::OnSpeakE(wxCommandEvent& event)
@@ -447,7 +459,7 @@ void xFarDicLeitner::OnSpeakE(wxCommandEvent& event)
     wxString msg;
     
     boxe->GetSelections(selection);
-
+#ifdef HAVE_SPEAKLIB
     if (selection.GetCount()>0) {
         pronounce->Pronounce(boxe->GetString(selection[0]));
     }else{
@@ -455,6 +467,7 @@ void xFarDicLeitner::OnSpeakE(wxCommandEvent& event)
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
     }
+#endif
 }
 
 void xFarDicLeitner::OnNextA(wxCommandEvent& event)
