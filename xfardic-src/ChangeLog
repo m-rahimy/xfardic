@@ -273,7 +273,8 @@ More limited display on notification window.
 Fixed a crasher bug in InitDB function.
 //////////////////////////////////////////////////////////////////////////////////////
 0.10.1     -- 2008-01-xx
-Fixed a crasher bug if tts menu item is enabled while tts engine is disabled.
-Fixed a crasher bug on the leitner box window if tts engine is disabled.
-Implemented --with-speaklib to enable/disable tts engine support. 
+Fixed a crasher bug if tts menu item is enabled while TTS engine is disabled.
+Fixed a crasher bug on the leitner box window if TTS engine is disabled.
+Fixed missing event handler for confirm button on the leitner box.
+Implemented --with-speaklib to enable/disable TTS engine support.
 

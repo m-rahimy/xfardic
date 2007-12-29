@@ -48,6 +48,7 @@ BEGIN_EVENT_TABLE(xFarDicLeitner, wxFrame)
     EVT_BUTTON(ID_BTN_SPK_D, xFarDicLeitner::OnSpeakD)
     EVT_BUTTON(ID_BTN_SPK_E, xFarDicLeitner::OnSpeakE)
     EVT_BUTTON(ID_BTN_REMOVE, xFarDicLeitner::OnRemoveA)
+    EVT_BUTTON(ID_BTN_CONFIRM, xFarDicLeitner::OnConfirm)
 END_EVENT_TABLE()
 
 bool showLeitner = TRUE;
@@ -533,6 +534,7 @@ void xFarDicLeitner::OnConfirm(wxCommandEvent& event)
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
+
     } else {
         tmpStr = boxe->GetString(selection[0]);
         boxecontents.RemoveAt(boxecontents.Index(tmpStr,FALSE),1);
