@@ -526,7 +526,8 @@ void xFarDicLeitner::OnRemoveA(wxCommandEvent& event)
 void xFarDicLeitner::OnConfirm(wxCommandEvent& event)
 {
     wxArrayInt selection;
-    wxString tmpStr, msg;    
+    wxString tmpStr, msg;
+    wxMessageDialog *confirm; 
 
     boxe->GetSelections(selection);
 
@@ -536,11 +537,16 @@ void xFarDicLeitner::OnConfirm(wxCommandEvent& event)
         return;
 
     } else {
-        tmpStr = boxe->GetString(selection[0]);
-        boxecontents.RemoveAt(boxecontents.Index(tmpStr,FALSE),1);
-
-        UpdateBoxes();
-        SubmitChanges();            
+        msg.Printf( _("Are you sure that you have learnt this word?\n"));
+        confirm = new wxMessageDialog(this, msg, _T("xFarDic"), wxYES_NO | wxNO_DEFAULT | wxICON_EXCLAMATION | wxSTAY_ON_TOP);
+        
+        if (confirm->ShowModal() == wxID_YES) {
+            tmpStr = boxe->GetString(selection[0]);
+            boxecontents.RemoveAt(boxecontents.Index(tmpStr,FALSE),1);
+        
+            UpdateBoxes();
+            SubmitChanges();            
+        }
     }
 }
 
