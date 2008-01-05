@@ -229,7 +229,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     opmenu->Append(xFarDic_Hide, _("Enable &Hide On Minimize and Close\tCtrl-H"), _("Enable hide on minimize and close"), wxITEM_CHECK);
     opmenu->Append(xFarDic_Spell, _("Enable S&pell Checking\tCtrl-P"), _("Enable spell checking"), wxITEM_CHECK);
     opmenu->Append(xFarDic_RevSrch, _("Enable Inexact &Reverse Searching\tCtrl-R"), _("Enable inexact reverse searchning"), wxITEM_CHECK);
-    opmenu->Append(xFarDic_Notification, _("Enable Notification Window"), _("Enable notification window"), wxITEM_CHECK);
+    opmenu->Append(xFarDic_Notification, _("Enable N&otification Window\tCtrl-O"), _("Enable notification window"), wxITEM_CHECK);
 
     opmenu->AppendSeparator();
     
@@ -347,7 +347,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     if (tts) {
         pron = new xFarDicPronounce();
         pron->Init();        
-    }else{
+    }else {
         menuFile->Enable(xFarDic_Pronounce, FALSE); 
     }
 #else
@@ -1045,12 +1045,14 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
     if (watcher && !swapupdate) {
         if (watcher_now.Len() > 0) {
             if (!watcher_now.IsSameAs(watcher_last, FALSE) && !watcher_now.IsSameAs(scanner_last, FALSE) && 
-                CheckSpell(watcher_now,0) && watcher_now.IsAscii() && watcher_now.IsWord()) {        
-
+               CheckSpell(watcher_now,0) && watcher_now.IsAscii() && watcher_now.IsWord()) {        
                 m_text->SetValue(watcher_now);
-                if (translate(watcher_now)) {            
+                if (!notification) {           
+                    translate(watcher_now);
                     this->Raise();
                     this->SetFocus();
+                }else {
+                    translate(watcher_now,FALSE,TRUE);
                 }
             }
         }
@@ -1061,7 +1063,13 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
             if (!scanner_now.IsSameAs(scanner_last, FALSE) && !scanner_now.IsSameAs(watcher_last, FALSE) && 
                CheckSpell(scanner_now,0) && scanner_now.IsAscii() && scanner_now.IsWord()) {        
                 m_text->SetValue(scanner_now);
-                translate(scanner_now,FALSE,TRUE);                    
+                if (!notification) {           
+                    translate(watcher_now);
+                    this->Raise();
+                    this->SetFocus();
+                }else {
+                    translate(watcher_now,FALSE,TRUE);
+                }
             }
         }
     }
@@ -1253,7 +1261,7 @@ void xFarDicApp::RecreateTrToolbar()
     m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(45,34));
     m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(45,34));
 
-    if (!tts){
+    if (!tts) {
        m_ttos->Enable(FALSE);
     }
 
@@ -1518,7 +1526,13 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
         }
     }
 
-    if (notify) {
+#ifdef HAVE_SPEAKLIB
+    if (speak) {
+        pron->Pronounce(m_text->GetValue());
+    }
+#endif
+
+    if (notify && notification) {
         ShowNotification(m_textVal, m_label->GetValue());
     }
 
@@ -1696,16 +1710,22 @@ void xFarDicApp::DoQuit()
         int x, y;
         GetPosition(&x, &y);
         pConfig->Write(wxT("/Options/x"), (long) x);
-        pConfig->Write(wxT("/Options/y"), (long) y);      
+        pConfig->Write(wxT("/Options/y"), (long) y);
     } else {
         pConfig->Write(wxT("/Options/Win-Pos"), 0);
         pConfig->Write(wxT("/Options/x"), 0);
         pConfig->Write(wxT("/Options/y"), 0);      
-    }    
+    }
+
+    if (this->IsMaximized()) {
+        pConfig->Write(wxT("/Options/IsMaximized"), 1);
+    }else {
+        pConfig->Write(wxT("/Options/IsMaximized"), 0);
+    }
 
 #ifdef HAVE_SPEAKLIB
     //Kill Espeak
-    if (tts){
+    if (tts) {
       pron->Kill();
     }
 #endif
@@ -1729,7 +1749,7 @@ void xFarDicApp::OnClose(wxCloseEvent& WXUNUSED(event))
 
 void xFarDicApp::OnBack(wxCommandEvent& WXUNUSED(event))
 {
-    if (wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ){
+    if (wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ) {
         translate(wordList.Item((wordList.Index(m_text->GetValue(),FALSE))-1),TRUE);
     }
     return;
@@ -1737,7 +1757,7 @@ void xFarDicApp::OnBack(wxCommandEvent& WXUNUSED(event))
 
 void xFarDicApp::OnForward(wxCommandEvent& WXUNUSED(event))
 {     
-    if (wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ){          
+    if (wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ) {          
         translate(wordList.Item((wordList.Index(m_text->GetValue(),FALSE))+1),TRUE);
     }
     return;
@@ -1943,17 +1963,12 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning)
             // fprintf(stderr, "failed to send notification\n");
             return TRUE;
         }
-#ifdef HAVE_SPEAKLIB
-        if (speak) {
-            pron->Pronounce(m_text->GetValue());
-        }
-#endif
     }
 
     delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
 
-wxString xFarDicApp::ProcessWord(wxString word){
+wxString xFarDicApp::ProcessWord(wxString word) {
     wxString LastChar, FirstChar;
 
     FirstChar = word;
@@ -2260,7 +2275,7 @@ void xFarDicApp::AddToLeitnerBox()
 
     m_text->SetFocus();
 
-    if (!showLeitner){
+    if (!showLeitner) {
          ltframe->UpdateBoxes(TRUE);
     }
 }
@@ -2364,7 +2379,7 @@ bool xFarDicApp::UpdateSwap()
     delete prog;
 
     // Emptying meanings list after update
-    if (meanList.GetCount() > 0){
+    if (meanList.GetCount() > 0) {
         meanList.Empty();  
     }
 

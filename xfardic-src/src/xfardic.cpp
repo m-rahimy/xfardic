@@ -127,30 +127,30 @@ bool MyApp::OnInit()
     m_locale.AddCatalog(_T("fileutils"));
 
     //DEBUGGING
-    //fprintf(stderr, "Going to starting Frame\n");    
+    //fprintf(stderr, "Going to starting Frame\n");   
+
+    // restore frame position & state
+    int x = pConfig->Read(_T("x"), 0l);
+    int y = pConfig->Read(_T("y"), 0l);
+    bool maximized = pConfig->Read(_T("IsMaximized"), 0l);
 
     // create the main application window
-    frame = new xFarDicApp(_T("xFarDic ")XVERSION, wxDefaultPosition, wxDefaultSize, m_locale,
-                           wxDEFAULT_FRAME_STYLE);
+    frame = new xFarDicApp(_T("xFarDic ")XVERSION, wxPoint(x,y), wxDefaultSize, m_locale,
+                       wxDEFAULT_FRAME_STYLE);
 
     //DEBUGGING
     //fprintf(stderr, "Frame Started\n");    
-               
-    // uncomment this to force writing back of the defaults for all values
-    // if they're not present in the config - this can give the user an idea
-    // of all possible settings for this program
-    // pConfig->SetRecordDefaults();
-
-    // restore frame position
-    int x = pConfig->Read(_T("x"), 0l);
-    int y = pConfig->Read(_T("y"), 0l);
-    int saved = pConfig->Read(_T("Save-Cache"), 1);    
-
-    if (x == 0 && y ==0) {
+                 
+    if (x == 0 && y == 0) {
         frame->Centre();
     }
 
+    if (maximized) {
+        frame->Maximize();
+    }
+
     // translate sent argument or first cached word
+    int saved = pConfig->Read(_T("Save-Cache"), 1);
 
     if (Param.Len() != 0 && frame->CheckSpell(Param,0)) {
         pConfig->Write(wxT("/Options/Temp-String"), Param);
@@ -195,13 +195,13 @@ void MyApp::OnTaskLeftDown(wxTaskBarIconEvent& WXUNUSED(event))
     if (frame->IsIconized()) {
         if (frame->hide) {
             frame->Show(TRUE);
-            if(!showLeitner){
+            if (!showLeitner) {
                frame->ltframe->Show(TRUE);
             }
-            if(!showAbout){
+            if (!showAbout) {
                frame->abframe->Show(TRUE);
             }
-            if(!showSettings){
+            if (!showSettings) {
                frame->setframe->Show(TRUE);
             }
         }
@@ -210,16 +210,16 @@ void MyApp::OnTaskLeftDown(wxTaskBarIconEvent& WXUNUSED(event))
     } else {
         if (frame->hide) {
             frame->Show(FALSE);
-            if(!showLeitner){
+            if (!showLeitner) {
                frame->ltframe->Show(FALSE);
             }
-            if(!showAbout){
+            if (!showAbout) {
                frame->abframe->Show(FALSE);
             }
-            if(!showSettings){
+            if (!showSettings) {
                frame->setframe->Show(FALSE);
             }
-        }else{
+        }else {
             frame->Iconize();
         }
     }                                     

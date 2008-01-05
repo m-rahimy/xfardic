@@ -275,10 +275,13 @@ Fixed a crasher bug in InitDB function.
 0.10.1     -- 2008-01-xx
 Fixed a crasher bug if tts menu item is enabled while TTS engine is disabled.
 Fixed a crasher bug on the leitner box window if TTS engine is disabled.
-Fixed missing event handler for confirm button on the leitner box.
 Fixed a wrong string in the settings window.
+Fixed a bug in main window position restoration.
+Fixed an acceleator conflict in the settings window.
+Fixed missing event handler for confirm button on the leitner box.
 Implemented --with-speaklib to enable/disable TTS engine support.
+Improved elements arrangement in the settings window.
 Ask for a confirmation before deleting the selected word from box E.
 Added an option to enable/disable notification window.
-
+Save maximized window state.
 

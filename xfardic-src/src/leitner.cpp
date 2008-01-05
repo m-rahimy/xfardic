@@ -170,7 +170,7 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     m_dtrans = new wxBitmapButton(bdpanel, ID_BTN_TRANS_D, trans, wxDefaultPosition,wxSize(80,36));
     m_etrans = new wxBitmapButton(bepanel, ID_BTN_TRANS_E, trans, wxDefaultPosition,wxSize(80,36));
 
-    if (! watcher){
+    if (! watcher) {
        m_atrans->Enable(FALSE);
        m_btrans->Enable(FALSE);
        m_ctrans->Enable(FALSE);
@@ -184,7 +184,7 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     m_dspeak = new wxBitmapButton(bdpanel, ID_BTN_SPK_D, bttos, wxDefaultPosition,wxSize(80,36));
     m_espeak = new wxBitmapButton(bepanel, ID_BTN_SPK_E, bttos, wxDefaultPosition,wxSize(80,36));
 
-    if (! tts){
+    if (! tts) {
        m_aspeak->Enable(FALSE);
        m_bspeak->Enable(FALSE);
        m_cspeak->Enable(FALSE);
@@ -222,7 +222,7 @@ void xFarDicLeitner::OnOK(wxCommandEvent& WXUNUSED(event))
 {
     SubmitChanges();
 #ifdef HAVE_SPEAKLIB
-    if(tts){
+    if (tts) {
        pronounce->Kill();
     }
 #endif
@@ -291,7 +291,7 @@ void xFarDicLeitner::OnTranslateA(wxCommandEvent& event)
 
     if (selection.GetCount()>0) {
         tmpStr = boxa->GetString(selection[0]);
-    }else{
+    }else {
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
@@ -314,7 +314,7 @@ void xFarDicLeitner::OnTranslateB(wxCommandEvent& event)
 
     if (selection.GetCount()>0) {
         tmpStr = boxb->GetString(selection[0]);
-    }else{
+    }else {
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
@@ -337,7 +337,7 @@ void xFarDicLeitner::OnTranslateC(wxCommandEvent& event)
 
     if (selection.GetCount()>0) {
         tmpStr = boxc->GetString(selection[0]);
-    }else{
+    }else {
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
@@ -360,7 +360,7 @@ void xFarDicLeitner::OnTranslateD(wxCommandEvent& event)
 
     if (selection.GetCount()>0) {
         tmpStr = boxd->GetString(selection[0]);
-    }else{
+    }else {
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
@@ -383,7 +383,7 @@ void xFarDicLeitner::OnTranslateE(wxCommandEvent& event)
 
     if (selection.GetCount()>0) {
         tmpStr = boxe->GetString(selection[0]);
-    }else{
+    }else {
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
@@ -404,7 +404,7 @@ void xFarDicLeitner::OnSpeakA(wxCommandEvent& event)
 #ifdef HAVE_SPEAKLIB
     if (selection.GetCount()>0) {
         pronounce->Pronounce(boxa->GetString(selection[0]));
-    }else{
+    }else {
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
@@ -421,7 +421,7 @@ void xFarDicLeitner::OnSpeakB(wxCommandEvent& event)
 #ifdef HAVE_SPEAKLIB
     if (selection.GetCount()>0) {
         pronounce->Pronounce(boxb->GetString(selection[0]));
-    }else{
+    }else {
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
@@ -438,7 +438,7 @@ void xFarDicLeitner::OnSpeakC(wxCommandEvent& event)
 #ifdef HAVE_SPEAKLIB
     if (selection.GetCount()>0) {
         pronounce->Pronounce(boxc->GetString(selection[0]));
-    }else{
+    }else {
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
@@ -455,7 +455,7 @@ void xFarDicLeitner::OnSpeakD(wxCommandEvent& event)
 #ifdef HAVE_SPEAKLIB
     if (selection.GetCount()>0) {
         pronounce->Pronounce(boxd->GetString(selection[0]));
-    }else{
+    }else {
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
@@ -472,7 +472,7 @@ void xFarDicLeitner::OnSpeakE(wxCommandEvent& event)
 #ifdef HAVE_SPEAKLIB
     if (selection.GetCount()>0) {
         pronounce->Pronounce(boxe->GetString(selection[0]));
-    }else{
+    }else {
         msg.Printf( _("Please select a word.\n"));
         wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
         return;
@@ -791,7 +791,7 @@ void xFarDicLeitner::OnBackE(wxCommandEvent& event)
 
 void xFarDicLeitner::UpdateBoxes(bool reload)
 {
-    if(reload){
+    if (reload) {
        boxacontents = LoadLeitnerBoxContents(wxT("LTBOX-A"));
        boxbcontents = LoadLeitnerBoxContents(wxT("LTBOX-B"));
        boxccontents = LoadLeitnerBoxContents(wxT("LTBOX-C"));
