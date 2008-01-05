@@ -122,7 +122,8 @@ private:
                 *chk_scanner,
                 *chk_swap,
                 *chk_speak,
-                *chk_tts;
+                *chk_tts,
+                *chk_notify;
 
     wxChoice      *lang;
     wxArrayString langlist,

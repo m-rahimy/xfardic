@@ -65,6 +65,7 @@ enum
     xFarDic_Leitner,
     xFarDic_AddLeitner,
     xFarDic_Pronounce,
+    xFarDic_Notification,
 
     // it is important for the id corresponding to the "About" command to have
     // this standard value as otherwise it won't be handled properly under Mac
@@ -90,6 +91,7 @@ static const long TOOLBAR_STYLE = wxTB_FLAT | wxTB_DOCKABLE;
 const int  ID_BUTTON_TRANSLATE = 100;
 const int  ID_BOX_TRANSLATE    = 101;
 const int  ID_BOX_RESULT       = 102;
+const int  ID_CHK_NOTIFICATION = 103;
 const int  ID_SBITMAP          = 104;
 const int  ID_ABBOX            = 105;
 const int  ID_BACK             = 106;

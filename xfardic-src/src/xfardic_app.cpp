@@ -66,6 +66,7 @@ BEGIN_EVENT_TABLE(xFarDicApp, wxFrame)
     EVT_MENU(xFarDic_RevSrch, xFarDicApp::OnRevSrch)
     EVT_MENU(xFarDic_Watcher, xFarDicApp::OnWatcher)
     EVT_MENU(xFarDic_Scanner, xFarDicApp::OnScanner)
+    EVT_MENU(xFarDic_Notification, xFarDicApp::OnNotification)
     EVT_MENU(xFarDic_Hide, xFarDicApp::OnHide)
     EVT_MENU(xFarDic_ViewToolBar, xFarDicApp::ViewToolbar)
     EVT_MENU(xFarDic_Leitner, xFarDicApp::OnLeitner)
@@ -228,6 +229,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     opmenu->Append(xFarDic_Hide, _("Enable &Hide On Minimize and Close\tCtrl-H"), _("Enable hide on minimize and close"), wxITEM_CHECK);
     opmenu->Append(xFarDic_Spell, _("Enable S&pell Checking\tCtrl-P"), _("Enable spell checking"), wxITEM_CHECK);
     opmenu->Append(xFarDic_RevSrch, _("Enable Inexact &Reverse Searching\tCtrl-R"), _("Enable inexact reverse searchning"), wxITEM_CHECK);
+    opmenu->Append(xFarDic_Notification, _("Enable Notification Window"), _("Enable notification window"), wxITEM_CHECK);
 
     opmenu->AppendSeparator();
     
@@ -576,6 +578,13 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         watcher = FALSE;
     }   
 
+    if ( pConfig->Read(wxT("Notification"), 1) != 0 ) {
+        notification = TRUE;      
+        opmenu->Check( xFarDic_Notification, TRUE );  
+    } else {
+        notification = FALSE;
+    }   
+
     if ( pConfig->Read(wxT("Speak"), 0l) != 0 ) {
         speak = TRUE;      
     } else {
@@ -848,6 +857,27 @@ void xFarDicApp::DoOnRevSrch()
         opmenu->Check( xFarDic_RevSrch, TRUE );
         tb->ToggleTool( ID_REVSRCH, TRUE );    
         pConfig->Write(wxT("/Options/RevSrch"), 1);
+    }
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
+}
+
+void xFarDicApp::OnNotification(wxCommandEvent& WXUNUSED(event))
+{
+    wxConfigBase *pConfig = wxConfigBase::Get();
+    if ( pConfig == NULL ) {
+        return;
+    }
+      
+    pConfig->SetPath(wxT("/"));
+
+    if ( notification == TRUE ) {
+        notification = FALSE;
+        opmenu->Check( xFarDic_Notification, FALSE );
+        pConfig->Write(wxT("/Options/Notification"), 0);
+    } else {
+        notification = TRUE;
+        opmenu->Check( xFarDic_Notification, TRUE );
+        pConfig->Write(wxT("/Options/Notification"), 1);
     }
     delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
@@ -1223,7 +1253,7 @@ void xFarDicApp::RecreateTrToolbar()
     m_leitnerbox = new wxBitmapButton(this, ID_BTN_LT, bltbox, wxDefaultPosition, wxSize(45,34));
     m_ttos = new wxBitmapButton(this, ID_BUTTON_TTOS, bttos, wxDefaultPosition, wxSize(45,34));
 
-    if(!tts){
+    if (!tts){
        m_ttos->Enable(FALSE);
     }
 
@@ -1675,7 +1705,7 @@ void xFarDicApp::DoQuit()
 
 #ifdef HAVE_SPEAKLIB
     //Kill Espeak
-    if(tts){
+    if (tts){
       pron->Kill();
     }
 #endif
@@ -1699,7 +1729,7 @@ void xFarDicApp::OnClose(wxCloseEvent& WXUNUSED(event))
 
 void xFarDicApp::OnBack(wxCommandEvent& WXUNUSED(event))
 {
-    if(wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ){
+    if (wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ){
         translate(wordList.Item((wordList.Index(m_text->GetValue(),FALSE))-1),TRUE);
     }
     return;
@@ -1707,7 +1737,7 @@ void xFarDicApp::OnBack(wxCommandEvent& WXUNUSED(event))
 
 void xFarDicApp::OnForward(wxCommandEvent& WXUNUSED(event))
 {     
-    if(wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ){          
+    if (wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ){          
         translate(wordList.Item((wordList.Index(m_text->GetValue(),FALSE))+1),TRUE);
     }
     return;
@@ -1872,6 +1902,11 @@ bool xFarDicApp::initDB(const char *filename) {
 
 bool xFarDicApp::ShowNotification(wxString word, wxString meaning)
 {
+    if (! notification) {
+       // if notification is not enabled, exit
+       return TRUE;
+    }
+
     notify_init("xFarDic");
 
     //Get Configuration From Config File
@@ -1906,11 +1941,11 @@ bool xFarDicApp::ShowNotification(wxString word, wxString meaning)
         if (!notify_notification_show (n, NULL)) {
             // DEBUGGING
             // fprintf(stderr, "failed to send notification\n");
-            return 1;
+            return TRUE;
         }
 #ifdef HAVE_SPEAKLIB
-        if(speak){
-           pron->Pronounce(m_text->GetValue());
+        if (speak) {
+            pron->Pronounce(m_text->GetValue());
         }
 #endif
     }
@@ -2225,7 +2260,7 @@ void xFarDicApp::AddToLeitnerBox()
 
     m_text->SetFocus();
 
-    if(!showLeitner){
+    if (!showLeitner){
          ltframe->UpdateBoxes(TRUE);
     }
 }
@@ -2329,7 +2364,7 @@ bool xFarDicApp::UpdateSwap()
     delete prog;
 
     // Emptying meanings list after update
-    if(meanList.GetCount() > 0){
+    if (meanList.GetCount() > 0){
         meanList.Empty();  
     }
 

@@ -77,6 +77,8 @@ public:
     void OnSrch(wxCommandEvent& event); 
     /// Selecting "Spell check" option
     void OnSpell(wxCommandEvent& event); 
+    /// Selecting "Enable notification" option
+    void OnNotification(wxCommandEvent& event); 
     /// Selecting "Reverse Search" option
     void OnRevSrch(wxCommandEvent& event); 
     /// Clipboard watcher caller
@@ -186,7 +188,8 @@ private:
             swap,
             swapupdate,
             update,
-            db_sort_order;
+            db_sort_order,
+            notification;
 
     size_t  m_rows;
 

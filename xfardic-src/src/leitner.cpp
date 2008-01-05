@@ -77,6 +77,7 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     pConfig->SetPath(_T("/Options"));
 
     bacap = pConfig->Read(_T("Leitner-Base"), 10);
+    watcher = pConfig->Read(_T("Watcher"), 0l);
 
     // First initialize Espeak engine
 #ifdef HAVE_SPEAKLIB
@@ -168,6 +169,14 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
     m_ctrans = new wxBitmapButton(bcpanel, ID_BTN_TRANS_C, trans, wxDefaultPosition,wxSize(80,36));
     m_dtrans = new wxBitmapButton(bdpanel, ID_BTN_TRANS_D, trans, wxDefaultPosition,wxSize(80,36));
     m_etrans = new wxBitmapButton(bepanel, ID_BTN_TRANS_E, trans, wxDefaultPosition,wxSize(80,36));
+
+    if (! watcher){
+       m_atrans->Enable(FALSE);
+       m_btrans->Enable(FALSE);
+       m_ctrans->Enable(FALSE);
+       m_dtrans->Enable(FALSE);
+       m_etrans->Enable(FALSE);
+    }
 
     m_aspeak = new wxBitmapButton(bapanel, ID_BTN_SPK_A, bttos, wxDefaultPosition,wxSize(80,36));
     m_bspeak = new wxBitmapButton(bbpanel, ID_BTN_SPK_B, bttos, wxDefaultPosition,wxSize(80,36));

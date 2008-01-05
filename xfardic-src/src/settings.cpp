@@ -104,7 +104,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     numEntry = new wxSpinCtrl(setpanel, ID_SPIN_ENTRY, _T(""));
     numEntry->SetRange(3,15);
 
-    timeouttext = new wxStaticText(setpanel, -1, _("Scan window timeout (Sec):"));
+    timeouttext = new wxStaticText(setpanel, -1, _("Notification window timeout (Sec):"));
     scantimeout = new wxSpinCtrl(setpanel, ID_SPIN_TIMEOUT, _T(""));
     scantimeout->SetRange(0,10);
 
@@ -118,11 +118,12 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     chk_winpos = new wxCheckBox(setpanel, ID_CHK_WINPOS, _("Save Program Window P&ositions"));
     chk_cache  = new wxCheckBox(setpanel, ID_CHK_CACHE,  _("Save Wor&d Cache On Exit"));
     chk_watcher  = new wxCheckBox(setpanel, ID_CHK_WATCHER,  _("Enable Clipboard &Watcher"));
-    chk_scanner  = new wxCheckBox(setpanel, ID_CHK_SCANNER,  _("Enable Clipboard Sca&nner"));
+    chk_scanner  = new wxCheckBox(setpanel, ID_CHK_SCANNER,  _("Enable Selection Sca&nner"));
+    chk_notify  = new wxCheckBox(setpanel, ID_CHK_NOTIFICATION,  _("Enable Noti&fication Window"));        
     chk_speak  = new wxCheckBox(setpanel, ID_CHK_SPEAK,  _("Spea&k With Clipboard Scanner"));        
     chk_srchsim   = new wxCheckBox(setpanel, ID_CHK_SRCHSIM,   _("Return Si&milar Words"));
     chk_spell  = new wxCheckBox(setpanel, ID_CHK_SPELL,  _("Enable S&pell Checker"));
-    chk_swap  = new wxCheckBox(setpanel, ID_CHK_SWAP,  _("Enable S&wap file"));
+    chk_swap  = new wxCheckBox(setpanel, ID_CHK_SWAP,  _("Enable Swa&p file"));
     chk_tts  = new wxCheckBox(setpanel, ID_CHK_TTS,  _("Enable Text to Speech En&gine"));
 
     m_ok = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition,wxSize(80,36));
@@ -174,6 +175,12 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
       chk_watcher->SetValue(FALSE);
     }
 
+    if ( pConfig->Read(_T("Notification"), 1) != 0 ) {
+      chk_notify->SetValue(TRUE);
+    } else {
+      chk_notify->SetValue(FALSE);
+    }
+
 #ifdef HAVE_SPEAKLIB
     if ( pConfig->Read(_T("TTS"), 0l) != 0 ) {
       chk_tts->SetValue(TRUE);
@@ -194,7 +201,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     if ( pConfig->Read(_T("Scanner"), 1) != 0 ) {
       chk_scanner->SetValue(TRUE);
 #ifdef HAVE_SPEAKLIB
-      if(!chk_tts->GetValue()){
+      if (!chk_tts->GetValue()){
           chk_speak->Enable(FALSE);
       }
 #endif
@@ -226,6 +233,10 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 
     int timeout = pConfig->Read(_T("Scan-Timeout"), 5);  
     scantimeout->SetValue(timeout);
+
+    if (!chk_notify->GetValue()){
+         scantimeout->Enable(FALSE);
+    }
 
     int ltbasecap = pConfig->Read(_T("Leitner-Base"), 10);  
     leitner->SetValue(ltbasecap); 
@@ -588,7 +599,7 @@ void xFarDicSettings::EnableScanner(wxCommandEvent& WXUNUSED(event))
 
 #ifdef HAVE_SPEAKLIB   
     if (chk_scanner->GetValue()) {
-        if(chk_tts->GetValue()){
+        if (chk_tts->GetValue()){
            chk_speak->Enable(TRUE);
         }
     }else{
@@ -603,7 +614,7 @@ void xFarDicSettings::EnableTTS(wxCommandEvent& WXUNUSED(event))
 
 #ifdef HAVE_SPEAKLIB   
     if (chk_tts->GetValue()) {
-        if(chk_scanner->GetValue()){
+        if (chk_scanner->GetValue()){
            chk_speak->Enable(TRUE);
         }
     }else{
@@ -649,7 +660,7 @@ void xFarDicSettings::OnDBinfo(wxCommandEvent& WXUNUSED(event))
                 msg += _("DB Author : ")+author+_T("\n");
                 msg += _("DB Version: ")+version+_T("\n");
 
-                if(x+1 == dbcount.GetCount()){
+                if (x+1 == dbcount.GetCount()){
                    msg += _("Input Lang: ")+inputlang;
                 }else{
                    msg += _("Input Lang: ")+inputlang+_T("\n\n");

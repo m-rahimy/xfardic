@@ -156,7 +156,8 @@ private:
         bdcap,
         becap; 
 
-    bool tts; 
+    bool tts,
+         watcher;
    
     DECLARE_EVENT_TABLE()
 };
