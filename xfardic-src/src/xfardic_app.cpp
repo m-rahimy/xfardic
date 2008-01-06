@@ -1064,11 +1064,11 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
                CheckSpell(scanner_now,0) && scanner_now.IsAscii() && scanner_now.IsWord()) {        
                 m_text->SetValue(scanner_now);
                 if (!notification) {           
-                    translate(watcher_now);
+                    translate(scanner_now);
                     this->Raise();
                     this->SetFocus();
                 }else {
-                    translate(watcher_now,FALSE,TRUE);
+                    translate(scanner_now,FALSE,TRUE);
                 }
             }
         }
