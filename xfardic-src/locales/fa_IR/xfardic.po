@@ -4,10 +4,10 @@
 # Armen Baghumian <armen@opensourceclub.org>
 msgid ""
 msgstr ""
-"Project-Id-Version: xFarDic 0.10.0\n"
+"Project-Id-Version: xFarDic 0.10.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-01-05 10:27+0330\n"
-"PO-Revision-Date: 2006-12-14 13:17+0330\n"
+"PO-Revision-Date: 2008-01-07 19:39+0330\n"
 "Last-Translator: Alan Baghumian <alan@technotux.org>\n"
 "Language-Team: fa_IR <alan@technotux.org>\n"
 "MIME-Version: 1.0\n"
@@ -102,7 +102,7 @@ msgid ""
 "send it back to the first box."
 msgstr ""
 "جعبه لایتنر برای پشتیبانی از یادگیری\n"
-"لغات بر اساس تکرار با فاصله عمل می‌کند.\n"
+"واژه‌ها بر اساس تکرار با فاصله عمل می‌کند.\n"
 "نحوه کارکرد آن بدین صورت است که شما سعی\n"
 "خواهید کرد تا معنای کلمه‌ای را به خاطر آورید.\n"
 "اگر موفق شدید، کلمه را به جعبه قبلی و در غیر\n"
@@ -150,9 +150,8 @@ msgid "Box B is full.\n"
 msgstr "ظرفیت جعبه ب تکمیل است.\n"
 
 #: ../src/leitner.cpp:549
-#, fuzzy
 msgid "Are you sure that you have learnt this word?\n"
-msgstr "آیا از پاک کردن محتویات جعبه اطمینان دارید؟\n"
+msgstr "آیا اطمینان دارید که این واژه را کاملا فرا گرفته‌اید؟\n"
 
 #: ../src/leitner.cpp:566
 msgid "Are you sure that you want to clear the box contents?\n"
@@ -204,9 +203,8 @@ msgid "Number of Entries in History Box:"
 msgstr "تعداد ورودی‌ها در جعبه تاریخچه:"
 
 #: ../src/settings.cpp:108
-#, fuzzy
 msgid "Notification window timeout (Sec):"
-msgstr "زمان بسته شدن خودکار پنجره انتخاب خودکار (ثانیه):"
+msgstr "زمان بسته شدن خودکار پنجره اعلان (ثانیه):"
 
 #: ../src/settings.cpp:112
 msgid "Leitner box base capacity:"
@@ -217,7 +215,6 @@ msgid "Enable Auto &Select Word After Translation"
 msgstr "انتخاب خودکار واژه پس از برگردان فعال شود"
 
 #: ../src/settings.cpp:117
-#, fuzzy
 msgid "&Hide On Window Minimize and Close"
 msgstr "پنجره هنگام کوچک شدن و بستن مخفی شود"
 
@@ -226,31 +223,28 @@ msgid "Enable Inexact &Reverse Searching"
 msgstr "جستجوی نادقیق برعکس فعال شود"
 
 #: ../src/settings.cpp:119
-#, fuzzy
 msgid "Save Program Window P&osition and State"
-msgstr "محل قرارگیری پنجره برنامه ذخیره شود"
+msgstr "محل قرارگیری و وضعیت پنجره برنامه ذخیره شود"
 
 #: ../src/settings.cpp:120
 msgid "Save Wor&d Cache On Exit"
-msgstr "تاریخچه لغات هنگام خروج ذخیره شود"
+msgstr "تاریخچه واژه‌ها هنگام خروج ذخیره شود"
 
 #: ../src/settings.cpp:121
 msgid "Enable Clipboard &Watcher"
 msgstr "حس‌گر حافظه فعال شود"
 
 #: ../src/settings.cpp:122
-#, fuzzy
 msgid "Enable Selection Sca&nner"
 msgstr "حس‌گر انتخاب فعال شود\tCtrl-W"
 
 #: ../src/settings.cpp:123
 msgid "Enable Noti&fication Window"
-msgstr ""
+msgstr "نمایش پنجره اعلان فعال شود"
 
 #: ../src/settings.cpp:124
-#, fuzzy
 msgid "Spea&k On Translation"
-msgstr "چسباندن و برگردان"
+msgstr "انجام تلفظ هنگام ترجمه"
 
 #: ../src/settings.cpp:125
 msgid "Return Si&milar Words"
@@ -261,13 +255,12 @@ msgid "Enable S&pell Checker"
 msgstr "غلط یاب املایی فعال شود"
 
 #: ../src/settings.cpp:127
-#, fuzzy
 msgid "Enable Swa&p file"
-msgstr "غلط یاب املایی فعال شود"
+msgstr "حافظه موقت فعال شود"
 
 #: ../src/settings.cpp:128
 msgid "Enable Text to Speech En&gine"
-msgstr ""
+msgstr "سیستم تلفظ واژه‌ها فعال شود"
 
 #: ../src/settings.cpp:131
 msgid "&Apply"
@@ -400,9 +393,8 @@ msgid "Translate word"
 msgstr "برگردان واژه"
 
 #: ../src/xfardic_app.cpp:186
-#, fuzzy
 msgid "Add to leitner box\tAlt-X"
-msgstr "نمایش جعبه لایتنر"
+msgstr "به جعبه لایتنر اضافه شود\tAlt-X"
 
 #: ../src/xfardic_app.cpp:186 ../src/xfardic_app.cpp:190
 msgid "Add word to the leitner box"
@@ -509,13 +501,12 @@ msgid "Enable inexact reverse searchning"
 msgstr "جستجوی نادقیق برعکس فعال شود"
 
 #: ../src/xfardic_app.cpp:232
-#, fuzzy
 msgid "Enable N&otification Window\tCtrl-O"
-msgstr "حس‌گر انتخاب فعال شود\tCtrl-W"
+msgstr "نمایش پنجره اعلان فعال شود\tCtrl-O"
 
 #: ../src/xfardic_app.cpp:232
 msgid "Enable notification window"
-msgstr ""
+msgstr "نمایش پنجره اعلان فعال شود"
 
 #: ../src/xfardic_app.cpp:236
 msgid "Set Result Box Font\tCtrl-F"
@@ -708,7 +699,7 @@ msgstr "درباره ایکس‌فاردیک"
 
 #: ../src/xfardic_app.cpp:1654
 msgid "xFarDic - Leitner Box"
-msgstr ""
+msgstr "ایکس‌فاردیک - جعبه لایتنر"
 
 #: ../src/xfardic_app.cpp:1838
 msgid ""
@@ -756,14 +747,3 @@ msgstr "نمایش این پیام راهنما"
 msgid "Another program instance is already running, aborting."
 msgstr "نسخه دیگری از برنامه در حال اجراست."
 
-#~ msgid "Enable Clipboard Sca&nner"
-#~ msgstr "حس‌گر انتخاب فعال شود"
-
-#, fuzzy
-#~ msgid "Spea&k With Clipboard Scanner"
-#~ msgstr "حس‌گر انتخاب فعال شود"
-
-#~ msgid ""
-#~ "Parse Error.\n"
-#~ " It seems that XML DB contains some errors."
-#~ msgstr "خطا: بانک اطلاعاتی حاوی خطاهایی می‌باشد."
