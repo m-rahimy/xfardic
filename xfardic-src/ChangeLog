@@ -279,6 +279,7 @@ Fixed a wrong string in the settings window.
 Fixed a bug in main window position restoration.
 Fixed an acceleator conflict in the settings window.
 Fixed missing event handler for confirm button on the leitner box.
+Fixed bad about window formation on fa_IR translation.
 Implemented --with-speaklib to enable/disable TTS engine support.
 Improved elements arrangement in the settings window.
 Improved the leitner box user interface.
