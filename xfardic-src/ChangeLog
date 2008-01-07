@@ -281,7 +281,9 @@ Fixed an acceleator conflict in the settings window.
 Fixed missing event handler for confirm button on the leitner box.
 Implemented --with-speaklib to enable/disable TTS engine support.
 Improved elements arrangement in the settings window.
+Improved the leitner box user interface.
 Ask for a confirmation before deleting the selected word from box E.
 Added an option to enable/disable notification window.
 Save maximized window state.
+Minor code-cleanups.
 

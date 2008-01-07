@@ -923,61 +923,61 @@ void xFarDicLeitner::CreateLayout() {
      wxBoxSizer *topsizer = new wxBoxSizer( wxVERTICAL );
 
      wxBoxSizer *logoandtextsizer = new wxBoxSizer(wxHORIZONTAL);
-     logoandtextsizer->Add(staticBitmap, 0, wxALIGN_LEFT|wxALL, 5);
-     logoandtextsizer->Add(lttext, 0, wxALIGN_LEFT|wxALL, 5);
-     topsizer->Add(logoandtextsizer, 0, wxEXPAND|wxALL, 3);
+     logoandtextsizer->Add(staticBitmap, 0, wxALIGN_LEFT|wxALL, 4);
+     logoandtextsizer->Add(lttext, 0, wxALIGN_LEFT|wxALL, 4);
+     topsizer->Add(logoandtextsizer, 0, wxEXPAND|wxALL, 0);
      
-     topsizer->Add(layout, 1, wxALL|wxEXPAND, 5);
+     topsizer->Add(layout, 1, wxALL|wxEXPAND, 4);
 
      wxBoxSizer *bapanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bapanelsizer->Add(boxa, 1, wxEXPAND|wxALL, 3);
+     bapanelsizer->Add(boxa, 1, wxEXPAND|wxALL, 0);
      wxBoxSizer *babuttonssizer = new wxBoxSizer(wxVERTICAL);
-     babuttonssizer->Add(boxatext, 1, wxEXPAND|wxTOP|wxLEFT|wxRIGHT, 3);
-     babuttonssizer->Add(m_anext ,1 , wxALIGN_CENTER|wxALL, 3);
-     babuttonssizer->Add(m_remove ,1 ,wxALIGN_CENTER|wxALL, 3);
-     babuttonssizer->Add(m_atrans ,1 ,wxALIGN_CENTER|wxALL, 3);
-     babuttonssizer->Add(m_aspeak ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bapanelsizer->Add(babuttonssizer, 0, wxEXPAND|wxALL, 0);
+     babuttonssizer->Add(boxatext, 1, wxALIGN_CENTER|wxALL, 0);
+     babuttonssizer->Add(m_anext ,1 , wxALIGN_CENTER|wxALL, 1);
+     babuttonssizer->Add(m_remove ,1 ,wxALIGN_CENTER|wxALL, 1);
+     babuttonssizer->Add(m_atrans ,1 ,wxALIGN_CENTER|wxALL, 1);
+     babuttonssizer->Add(m_aspeak ,1 ,wxALIGN_CENTER|wxALL, 1);
+     bapanelsizer->Add(babuttonssizer, 1, wxEXPAND|wxALL, 2);
 
      wxBoxSizer *bbpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bbpanelsizer->Add(boxb, 1, wxEXPAND|wxALL, 3);
+     bbpanelsizer->Add(boxb, 1, wxEXPAND|wxALL, 0);
      wxBoxSizer *bbbuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bbbuttonssizer->Add(boxbtext, 1,wxEXPAND|wxTOP|wxLEFT|wxRIGHT, 3);
-     bbbuttonssizer->Add(m_bnext ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bbbuttonssizer->Add(m_bback ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bbbuttonssizer->Add(m_btrans ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bbbuttonssizer->Add(m_bspeak ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bbpanelsizer->Add(bbbuttonssizer, 0, wxEXPAND|wxALL, 0);
+     bbbuttonssizer->Add(boxbtext, 1, wxALIGN_CENTER|wxALL, 0);
+     bbbuttonssizer->Add(m_bnext ,1 , wxALIGN_CENTER|wxALL, 1);
+     bbbuttonssizer->Add(m_bback ,1 , wxALIGN_CENTER|wxALL, 1);
+     bbbuttonssizer->Add(m_btrans ,1 ,wxALIGN_CENTER|wxALL, 1);
+     bbbuttonssizer->Add(m_bspeak ,1 ,wxALIGN_CENTER|wxALL, 1);
+     bbpanelsizer->Add(bbbuttonssizer, 1, wxEXPAND|wxALL, 2);
 
      wxBoxSizer *bcpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bcpanelsizer->Add(boxc, 1, wxEXPAND|wxALL, 3);
+     bcpanelsizer->Add(boxc, 1, wxEXPAND|wxALL, 0);
      wxBoxSizer *bcbuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bcbuttonssizer->Add(boxctext, 1, wxEXPAND|wxTOP|wxLEFT|wxRIGHT, 3);
-     bcbuttonssizer->Add(m_cnext ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bcbuttonssizer->Add(m_cback ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bcbuttonssizer->Add(m_ctrans ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bcbuttonssizer->Add(m_cspeak ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bcpanelsizer->Add(bcbuttonssizer, 0, wxEXPAND|wxALL, 0);
+     bcbuttonssizer->Add(boxctext, 1, wxALIGN_CENTER|wxALL, 0);
+     bcbuttonssizer->Add(m_cnext ,1 , wxALIGN_CENTER|wxALL, 1);
+     bcbuttonssizer->Add(m_cback ,1 , wxALIGN_CENTER|wxALL, 1);
+     bcbuttonssizer->Add(m_ctrans ,1 ,wxALIGN_CENTER|wxALL, 1);
+     bcbuttonssizer->Add(m_cspeak ,1 ,wxALIGN_CENTER|wxALL, 1);
+     bcpanelsizer->Add(bcbuttonssizer, 1, wxEXPAND|wxALL, 2);
 
      wxBoxSizer *bdpanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bdpanelsizer->Add(boxd, 1, wxEXPAND|wxALL, 3);
+     bdpanelsizer->Add(boxd, 1, wxEXPAND|wxALL, 0);
      wxBoxSizer *bdbuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bdbuttonssizer->Add(boxdtext, 1, wxEXPAND|wxTOP|wxLEFT|wxRIGHT, 3);
-     bdbuttonssizer->Add(m_dnext ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bdbuttonssizer->Add(m_dback ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bdbuttonssizer->Add(m_dtrans ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bdbuttonssizer->Add(m_dspeak ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bdpanelsizer->Add(bdbuttonssizer, 0, wxEXPAND|wxALL, 0);
+     bdbuttonssizer->Add(boxdtext, 1, wxALIGN_CENTER|wxALL, 0);
+     bdbuttonssizer->Add(m_dnext ,1 , wxALIGN_CENTER|wxALL, 1);
+     bdbuttonssizer->Add(m_dback ,1 , wxALIGN_CENTER|wxALL, 1);
+     bdbuttonssizer->Add(m_dtrans ,1 ,wxALIGN_CENTER|wxALL, 1);
+     bdbuttonssizer->Add(m_dspeak ,1 ,wxALIGN_CENTER|wxALL, 1);
+     bdpanelsizer->Add(bdbuttonssizer, 1, wxEXPAND|wxALL, 2);
 
      wxBoxSizer *bepanelsizer = new wxBoxSizer(wxHORIZONTAL);
-     bepanelsizer->Add(boxe, 1, wxEXPAND|wxALL, 3);
+     bepanelsizer->Add(boxe, 1, wxEXPAND|wxALL, 0);
      wxBoxSizer *bebuttonssizer = new wxBoxSizer(wxVERTICAL);
-     bebuttonssizer->Add(boxetext, 1, wxEXPAND|wxTOP|wxLEFT|wxRIGHT, 3);
-     bebuttonssizer->Add(m_eback ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bebuttonssizer->Add(m_confirm ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bebuttonssizer->Add(m_etrans ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bebuttonssizer->Add(m_espeak ,1 ,wxALIGN_CENTER|wxALL, 3);
-     bepanelsizer->Add(bebuttonssizer, 0, wxEXPAND|wxALL, 0);
+     bebuttonssizer->Add(boxetext, 1, wxALIGN_CENTER|wxALL, 0);
+     bebuttonssizer->Add(m_eback ,1 , wxALIGN_CENTER|wxALL, 1);
+     bebuttonssizer->Add(m_confirm ,1 ,wxALIGN_CENTER|wxALL, 1);
+     bebuttonssizer->Add(m_etrans ,1 ,wxALIGN_CENTER|wxALL, 1);
+     bebuttonssizer->Add(m_espeak ,1 ,wxALIGN_CENTER|wxALL, 1);
+     bepanelsizer->Add(bebuttonssizer, 1, wxEXPAND|wxALL, 2);
 
      bapanel->SetAutoLayout( TRUE );
      bapanel->SetSizer( bapanelsizer );
@@ -992,10 +992,10 @@ void xFarDicLeitner::CreateLayout() {
 
      wxBoxSizer *bottomsizer = new wxBoxSizer(wxHORIZONTAL);
      bottomsizer->AddStretchSpacer(1);
-     bottomsizer->Add(m_clear, 0, wxALIGN_RIGHT|wxALL, 5);
-     bottomsizer->Add(m_ok, 0, wxALIGN_RIGHT|wxALL, 5);
+     bottomsizer->Add(m_clear, 0, wxALIGN_RIGHT|wxALL, 2);
+     bottomsizer->Add(m_ok, 0, wxALIGN_RIGHT|wxALL, 2);
      
-     topsizer->Add(bottomsizer, 0, wxEXPAND|wxALL, 3);
+     topsizer->Add(bottomsizer, 0, wxEXPAND|wxALL, 0);
 
      SetSizer( topsizer );
      topsizer->SetSizeHints( this );
