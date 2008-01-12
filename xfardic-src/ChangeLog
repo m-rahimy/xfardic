@@ -272,7 +272,7 @@ More limited display on notification window.
 0.10.0.1   -- 2007-12-24
 Fixed a crasher bug in InitDB function.
 //////////////////////////////////////////////////////////////////////////////////////
-0.10.1     -- 2008-01-xx
+0.10.1     -- 2008-01-13
 Fixed a crasher bug if tts menu item is enabled while TTS engine is disabled.
 Fixed a crasher bug on the leitner box window if TTS engine is disabled.
 Fixed a wrong string in the settings window.
