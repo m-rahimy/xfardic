@@ -96,7 +96,7 @@ BEGIN_EVENT_TABLE(xFarDicApp, wxFrame)
 END_EVENT_TABLE()
 
 /// Main window creation function
-xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& size, wxLocale& locale, long style)
+xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& size, wxLocale& locale, long style, bool fit)
        : wxFrame(NULL, -1, title, pos, size, style), m_locale(locale), m_timer(this, ID_TIMER)
 {
     // set the frame icon    
@@ -664,7 +664,11 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     initSwap();
 
     //Init layout
-    CreateLayout();
+    if (fit) {
+        CreateLayout(TRUE);
+    } else {
+        CreateLayout(FALSE);
+    }
 }
 
 void xFarDicApp::OnFocus(wxFocusEvent& event)
@@ -1707,14 +1711,19 @@ void xFarDicApp::DoQuit()
     pConfig->SetPath(wxT("/"));
 
     if (pConfig->Read(wxT("/Options/Win-Pos"), 0l) != 0 ) {
-        int x, y;
+        int x, y, w, h;
         GetPosition(&x, &y);
+        GetSize(&w, &h);
         pConfig->Write(wxT("/Options/x"), (long) x);
         pConfig->Write(wxT("/Options/y"), (long) y);
+        pConfig->Write(wxT("/Options/w"), (long) w);
+        pConfig->Write(wxT("/Options/h"), (long) h);
     } else {
         pConfig->Write(wxT("/Options/Win-Pos"), 0);
         pConfig->Write(wxT("/Options/x"), 0);
         pConfig->Write(wxT("/Options/y"), 0);      
+        pConfig->Write(wxT("/Options/w"), 0);
+        pConfig->Write(wxT("/Options/h"), 0);      
     }
 
     if (this->IsMaximized()) {
@@ -2446,7 +2455,7 @@ void xFarDicApp::LoadLeitnerBoxContents()
     }
 }
 
-void xFarDicApp::CreateLayout() {
+void xFarDicApp::CreateLayout(bool fit) {
      wxBoxSizer *horizontalSizer = new wxBoxSizer(wxHORIZONTAL);
      horizontalSizer->Add(m_text,
                     1, //make horizontally stretchable
@@ -2476,8 +2485,11 @@ void xFarDicApp::CreateLayout() {
                wxEXPAND|wxALL);
      topSizer->Add(verticalSizer, 1, wxEXPAND|wxALL, 1);
      SetSizer(topSizer);
-     topSizer->Fit(this);
-     topSizer->SetSizeHints(this);
+
+     if (fit) {
+         topSizer->Fit(this);
+         topSizer->SetSizeHints(this);
+     }
 }
 
 void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {

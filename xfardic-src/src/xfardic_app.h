@@ -43,7 +43,7 @@ class xFarDicApp : public wxFrame
 public:
     /// Main App startup function
     xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& size, wxLocale& m_locale,
-            long style = wxDEFAULT_FRAME_STYLE);
+            long style = wxDEFAULT_FRAME_STYLE, bool fit = TRUE);
 
     /// Quits Event Handler
     void OnQuit(wxCommandEvent& event);
@@ -164,7 +164,7 @@ public:
     xFarDicLeitner   *ltframe;
 
 private:
-    void CreateLayout();
+    void CreateLayout(bool fit=TRUE);
 
     wxTextCtrl       *m_label;
     wxBitmapButton   *m_translate,

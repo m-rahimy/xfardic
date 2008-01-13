@@ -221,11 +221,6 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
 void xFarDicLeitner::OnOK(wxCommandEvent& WXUNUSED(event))
 {
     SubmitChanges();
-#ifdef HAVE_SPEAKLIB
-    if (tts) {
-       pronounce->Kill();
-    }
-#endif
     Close(TRUE);
 }
 

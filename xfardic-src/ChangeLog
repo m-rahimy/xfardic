@@ -287,4 +287,8 @@ Ask for a confirmation before deleting the selected word from box E.
 Added an option to enable/disable notification window.
 Save maximized window state.
 Minor code-cleanups.
+//////////////////////////////////////////////////////////////////////////////////////
+0.10.2     -- 2008-01-xx
+Fixed a bug related to killing TTS engine on the leitner box.
+Save window size too. 
 

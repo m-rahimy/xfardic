@@ -132,11 +132,21 @@ bool MyApp::OnInit()
     // restore frame position & state
     int x = pConfig->Read(_T("x"), 0l);
     int y = pConfig->Read(_T("y"), 0l);
+    int w = pConfig->Read(_T("w"), 0l);
+    int h = pConfig->Read(_T("h"), 0l);
     bool maximized = pConfig->Read(_T("IsMaximized"), 0l);
 
     // create the main application window
-    frame = new xFarDicApp(_T("xFarDic ")XVERSION, wxPoint(x,y), wxDefaultSize, m_locale,
-                       wxDEFAULT_FRAME_STYLE);
+    if (h > 0 && w > 0) {
+         frame = new xFarDicApp(_T("xFarDic ")XVERSION, wxPoint(x,y), wxSize(w,h), m_locale,
+                       wxDEFAULT_FRAME_STYLE, FALSE);
+    } else {
+         frame = new xFarDicApp(_T("xFarDic ")XVERSION, wxPoint(x,y), wxDefaultSize, m_locale,
+                       wxDEFAULT_FRAME_STYLE, TRUE);
+    }
+
+    // Set minimum allowed size
+    frame->SetMinSize(wxSize(519, 320));
 
     //DEBUGGING
     //fprintf(stderr, "Frame Started\n");    
