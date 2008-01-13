@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-05 10:27+0330\n"
+"POT-Creation-Date: 2008-01-13 19:49+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,9 +89,9 @@ msgid ""
 msgstr ""
 
 #: ../src/leitner.cpp:135 ../src/leitner.cpp:136 ../src/leitner.cpp:137
-#: ../src/leitner.cpp:138 ../src/leitner.cpp:139 ../src/leitner.cpp:834
-#: ../src/leitner.cpp:835 ../src/leitner.cpp:836 ../src/leitner.cpp:837
-#: ../src/leitner.cpp:838
+#: ../src/leitner.cpp:138 ../src/leitner.cpp:139 ../src/leitner.cpp:829
+#: ../src/leitner.cpp:830 ../src/leitner.cpp:831 ../src/leitner.cpp:832
+#: ../src/leitner.cpp:833
 msgid "Word Count: "
 msgstr ""
 
@@ -115,42 +115,42 @@ msgstr ""
 msgid "Box E"
 msgstr ""
 
-#: ../src/leitner.cpp:295 ../src/leitner.cpp:318 ../src/leitner.cpp:341
-#: ../src/leitner.cpp:364 ../src/leitner.cpp:387 ../src/leitner.cpp:408
-#: ../src/leitner.cpp:425 ../src/leitner.cpp:442 ../src/leitner.cpp:459
-#: ../src/leitner.cpp:476 ../src/leitner.cpp:491 ../src/leitner.cpp:522
-#: ../src/leitner.cpp:544 ../src/leitner.cpp:590 ../src/leitner.cpp:620
-#: ../src/leitner.cpp:650 ../src/leitner.cpp:680 ../src/leitner.cpp:710
-#: ../src/leitner.cpp:740 ../src/leitner.cpp:770
+#: ../src/leitner.cpp:290 ../src/leitner.cpp:313 ../src/leitner.cpp:336
+#: ../src/leitner.cpp:359 ../src/leitner.cpp:382 ../src/leitner.cpp:403
+#: ../src/leitner.cpp:420 ../src/leitner.cpp:437 ../src/leitner.cpp:454
+#: ../src/leitner.cpp:471 ../src/leitner.cpp:486 ../src/leitner.cpp:517
+#: ../src/leitner.cpp:539 ../src/leitner.cpp:585 ../src/leitner.cpp:615
+#: ../src/leitner.cpp:645 ../src/leitner.cpp:675 ../src/leitner.cpp:705
+#: ../src/leitner.cpp:735 ../src/leitner.cpp:765
 msgid "Please select a word.\n"
 msgstr ""
 
-#: ../src/leitner.cpp:507
+#: ../src/leitner.cpp:502
 msgid "Box B is full.\n"
 msgstr ""
 
-#: ../src/leitner.cpp:549
+#: ../src/leitner.cpp:544
 msgid "Are you sure that you have learnt this word?\n"
 msgstr ""
 
-#: ../src/leitner.cpp:566
+#: ../src/leitner.cpp:561
 msgid "Are you sure that you want to clear the box contents?\n"
 msgstr ""
 
-#: ../src/leitner.cpp:605 ../src/leitner.cpp:665 ../src/leitner.cpp:725
-#: ../src/leitner.cpp:785
+#: ../src/leitner.cpp:600 ../src/leitner.cpp:660 ../src/leitner.cpp:720
+#: ../src/leitner.cpp:780
 msgid "Box A is full.\n"
 msgstr ""
 
-#: ../src/leitner.cpp:635
+#: ../src/leitner.cpp:630
 msgid "Box C is full.\n"
 msgstr ""
 
-#: ../src/leitner.cpp:695
+#: ../src/leitner.cpp:690
 msgid "Box D is full.\n"
 msgstr ""
 
-#: ../src/leitner.cpp:755
+#: ../src/leitner.cpp:750
 msgid "Box E is full.\n"
 msgstr ""
 
@@ -410,7 +410,7 @@ msgstr ""
 msgid "Last word"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:220 ../src/xfardic_app.cpp:1108
+#: ../src/xfardic_app.cpp:220 ../src/xfardic_app.cpp:1112
 msgid "&Quit\tCtrl+Q"
 msgstr ""
 
@@ -446,7 +446,7 @@ msgstr ""
 msgid "Return Similar Words\tCtrl-S"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:228 ../src/xfardic_app.cpp:1218
+#: ../src/xfardic_app.cpp:228 ../src/xfardic_app.cpp:1222
 msgid "Return similar words"
 msgstr ""
 
@@ -506,7 +506,7 @@ msgstr ""
 msgid "Copy result to clipboard"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:250 ../src/xfardic_app.cpp:1090
+#: ../src/xfardic_app.cpp:250 ../src/xfardic_app.cpp:1094
 msgid "&Paste and Translate\tCtrl-V"
 msgstr ""
 
@@ -522,7 +522,7 @@ msgstr ""
 msgid "Clear history"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:262 ../src/xfardic_app.cpp:1220
+#: ../src/xfardic_app.cpp:262 ../src/xfardic_app.cpp:1224
 msgid "Preferences"
 msgstr ""
 
@@ -550,153 +550,159 @@ msgstr ""
 msgid "&Help"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:987
+#: ../src/xfardic_app.cpp:991
 msgid "Input text is too long.\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1094
+#: ../src/xfardic_app.cpp:1098
 msgid "Set Result Box Font\tCtrl+F"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1098
+#: ../src/xfardic_app.cpp:1102
 msgid "Open Preferences"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1103
+#: ../src/xfardic_app.cpp:1107
 msgid "&About xFarDic\tF1"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1206
+#: ../src/xfardic_app.cpp:1210
 msgid "Back"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1206
+#: ../src/xfardic_app.cpp:1210
 msgid "Previous Word"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1207
+#: ../src/xfardic_app.cpp:1211
 msgid "Fwd"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1207
+#: ../src/xfardic_app.cpp:1211
 msgid "Next Word"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1209
+#: ../src/xfardic_app.cpp:1213
 msgid "Cut"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1210
+#: ../src/xfardic_app.cpp:1214
 msgid "Copy"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1210
+#: ../src/xfardic_app.cpp:1214
 msgid "Copy Result"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1211
+#: ../src/xfardic_app.cpp:1215
 msgid "Paste"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1211
+#: ../src/xfardic_app.cpp:1215
 msgid "Paste and Translate"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1212
+#: ../src/xfardic_app.cpp:1216
 msgid "Trash"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1212
+#: ../src/xfardic_app.cpp:1216
 msgid "Clear History"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1215
+#: ../src/xfardic_app.cpp:1219
 msgid "Select"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1215
+#: ../src/xfardic_app.cpp:1219
 msgid "Auto Select Text"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1216
+#: ../src/xfardic_app.cpp:1220
 msgid "Spell"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1216
+#: ../src/xfardic_app.cpp:1220
 msgid "Spell Checking"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1217
+#: ../src/xfardic_app.cpp:1221
 msgid "Reverse Search"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1218
+#: ../src/xfardic_app.cpp:1222
 msgid "Similar"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1221
+#: ../src/xfardic_app.cpp:1225
 msgid "Quit"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1300
+#: ../src/xfardic_app.cpp:1304
 msgid "Please enter clause.\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1314 ../src/xfardic_app.cpp:1429
+#: ../src/xfardic_app.cpp:1318 ../src/xfardic_app.cpp:1433
 msgid "Please wait..."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1357 ../src/xfardic_app.cpp:1420
-#: ../src/xfardic_app.cpp:1473 ../src/xfardic_app.cpp:1522
+#: ../src/xfardic_app.cpp:1361 ../src/xfardic_app.cpp:1424
+#: ../src/xfardic_app.cpp:1477 ../src/xfardic_app.cpp:1526
 msgid "Phrase not found."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1579
+#: ../src/xfardic_app.cpp:1583
 msgid ""
 "xFarDic spell checker found error(s) on your typed word.\n"
 " Please choose correct word from list and then click OK."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1579
+#: ../src/xfardic_app.cpp:1583
 msgid "xFarDic Spell Checker"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1608
+#: ../src/xfardic_app.cpp:1612
 msgid "xFarDic Preferences"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1631
+#: ../src/xfardic_app.cpp:1635
 msgid "About xFarDic"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1654
+#: ../src/xfardic_app.cpp:1658
 msgid "xFarDic - Leitner Box"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1838
+#: ../src/xfardic_app.cpp:1847
 msgid ""
 "It seems that Aspell is not installed.\n"
 "xFarDic will not work correctly."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1917
+#: ../src/xfardic_app.cpp:1926
 msgid ""
 "Parse Error. Invalid Document.\n"
 " It is possible that XML-DB is not installed.\n"
 " Set XML DB path in settings window."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:2249
+#: ../src/xfardic_app.cpp:2258
 msgid ""
 "Selected word already exists in the box\n"
 "or not found in the installed database(s).\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:2255
+#: ../src/xfardic_app.cpp:2264
 msgid "The leitner box is full.\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:2357
+#: ../src/xfardic_app.cpp:2317
+msgid ""
+"xFarDic should be restarted to work correctly.\n"
+"Would you like to close it now?"
+msgstr ""
+
+#: ../src/xfardic_app.cpp:2374
 msgid ""
 "Creating the swap file. Please wait.\n"
 "This will take a while..."
