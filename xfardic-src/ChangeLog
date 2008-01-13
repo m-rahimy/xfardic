@@ -290,5 +290,6 @@ Minor code-cleanups.
 //////////////////////////////////////////////////////////////////////////////////////
 0.10.2     -- 2008-01-xx
 Fixed a bug related to killing TTS engine on the leitner box.
+Added a close confirmation after creating the swap file. 
 Save window size too. 
 

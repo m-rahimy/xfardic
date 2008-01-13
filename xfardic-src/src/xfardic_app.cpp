@@ -2293,9 +2293,10 @@ bool xFarDicApp::initSwap()
 {
     // SWAP file implementation
     int returnvalue;
-    wxString swappath, initsql; 
+    wxString swappath, initsql, msg; 
     wxFile swapfile;
     update = FALSE;
+    wxMessageDialog *confirm;
 
     swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
 
@@ -2312,7 +2313,14 @@ bool xFarDicApp::initSwap()
     }
 
     if (update || swapupdate) {
-         UpdateSwap();
+         if (UpdateSwap()) {
+             msg.Printf( _("xFarDic should be restarted to work correctly.\nWould you like to close it now?"));
+             confirm = new wxMessageDialog(this, msg, _T("xFarDic"), wxYES_NO | wxNO_DEFAULT | wxICON_QUESTION | wxSTAY_ON_TOP);
+
+             if (confirm->ShowModal() == wxID_YES) {
+                 DoQuit();
+             }
+         }
     }     
 }
 
@@ -2384,10 +2392,10 @@ bool xFarDicApp::UpdateSwap()
         } 
     }
 
-    // Killing progress dialog
+    // Killing the progress dialog
     delete prog;
 
-    // Emptying meanings list after update
+    // Emptying the meanings list after update
     if (meanList.GetCount() > 0) {
         meanList.Empty();  
     }
