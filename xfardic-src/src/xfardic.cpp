@@ -146,7 +146,7 @@ bool MyApp::OnInit()
     }
 
     // Set minimum allowed size
-    frame->SetMinSize(wxSize(519, 320));
+    frame->SetMinSize(wxSize(509, 294));
 
     //DEBUGGING
     //fprintf(stderr, "Frame Started\n");    
