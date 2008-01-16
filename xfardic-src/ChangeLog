@@ -294,4 +294,7 @@ Fixed too small size of language selector in the settings window.
 Added an option to change TTS accent (American/British).
 Added a close confirmation after creating the swap file. 
 Save window size too.
+//////////////////////////////////////////////////////////////////////////////////////
+0.10.3     -- 2008-01-xx
+
 
