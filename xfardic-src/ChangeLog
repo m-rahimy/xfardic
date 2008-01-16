@@ -288,8 +288,10 @@ Added an option to enable/disable notification window.
 Save maximized window state.
 Minor code-cleanups.
 //////////////////////////////////////////////////////////////////////////////////////
-0.10.2     -- 2008-01-xx
+0.10.2     -- 2008-01-16
 Fixed a bug related to killing TTS engine on the leitner box.
+Fixed too small size of language selector in the settings window.
+Added an option to change TTS accent (American/British).
 Added a close confirmation after creating the swap file. 
-Save window size too. 
+Save window size too.
 

@@ -120,7 +120,7 @@ const int  ID_DB_PATH          = 131;
 const int  ID_CHK_SCANNER      = 132;
 const int  ID_SPELL            = 133;
 const int  ID_CHK_SPELL        = 134;
-const int  ID_CHOICE           = 135;
+const int  ID_LANG_CHOICE      = 135;
 const int  ID_TIMER            = 136;
 const int  ID_CHK_WATCHER      = 137;
 const int  ID_WATCHER          = 138;
@@ -163,6 +163,7 @@ const int  ID_BTN_SPK_B        = 174;
 const int  ID_BTN_SPK_C        = 175;
 const int  ID_BTN_SPK_D        = 176;
 const int  ID_BTN_SPK_E        = 177;
+const int  ID_ACNT_CHOICE      = 178;
 
 #endif
 

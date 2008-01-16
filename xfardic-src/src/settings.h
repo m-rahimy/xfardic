@@ -94,6 +94,7 @@ private:
 
     wxStaticText *effecttext,
                  *langtext,
+                 *acnttext,
                  *settext,
                  *timeouttext,
                  *leitnertext,
@@ -125,9 +126,13 @@ private:
                 *chk_tts,
                 *chk_notify;
 
-    wxChoice      *lang;
+    wxChoice      *lang,
+                  *accent;
+
     wxArrayString langlist,
+                  acntlist,
                   dbs;
+
     wxSpinCtrl    *numEntry,
                   *scantimeout,
                   *leitner;

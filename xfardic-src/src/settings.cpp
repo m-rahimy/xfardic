@@ -53,7 +53,8 @@ BEGIN_EVENT_TABLE(xFarDicSettings, wxFrame)
     EVT_SPINCTRL(ID_SPIN_TIMEOUT,  xFarDicSettings::EnableSpApply)
     EVT_SPINCTRL(ID_SPIN_ENTRY, xFarDicSettings::EnableSpApply)
     EVT_SPINCTRL(ID_SPIN_LEITNER, xFarDicSettings::EnableSpApply)
-    EVT_CHOICE(ID_CHOICE, xFarDicSettings::EnableApply)
+    EVT_CHOICE(ID_LANG_CHOICE, xFarDicSettings::EnableApply)
+    EVT_CHOICE(ID_ACNT_CHOICE, xFarDicSettings::EnableApply)
     EVT_LISTBOX(ID_DB_PATH, xFarDicSettings::OnPathUpdate)
 END_EVENT_TABLE()
 
@@ -91,15 +92,23 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     submit = FALSE;
     swapupdate = FALSE;
 
-    size_t copies =1;
+    size_t copies = 1;    
+
     langlist.Add(_("Persian"), copies);
     langlist.Add(_("English (U.S)"),copies);
     langlist.Add(_("System default"),copies);
     //langlist.Add(_("Azeri"),copies);
 
+    acntlist.Add(_("American"), copies);
+    acntlist.Add(_("British"), copies);
    
     langtext = new wxStaticText(setpanel, -1, _("Choose default &language:"));
-    lang = new wxChoice(setpanel, ID_CHOICE, wxDefaultPosition, wxDefaultSize, langlist);
+    lang = new wxChoice(setpanel, ID_LANG_CHOICE, wxDefaultPosition, wxDefaultSize, langlist);
+    lang->SetMinSize(wxSize(127,26));
+
+    acnttext = new wxStaticText(setpanel, -1, _("Choose default accen&t:"));
+    accent = new wxChoice(setpanel, ID_ACNT_CHOICE, wxDefaultPosition, wxDefaultSize, acntlist);
+    accent->SetMinSize(wxSize(127,26));
 
     settext = new wxStaticText(setpanel, -1, _("Number of Entries in History Box:"));
     numEntry = new wxSpinCtrl(setpanel, ID_SPIN_ENTRY, _T(""));
@@ -194,9 +203,13 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     } else {
       chk_speak->SetValue(FALSE);
     }   
+
+    accent->SetSelection(pConfig->Read(_T("Accent"), 0l));  
 #else
     chk_tts->Enable(FALSE);
     chk_speak->Enable(FALSE);
+    accent->Enable(FALSE);
+    acnttext->Enable(FALSE);
 #endif 
  
     if ( pConfig->Read(_T("Scanner"), 1) != 0 ) {
@@ -479,13 +492,13 @@ void xFarDicSettings::SubmitChanges()
     } else {
         pConfig->Write(wxT("/Options/TTS"), 0);
     }
-#endif
 
     if (chk_speak->GetValue()) {
         pConfig->Write(wxT("/Options/Speak"), 1);
     } else {
         pConfig->Write(wxT("/Options/Speak"), 0);
     }
+#endif
 
     if (chk_notify->GetValue()) {
         pConfig->Write(wxT("/Options/Notification"), 1);
@@ -541,7 +554,11 @@ void xFarDicSettings::SubmitChanges()
 
     pConfig->Write(wxT("/Options/Leitner-Base"), leitner->GetValue());
 
-    pConfig->Write(wxT("/Options/GUI-Lang"), lang->GetSelection());            
+    pConfig->Write(wxT("/Options/GUI-Lang"), lang->GetSelection());
+
+#ifdef HAVE_SPEAKLIB
+    pConfig->Write(wxT("/Options/Accent"), accent->GetSelection());            
+#endif
             
     pConfig->Write(wxT("/Options/DB-Path"), path);
 
@@ -762,6 +779,8 @@ void xFarDicSettings::CreateLayout() {
     wxGridSizer *setpanelSizer = new wxGridSizer(9,2,0,0);
     setpanelSizer->Add(langtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     setpanelSizer->Add(lang , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(acnttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    setpanelSizer->Add(accent , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     setpanelSizer->Add(settext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     setpanelSizer->Add(numEntry , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     setpanelSizer->Add(timeouttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);

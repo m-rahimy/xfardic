@@ -43,7 +43,10 @@ public:
     void Kill();
 
 private:
-    bool tts;
+    bool tts,
+         acnt;
+
+    wxString voiceName;
 };
 
 #endif

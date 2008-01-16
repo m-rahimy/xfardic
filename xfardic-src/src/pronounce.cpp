@@ -28,21 +28,32 @@
 
 void xFarDicPronounce::Init()
 {
+#ifdef HAVE_SPEAKLIB
+    // First initialize Espeak engine
     wxConfigBase *pConfig = wxConfigBase::Get();
     pConfig->SetPath(_T("/Options"));
 
-    // First initialize Espeak engine
-#ifdef HAVE_SPEAKLIB
     tts = pConfig->Read(_T("TTS"), 0l);
+    acnt = pConfig->Read(_T("Accent"), 0l);
+
     if (tts) { 
-        espeak_Initialize(AUDIO_OUTPUT_PLAYBACK,0,NULL,0);
+        espeak_Initialize(AUDIO_OUTPUT_PLAYBACK, 0, NULL, 0);
 
-        espeak_SetParameter(espeakRATE, 125,0);
-        espeak_SetParameter(espeakVOLUME, 150,0);
-        espeak_SetParameter(espeakPITCH, 55,0);
+        espeak_SetParameter(espeakRATE, 125, 0);
+        espeak_SetParameter(espeakVOLUME, 150, 0);
+        espeak_SetParameter(espeakPITCH, 55, 0);
 
-        // American English
-        wxString voiceName=wxT("us-mbrola-3");
+        switch (acnt) {
+               case 0:
+                   // American Accent
+                   voiceName = wxT("us-mbrola-3");
+                   break;
+               case 1:
+                   // British Accent
+                   voiceName = wxT("english");
+                   break;
+        }
+
         espeak_SetVoiceByName((const char *)voiceName.mb_str(wxConvUTF8));
     }
 #else
