@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-13 19:49+0330\n"
+"POT-Creation-Date: 2008-01-16 10:16+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,7 +70,7 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#: ../src/leitner.cpp:114 ../src/settings.cpp:130
+#: ../src/leitner.cpp:114 ../src/settings.cpp:139
 msgid "&OK"
 msgstr ""
 
@@ -154,183 +154,195 @@ msgstr ""
 msgid "Box E is full.\n"
 msgstr ""
 
-#: ../src/settings.cpp:84
+#: ../src/settings.cpp:85
 msgid ""
 "Here you can configure your desired options. Changes will take effect after "
 "xFarDic restart."
 msgstr ""
 
-#: ../src/settings.cpp:95
+#: ../src/settings.cpp:97
 msgid "Persian"
 msgstr ""
 
-#: ../src/settings.cpp:96
+#: ../src/settings.cpp:98
 msgid "English (U.S)"
 msgstr ""
 
-#: ../src/settings.cpp:97
+#: ../src/settings.cpp:99
 msgid "System default"
 msgstr ""
 
-#: ../src/settings.cpp:101
+#: ../src/settings.cpp:102
+msgid "American"
+msgstr ""
+
+#: ../src/settings.cpp:103
+msgid "British"
+msgstr ""
+
+#: ../src/settings.cpp:105
 msgid "Choose default &language:"
 msgstr ""
 
-#: ../src/settings.cpp:104
+#: ../src/settings.cpp:109
+msgid "Choose default accen&t:"
+msgstr ""
+
+#: ../src/settings.cpp:113
 msgid "Number of Entries in History Box:"
 msgstr ""
 
-#: ../src/settings.cpp:108
+#: ../src/settings.cpp:117
 msgid "Notification window timeout (Sec):"
 msgstr ""
 
-#: ../src/settings.cpp:112
+#: ../src/settings.cpp:121
 msgid "Leitner box base capacity:"
 msgstr ""
 
-#: ../src/settings.cpp:116
+#: ../src/settings.cpp:125
 msgid "Enable Auto &Select Word After Translation"
 msgstr ""
 
-#: ../src/settings.cpp:117
+#: ../src/settings.cpp:126
 msgid "&Hide On Window Minimize and Close"
 msgstr ""
 
-#: ../src/settings.cpp:118
+#: ../src/settings.cpp:127
 msgid "Enable Inexact &Reverse Searching"
 msgstr ""
 
-#: ../src/settings.cpp:119
+#: ../src/settings.cpp:128
 msgid "Save Program Window P&osition and State"
 msgstr ""
 
-#: ../src/settings.cpp:120
+#: ../src/settings.cpp:129
 msgid "Save Wor&d Cache On Exit"
 msgstr ""
 
-#: ../src/settings.cpp:121
+#: ../src/settings.cpp:130
 msgid "Enable Clipboard &Watcher"
 msgstr ""
 
-#: ../src/settings.cpp:122
+#: ../src/settings.cpp:131
 msgid "Enable Selection Sca&nner"
 msgstr ""
 
-#: ../src/settings.cpp:123
+#: ../src/settings.cpp:132
 msgid "Enable Noti&fication Window"
 msgstr ""
 
-#: ../src/settings.cpp:124
+#: ../src/settings.cpp:133
 msgid "Spea&k On Translation"
 msgstr ""
 
-#: ../src/settings.cpp:125
+#: ../src/settings.cpp:134
 msgid "Return Si&milar Words"
 msgstr ""
 
-#: ../src/settings.cpp:126
+#: ../src/settings.cpp:135
 msgid "Enable S&pell Checker"
 msgstr ""
 
-#: ../src/settings.cpp:127
+#: ../src/settings.cpp:136
 msgid "Enable Swa&p file"
 msgstr ""
 
-#: ../src/settings.cpp:128
+#: ../src/settings.cpp:137
 msgid "Enable Text to Speech En&gine"
 msgstr ""
 
-#: ../src/settings.cpp:131
+#: ../src/settings.cpp:140
 msgid "&Apply"
 msgstr ""
 
-#: ../src/settings.cpp:132
+#: ../src/settings.cpp:141
 msgid "&Cancel"
 msgstr ""
 
-#: ../src/settings.cpp:299
+#: ../src/settings.cpp:312
 msgid "XML DB Path:"
 msgstr ""
 
-#: ../src/settings.cpp:301
+#: ../src/settings.cpp:314
 msgid "Add"
 msgstr ""
 
-#: ../src/settings.cpp:302
+#: ../src/settings.cpp:315
 msgid "DB info"
 msgstr ""
 
-#: ../src/settings.cpp:303
+#: ../src/settings.cpp:316
 msgid "Up"
 msgstr ""
 
-#: ../src/settings.cpp:304
+#: ../src/settings.cpp:317
 msgid "Down"
 msgstr ""
 
-#: ../src/settings.cpp:321
+#: ../src/settings.cpp:334
 msgid "Ctrl+Click to enable or disable available database(s)."
 msgstr ""
 
-#: ../src/settings.cpp:323
+#: ../src/settings.cpp:336
 msgid "Enabling swap reduces memory usage by 60% and performance by 15%."
 msgstr ""
 
-#: ../src/settings.cpp:335
+#: ../src/settings.cpp:348
 msgid "Options"
 msgstr ""
 
-#: ../src/settings.cpp:336
+#: ../src/settings.cpp:349
 msgid "Databases"
 msgstr ""
 
-#: ../src/settings.cpp:439
+#: ../src/settings.cpp:452
 msgid ""
 "XML DB path is empty.\n"
 "xFarDic will now work without a valid database."
 msgstr ""
 
-#: ../src/settings.cpp:440
+#: ../src/settings.cpp:453
 msgid "Warning"
 msgstr ""
 
-#: ../src/settings.cpp:572
+#: ../src/settings.cpp:589
 msgid "Choose a XML DataBase"
 msgstr ""
 
-#: ../src/settings.cpp:572
+#: ../src/settings.cpp:589
 msgid "XML DataBase files (*.xdb)|*.xdb"
 msgstr ""
 
-#: ../src/settings.cpp:674
+#: ../src/settings.cpp:691
 msgid "DB Name  : "
 msgstr ""
 
-#: ../src/settings.cpp:675
+#: ../src/settings.cpp:692
 msgid "DB Author : "
 msgstr ""
 
-#: ../src/settings.cpp:676
+#: ../src/settings.cpp:693
 msgid "DB Version: "
 msgstr ""
 
-#: ../src/settings.cpp:679 ../src/settings.cpp:681
+#: ../src/settings.cpp:696 ../src/settings.cpp:698
 msgid "Input Lang: "
 msgstr ""
 
-#: ../src/settings.cpp:684
+#: ../src/settings.cpp:701
 msgid "No information found."
 msgstr ""
 
-#: ../src/settings.cpp:688
+#: ../src/settings.cpp:705
 msgid "No information found or no databse is selected."
 msgstr ""
 
-#: ../src/settings.cpp:691
+#: ../src/settings.cpp:708
 msgid "XML Database information"
 msgstr ""
 
-#: ../src/settings.cpp:733
+#: ../src/settings.cpp:750
 msgid "Parse Error. Invalid Document.\n"
 msgstr ""
 

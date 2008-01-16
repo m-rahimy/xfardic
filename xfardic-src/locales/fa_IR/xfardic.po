@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xFarDic 0.10.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-13 19:49+0330\n"
-"PO-Revision-Date: 2008-01-07 19:39+0330\n"
+"POT-Creation-Date: 2008-01-16 10:16+0330\n"
+"PO-Revision-Date: 2008-01-16 10:17+0330\n"
 "Last-Translator: Alan Baghumian <alan@technotux.org>\n"
 "Language-Team: fa_IR <alan@technotux.org>\n"
 "MIME-Version: 1.0\n"
@@ -84,7 +84,7 @@ msgstr "پروانه"
 msgid "Authors"
 msgstr "نویسندگان"
 
-#: ../src/leitner.cpp:114 ../src/settings.cpp:130
+#: ../src/leitner.cpp:114 ../src/settings.cpp:139
 msgid "&OK"
 msgstr "تایید"
 
@@ -174,7 +174,7 @@ msgstr "ظرفیت جعبه ت تکمیل است.\n"
 msgid "Box E is full.\n"
 msgstr "ظرفیت جعبه ث تکمیل است.\n"
 
-#: ../src/settings.cpp:84
+#: ../src/settings.cpp:85
 msgid ""
 "Here you can configure your desired options. Changes will take effect after "
 "xFarDic restart."
@@ -182,133 +182,145 @@ msgstr ""
 "در این پنجره می‌توانید گزینه‌های مورد نظرتان را تنظیم کنید. تغییرات پس از "
 "راه‌اندازی مجدد نرم‌افزار اعمال خواهند شد."
 
-#: ../src/settings.cpp:95
+#: ../src/settings.cpp:97
 msgid "Persian"
 msgstr "فارسی"
 
-#: ../src/settings.cpp:96
+#: ../src/settings.cpp:98
 msgid "English (U.S)"
 msgstr "انگلیسی"
 
-#: ../src/settings.cpp:97
+#: ../src/settings.cpp:99
 msgid "System default"
 msgstr "پیش‌گزیده سیستم"
 
-#: ../src/settings.cpp:101
+#: ../src/settings.cpp:102
+msgid "American"
+msgstr "آمریکایی"
+
+#: ../src/settings.cpp:103
+msgid "British"
+msgstr "بریتیش"
+
+#: ../src/settings.cpp:105
 msgid "Choose default &language:"
 msgstr "زبان رابط کاربری:"
 
-#: ../src/settings.cpp:104
+#: ../src/settings.cpp:109
+msgid "Choose default accen&t:"
+msgstr "لهجه سیستم تلفظ:"
+
+#: ../src/settings.cpp:113
 msgid "Number of Entries in History Box:"
 msgstr "تعداد ورودی‌ها در جعبه تاریخچه:"
 
-#: ../src/settings.cpp:108
+#: ../src/settings.cpp:117
 msgid "Notification window timeout (Sec):"
 msgstr "زمان بسته شدن خودکار پنجره اعلان (ثانیه):"
 
-#: ../src/settings.cpp:112
+#: ../src/settings.cpp:121
 msgid "Leitner box base capacity:"
 msgstr "طرفیت جعبه لایتنر:"
 
-#: ../src/settings.cpp:116
+#: ../src/settings.cpp:125
 msgid "Enable Auto &Select Word After Translation"
 msgstr "انتخاب خودکار واژه پس از برگردان فعال شود"
 
-#: ../src/settings.cpp:117
+#: ../src/settings.cpp:126
 msgid "&Hide On Window Minimize and Close"
 msgstr "پنجره هنگام کوچک شدن و بستن مخفی شود"
 
-#: ../src/settings.cpp:118
+#: ../src/settings.cpp:127
 msgid "Enable Inexact &Reverse Searching"
 msgstr "جستجوی نادقیق برعکس فعال شود"
 
-#: ../src/settings.cpp:119
+#: ../src/settings.cpp:128
 msgid "Save Program Window P&osition and State"
 msgstr "محل قرارگیری و وضعیت پنجره برنامه ذخیره شود"
 
-#: ../src/settings.cpp:120
+#: ../src/settings.cpp:129
 msgid "Save Wor&d Cache On Exit"
 msgstr "تاریخچه واژه‌ها هنگام خروج ذخیره شود"
 
-#: ../src/settings.cpp:121
+#: ../src/settings.cpp:130
 msgid "Enable Clipboard &Watcher"
 msgstr "حس‌گر حافظه فعال شود"
 
-#: ../src/settings.cpp:122
+#: ../src/settings.cpp:131
 msgid "Enable Selection Sca&nner"
 msgstr "حس‌گر انتخاب فعال شود"
 
-#: ../src/settings.cpp:123
+#: ../src/settings.cpp:132
 msgid "Enable Noti&fication Window"
 msgstr "نمایش پنجره اعلان فعال شود"
 
-#: ../src/settings.cpp:124
+#: ../src/settings.cpp:133
 msgid "Spea&k On Translation"
 msgstr "انجام تلفظ هنگام ترجمه"
 
-#: ../src/settings.cpp:125
+#: ../src/settings.cpp:134
 msgid "Return Si&milar Words"
 msgstr "برگردان کلمات مشابه"
 
-#: ../src/settings.cpp:126
+#: ../src/settings.cpp:135
 msgid "Enable S&pell Checker"
 msgstr "غلط یاب املایی فعال شود"
 
-#: ../src/settings.cpp:127
+#: ../src/settings.cpp:136
 msgid "Enable Swa&p file"
 msgstr "حافظه موقت فعال شود"
 
-#: ../src/settings.cpp:128
+#: ../src/settings.cpp:137
 msgid "Enable Text to Speech En&gine"
 msgstr "سیستم تلفظ واژه‌ها فعال شود"
 
-#: ../src/settings.cpp:131
+#: ../src/settings.cpp:140
 msgid "&Apply"
 msgstr "اعمال"
 
-#: ../src/settings.cpp:132
+#: ../src/settings.cpp:141
 msgid "&Cancel"
 msgstr "انصراف"
 
-#: ../src/settings.cpp:299
+#: ../src/settings.cpp:312
 msgid "XML DB Path:"
 msgstr "مسیر بانک:"
 
-#: ../src/settings.cpp:301
+#: ../src/settings.cpp:314
 msgid "Add"
 msgstr "اضافه کردن"
 
-#: ../src/settings.cpp:302
+#: ../src/settings.cpp:315
 msgid "DB info"
 msgstr "اطلاعات"
 
-#: ../src/settings.cpp:303
+#: ../src/settings.cpp:316
 msgid "Up"
 msgstr "صعودی"
 
-#: ../src/settings.cpp:304
+#: ../src/settings.cpp:317
 msgid "Down"
 msgstr "نزولی"
 
-#: ../src/settings.cpp:321
+#: ../src/settings.cpp:334
 msgid "Ctrl+Click to enable or disable available database(s)."
 msgstr "برای فعال یا غیر فعال کردن بانک‌های موجود از Ctrl+Click استفاده نمایید."
 
-#: ../src/settings.cpp:323
+#: ../src/settings.cpp:336
 msgid "Enabling swap reduces memory usage by 60% and performance by 15%."
 msgstr ""
 "فعال کردن swap باعث صرفه‌جویی در مصرف حافظه به میزان ۶۰٪ و کاهش سرعت به میزان "
 "۱۵٪ خواهد شد."
 
-#: ../src/settings.cpp:335
+#: ../src/settings.cpp:348
 msgid "Options"
 msgstr "گزینه‌ها"
 
-#: ../src/settings.cpp:336
+#: ../src/settings.cpp:349
 msgid "Databases"
 msgstr "بانک‌های اطلاعاتی"
 
-#: ../src/settings.cpp:439
+#: ../src/settings.cpp:452
 msgid ""
 "XML DB path is empty.\n"
 "xFarDic will now work without a valid database."
@@ -316,47 +328,47 @@ msgstr ""
 "مسیر بانک اطلاعاای XML خالی است.\n"
 "xFarDic بدون یک بانک اطلاعاتی معتبر کار نخواهد کرد."
 
-#: ../src/settings.cpp:440
+#: ../src/settings.cpp:453
 msgid "Warning"
 msgstr "هشدار"
 
-#: ../src/settings.cpp:572
+#: ../src/settings.cpp:589
 msgid "Choose a XML DataBase"
 msgstr "انتخاب بانک اطلاعاتی XML"
 
-#: ../src/settings.cpp:572
+#: ../src/settings.cpp:589
 msgid "XML DataBase files (*.xdb)|*.xdb"
 msgstr "بانک‌های اطلاعاتی XML (*.xdb)|*.xdb"
 
-#: ../src/settings.cpp:674
+#: ../src/settings.cpp:691
 msgid "DB Name  : "
 msgstr "نام بانک اطلاعاتی       :"
 
-#: ../src/settings.cpp:675
+#: ../src/settings.cpp:692
 msgid "DB Author : "
 msgstr "نویسنده بانک اطلاعاتی:"
 
-#: ../src/settings.cpp:676
+#: ../src/settings.cpp:693
 msgid "DB Version: "
 msgstr "شماره نسخه بانک       :"
 
-#: ../src/settings.cpp:679 ../src/settings.cpp:681
+#: ../src/settings.cpp:696 ../src/settings.cpp:698
 msgid "Input Lang: "
 msgstr "زبان ورودی بانک            :"
 
-#: ../src/settings.cpp:684
+#: ../src/settings.cpp:701
 msgid "No information found."
 msgstr "اطلاعاتی یافت نشد."
 
-#: ../src/settings.cpp:688
+#: ../src/settings.cpp:705
 msgid "No information found or no databse is selected."
 msgstr "اطلاعاتی یافت نشد یا هیچ بانک اطلاعاتی انتخاب نشده است."
 
-#: ../src/settings.cpp:691
+#: ../src/settings.cpp:708
 msgid "XML Database information"
 msgstr "اطلاعات بانک XML"
 
-#: ../src/settings.cpp:733
+#: ../src/settings.cpp:750
 msgid "Parse Error. Invalid Document.\n"
 msgstr "خطا: بانک اطلاعاتی خالی است.\n"
 

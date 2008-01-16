@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xFarDic 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-13 19:49+0330\n"
+"POT-Creation-Date: 2008-01-16 10:16+0330\n"
 "PO-Revision-Date: 2007-01-25 16:30+0330\n"
 "Last-Translator: Navid Abdi <navid@gnuiran.org>\n"
 "Language-Team: az_AZ <navid@gnuiran.org>\n"
@@ -97,7 +97,7 @@ msgstr "Lisenziya"
 msgid "Authors"
 msgstr "·Verilənlər bazalarının yazırı :"
 
-#: ../src/leitner.cpp:114 ../src/settings.cpp:130
+#: ../src/leitner.cpp:114 ../src/settings.cpp:139
 msgid "&OK"
 msgstr "&Oldu"
 
@@ -183,7 +183,7 @@ msgstr ""
 msgid "Box E is full.\n"
 msgstr ""
 
-#: ../src/settings.cpp:84
+#: ../src/settings.cpp:85
 msgid ""
 "Here you can configure your desired options. Changes will take effect after "
 "xFarDic restart."
@@ -191,137 +191,151 @@ msgstr ""
 "Bu pəncərədə proqrəminizin artıq seçimlərini qura bilərsiniz. dəyiştirilən "
 "seçimlər gələn dəfə proqrəmi çalışdıranda aktiv ediləcək"
 
-#: ../src/settings.cpp:95
+#: ../src/settings.cpp:97
 msgid "Persian"
 msgstr "Farsca"
 
-#: ../src/settings.cpp:96
+#: ../src/settings.cpp:98
 msgid "English (U.S)"
 msgstr "İngilizcə"
 
-#: ../src/settings.cpp:97
+#: ../src/settings.cpp:99
 msgid "System default"
 msgstr "On gurğulu sistem"
 
-#: ../src/settings.cpp:101
+#: ../src/settings.cpp:102
+#, fuzzy
+msgid "American"
+msgstr "Farsca"
+
+#: ../src/settings.cpp:103
+msgid "British"
+msgstr ""
+
+#: ../src/settings.cpp:105
 msgid "Choose default &language:"
 msgstr "Ön qurğu&lu dil :"
 
-#: ../src/settings.cpp:104
+#: ../src/settings.cpp:109
+#, fuzzy
+msgid "Choose default accen&t:"
+msgstr "Ön qurğu&lu dil :"
+
+#: ../src/settings.cpp:113
 msgid "Number of Entries in History Box:"
 msgstr "Keçmiş qutusunda :"
 
-#: ../src/settings.cpp:108
+#: ../src/settings.cpp:117
 #, fuzzy
 msgid "Notification window timeout (Sec):"
 msgstr "Yoxlama Pəncərəsinin göstəriş zamani (San.):"
 
-#: ../src/settings.cpp:112
+#: ../src/settings.cpp:121
 msgid "Leitner box base capacity:"
 msgstr ""
 
-#: ../src/settings.cpp:116
+#: ../src/settings.cpp:125
 msgid "Enable Auto &Select Word After Translation"
 msgstr "Tərcümə Etmədən sonra avtomatik olaraq seç"
 
-#: ../src/settings.cpp:117
+#: ../src/settings.cpp:126
 #, fuzzy
 msgid "&Hide On Window Minimize and Close"
 msgstr "Pəncərəni kiçildəndə gizlə"
 
-#: ../src/settings.cpp:118
+#: ../src/settings.cpp:127
 msgid "Enable Inexact &Reverse Searching"
 msgstr "Qarşı qeyri-dəqiq Axtarış"
 
-#: ../src/settings.cpp:119
+#: ../src/settings.cpp:128
 #, fuzzy
 msgid "Save Program Window P&osition and State"
 msgstr "Pəncərə mövqeyini yadda saxla"
 
-#: ../src/settings.cpp:120
+#: ../src/settings.cpp:129
 msgid "Save Wor&d Cache On Exit"
 msgstr "Çıxşda Keçmişi qeyd et"
 
-#: ../src/settings.cpp:121
+#: ../src/settings.cpp:130
 msgid "Enable Clipboard &Watcher"
 msgstr "Ara yaddaşdakı· sensörün dəstəyi"
 
-#: ../src/settings.cpp:122
+#: ../src/settings.cpp:131
 #, fuzzy
 msgid "Enable Selection Sca&nner"
 msgstr "Selection Scanneri fəallaşdır"
 
-#: ../src/settings.cpp:123
+#: ../src/settings.cpp:132
 msgid "Enable Noti&fication Window"
 msgstr ""
 
-#: ../src/settings.cpp:124
+#: ../src/settings.cpp:133
 #, fuzzy
 msgid "Spea&k On Translation"
 msgstr "Yapışdır və tərcümə et"
 
-#: ../src/settings.cpp:125
+#: ../src/settings.cpp:134
 msgid "Return Si&milar Words"
 msgstr "Bənzər kəlmələri göstər"
 
-#: ../src/settings.cpp:126
+#: ../src/settings.cpp:135
 msgid "Enable S&pell Checker"
 msgstr "İmlanı yoxlaması"
 
-#: ../src/settings.cpp:127
+#: ../src/settings.cpp:136
 #, fuzzy
 msgid "Enable Swa&p file"
 msgstr "İmlanı yoxlaması"
 
-#: ../src/settings.cpp:128
+#: ../src/settings.cpp:137
 msgid "Enable Text to Speech En&gine"
 msgstr ""
 
-#: ../src/settings.cpp:131
+#: ../src/settings.cpp:140
 msgid "&Apply"
 msgstr "Tətbiq Et"
 
-#: ../src/settings.cpp:132
+#: ../src/settings.cpp:141
 msgid "&Cancel"
 msgstr "&Ləğv Et"
 
-#: ../src/settings.cpp:299
+#: ../src/settings.cpp:312
 msgid "XML DB Path:"
 msgstr "XML VB Adresi:"
 
-#: ../src/settings.cpp:301
+#: ../src/settings.cpp:314
 msgid "Add"
 msgstr " Əlavə Et"
 
-#: ../src/settings.cpp:302
+#: ../src/settings.cpp:315
 msgid "DB info"
 msgstr "VB bilgiləri"
 
-#: ../src/settings.cpp:303
+#: ../src/settings.cpp:316
 msgid "Up"
 msgstr ""
 
-#: ../src/settings.cpp:304
+#: ../src/settings.cpp:317
 msgid "Down"
 msgstr ""
 
-#: ../src/settings.cpp:321
+#: ../src/settings.cpp:334
 msgid "Ctrl+Click to enable or disable available database(s)."
 msgstr "·Verilənlər·bazalarıni İstifadə etmə/ İstifadə etməməsinə  Ctrl+Click "
 
-#: ../src/settings.cpp:323
+#: ../src/settings.cpp:336
 msgid "Enabling swap reduces memory usage by 60% and performance by 15%."
 msgstr ""
 
-#: ../src/settings.cpp:335
+#: ../src/settings.cpp:348
 msgid "Options"
 msgstr "Seçimlər"
 
-#: ../src/settings.cpp:336
+#: ../src/settings.cpp:349
 msgid "Databases"
 msgstr " Verilənlər bazaları"
 
-#: ../src/settings.cpp:439
+#: ../src/settings.cpp:452
 msgid ""
 "XML DB path is empty.\n"
 "xFarDic will now work without a valid database."
@@ -329,47 +343,47 @@ msgstr ""
 "XML VB adresi yox.\n"
 "İtibarlı  bir VB olmasa   xFarDic çalışmaz"
 
-#: ../src/settings.cpp:440
+#: ../src/settings.cpp:453
 msgid "Warning"
 msgstr "Xəbərdarlıq"
 
-#: ../src/settings.cpp:572
+#: ../src/settings.cpp:589
 msgid "Choose a XML DataBase"
 msgstr "Bir XML VB seç"
 
-#: ../src/settings.cpp:572
+#: ../src/settings.cpp:589
 msgid "XML DataBase files (*.xdb)|*.xdb"
 msgstr "XML VB fayları  (*.xdb)|*.xdb"
 
-#: ../src/settings.cpp:674
+#: ../src/settings.cpp:691
 msgid "DB Name  : "
 msgstr "VB Adı   :"
 
-#: ../src/settings.cpp:675
+#: ../src/settings.cpp:692
 msgid "DB Author : "
 msgstr "VB yazıçısı :"
 
-#: ../src/settings.cpp:676
+#: ../src/settings.cpp:693
 msgid "DB Version: "
 msgstr "VB Versiyonü      :"
 
-#: ../src/settings.cpp:679 ../src/settings.cpp:681
+#: ../src/settings.cpp:696 ../src/settings.cpp:698
 msgid "Input Lang: "
 msgstr "VB dili    :"
 
-#: ../src/settings.cpp:684
+#: ../src/settings.cpp:701
 msgid "No information found."
 msgstr "Heç bilgi tapılmadı."
 
-#: ../src/settings.cpp:688
+#: ../src/settings.cpp:705
 msgid "No information found or no databse is selected."
 msgstr "Heç mə'lumat tapılmadı."
 
-#: ../src/settings.cpp:691
+#: ../src/settings.cpp:708
 msgid "XML Database information"
 msgstr "XML VB'nin mə'lumati"
 
-#: ../src/settings.cpp:733
+#: ../src/settings.cpp:750
 msgid "Parse Error. Invalid Document.\n"
 msgstr "Xəta : Verilənlər Bazasi Boşdur.\n"
 
