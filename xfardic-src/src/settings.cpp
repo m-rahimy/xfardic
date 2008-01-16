@@ -45,7 +45,7 @@ BEGIN_EVENT_TABLE(xFarDicSettings, wxFrame)
     EVT_CHECKBOX(ID_CHK_SWAP, xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_SPEAK, xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_WATCHER, xFarDicSettings::EnableApply)
-    EVT_CHECKBOX(ID_CHK_SCANNER,  xFarDicSettings::EnableScanner)
+    EVT_CHECKBOX(ID_CHK_SCANNER,  xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_NOTIFICATION, xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_TTS,  xFarDicSettings::EnableTTS)
     EVT_CHECKBOX(ID_CHK_HIDE,  xFarDicSettings::EnableApply)
@@ -194,8 +194,12 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 #ifdef HAVE_SPEAKLIB
     if ( pConfig->Read(_T("TTS"), 0l) != 0 ) {
       chk_tts->SetValue(TRUE);
+      accent->Enable(TRUE);
+      acnttext->Enable(TRUE);
     } else {
       chk_tts->SetValue(FALSE);
+      accent->Enable(FALSE);
+      acnttext->Enable(FALSE);
     }
 
     if ( pConfig->Read(_T("Speak"), 0l) != 0 ) {
@@ -214,14 +218,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
  
     if ( pConfig->Read(_T("Scanner"), 1) != 0 ) {
       chk_scanner->SetValue(TRUE);
-#ifdef HAVE_SPEAKLIB
-      if (!chk_tts->GetValue()) {
-          chk_speak->Enable(FALSE);
-      }
-#endif
     } else {
       chk_scanner->SetValue(FALSE);
-      chk_speak->Enable(FALSE);
     }    
 
     if ( pConfig->Read(_T("Win-Pos"), 1) != 0 ) {
@@ -250,6 +248,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 
     if (!chk_notify->GetValue()) {
          scantimeout->Enable(FALSE);
+         timeouttext->Enable(FALSE);
     }
 
     int ltbasecap = pConfig->Read(_T("Leitner-Base"), 10);  
@@ -625,32 +624,19 @@ void xFarDicSettings::EnableApply(wxCommandEvent& WXUNUSED(event))
     }    
 }
 
-void xFarDicSettings::EnableScanner(wxCommandEvent& WXUNUSED(event))
-{
-    m_apply->Enable(TRUE);
-
-#ifdef HAVE_SPEAKLIB   
-    if (chk_scanner->GetValue()) {
-        if (chk_tts->GetValue()) {
-           chk_speak->Enable(TRUE);
-        }
-    }else {
-        chk_speak->Enable(FALSE);
-    }
-#endif
-}
-
 void xFarDicSettings::EnableTTS(wxCommandEvent& WXUNUSED(event))
 {
     m_apply->Enable(TRUE);
 
 #ifdef HAVE_SPEAKLIB   
     if (chk_tts->GetValue()) {
-        if (chk_scanner->GetValue()) {
-           chk_speak->Enable(TRUE);
-        }
+        chk_speak->Enable(TRUE);
+        accent->Enable(TRUE);
+        acnttext->Enable(TRUE);
     }else {
         chk_speak->Enable(FALSE);
+        accent->Enable(FALSE);
+        acnttext->Enable(FALSE);
     }
 #endif
 }

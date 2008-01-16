@@ -62,8 +62,6 @@ public:
     void EnableSpApply(wxSpinEvent& event); 
     /// Enables Apply button
     void EnableApply(wxCommandEvent& event);
-    /// Enables Apply button & Speak check box
-    void EnableScanner(wxCommandEvent& event);
     /// Enables Apply & TTS check box
     void EnableTTS(wxCommandEvent& event);
     /// Process path update event

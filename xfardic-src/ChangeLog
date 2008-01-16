@@ -296,5 +296,7 @@ Added a close confirmation after creating the swap file.
 Save window size too.
 //////////////////////////////////////////////////////////////////////////////////////
 0.10.3     -- 2008-01-xx
+Fixed a bug related to selection scanner event handler.
+Fixed activation status of accent selector when TTS engine is enabled/disabled.
 
 
