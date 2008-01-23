@@ -600,9 +600,6 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
         oSelection.start();    
     } else {
         scanner = FALSE;
-
-        // Speak if scanner is enabled
-        speak = FALSE;
     }   
 
     if ( pConfig->Read(wxT("Hide"), 0l) != 0 ) {
@@ -918,9 +915,6 @@ void xFarDicApp::OnScanner(wxCommandEvent& WXUNUSED(event))
     
     if ( scanner == TRUE ) {
         scanner = FALSE;
-
-        //Speak if scanner is enabled
-        speak = FALSE;
         opmenu->Check( xFarDic_Scanner, FALSE );
         pConfig->Write(wxT("/Options/Scanner"), 0);
     } else {
@@ -1530,15 +1524,15 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
         }
     }
 
+    if (notify && notification) {
+        ShowNotification(m_textVal, m_label->GetValue());
+    }
+
 #ifdef HAVE_SPEAKLIB
     if (speak) {
         pron->Pronounce(m_text->GetValue());
     }
 #endif
-
-    if (notify && notification) {
-        ShowNotification(m_textVal, m_label->GetValue());
-    }
 
     return found;
 }

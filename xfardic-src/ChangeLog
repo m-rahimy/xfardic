@@ -298,5 +298,11 @@ Save window size too.
 0.10.3     -- 2008-01-22
 Fixed a bug related to selection scanner event handler.
 Fixed activation status of accent selector when TTS engine is enabled/disabled.
+//////////////////////////////////////////////////////////////////////////////////////
+0.10.4     -- 2008-02-XX
+Fixed two glitches related to new scanner/speak relationship.
+First show notification then speak.
+
+
 
 
