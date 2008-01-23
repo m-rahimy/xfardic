@@ -302,4 +302,6 @@ Fixed activation status of accent selector when TTS engine is enabled/disabled.
 0.10.4     -- 2008-02-XX
 Fixed two glitches related to new scanner/speak relationship.
 First show notification then speak.
+Use en-rhotic as American accent, suggested by Jonathan Duddington.
+
 

@@ -46,7 +46,7 @@ void xFarDicPronounce::Init()
         switch (acnt) {
                case 0:
                    // American Accent
-                   voiceName = wxT("us-mbrola-3");
+                   voiceName = wxT("en-rhotic");
                    break;
                case 1:
                    // British Accent
