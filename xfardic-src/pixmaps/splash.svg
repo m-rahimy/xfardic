@@ -1060,11 +1060,14 @@
        style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1"
        x="8.3626852"
        y="24.103104"
-       id="text3406"><tspan
+       id="text3406"
+       inkscape:export-filename="/home/alan/svn/xfardic/trunk/xfardic-src/pixmaps/splash.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          x="8.3626852"
          y="24.103104"
          id="tspan3410"
-         style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;font-family:Bitstream Charter">0.10.3</tspan></text>
+         style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;font-family:Bitstream Charter">0.10.4</tspan></text>
   </g>
 </svg>

@@ -303,6 +303,3 @@ Fixed activation status of accent selector when TTS engine is enabled/disabled.
 Fixed two glitches related to new scanner/speak relationship.
 First show notification then speak.
 
-
-
-
