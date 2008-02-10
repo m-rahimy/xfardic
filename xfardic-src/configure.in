@@ -14,14 +14,7 @@ if test "x$prefix" = "xNONE"; then
 	prefix=/usr
 fi
 
-AC_ARG_WITH([speaklib],
-        AC_HELP_STRING([--with-speaklib],
-                [Use speaklib if available (default=yes)]),[
-	with_speaklib=$withval
-],[
-	with_speaklib=yes
-])
-
+AC_ARG_WITH([speaklib], AC_HELP_STRING([--with-speaklib], [Use speaklib if available (default=yes)]),[with_speaklib=$withval],[with_speaklib=yes])
 AC_TRY_CPP([#include <aspell.h>] ,echo "checking for aspell.h... yes",[AC_MSG_ERROR([You should have aspell header files! Install libaspell-dev])])
 
 LIBGNOME_INCLUDEDIR=""
@@ -76,25 +69,24 @@ else
 fi
 
 # speaklib configuration
-if test x$with_speaklib != xno; then
-    LIBESPEAK_INCLUDEDIR=""
-    for d in 			\
-        /usr/include/espeak\
-        $prefix/include/espeak\
-        /usr/include
-    do
-        if test -f "$d/speak_lib.h" ; then
-	    LIBESPEAK_INCLUDEDIR="$d"
-	    break
-        fi
-    done
-    if test "x$LIBESPEAK_INCLUDEDIR" = "x"; then
-        echo "checking for speak_lib.h...no"    
-        AC_DEFINE(HAVE_SPEAKLIB,0,[Defined when speaklib can be used.])            
-    else
-        echo "checking for speak_lib.h...yes"
-        AC_DEFINE(HAVE_SPEAKLIB,1,[Defined when speaklib can be used.])            
+LIBESPEAK_INCLUDEDIR=""
+for d in 			\
+    /usr/include/espeak\
+    $prefix/include/espeak\
+    /usr/include
+do
+    if test -f "$d/speak_lib.h" ; then
+    LIBESPEAK_INCLUDEDIR="$d"
+    break
     fi
+done
+if test "x$LIBESPEAK_INCLUDEDIR" = "x" -o "x$with_speaklib" = "xno"; then
+    echo "checking for speak_lib.h...no"
+    with_speaklib="no"
+    AC_DEFINE(HAVE_SPEAKLIB,0,[Defined when speaklib cant be used.])            
+else
+    echo "checking for speak_lib.h...yes"
+    AC_DEFINE(HAVE_SPEAKLIB,1,[Defined when speaklib can be used.])            
 fi
 
 LIBSQLITE3_INCLUDEDIR=""

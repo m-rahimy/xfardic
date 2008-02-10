@@ -3728,15 +3728,10 @@ fi
 
 # Check whether --with-speaklib was given.
 if test "${with_speaklib+set}" = set; then
-  withval=$with_speaklib;
-	with_speaklib=$withval
-
+  withval=$with_speaklib; with_speaklib=$withval
 else
-
-	with_speaklib=yes
-
+  with_speaklib=yes
 fi
-
 
 
 ac_ext=c
@@ -4064,33 +4059,32 @@ else
 fi
 
 # speaklib configuration
-if test x$with_speaklib != xno; then
-    LIBESPEAK_INCLUDEDIR=""
-    for d in 			\
-        /usr/include/espeak\
-        $prefix/include/espeak\
-        /usr/include
-    do
-        if test -f "$d/speak_lib.h" ; then
-	    LIBESPEAK_INCLUDEDIR="$d"
-	    break
-        fi
-    done
-    if test "x$LIBESPEAK_INCLUDEDIR" = "x"; then
-        echo "checking for speak_lib.h...no"
+LIBESPEAK_INCLUDEDIR=""
+for d in 			\
+    /usr/include/espeak\
+    $prefix/include/espeak\
+    /usr/include
+do
+    if test -f "$d/speak_lib.h" ; then
+    LIBESPEAK_INCLUDEDIR="$d"
+    break
+    fi
+done
+if test "x$LIBESPEAK_INCLUDEDIR" = "x" -o "x$with_speaklib" = "xno"; then
+    echo "checking for speak_lib.h...no"
+    with_speaklib="no"
 
 cat >>confdefs.h <<\_ACEOF
 #define HAVE_SPEAKLIB 0
 _ACEOF
 
-    else
-        echo "checking for speak_lib.h...yes"
+else
+    echo "checking for speak_lib.h...yes"
 
 cat >>confdefs.h <<\_ACEOF
 #define HAVE_SPEAKLIB 1
 _ACEOF
 
-    fi
 fi
 
 LIBSQLITE3_INCLUDEDIR=""
