@@ -76,9 +76,11 @@ using namespace std;
 #include <gtk/gtk.h>
 #include <cstring>
 #include "sqlite3.h"
-#include "speak_lib.h"
-
 #include "constants.h"
+
+#ifdef HAVE_SPEAKLIB
+    #include "speak_lib.h"
+#endif
 
 extern bool showAspell;
 extern bool showAbout;
@@ -86,4 +88,3 @@ extern bool showLeitner;
 extern bool showSettings;
 
 #endif
-

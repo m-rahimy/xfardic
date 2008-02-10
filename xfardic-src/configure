@@ -4073,11 +4073,6 @@ done
 if test "x$LIBESPEAK_INCLUDEDIR" = "x" -o "x$with_speaklib" = "xno"; then
     echo "checking for speak_lib.h...no"
     with_speaklib="no"
-
-cat >>confdefs.h <<\_ACEOF
-#define HAVE_SPEAKLIB 0
-_ACEOF
-
 else
     echo "checking for speak_lib.h...yes"
 
