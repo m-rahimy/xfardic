@@ -89,11 +89,12 @@ if test x$with_speaklib != xno; then
         fi
     done
     if test "x$LIBESPEAK_INCLUDEDIR" = "x"; then
-        AC_MSG_ERROR([You should have Espeak header files! Install libespeak-dev])
+        echo "checking for speak_lib.h...no"    
+        AC_DEFINE(HAVE_SPEAKLIB,0,[Defined when speaklib can be used.])            
     else
         echo "checking for speak_lib.h...yes"
+        AC_DEFINE(HAVE_SPEAKLIB,1,[Defined when speaklib can be used.])            
     fi
-    AC_DEFINE(HAVE_SPEAKLIB,1,[Defined when speaklib can be used.])    
 fi
 
 LIBSQLITE3_INCLUDEDIR=""

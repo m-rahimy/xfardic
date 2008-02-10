@@ -4077,17 +4077,20 @@ if test x$with_speaklib != xno; then
         fi
     done
     if test "x$LIBESPEAK_INCLUDEDIR" = "x"; then
-        { { echo "$as_me:$LINENO: error: You should have Espeak header files! Install libespeak-dev" >&5
-echo "$as_me: error: You should have Espeak header files! Install libespeak-dev" >&2;}
-   { (exit 1); exit 1; }; }
+        echo "checking for speak_lib.h...no"
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_SPEAKLIB 0
+_ACEOF
+
     else
         echo "checking for speak_lib.h...yes"
-    fi
 
 cat >>confdefs.h <<\_ACEOF
 #define HAVE_SPEAKLIB 1
 _ACEOF
 
+    fi
 fi
 
 LIBSQLITE3_INCLUDEDIR=""
