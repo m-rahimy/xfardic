@@ -7,7 +7,8 @@ dnl checks for programs
 AC_PROG_CC
 
 dnl checks for libraries
-AC_CHECK_LIB(espeak, espeak_Synchronize, [with_speaklib=yes; AC_DEFINE(HAVE_SPEAKLIB,1,[Defined when speaklib can be used.])], with_speaklib=no)
+AC_CHECK_LIB(espeak, espeak_Synchronize, [LIBS="$LIBS -lespeak"; with_speaklib=yes; AC_DEFINE(HAVE_SPEAKLIB,1,[Defined when speaklib can be used.])], 
+             with_speaklib=no)
 AC_CHECK_LIB(sqlite3, sqlite3_exec)
 AC_CHECK_LIB(notify, notify_init, [], AC_MSG_ERROR([You should have libnotify header files! Install libnotify-dev]))
 
