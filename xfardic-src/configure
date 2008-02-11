@@ -3829,6 +3829,7 @@ else
   with_speaklib=no
 fi
 
+
 { echo "$as_me:$LINENO: checking for sqlite3_exec in -lsqlite3" >&5
 echo $ECHO_N "checking for sqlite3_exec in -lsqlite3... $ECHO_C" >&6; }
 if test "${ac_cv_lib_sqlite3_sqlite3_exec+set}" = set; then
@@ -3891,11 +3892,12 @@ fi
 { echo "$as_me:$LINENO: result: $ac_cv_lib_sqlite3_sqlite3_exec" >&5
 echo "${ECHO_T}$ac_cv_lib_sqlite3_sqlite3_exec" >&6; }
 if test $ac_cv_lib_sqlite3_sqlite3_exec = yes; then
-  echo "checking for sqlite3.h...yes"
-else
-  { { echo "$as_me:$LINENO: error: You should have libsqlite3 header files! Install libsqlite3-dev" >&5
-echo "$as_me: error: You should have libsqlite3 header files! Install libsqlite3-dev" >&2;}
-   { (exit 1); exit 1; }; }
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBSQLITE3 1
+_ACEOF
+
+  LIBS="-lsqlite3 $LIBS"
+
 fi
 
 
@@ -4734,6 +4736,13 @@ fi
 { echo "$as_me:$LINENO: result: $ac_cv_header_sqlite3_h" >&5
 echo "${ECHO_T}$ac_cv_header_sqlite3_h" >&6; }
 
+fi
+if test $ac_cv_header_sqlite3_h = yes; then
+  echo "checking for sqlite3.h...yes"
+else
+  { { echo "$as_me:$LINENO: error: You should have libsqlite3 header files! Install libsqlite3-dev" >&5
+echo "$as_me: error: You should have libsqlite3 header files! Install libsqlite3-dev" >&2;}
+   { (exit 1); exit 1; }; }
 fi
 
 
