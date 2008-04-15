@@ -776,9 +776,9 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="222.08704"
-     inkscape:cy="101.75762"
+     inkscape:zoom="4"
+     inkscape:cx="91.972554"
+     inkscape:cy="151.15322"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      width="278px"
@@ -786,7 +786,7 @@
      inkscape:window-width="1280"
      inkscape:window-height="728"
      inkscape:window-x="0"
-     inkscape:window-y="25" />
+     inkscape:window-y="46" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -1085,6 +1085,6 @@
          x="8.3626852"
          y="24.103104"
          id="tspan3410"
-         style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;font-family:Bitstream Charter">0.10.4</tspan></text>
+         style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;font-family:Bitstream Charter">0.11.0</tspan></text>
   </g>
 </svg>
