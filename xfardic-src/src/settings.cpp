@@ -278,8 +278,6 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
         }        
     }
 
-    //dbtext = new wxStaticText(dbpanel, -1, _("XML DB Path:"));
-
     dbdir = new wxButton(dbpanel, wxID_ADD, _("Add"), wxDefaultPosition,wxSize(80,36));
     dbdel = new wxButton(dbpanel, wxID_DELETE, _("Delete"), wxDefaultPosition,wxSize(80,36));
     dbinfo = new wxButton(dbpanel, wxID_HELP, _("DB info"), wxDefaultPosition,wxSize(80,36));
@@ -790,7 +788,6 @@ void xFarDicSettings::CreateLayout() {
     dbpanelrightSizer->Add(dbpanelrightSizerbuttons, 0, wxEXPAND|wxALL, 2);
     dbpanelrightSizer->Add(dbpanelrightSizerfirsttext, 0, wxEXPAND|wxALL, 2);
     dbpanelrightSizer->Add(dbpanelrightSizersecondtext, 0, wxEXPAND|wxALL, 2);
-    //dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 2);
     dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 0);
 
     setpanel->SetAutoLayout(TRUE);
@@ -816,3 +813,4 @@ void xFarDicSettings::CreateLayout() {
     topSizer->Fit(this);
     topSizer->SetSizeHints(this);
 }
+

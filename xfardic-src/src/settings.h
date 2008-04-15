@@ -98,7 +98,6 @@ private:
                  *settext,
                  *timeouttext,
                  *leitnertext,
-                 *dbtext,
                  *dbnote,
                  *swapnote;
 
