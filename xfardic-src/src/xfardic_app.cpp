@@ -335,6 +335,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     m_label->SetFont(m_font);
     
     path = pConfig->Read(_T("DB-Path"), _T(""));
+    status = pConfig->Read(_T("DB-Status"), _T(""));
     //inputlang = pConfig->Read(_T("DB-ILang"), _T(""));
 
     path = path.Trim(TRUE);
@@ -356,49 +357,36 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 #endif
  
     // if there are defined xdbs     
-    if (path.Len() > 0) {
-        for (int x=1; x <= path.Len(); x++) {    
-            Part = path.GetChar(x);
-            if (Part.CmpNoCase(_T(";"))==0) {
-                seppos.Add(x);        
-            }
-        } // End For
+    if (path.Len() > 0) {        
    
         splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 
-                                    wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
-         
-        if (seppos.GetCount()>0) {    
-            for (int x=0; x <= seppos.GetCount(); x++) {
-                if (x == 0) {
-                    tmppath = path.Mid(0,seppos[x]);
-                    if (tmppath.Len()!=0) {
-                        paths.Add(path.Mid(0,seppos[x]));
-                    }
-                } else if (x == seppos.GetCount()) {
-                    tmppath = path.Mid(seppos[x-1]+1,path.Len());
-                    if (tmppath.Len()!=0) {
-                        paths.Add(path.Mid(seppos[x-1]+1,path.Len()));
-                    }
-                } else {
-                    tmppath = path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1);
-                    if (tmppath.Len()!=0) {
-                        paths.Add(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1));
-                    }
-                }
+                                    wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);     
+
+        // Get number of array items, by number of delimiters + 1
+        int array_items = path.Freq( ArraySeparator ) + 1;
+
+        // Loop through the string parsing
+        for ( int i = 0; i < array_items; i++ ) {
+            wxString ItemString = path.BeforeFirst( ArraySeparator );
+            wxString StatString = status.BeforeFirst( ArraySeparator );
+            if (StatString == wxT("1")) {
+               paths.Add( ItemString );
+               //DEBUG
+               //printf("%s\n", (const char*)ItemString.mb_str(wxConvUTF8));  
             }
-
-            // Sort DB list
-            paths.Sort(db_sort_order);
-
-            for (int x=0; x < paths.GetCount(); x++) {            
-                if (paths.Item(x).Len()!=0) {
-                   initDB((const char *)paths.Item(x).mb_str(wxConvUTF8));        
-                }        
-            }           
-      
-        } else {
-            initDB((const char *)path.mb_str(wxConvUTF8));        
+            path = path.AfterFirst( ArraySeparator );
+            status = status.AfterFirst( ArraySeparator );
         }
+
+        // Sort DB list
+        paths.Sort(db_sort_order);
+
+        for (int x=0; x < paths.GetCount(); x++) {            
+            if (paths.Item(x).Len()!=0) {
+               initDB((const char *)paths.Item(x).mb_str(wxConvUTF8));        
+            }        
+        }           
+      
         delete splash;
         wxYield();       
         // if there is no defined xdb, Database Auto-Load system
@@ -2406,7 +2394,7 @@ bool xFarDicApp::UpdateSwap()
 
 void xFarDicApp::LoadLeitnerBoxContents()
 {
-    wxString tmpstr, ltboxstr, Part;
+    wxString tmpstr, ltboxstr;
     wxArrayInt position;
    
     //Get Configuration From Config File
@@ -2499,6 +2487,4 @@ void xFarDicApp::OnTexttoSpeech(wxCommandEvent &event) {
     pron->Pronounce(m_text->GetValue());
 #endif
 }
-
-
 

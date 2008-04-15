@@ -82,6 +82,8 @@ using namespace std;
     #include "speak_lib.h"
 #endif
 
+#define ArraySeparator            ';'
+
 extern bool showAspell;
 extern bool showAbout;
 extern bool showLeitner;

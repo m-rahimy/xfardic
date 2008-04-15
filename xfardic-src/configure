@@ -2044,7 +2044,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=xfardic
- VERSION=0.10.4
+ VERSION=0.11.0
 
 
 cat >>confdefs.h <<_ACEOF

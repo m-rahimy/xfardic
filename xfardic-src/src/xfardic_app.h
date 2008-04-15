@@ -206,8 +206,7 @@ private:
 #ifdef HAVE_SPEAKLIB
     xFarDicPronounce *pron;
 #endif
-
-    int              entryq;        
+     
     wxFont           m_font;
     wxFontData       retData;
     wxTaskBarIcon    ticon;
@@ -222,7 +221,8 @@ private:
                      scanner_last,
                      inputlang, 
                      path,
-                     Part, 
+                     status,
+                     Part,
                      tmppath,
                      tmpstr;
 
@@ -230,7 +230,9 @@ private:
     xmlTextReaderPtr reader;
     wxArrayInt       seppos;
     wxSplashScreen   *splash;
-    int              ltbaselimit;
+    int              ltbaselimit,
+                     array_items,
+                     entryq;
     
     //Swapfile handle
     sqlite3          *Db;

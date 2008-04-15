@@ -47,10 +47,12 @@ public:
     /// Add DBs 
     void OnSetDB(wxCommandEvent& event); 
     /// Return DB info
-    void OnDBinfo(wxCommandEvent& event); 
-    /// Up button process handler
+    void OnDBinfo(wxCommandEvent& event);
+    /// Delete button event handler
+    void OnDelete(wxCommandEvent& event); 
+    /// Up button event handler
     void OnUp(wxCommandEvent& event);  
-    /// Down button process handler
+    /// Down button event handler
     void OnDown(wxCommandEvent& event);  
     /// Select check box event handler
     void OnChkSelect(wxCommandEvent& event); 
@@ -105,6 +107,7 @@ private:
                 *m_cancel,
                 *dbinfo,
                 *dbdir,
+                *dbdel,
                 *sort_up,
                 *sort_down;
 
@@ -124,29 +127,30 @@ private:
                 *chk_tts,
                 *chk_notify;
 
-    wxChoice      *lang,
-                  *accent;
+    wxChoice    *lang,
+                *accent;
 
     wxArrayString langlist,
                   acntlist,
-                  dbs;
+                  dbs,
+                  dbstatus;
 
     wxSpinCtrl    *numEntry,
                   *scantimeout,
                   *leitner;
     
-    wxListBox     *dbpath;
+    wxCheckListBox     *dbpath;
 
     wxString      strSel,
                   dbname,
                   author,
                   inputlang,
                   version,
-                  tmppath; 
+                  tmppath,
+                  ItemString;
 
     xmlTextReaderPtr reader;
-    wxArrayInt       dbcount,
-                     seppos;
+    wxArrayInt       seppos;
     wxNotebook       *layout;
 
     DECLARE_EVENT_TABLE()

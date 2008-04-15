@@ -37,6 +37,7 @@ BEGIN_EVENT_TABLE(xFarDicSettings, wxFrame)
     EVT_BUTTON(wxID_DOWN, xFarDicSettings::OnDown)
     EVT_BUTTON(wxID_ADD, xFarDicSettings::OnSetDB)
     EVT_BUTTON(wxID_HELP, xFarDicSettings::OnDBinfo)
+    EVT_BUTTON(wxID_DELETE, xFarDicSettings::OnDelete)
     EVT_CHECKBOX(ID_CHK_SELECT, xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_WINPOS, xFarDicSettings::EnableApply)
     EVT_CHECKBOX(ID_CHK_CACHE,  xFarDicSettings::EnableApply)
@@ -55,6 +56,7 @@ BEGIN_EVENT_TABLE(xFarDicSettings, wxFrame)
     EVT_SPINCTRL(ID_SPIN_LEITNER, xFarDicSettings::EnableSpApply)
     EVT_CHOICE(ID_LANG_CHOICE, xFarDicSettings::EnableApply)
     EVT_CHOICE(ID_ACNT_CHOICE, xFarDicSettings::EnableApply)
+    EVT_CHECKLISTBOX(ID_DB_PATH, xFarDicSettings::OnPathUpdate)
     EVT_LISTBOX(ID_DB_PATH, xFarDicSettings::OnPathUpdate)
 END_EVENT_TABLE()
 
@@ -256,61 +258,30 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
    
     lang->SetSelection(pConfig->Read(_T("GUI-Lang"), 2));  
            
-    wxString path = pConfig->Read(_T("DB-Path"), _T(""));    
-   
-    wxString Part;
+    wxString path = pConfig->Read(_T("DB-Path"), wxT(""));
+    wxString status = pConfig->Read(_T("DB-Status"), wxT(""));    
 
     if (path.Len()!=0) {
-        for (int x=1; x <= path.Len(); x++) {
-            Part = path.GetChar(x);
-            if (Part.CmpNoCase(_T(";"))==0) {
-                seppos.Add(x);
-            }
-        }
+        // Get number of array items, by number of delimiters + 1
+        int array_items = path.Freq( ArraySeparator ) + 1;
 
-        if (seppos.GetCount()>0) {    
-            for (int x=0; x <= seppos.GetCount(); x++) {
-                if (x == 0) {
-                    tmppath = path.Mid(0,seppos[x]);
-                    if (tmppath.Len()!=0) {
-                        if (CheckPath(path.Mid(0,seppos[x]))) {
-                            dbs.Add(path.Mid(0,seppos[x]));
-                        } else {
-                            submit = TRUE;
-                        }
-                    }
-                } else if (x == seppos.GetCount()) {
-                    tmppath = path.Mid(seppos[x-1]+1,path.Len());
-                    if (tmppath.Len()!=0) {
-                        if (CheckPath(path.Mid(seppos[x-1]+1,path.Len()))) {
-                            dbs.Add(path.Mid(seppos[x-1]+1,path.Len()));
-                        } else {
-                            submit = TRUE;
-                        }
-                    }
-                } else {
-                    tmppath = path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1);
-                    if (tmppath.Len()!=0) {
-                        if (CheckPath(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1))) {
-                            dbs.Add(path.Mid(seppos[x-1]+1,seppos[x]-seppos[x-1]-1));
-                        } else {
-                            submit = TRUE;
-                        }
-                    }
-                }
-            }      
-        } else {
-            if (CheckPath(path)) {
-                dbs.Add(path);
+        // Loop through the string parsing
+        for ( int i = 0; i < array_items; i++ ) {
+            ItemString = path.BeforeFirst( ArraySeparator );
+            if (CheckPath(ItemString)) {
+               dbs.Add( ItemString );
             } else {
-                submit = TRUE;
+               submit = TRUE;
             }
-        }    
+            path = path.AfterFirst( ArraySeparator );
+            //printf("%s\n", (const char*)ItemString.mb_str(wxConvUTF8));  
+        }        
     }
 
-    dbtext = new wxStaticText(dbpanel, -1, _("XML DB Path:"));
+    //dbtext = new wxStaticText(dbpanel, -1, _("XML DB Path:"));
 
     dbdir = new wxButton(dbpanel, wxID_ADD, _("Add"), wxDefaultPosition,wxSize(80,36));
+    dbdel = new wxButton(dbpanel, wxID_DELETE, _("Delete"), wxDefaultPosition,wxSize(80,36));
     dbinfo = new wxButton(dbpanel, wxID_HELP, _("DB info"), wxDefaultPosition,wxSize(80,36));
     sort_up = new wxButton(dbpanel, wxID_UP, _("Up"), wxDefaultPosition,wxSize(80,36));
     sort_down = new wxButton(dbpanel, wxID_DOWN, _("Down"), wxDefaultPosition,wxSize(80,36));
@@ -325,27 +296,36 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
       db_sort_order = TRUE;
     }  
 
-    dbpath = new wxListBox(dbpanel, ID_DB_PATH, wxDefaultPosition, wxDefaultSize, dbs, wxLB_EXTENDED |wxLB_NEEDED_SB);    
+    dbpath = new wxCheckListBox(dbpanel, ID_DB_PATH, wxDefaultPosition, wxDefaultSize, dbs, wxLB_EXTENDED |wxLB_NEEDED_SB);
+
+    if (status.Len()!=0) {
+        // Get number of array items, by number of delimiters + 1
+        int array_items = status.Freq( ArraySeparator ) + 1;
+
+        // Loop through the string parsing
+        for ( int i = 0; i < array_items; i++ ) {
+            ItemString = status.BeforeFirst( ArraySeparator );
+            if (ItemString == wxT("1")) {
+               dbpath->Check(i, TRUE);
+            }
+            status = status.AfterFirst( ArraySeparator );
+            //printf("%s\n", (const char*)ItemString.mb_str(wxConvUTF8));  
+        }
+    }
    
     notelogoBitmap1 = new wxStaticBitmap (dbpanel, -1, notelogo, wxDefaultPosition);
     notelogoBitmap2 = new wxStaticBitmap (dbpanel, -1, notelogo, wxDefaultPosition);
 
-    dbnote = new wxStaticText(dbpanel, -1, _("Ctrl+Click to enable or disable available database(s)."));
+    dbnote = new wxStaticText(dbpanel, -1, _("Check/UnCheck to enable or disable available dictionaries."));
 
     swapnote = new wxStaticText(dbpanel, -1, _("Enabling swap reduces memory usage by 60% and performance by 15%."));
-
-    if (path.Len()!=0) {
-        for (int x=0; x < dbs.GetCount(); x++) {
-            dbpath->SetSelection(x);    
-        }
-    }        
-           
-    if (path.Len()==0) {
+ 
+    if (dbpath->GetCount()==0) {
         dbinfo->Enable(FALSE);
     }
 
     layout->AddPage(setpanel, _("Options"));    
-    layout->AddPage(dbpanel, _("Databases")); 
+    layout->AddPage(dbpanel, _("Dictionaries")); 
 
     //if there are changes on DBs, auto-submit changes
     if (submit == TRUE) {
@@ -381,14 +361,8 @@ void xFarDicSettings::OnUp(wxCommandEvent& WXUNUSED(event))
     db_sort_order = TRUE;
     dbs.Sort(db_sort_order);
     dbpath->Set(dbs);
-    // Select items
-    for (int x=0; x < dbs.GetCount(); x++) {
-         dbpath->SetSelection(x);    
-    }
 
-    dbpath->GetSelections(dbcount);
-
-    if (dbcount.GetCount()>0) {          
+    if (dbpath->GetCount()>0) {          
         dbinfo->Enable(TRUE);
     } else {
         dbinfo->Enable(FALSE);
@@ -404,14 +378,8 @@ void xFarDicSettings::OnDown(wxCommandEvent& WXUNUSED(event))
     db_sort_order = FALSE;
     dbs.Sort(db_sort_order);
     dbpath->Set(dbs);
-    // Select items
-    for (int x=0; x < dbs.GetCount(); x++) {
-         dbpath->SetSelection(x);    
-    }
-
-    dbpath->GetSelections(dbcount);
-
-    if (dbcount.GetCount()>0) {          
+    
+    if (dbpath->GetCount()>0) {          
         dbinfo->Enable(TRUE);
     } else {
         dbinfo->Enable(FALSE);
@@ -429,19 +397,27 @@ void xFarDicSettings::SubmitChanges()
         return;
     }
 
-    wxString path,att;
-    dbpath->GetSelections(dbcount);
+    wxString path,dbstatus,att;
      
-    if (dbcount.GetCount()>0) {          
-        for (int x=0; x < dbcount.GetCount(); x++) {
-            if (path.Len()==0) {
+    if (dbpath->GetCount() > 0) {          
+        for (int x=0; x < dbpath->GetCount(); x++) {
+            if (path.Len() == 0) {
                 att = _T(";");
             }
-
-            if (x+1 < dbcount.GetCount()) {
-               path = path + dbpath->GetString(dbcount[x]) + att;
+            if (x+1 < dbpath->GetCount()) {
+               path = path + dbpath->GetString(x) + att;
+               if (dbpath->IsChecked(x)) {
+                  dbstatus = dbstatus + wxT("1") + att;
+               } else {
+                  dbstatus = dbstatus + wxT("0") + att;
+               }
             } else {
-               path = path + dbpath->GetString(dbcount[x]);
+               path = path + dbpath->GetString(x);
+               if (dbpath->IsChecked(x)) {
+                  dbstatus = dbstatus + wxT("1");
+               } else {
+                  dbstatus = dbstatus + wxT("0");
+               }
             }
         }
     }
@@ -560,6 +536,7 @@ void xFarDicSettings::SubmitChanges()
 #endif
             
     pConfig->Write(wxT("/Options/DB-Path"), path);
+    pConfig->Write(wxT("/Options/DB-Status"), dbstatus);
 
     if (swapupdate) {     
         pConfig->Write(wxT("/Options/Swap-Update"), 1);     
@@ -590,9 +567,8 @@ void xFarDicSettings::OnSetDB(wxCommandEvent& WXUNUSED(event))
 
     if (dialog.ShowModal() == wxID_OK) {       
         path = dialog.GetPath().c_str();
-        dbpath->GetSelections(dbcount);
-        if (dbcount.GetCount()>0) {          
-           for (int x=0; x < dbcount.GetCount(); x++) {                        
+        if (dbpath->GetCount()>0) {          
+           for (int x=0; x < dbpath->GetCount(); x++) {                        
                if (path.IsSameAs(dbpath->GetString(x))) {                       
                    exist = TRUE;                
                }
@@ -602,8 +578,7 @@ void xFarDicSettings::OnSetDB(wxCommandEvent& WXUNUSED(event))
                            dbs.Clear();  
                            dbs.Add(path);
                            dbpath->InsertItems(dbs,0);
-                           dbpath->SetSelection(0,0);
-                           dbpath->SetStringSelection(path);
+                           dbpath->Check(0);
                            dbinfo->Enable(TRUE);
                            m_apply->Enable(TRUE);    
                            swapupdate = TRUE;
@@ -644,10 +619,8 @@ void xFarDicSettings::EnableTTS(wxCommandEvent& WXUNUSED(event))
 void xFarDicSettings::OnPathUpdate(wxCommandEvent& WXUNUSED(event))
 {     
     m_apply->Enable(TRUE);
-    
-    dbpath->GetSelections(dbcount);
 
-    if (dbcount.GetCount()>0) {          
+    if (dbpath->GetCount()>0) {          
         dbinfo->Enable(TRUE);
     } else {
         dbinfo->Enable(FALSE);
@@ -666,11 +639,10 @@ void xFarDicSettings::OnDBinfo(wxCommandEvent& WXUNUSED(event))
 {
     wxString msg, path;
     
-    dbpath->GetSelections(dbcount);
     msg =_T("");
      
-    if (dbcount.GetCount()>0) {          
-        for (int x=0; x < dbcount.GetCount(); x++) {                        
+    if (dbpath->GetCount()>0) {          
+        for (int x=0; x < dbpath->GetCount(); x++) {                        
             path = dbpath->GetString(x);                                    
             DB((const char *)path.mb_str(wxConvUTF8));
             if (dbname.Len()!=0 || author.Len()!=0 || version.Len()!=0 || inputlang.Len()!=0) {
@@ -678,7 +650,7 @@ void xFarDicSettings::OnDBinfo(wxCommandEvent& WXUNUSED(event))
                 msg += _("DB Author : ")+author+_T("\n");
                 msg += _("DB Version: ")+version+_T("\n");
 
-                if (x+1 == dbcount.GetCount()) {
+                if (x+1 == dbpath->GetCount()) {
                    msg += _("Input Lang: ")+inputlang;
                 }else {
                    msg += _("Input Lang: ")+inputlang+_T("\n\n");
@@ -692,6 +664,19 @@ void xFarDicSettings::OnDBinfo(wxCommandEvent& WXUNUSED(event))
     }    
 
     wxMessageBox(msg, _("XML Database information"), wxOK | wxICON_INFORMATION, this);
+}
+
+void xFarDicSettings::OnDelete(wxCommandEvent& WXUNUSED(event))
+{
+    wxString msg;
+
+    if (dbpath->GetSelection() > 0) {
+       dbpath->Delete(dbpath->GetSelection());
+    } else {
+       msg.Printf( _("Please select a dictionary.\n"));
+       wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+       return;
+    }
 }
 
 /// Validate XML Database
@@ -792,6 +777,7 @@ void xFarDicSettings::CreateLayout() {
     dbpanelrightSizer->Add(dbpath, 1, wxEXPAND|wxALL, 2);
     wxBoxSizer *dbpanelrightSizerbuttons = new wxBoxSizer(wxHORIZONTAL);
     dbpanelrightSizerbuttons->Add(dbdir, 0, wxEXPAND|wxALL, 2);
+    dbpanelrightSizerbuttons->Add(dbdel, 0, wxEXPAND|wxALL, 2);
     dbpanelrightSizerbuttons->Add(dbinfo, 0, wxEXPAND|wxALL, 2);
     dbpanelrightSizerbuttons->Add(sort_up, 0, wxEXPAND|wxALL, 2);
     dbpanelrightSizerbuttons->Add(sort_down, 0, wxEXPAND|wxALL, 2);
@@ -804,7 +790,7 @@ void xFarDicSettings::CreateLayout() {
     dbpanelrightSizer->Add(dbpanelrightSizerbuttons, 0, wxEXPAND|wxALL, 2);
     dbpanelrightSizer->Add(dbpanelrightSizerfirsttext, 0, wxEXPAND|wxALL, 2);
     dbpanelrightSizer->Add(dbpanelrightSizersecondtext, 0, wxEXPAND|wxALL, 2);
-    dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 2);
+    //dbpanelSizer->Add(dbtext, 0, wxEXPAND|wxALL, 2);
     dbpanelSizer->Add(dbpanelrightSizer, 1, wxEXPAND|wxALL, 0);
 
     setpanel->SetAutoLayout(TRUE);
