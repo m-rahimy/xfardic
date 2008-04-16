@@ -115,7 +115,6 @@ private:
     wxCheckBox  *chk_select,
                 *chk_winpos,
                 *chk_cache,
-                *chk_srchsim,
                 *chk_spell,
                 *chk_watcher,
                 *chk_hide,
