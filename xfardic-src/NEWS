@@ -27,10 +27,70 @@ Make files to install svg logo at the proper location and to
 check xdbs existence before parsing and to remove missing 
 xdbs automatically.
 --------------------------------------------------------------
-2007-02-XX						  NEWS
+2007-05-31						  NEWS
 --------------------------------------------------------------
-xFarDic 0.9.0 released. This is a major upgrade to the xFarDic
-features and introduces leitner box a tool to help memorizing
-words in an efficient way. Other changes include new icon for
-clear history function and parenthesis support for the Process
-word function.
+xFarDic 0.9.0 released. This version has lots of improvements
+and new features. Notable changes are: added 'Leitner Box' 
+feature to help memorizing words, added 'swap file' support to
+decrease memory usage (55-60%), added simple command line 
+interface, replaced clear history's menu/toolbar trash icons 
+with clear icons, added parenthesis support to the ProcessWord
+function, fixed enabled navigator buttons on reverse search mode
+and few minor bug fixes and clean-ups.
+--------------------------------------------------------------
+2007-06-16						  NEWS
+--------------------------------------------------------------
+xFarDic 0.9.0 released. This version adresses some reported 
+bugs including a crasher related to the swap engine. Also we 
+have done some code clean-ups and re-arrangements.
+--------------------------------------------------------------
+2007-12-25						  NEWS
+--------------------------------------------------------------
+xFarDic 0.10.0.1 released. Highlights are: implemented dynamic
+sizers of the user interface, implemented pronunciation engine
+based on Espeak, both based on patches from Saeed Taghavi,
+implemented database sorting buttons in the preferences window, 
+improved, simplified and precised user interface, added pronounce 
+buttons to the leitner box window, improved the implementation 
+of leitner box, fixed a crasher bug on back/forward actions, 
+fixed a bug related to focusing/unfocusing windows, fixed a bug
+in UpdateDBPaths function of the preferences window, fixed a
+bug in the update swap function, More limited text display on
+notification windows and lots of code clean-ups and minor fixes.
+In a related news, GNU Collaborative International Dictionary 
+for xFarDic is available in project's download section.
+--------------------------------------------------------------
+2008-01-12						  NEWS
+--------------------------------------------------------------
+xFarDic 0.10.1 released. This version mainly fixes issues 
+reported with the last version and adds small improvements too.
+Highlights from the change log: Fixed a crasher bug if pronounce
+menu item is enabled while TTS engine is disabled, fixed a crasher
+bug on the leitner box window if TTS engine is disabled, fixed a
+wrong string in the settings window, fixed a bug in the main window
+position restoration, fixed an accelerator conflict in the settings
+window, fixed missing event handler for confirm button on the leitner
+box, fixed bad about window formation on fa_IR translation, 
+implemented --with-speaklib to enable/disable TTS engine support 
+on build time, improved elements arrangement in the settings 
+window, improved the leitner box user interface, ask for a 
+confirmation before deleting the selected word from box E, 
+added an option to enable/disable notification window, save 
+maximized window state on quit and some minor code-cleanups.
+--------------------------------------------------------------
+2008-01-16						  NEWS
+--------------------------------------------------------------
+xFarDic 0.10.2 released. This version addresses few issues 
+reported by the community and adds two minor features. Highlights
+from the change log: Fixed a bug related to killing TTS engine 
+on the leitner box, fixed too small size of language selector in 
+the settings window, added an option to change TTS accent 
+(American/British), added a close confirmation after creating 
+the swap file and saves window size on quit.
+--------------------------------------------------------------
+2008-01-22						  NEWS
+--------------------------------------------------------------
+xFarDic 0.10.3 released. This version fixes two minor issues 
+within the preferences window. From the change log: Fixed a bug 
+related to selection scanner event handler and fixed activation
+status of accent selector when TTS engine is enabled/disabled.
