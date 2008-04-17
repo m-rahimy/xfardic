@@ -688,7 +688,7 @@ void xFarDicApp::ViewToolbar(wxCommandEvent& WXUNUSED(event))
         RecreateToolbar();    
         vimenu->Check( xFarDic_ViewToolBar, TRUE );        
         pConfig->Write(wxT("/Options/View-Toolbar"), 1);    
-        translate(m_text->GetValue());
+        Translate(m_text->GetValue());
 
     } else {
         
@@ -716,7 +716,7 @@ void xFarDicApp::DoAutoTrans()
 
         if (CheckSpell(m_textVal, FALSE)) {                  
             if (m_textVal.Len() >1 && !srch) {
-                translate(m_textVal);
+                Translate(m_textVal);
             }
         }
     }
@@ -1034,11 +1034,11 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
                CheckSpell(watcher_now,0) && watcher_now.IsAscii() && watcher_now.IsWord()) {        
                 m_text->SetValue(watcher_now);
                 if (!notification) {           
-                    translate(watcher_now);
+                    Translate(watcher_now);
                     this->Raise();
                     this->SetFocus();
                 }else {
-                    translate(watcher_now,FALSE,TRUE);
+                    Translate(watcher_now,FALSE,TRUE);
                 }
             }
         }
@@ -1050,11 +1050,11 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
                CheckSpell(scanner_now,0) && scanner_now.IsAscii() && scanner_now.IsWord()) {        
                 m_text->SetValue(scanner_now);
                 if (!notification) {           
-                    translate(scanner_now);
+                    Translate(scanner_now);
                     this->Raise();
                     this->SetFocus();
                 }else {
-                    translate(scanner_now,FALSE,TRUE);
+                    Translate(scanner_now,FALSE,TRUE);
                 }
             }
         }
@@ -1255,7 +1255,7 @@ void xFarDicApp::RecreateTrToolbar()
     m_translate->SetDefault();   
 }
 
-bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
+bool xFarDicApp::Translate(wxString m_textVal, bool atrans, bool notify)
 {
     int nrow, ncol, returnvalue;
     char** qresult;
@@ -1339,6 +1339,8 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
         m_label->Clear();
         if (tmpstr.Len()!=0) {
             m_label->WriteText(tmpstr);
+            // Scroll back up the control
+            m_label->SetInsertionPoint(0);
         } else {
             m_label->SetValue(_("Phrase not found."));
         }
@@ -1379,7 +1381,9 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
 
                     m_label->Clear();
                     m_label->SetFont(m_font);    
-                    m_label->WriteText(tmpstr);               
+                    m_label->WriteText(tmpstr);         
+                    // Scroll back up the control
+                    m_label->SetInsertionPoint(0);      
                     m_text->SetValue(wordList.Item(wordList.Index(m_textVal,FALSE)));    
                 }
                
@@ -1455,6 +1459,8 @@ bool xFarDicApp::translate(wxString m_textVal, bool atrans, bool notify)
             m_label->Clear();
             if (tmpstr.Len()!=0) {
                 m_label->WriteText(tmpstr);
+                // Scroll back up the control
+                m_label->SetInsertionPoint(0);
             } else {
                 m_label->SetValue(_("Phrase not found."));
             }
@@ -1556,7 +1562,7 @@ void xFarDicApp::DoTranslate()
     }  
 
     //let actually translate!
-    translate();  
+    Translate();  
     m_text->SetFocus();   
 }
 
@@ -1741,7 +1747,7 @@ void xFarDicApp::OnClose(wxCloseEvent& WXUNUSED(event))
 void xFarDicApp::OnBack(wxCommandEvent& WXUNUSED(event))
 {
     if (wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ) {
-        translate(wordList.Item((wordList.Index(m_text->GetValue(),FALSE))-1),TRUE);
+        Translate(wordList.Item((wordList.Index(m_text->GetValue(),FALSE))-1),TRUE);
     }
     return;
 }
@@ -1749,20 +1755,20 @@ void xFarDicApp::OnBack(wxCommandEvent& WXUNUSED(event))
 void xFarDicApp::OnForward(wxCommandEvent& WXUNUSED(event))
 {     
     if (wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND ) {          
-        translate(wordList.Item((wordList.Index(m_text->GetValue(),FALSE))+1),TRUE);
+        Translate(wordList.Item((wordList.Index(m_text->GetValue(),FALSE))+1),TRUE);
     }
     return;
 }
 
 void xFarDicApp::OnFirst(wxCommandEvent& WXUNUSED(event))
 {               
-    translate(wordList.Item(1),TRUE);
+    Translate(wordList.Item(1),TRUE);
     return;
 }
 
 void xFarDicApp::OnLast(wxCommandEvent& WXUNUSED(event))
 {               
-    translate(wordList.Last(),TRUE);
+    Translate(wordList.Last(),TRUE);
     return;
 }
 
@@ -2357,6 +2363,10 @@ bool xFarDicApp::UpdateSwap()
                                 wordList.GetCount(), this, wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_SMOOTH |
                                 wxPD_REMAINING_TIME);
 
+    // SQLite speed tuning    
+    initsql = wxT("BEGIN TRANSACTION;");
+    returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
+
     for (int x=0; x < wordList.Count(); x++) {
         tmpIn = wordList.Item(x);
         tmpOut = meanList.Item(x);
@@ -2369,13 +2379,16 @@ bool xFarDicApp::UpdateSwap()
             returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
         }
 
-        if (x % 500  == 0) {
+        if (x % 1000  == 0) {
             prog->Update(x);
         } 
     }
 
     // Killing the progress dialog
     delete prog;
+
+    initsql = wxT("COMMIT TRANSACTION;");
+    returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);      
 
     // Emptying the meanings list after update
     if (meanList.GetCount() > 0) {
@@ -2394,8 +2407,7 @@ bool xFarDicApp::UpdateSwap()
 
 void xFarDicApp::LoadLeitnerBoxContents()
 {
-    wxString tmpstr, ltboxstr;
-    wxArrayInt position;
+    wxString ItemString, ltboxstr;    
    
     //Get Configuration From Config File
     wxConfigBase *pConfig = wxConfigBase::Get();
@@ -2406,10 +2418,22 @@ void xFarDicApp::LoadLeitnerBoxContents()
    
     ltboxstr = ltboxstr.Trim(TRUE);
     ltboxstr = ltboxstr.Trim(FALSE);
- 
-    position.Empty();
+
+    ltbox.Empty();
  
     if (ltboxstr.Len() > 0) {
+        // Get number of array items, by number of delimiters + 1
+        int array_items = ltboxstr.Freq( ArraySeparator ) + 1;
+
+        // Loop through the string parsing
+        for ( int i = 0; i < array_items; i++ ) {
+            ItemString = ltboxstr.BeforeFirst( ArraySeparator );
+            ltbox.Add( ItemString );
+            ltboxstr = ltboxstr.AfterFirst( ArraySeparator );
+        }  
+    }    
+ 
+    /*if (ltboxstr.Len() > 0) {
         for (int x=1; x <= ltboxstr.Len(); x++) {    
             Part = ltboxstr.GetChar(x);
             if (Part.CmpNoCase(_T(";"))==0) {
@@ -2442,7 +2466,7 @@ void xFarDicApp::LoadLeitnerBoxContents()
         }         
     } else if (ltboxstr.Len() > 0) {
         ltbox.Add(ltboxstr);
-    }
+    }*/
 }
 
 void xFarDicApp::CreateLayout(bool fit) {

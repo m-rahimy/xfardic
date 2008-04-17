@@ -271,18 +271,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     dbdir = new wxButton(dbpanel, wxID_ADD, _("Add"), wxDefaultPosition,wxSize(80,36));
     dbdel = new wxButton(dbpanel, wxID_DELETE, _("Delete"), wxDefaultPosition,wxSize(80,36));
     dbinfo = new wxButton(dbpanel, wxID_HELP, _("DB info"), wxDefaultPosition,wxSize(80,36));
-    sort_up = new wxButton(dbpanel, wxID_UP, _("Up"), wxDefaultPosition,wxSize(80,36));
-    sort_down = new wxButton(dbpanel, wxID_DOWN, _("Down"), wxDefaultPosition,wxSize(80,36));
-
-    if ( pConfig->Read(_T("DB-Sort"), 0l) == 1 ) {
-      sort_up->Enable(FALSE);
-      sort_down->Enable(TRUE);
-      db_sort_order = TRUE;
-    } else {
-      sort_up->Enable(TRUE);
-      sort_down->Enable(FALSE);
-      db_sort_order = TRUE;
-    }  
+    move_up = new wxButton(dbpanel, wxID_UP, _("Up"), wxDefaultPosition,wxSize(80,36));
+    move_down = new wxButton(dbpanel, wxID_DOWN, _("Down"), wxDefaultPosition,wxSize(80,36));   
 
     dbpath = new wxCheckListBox(dbpanel, ID_DB_PATH, wxDefaultPosition, wxDefaultSize, dbs, wxLB_EXTENDED |wxLB_NEEDED_SB);
 
@@ -344,36 +334,14 @@ void xFarDicSettings::OnCancel(wxCommandEvent& WXUNUSED(event))
 
 /// Up button click event handler.
 void xFarDicSettings::OnUp(wxCommandEvent& WXUNUSED(event))
-{
-    db_sort_order = TRUE;
-    dbs.Sort(db_sort_order);
-    dbpath->Set(dbs);
-
-    if (dbpath->GetCount()>0) {          
-        dbinfo->Enable(TRUE);
-    } else {
-        dbinfo->Enable(FALSE);
-    }
-
-    sort_up->Enable(FALSE);
-    sort_down->Enable(TRUE);
+{    
+    MoveItem(TRUE);
 }
 
 /// Down button click event handler.
 void xFarDicSettings::OnDown(wxCommandEvent& WXUNUSED(event))
-{
-    db_sort_order = FALSE;
-    dbs.Sort(db_sort_order);
-    dbpath->Set(dbs);
-    
-    if (dbpath->GetCount()>0) {          
-        dbinfo->Enable(TRUE);
-    } else {
-        dbinfo->Enable(FALSE);
-    }
-
-    sort_up->Enable(TRUE);
-    sort_down->Enable(FALSE);
+{   
+    MoveItem(FALSE);
 }
 
 /// Submit config changes to the config file
@@ -484,13 +452,7 @@ void xFarDicSettings::SubmitChanges()
         pConfig->Write(wxT("/Options/Swap"), 1);
     } else {
         pConfig->Write(wxT("/Options/Swap"), 0);
-    }
-
-    if (db_sort_order) {
-        pConfig->Write(wxT("/Options/DB-Sort"), 1);
-    } else {
-        pConfig->Write(wxT("/Options/DB-Sort"), 0);
-    }
+    }  
 
     if (chk_winpos->GetValue()) {
         pConfig->Write(wxT("/Options/Win-Pos"), 1);
@@ -651,9 +613,9 @@ void xFarDicSettings::OnDelete(wxCommandEvent& WXUNUSED(event))
 {
     wxString msg;
 
-    if (dbpath->GetSelection() > 0) {
+    if (dbpath->GetSelection() >= 0) {
        dbpath->Delete(dbpath->GetSelection());
-       if (dbpath->IsChecked(dbpath->GetSelection()) {
+       if (dbpath->IsChecked(dbpath->GetSelection())) {
            swapupdate = TRUE;
        }
 
@@ -663,6 +625,45 @@ void xFarDicSettings::OnDelete(wxCommandEvent& WXUNUSED(event))
            dbinfo->Enable(TRUE);
        } else {
            dbinfo->Enable(FALSE);
+       }
+    } else {
+       msg.Printf( _("Please select a dictionary.\n"));
+       wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
+       return;
+    }
+}
+
+void xFarDicSettings::MoveItem(bool up)
+{
+    wxString msg, tmpstr;
+    int pos, destpos, cnt;
+    bool checked;
+
+    pos = dbpath->GetSelection();
+    cnt = dbpath->GetCount() - 1;
+
+    if (up) {
+       destpos = pos - 1;
+    } else {
+       destpos = pos + 1;
+    }
+
+    if (pos >= 0) {
+       if (destpos <= cnt && destpos >= 0) {
+          tmpstr = dbpath->GetString(pos);
+          checked = dbpath->IsChecked(pos);
+          dbpath->Delete(pos);
+       
+          // Move it up or down
+          dbpath->Insert(tmpstr, destpos);
+          dbpath->SetSelection(destpos);
+
+          if (checked) {
+             dbpath->Check(destpos, TRUE);
+          }
+       
+          swapupdate = TRUE;
+          m_apply->Enable(TRUE);
        }
     } else {
        msg.Printf( _("Please select a dictionary.\n"));
@@ -770,8 +771,8 @@ void xFarDicSettings::CreateLayout() {
     dbpanelrightSizerbuttons->Add(dbdir, 0, wxEXPAND|wxALL, 2);
     dbpanelrightSizerbuttons->Add(dbdel, 0, wxEXPAND|wxALL, 2);
     dbpanelrightSizerbuttons->Add(dbinfo, 0, wxEXPAND|wxALL, 2);
-    dbpanelrightSizerbuttons->Add(sort_up, 0, wxEXPAND|wxALL, 2);
-    dbpanelrightSizerbuttons->Add(sort_down, 0, wxEXPAND|wxALL, 2);
+    dbpanelrightSizerbuttons->Add(move_up, 0, wxEXPAND|wxALL, 2);
+    dbpanelrightSizerbuttons->Add(move_down, 0, wxEXPAND|wxALL, 2);
     wxBoxSizer *dbpanelrightSizerfirsttext = new wxBoxSizer(wxHORIZONTAL);
     dbpanelrightSizerfirsttext->Add(notelogoBitmap1, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     dbpanelrightSizerfirsttext->Add(dbnote, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);

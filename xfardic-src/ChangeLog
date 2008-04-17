@@ -306,5 +306,7 @@ Use en-rhotic as American accent, suggested by Jonathan Duddington.
 New and better structure in the preferences window.
 Improved configure and build scripts.
 Improved the leitner box data load method.
+Improved the swap file creation speed.
+Scroll up the output box after translation.
 Updated NEWS file.
 

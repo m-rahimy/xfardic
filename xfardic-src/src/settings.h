@@ -74,6 +74,8 @@ public:
     void SubmitChanges();
     /// Checks DB path
     bool CheckPath(wxString dbpath);
+    /// Move Items up or Down
+    void MoveItem(bool up=TRUE);
     
     bool exist,
          submit,
@@ -85,8 +87,6 @@ public:
 
 private:
     void CreateLayout();
-
-    bool db_sort_order;    
 
     wxStaticBitmap *settingsBitmap,
                    *notelogoBitmap1,
@@ -107,8 +107,8 @@ private:
                 *dbinfo,
                 *dbdir,
                 *dbdel,
-                *sort_up,
-                *sort_down;
+                *move_up,
+                *move_down;
 
     wxPanel     *setpanel,
                 *dbpanel;

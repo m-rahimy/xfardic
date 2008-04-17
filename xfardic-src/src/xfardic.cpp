@@ -170,8 +170,8 @@ bool MyApp::OnInit()
             long dummy;
             pConfig->SetPath(wxT("/Cache"));
             bool bCont = pConfig->GetFirstEntry(str, dummy);
-            if (bCont) {
-                frame->translate();
+            if (bCont && !frame->swapupdate) {
+                frame->Translate();
             }
         }
     } 

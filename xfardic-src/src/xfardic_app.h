@@ -116,7 +116,7 @@ public:
     /// Shows/Hides toolbar      
     void ViewToolbar(wxCommandEvent& event);  
     /// Core translation function
-    bool translate(wxString m_textVal = _T(""), bool atrans=FALSE, bool notify=FALSE); 
+    bool Translate(wxString m_textVal = _T(""), bool atrans=FALSE, bool notify=FALSE); 
     /// Word spelling function
     bool CheckSpell(wxString chkStr, bool suggest); 
     /// Auto-Translation process handler  
@@ -157,7 +157,8 @@ public:
     void AddToLeitnerBox();
 
     wxLocale& m_locale;
-    bool   hide;
+    bool             hide,
+                     swapupdate;
     wxComboBox       *m_text;
     xFarDicAbout     *abframe;
     xFarDicSettings  *setframe;
@@ -186,7 +187,6 @@ private:
             revsrch,
             aspelli,
             swap,
-            swapupdate,
             update,
             db_sort_order,
             notification;
