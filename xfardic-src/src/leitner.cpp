@@ -226,8 +226,7 @@ void xFarDicLeitner::OnOK(wxCommandEvent& WXUNUSED(event))
 
 wxArrayString xFarDicLeitner::LoadLeitnerBoxContents(wxString configpath)
 {
-    wxString tmpstr, ltboxstr, Part;
-    wxArrayInt ltseppos;
+    wxString ItemString, ltboxstr;
     wxArrayString tmparr;
 
     //Get Configuration From Config File
@@ -241,35 +240,15 @@ wxArrayString xFarDicLeitner::LoadLeitnerBoxContents(wxString configpath)
     ltboxstr = ltboxstr.Trim(FALSE);
  
     if (ltboxstr.Len() > 0) {
-        for (int x=1; x <= ltboxstr.Len(); x++) {
-            Part = ltboxstr.GetChar(x);
-            if (Part.CmpNoCase(_T(";"))==0) {
-                ltseppos.Add(x);
-            }
-        } // End For
-    }
+        // Get number of array items, by number of delimiters + 1
+        int array_items = ltboxstr.Freq( ArraySeparator ) + 1;
 
-    if (ltseppos.GetCount()>0) {    
-        for (int x=0; x <= ltseppos.GetCount(); x++) {
-            if (x == 0) {
-                tmpstr = ltboxstr.Mid(0,ltseppos[x]);
-                if (tmpstr.Len()!=0) {
-                    tmparr.Add(ltboxstr.Mid(0,ltseppos[x]));
-                }
-            } else if (x == ltseppos.GetCount()) {
-                tmpstr = ltboxstr.Mid(ltseppos[x-1]+1,ltboxstr.Len());
-                if (tmpstr.Len()!=0) {
-                    tmparr.Add(ltboxstr.Mid(ltseppos[x-1]+1,ltboxstr.Len()));
-                }
-            } else {
-                tmpstr = ltboxstr.Mid(ltseppos[x-1]+1,ltseppos[x]-ltseppos[x-1]-1);
-                if (tmpstr.Len()!=0) {
-                    tmparr.Add(ltboxstr.Mid(ltseppos[x-1]+1,ltseppos[x]-ltseppos[x-1]-1));
-                }
-            }
-        }         
-    } else if (ltboxstr.Len() > 0) {
-        tmparr.Add(ltboxstr);
+        // Loop through the string parsing
+        for ( int i = 0; i < array_items; i++ ) {
+            ItemString = ltboxstr.BeforeFirst( ArraySeparator );
+            tmparr.Add( ItemString );
+            ltboxstr = ltboxstr.AfterFirst( ArraySeparator );
+        }        
     }
 
     return tmparr;

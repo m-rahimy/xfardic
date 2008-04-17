@@ -305,4 +305,6 @@ First show notification then speak.
 Use en-rhotic as American accent, suggested by Jonathan Duddington.
 New and better structure in the preferences window.
 Improved configure and build scripts.
+Improved the leitner box data load method.
+Updated NEWS file.
 
