@@ -56,7 +56,6 @@ BEGIN_EVENT_TABLE(xFarDicSettings, wxFrame)
     EVT_CHOICE(ID_LANG_CHOICE, xFarDicSettings::EnableApply)
     EVT_CHOICE(ID_ACNT_CHOICE, xFarDicSettings::EnableApply)
     EVT_CHECKLISTBOX(ID_DB_PATH, xFarDicSettings::OnPathUpdate)
-    EVT_LISTBOX(ID_DB_PATH, xFarDicSettings::OnPathUpdate)
 END_EVENT_TABLE()
 
 bool showSettings = TRUE;
@@ -266,7 +265,6 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
                submit = TRUE;
             }
             path = path.AfterFirst( ArraySeparator );
-            //printf("%s\n", (const char*)ItemString.mb_str(wxConvUTF8));  
         }        
     }
 
@@ -299,7 +297,6 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
                dbpath->Check(i, TRUE);
             }
             status = status.AfterFirst( ArraySeparator );
-            //printf("%s\n", (const char*)ItemString.mb_str(wxConvUTF8));  
         }
     }
    
@@ -656,6 +653,17 @@ void xFarDicSettings::OnDelete(wxCommandEvent& WXUNUSED(event))
 
     if (dbpath->GetSelection() > 0) {
        dbpath->Delete(dbpath->GetSelection());
+       if (dbpath->IsChecked(dbpath->GetSelection()) {
+           swapupdate = TRUE;
+       }
+
+       m_apply->Enable(TRUE);
+
+       if (dbpath->GetCount()>0) {          
+           dbinfo->Enable(TRUE);
+       } else {
+           dbinfo->Enable(FALSE);
+       }
     } else {
        msg.Printf( _("Please select a dictionary.\n"));
        wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
