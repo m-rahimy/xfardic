@@ -56,6 +56,7 @@ BEGIN_EVENT_TABLE(xFarDicSettings, wxFrame)
     EVT_CHOICE(ID_LANG_CHOICE, xFarDicSettings::EnableApply)
     EVT_CHOICE(ID_ACNT_CHOICE, xFarDicSettings::EnableApply)
     EVT_CHECKLISTBOX(ID_DB_PATH, xFarDicSettings::OnPathUpdate)
+    EVT_SCROLL(xFarDicSettings::OnScroll)
 END_EVENT_TABLE()
 
 bool showSettings = TRUE;
@@ -82,12 +83,13 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 
     settingsBitmap = new wxStaticBitmap (this, -1, logo);
    
-    effecttext = new wxStaticText(this, -1, _("Here you can configure your desired options. Changes will take effect after xFarDic restart."));
+    effecttext = new wxStaticText(this, -1, _("Here you can configure your desired options. Changes will take effect after xFarDic \nrestart."));
 
     layout = new wxNotebook(this, xFarDic_ChangeTab);
 
     setpanel =  new wxPanel(layout);
     dbpanel =  new wxPanel(layout);
+    spkpanel = new wxPanel(layout);
 
     submit = FALSE;
     swapupdate = FALSE;
@@ -106,8 +108,8 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     lang = new wxChoice(setpanel, ID_LANG_CHOICE, wxDefaultPosition, wxDefaultSize, langlist);
     lang->SetMinSize(wxSize(127,26));
 
-    acnttext = new wxStaticText(setpanel, -1, _("Choose default accen&t:"));
-    accent = new wxChoice(setpanel, ID_ACNT_CHOICE, wxDefaultPosition, wxDefaultSize, acntlist);
+    acnttext = new wxStaticText(spkpanel, -1, _("Choose default accen&t:"));
+    accent = new wxChoice(spkpanel, ID_ACNT_CHOICE, wxDefaultPosition, wxDefaultSize, acntlist);
     accent->SetMinSize(wxSize(127,26));
 
     settext = new wxStaticText(setpanel, -1, _("Number of Entries in History Box:"));
@@ -130,14 +132,26 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     chk_watcher  = new wxCheckBox(setpanel, ID_CHK_WATCHER,  _("Enable Clipboard &Watcher"));
     chk_scanner  = new wxCheckBox(setpanel, ID_CHK_SCANNER,  _("Enable Selection Sca&nner"));
     chk_notify  = new wxCheckBox(setpanel, ID_CHK_NOTIFICATION,  _("Enable Noti&fication Window"));        
-    chk_speak  = new wxCheckBox(setpanel, ID_CHK_SPEAK,  _("Spea&k On Translation"));        
     chk_spell  = new wxCheckBox(setpanel, ID_CHK_SPELL,  _("Enable S&pell Checker"));
     chk_swap  = new wxCheckBox(setpanel, ID_CHK_SWAP,  _("Enable Swa&p file"));
-    chk_tts  = new wxCheckBox(setpanel, ID_CHK_TTS,  _("Enable Text to Speech En&gine"));
+    chk_tts  = new wxCheckBox(spkpanel, ID_CHK_TTS,  _("Enable Text to Speech En&gine"));
+    chk_speak  = new wxCheckBox(spkpanel, ID_CHK_SPEAK,  _("Spea&k On Translation"));
 
     m_ok = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition,wxSize(80,36));
     m_apply = new wxButton(this, wxID_APPLY, _("&Apply"), wxDefaultPosition,wxSize(80,36));
     m_cancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition,wxSize(80,36));
+   
+    pitchtext = new wxStaticText(spkpanel, -1, _("Base Pitch:"));
+    spk_pitch = new wxSlider(spkpanel, ID_SPK_PITCH, 0, 0, 100, wxDefaultPosition, wxSize(150, wxDefaultCoord), wxSL_HORIZONTAL | wxSL_LABELS);
+
+    rangetext = new wxStaticText(spkpanel, -1, _("Pitch Range:"));
+    spk_range = new wxSlider(spkpanel, ID_SPK_RANGE, 0, 0, 100, wxDefaultPosition, wxSize(150, wxDefaultCoord), wxSL_HORIZONTAL | wxSL_LABELS);
+
+    ratetext = new wxStaticText(spkpanel, -1, _("Speaking Speed (Words/Min):"));
+    spk_rate = new wxSlider(spkpanel, ID_SPK_RATE, 100, 100, 200, wxDefaultPosition, wxSize(150, wxDefaultCoord), wxSL_HORIZONTAL | wxSL_LABELS);
+
+    voltext = new wxStaticText(spkpanel, -1, _("Pronounciation Volume:"));
+    spk_volume = new wxSlider(spkpanel, ID_SPK_VOLUME, 10, 10, 100, wxDefaultPosition, wxSize(150, wxDefaultCoord), wxSL_HORIZONTAL | wxSL_LABELS);
   
     // Set Default button
     m_ok->SetDefault();
@@ -201,7 +215,11 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
       chk_speak->SetValue(FALSE);
     }   
 
-    accent->SetSelection(pConfig->Read(_T("Accent"), 0l));  
+    accent->SetSelection(pConfig->Read(_T("Accent"), 0l));
+    spk_pitch->SetValue(pConfig->Read(_T("Pitch"), 55));
+    spk_rate->SetValue(pConfig->Read(_T("Rate"), 125));
+    spk_range->SetValue(pConfig->Read(_T("Range"), 50));
+    spk_volume->SetValue(pConfig->Read(_T("Volume"), 100));
 #else
     chk_tts->Enable(FALSE);
     chk_speak->Enable(FALSE);
@@ -301,8 +319,9 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
         dbinfo->Enable(FALSE);
     }
 
-    layout->AddPage(setpanel, _("Options"));    
-    layout->AddPage(dbpanel, _("Dictionaries")); 
+    layout->AddPage(setpanel, _("Options"));
+    layout->AddPage(dbpanel, _("Dictionaries"));
+    layout->AddPage(spkpanel, _("Pronounciation"));
 
     //if there are changes on DBs, auto-submit changes
     if (submit == TRUE) {
@@ -475,7 +494,11 @@ void xFarDicSettings::SubmitChanges()
     pConfig->Write(wxT("/Options/GUI-Lang"), lang->GetSelection());
 
 #ifdef HAVE_SPEAKLIB
-    pConfig->Write(wxT("/Options/Accent"), accent->GetSelection());            
+    pConfig->Write(wxT("/Options/Accent"), accent->GetSelection());
+    pConfig->Write(wxT("/Options/Volume"), spk_volume->GetValue());
+    pConfig->Write(wxT("/Options/Pitch"), spk_pitch->GetValue());
+    pConfig->Write(wxT("/Options/Rate"), spk_rate->GetValue());
+    pConfig->Write(wxT("/Options/Range"), spk_range->GetValue());
 #endif
             
     pConfig->Write(wxT("/Options/DB-Path"), path);
@@ -551,10 +574,26 @@ void xFarDicSettings::EnableTTS(wxCommandEvent& WXUNUSED(event))
         chk_speak->Enable(TRUE);
         accent->Enable(TRUE);
         acnttext->Enable(TRUE);
+        spk_pitch->Enable(TRUE);
+        pitchtext->Enable(TRUE);
+        spk_rate->Enable(TRUE);
+        ratetext->Enable(TRUE);
+        spk_range->Enable(TRUE);
+        rangetext->Enable(TRUE);
+        spk_volume->Enable(TRUE);
+        voltext->Enable(TRUE);
     }else {
         chk_speak->Enable(FALSE);
         accent->Enable(FALSE);
         acnttext->Enable(FALSE);
+        spk_pitch->Enable(FALSE);
+        pitchtext->Enable(FALSE);
+        spk_rate->Enable(FALSE);
+        ratetext->Enable(FALSE);
+        spk_range->Enable(FALSE);
+        rangetext->Enable(FALSE);
+        spk_volume->Enable(FALSE);
+        voltext->Enable(FALSE);
     }
 #endif
 }
@@ -672,6 +711,11 @@ void xFarDicSettings::MoveItem(bool up)
     }
 }
 
+void xFarDicSettings::OnScroll(wxScrollEvent& event)
+{
+    m_apply->Enable(TRUE);
+}
+
 /// Validate XML Database
 bool xFarDicSettings::DB(const char *filename) {    
     int ret, counter;
@@ -734,17 +778,15 @@ void xFarDicSettings::CreateLayout() {
 
     wxBoxSizer *logoandtextSizer = new wxBoxSizer(wxHORIZONTAL);
     logoandtextSizer->Add(settingsBitmap, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-    logoandtextSizer->Add(effecttext, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    logoandtextSizer->Add(effecttext, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
     wxBoxSizer *masterSizer = new wxBoxSizer(wxVERTICAL);
-    masterSizer->Add(logoandtextSizer,0,wxEXPAND|wxALL,2);
-    masterSizer->Add(layout,1,wxEXPAND|wxALL,2);
+    masterSizer->Add(logoandtextSizer, 0,wxEXPAND|wxALL,2);
+    masterSizer->Add(layout, 1,wxEXPAND|wxALL,2);
 
-    wxGridSizer *setpanelSizer = new wxGridSizer(9,2,0,0);
+    wxGridSizer *setpanelSizer = new wxGridSizer(8,2,0,0);
     setpanelSizer->Add(langtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     setpanelSizer->Add(lang , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-    setpanelSizer->Add(acnttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-    setpanelSizer->Add(accent , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     setpanelSizer->Add(settext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     setpanelSizer->Add(numEntry , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     setpanelSizer->Add(timeouttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
@@ -759,10 +801,22 @@ void xFarDicSettings::CreateLayout() {
     setpanelSizer->Add(chk_watcher , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     setpanelSizer->Add(chk_revsrch , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     setpanelSizer->Add(chk_spell , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-    setpanelSizer->Add(chk_tts , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-    setpanelSizer->Add(chk_speak , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);   
     setpanelSizer->Add(chk_cache , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     setpanelSizer->Add(chk_swap , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+
+    wxGridSizer *spkpanelSizer = new wxGridSizer(8,2,0,0);
+    spkpanelSizer->Add(chk_tts , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);     
+    spkpanelSizer->Add(chk_speak , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    spkpanelSizer->Add(acnttext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    spkpanelSizer->Add(accent , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    spkpanelSizer->Add(ratetext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);      
+    spkpanelSizer->Add(spk_rate , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);      
+    spkpanelSizer->Add(voltext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);      
+    spkpanelSizer->Add(spk_volume , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2); 
+    spkpanelSizer->Add(rangetext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);      
+    spkpanelSizer->Add(spk_range , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    spkpanelSizer->Add(pitchtext , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);      
+    spkpanelSizer->Add(spk_pitch , 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
     wxBoxSizer *dbpanelSizer = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer *dbpanelrightSizer = new wxBoxSizer(wxVERTICAL);
@@ -775,7 +829,7 @@ void xFarDicSettings::CreateLayout() {
     dbpanelrightSizerbuttons->Add(move_down, 0, wxEXPAND|wxALL, 2);
     wxBoxSizer *dbpanelrightSizerfirsttext = new wxBoxSizer(wxHORIZONTAL);
     dbpanelrightSizerfirsttext->Add(notelogoBitmap1, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
-    dbpanelrightSizerfirsttext->Add(dbnote, 1, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
+    dbpanelrightSizerfirsttext->Add(dbnote, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     wxBoxSizer *dbpanelrightSizersecondtext = new wxBoxSizer(wxHORIZONTAL);
     dbpanelrightSizersecondtext->Add(notelogoBitmap2, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
     dbpanelrightSizersecondtext->Add(swapnote, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 2);
@@ -786,6 +840,8 @@ void xFarDicSettings::CreateLayout() {
 
     setpanel->SetAutoLayout(TRUE);
     setpanel->SetSizer( setpanelSizer );
+    spkpanel->SetAutoLayout(TRUE);
+    spkpanel->SetSizer( spkpanelSizer );
     dbpanel->SetAutoLayout(TRUE);
     dbpanel->SetSizer( dbpanelSizer );
 
@@ -795,13 +851,13 @@ void xFarDicSettings::CreateLayout() {
     bottomSizer->Add(m_apply, 0, wxALIGN_RIGHT, 2);
     bottomSizer->Add(m_cancel, 0, wxALIGN_RIGHT, 2);    
     
-    masterSizer->Add(bottomSizer,0,wxEXPAND|wxALL,2);
+    masterSizer->Add(bottomSizer, 0,wxEXPAND|wxALL,2);
 
     wxBoxSizer *topSizer = new wxBoxSizer(wxVERTICAL);
     topSizer->Add(masterSizer,
-            1, //make vertically stretchable
+            0, //make vertically stretchable
             wxEXPAND|wxALL,
-            3);
+            2);
 
     SetSizer(topSizer);
     topSizer->Fit(this);

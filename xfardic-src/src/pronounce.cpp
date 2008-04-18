@@ -39,9 +39,10 @@ void xFarDicPronounce::Init()
     if (tts) { 
         espeak_Initialize(AUDIO_OUTPUT_PLAYBACK, 0, NULL, 0);
 
-        espeak_SetParameter(espeakRATE, 125, 0);
-        espeak_SetParameter(espeakVOLUME, 150, 0);
-        espeak_SetParameter(espeakPITCH, 55, 0);
+        espeak_SetParameter(espeakRATE, pConfig->Read(_T("Rate"), 125), 0);
+        espeak_SetParameter(espeakVOLUME, pConfig->Read(_T("Volume"), 100), 0);
+        espeak_SetParameter(espeakPITCH, pConfig->Read(_T("Pitch"), 55), 0);
+        espeak_SetParameter(espeakRANGE, pConfig->Read(_T("Range"), 50), 0);
 
         switch (acnt) {
                case 0:

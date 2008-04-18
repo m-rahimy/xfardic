@@ -56,6 +56,7 @@ using namespace std;
 #include "wx/taskbar.h"
 #include "wx/utils.h"
 #include "wx/filedlg.h"
+#include "wx/slider.h"
 #include "wx/generic/filedlgg.h"
 #include "wx/log.h"
 #include "wx/intl.h"

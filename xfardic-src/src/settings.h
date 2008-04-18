@@ -76,6 +76,8 @@ public:
     bool CheckPath(wxString dbpath);
     /// Move Items up or Down
     void MoveItem(bool up=TRUE);
+    /// Pitch Scroll event handler
+    void OnScroll(wxScrollEvent& event);
     
     bool exist,
          submit,
@@ -99,7 +101,11 @@ private:
                  *timeouttext,
                  *leitnertext,
                  *dbnote,
-                 *swapnote;
+                 *swapnote,
+                 *voltext,
+                 *ratetext,
+                 *rangetext,
+                 *pitchtext;
 
     wxButton    *m_ok,
                 *m_apply,
@@ -111,7 +117,14 @@ private:
                 *move_down;
 
     wxPanel     *setpanel,
+                *spkpanel,
                 *dbpanel;
+
+    wxSlider    *spk_pitch,
+                *spk_rate,
+                *spk_range,
+                *spk_volume;
+
     wxCheckBox  *chk_select,
                 *chk_winpos,
                 *chk_cache,

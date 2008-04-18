@@ -163,6 +163,10 @@ const int  ID_BTN_SPK_C        = 171;
 const int  ID_BTN_SPK_D        = 172;
 const int  ID_BTN_SPK_E        = 173;
 const int  ID_ACNT_CHOICE      = 174;
+const int  ID_SPK_PITCH        = 175;
+const int  ID_SPK_RATE         = 176;
+const int  ID_SPK_VOLUME       = 177;
+const int  ID_SPK_RANGE        = 178;
 
 #endif
 
