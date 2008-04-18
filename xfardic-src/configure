@@ -3758,76 +3758,19 @@ fi
 
 
 
-{ echo "$as_me:$LINENO: checking for espeak_Synchronize in -lespeak" >&5
-echo $ECHO_N "checking for espeak_Synchronize in -lespeak... $ECHO_C" >&6; }
-if test "${ac_cv_lib_espeak_espeak_Synchronize+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-lespeak  $LIBS"
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
 
-/* Override any GCC internal prototype to avoid an error.
-   Use char because int might match the return type of a GCC
-   builtin and then its argument prototype would still apply.  */
-#ifdef __cplusplus
-extern "C"
-#endif
-char espeak_Synchronize ();
-int
-main ()
-{
-return espeak_Synchronize ();
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (ac_try="$ac_link"
-case "(($ac_try" in
-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
-  *) ac_try_echo=$ac_try;;
-esac
-eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
-  (eval "$ac_link") 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } && {
-	 test -z "$ac_c_werror_flag" ||
-	 test ! -s conftest.err
-       } && test -s conftest$ac_exeext &&
-       $as_test_x conftest$ac_exeext; then
-  ac_cv_lib_espeak_espeak_Synchronize=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-	ac_cv_lib_espeak_espeak_Synchronize=no
-fi
-
-rm -f core conftest.err conftest.$ac_objext conftest_ipa8_conftest.oo \
-      conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
-fi
-{ echo "$as_me:$LINENO: result: $ac_cv_lib_espeak_espeak_Synchronize" >&5
-echo "${ECHO_T}$ac_cv_lib_espeak_espeak_Synchronize" >&6; }
-if test $ac_cv_lib_espeak_espeak_Synchronize = yes; then
-  LIBS="$LIBS -lespeak"; with_speaklib=yes;
-cat >>confdefs.h <<\_ACEOF
-#define HAVE_SPEAKLIB 1
-_ACEOF
+# Check whether --with-speaklib was given.
+if test "${with_speaklib+set}" = set; then
+  withval=$with_speaklib;
+	with_speaklib=$withval
 
 else
-  with_speaklib=no
+
+	with_speaklib=yes
+
 fi
+
+
 
 
 { echo "$as_me:$LINENO: checking for sqlite3_exec in -lsqlite3" >&5
@@ -4940,6 +4883,33 @@ echo "$as_me: error: You should have GNOME desktop header files! Install libgnom
    { (exit 1); exit 1; }; }
 else
     echo "checking for libgnome.h...yes"
+fi
+
+# speaklib configuration
+if test x$with_speaklib != xno; then
+    LIBESPEAK_INCLUDEDIR=""
+    for d in 			\
+        /usr/include/espeak\
+        $prefix/include/espeak\
+        /usr/include
+    do
+        if test -f "$d/speak_lib.h" ; then
+	    LIBESPEAK_INCLUDEDIR="$d"
+	    break
+        fi
+    done
+    if test "x$LIBESPEAK_INCLUDEDIR" = "x"; then
+        { { echo "$as_me:$LINENO: error: You should have Espeak header files! Install libespeak-dev" >&5
+echo "$as_me: error: You should have Espeak header files! Install libespeak-dev" >&2;}
+   { (exit 1); exit 1; }; }
+    else
+        echo "checking for speak_lib.h...yes"
+    fi
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_SPEAKLIB 1
+_ACEOF
+
 fi
 
 LIBWX_INCLUDEDIR=""
