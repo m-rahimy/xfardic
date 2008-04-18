@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-16 13:12+0200\n"
+"POT-Creation-Date: 2008-04-18 22:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,7 +70,7 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#: ../src/leitner.cpp:114 ../src/settings.cpp:139
+#: ../src/leitner.cpp:114 ../src/settings.cpp:140
 msgid "&OK"
 msgstr ""
 
@@ -89,9 +89,9 @@ msgid ""
 msgstr ""
 
 #: ../src/leitner.cpp:135 ../src/leitner.cpp:136 ../src/leitner.cpp:137
-#: ../src/leitner.cpp:138 ../src/leitner.cpp:139 ../src/leitner.cpp:829
-#: ../src/leitner.cpp:830 ../src/leitner.cpp:831 ../src/leitner.cpp:832
-#: ../src/leitner.cpp:833
+#: ../src/leitner.cpp:138 ../src/leitner.cpp:139 ../src/leitner.cpp:808
+#: ../src/leitner.cpp:809 ../src/leitner.cpp:810 ../src/leitner.cpp:811
+#: ../src/leitner.cpp:812
 msgid "Word Count: "
 msgstr ""
 
@@ -115,125 +115,122 @@ msgstr ""
 msgid "Box E"
 msgstr ""
 
-#: ../src/leitner.cpp:290 ../src/leitner.cpp:313 ../src/leitner.cpp:336
-#: ../src/leitner.cpp:359 ../src/leitner.cpp:382 ../src/leitner.cpp:403
-#: ../src/leitner.cpp:420 ../src/leitner.cpp:437 ../src/leitner.cpp:454
-#: ../src/leitner.cpp:471 ../src/leitner.cpp:486 ../src/leitner.cpp:517
-#: ../src/leitner.cpp:539 ../src/leitner.cpp:585 ../src/leitner.cpp:615
-#: ../src/leitner.cpp:645 ../src/leitner.cpp:675 ../src/leitner.cpp:705
-#: ../src/leitner.cpp:735 ../src/leitner.cpp:765
+#: ../src/leitner.cpp:269 ../src/leitner.cpp:292 ../src/leitner.cpp:315
+#: ../src/leitner.cpp:338 ../src/leitner.cpp:361 ../src/leitner.cpp:382
+#: ../src/leitner.cpp:399 ../src/leitner.cpp:416 ../src/leitner.cpp:433
+#: ../src/leitner.cpp:450 ../src/leitner.cpp:465 ../src/leitner.cpp:496
+#: ../src/leitner.cpp:518 ../src/leitner.cpp:564 ../src/leitner.cpp:594
+#: ../src/leitner.cpp:624 ../src/leitner.cpp:654 ../src/leitner.cpp:684
+#: ../src/leitner.cpp:714 ../src/leitner.cpp:744
 msgid "Please select a word.\n"
 msgstr ""
 
-#: ../src/leitner.cpp:502
+#: ../src/leitner.cpp:481
 msgid "Box B is full.\n"
 msgstr ""
 
-#: ../src/leitner.cpp:544
+#: ../src/leitner.cpp:523
 msgid "Are you sure that you have learnt this word?\n"
 msgstr ""
 
-#: ../src/leitner.cpp:561
+#: ../src/leitner.cpp:540
 msgid "Are you sure that you want to clear the box contents?\n"
 msgstr ""
 
-#: ../src/leitner.cpp:600 ../src/leitner.cpp:660 ../src/leitner.cpp:720
-#: ../src/leitner.cpp:780
+#: ../src/leitner.cpp:579 ../src/leitner.cpp:639 ../src/leitner.cpp:699
+#: ../src/leitner.cpp:759
 msgid "Box A is full.\n"
 msgstr ""
 
-#: ../src/leitner.cpp:630
+#: ../src/leitner.cpp:609
 msgid "Box C is full.\n"
 msgstr ""
 
-#: ../src/leitner.cpp:690
+#: ../src/leitner.cpp:669
 msgid "Box D is full.\n"
 msgstr ""
 
-#: ../src/leitner.cpp:750
+#: ../src/leitner.cpp:729
 msgid "Box E is full.\n"
 msgstr ""
 
 #: ../src/settings.cpp:86
 msgid ""
 "Here you can configure your desired options. Changes will take effect after "
-"xFarDic restart."
-msgstr ""
-
-#: ../src/settings.cpp:98
-msgid "Persian"
+"xFarDic \n"
+"restart."
 msgstr ""
 
 #: ../src/settings.cpp:99
-msgid "English (U.S)"
+msgid "Persian"
 msgstr ""
 
 #: ../src/settings.cpp:100
+msgid "English (U.S)"
+msgstr ""
+
+#: ../src/settings.cpp:101
 msgid "System default"
 msgstr ""
 
-#: ../src/settings.cpp:103
+#: ../src/settings.cpp:104
 msgid "American"
 msgstr ""
 
-#: ../src/settings.cpp:104
+#: ../src/settings.cpp:105
 msgid "British"
 msgstr ""
 
-#: ../src/settings.cpp:106
+#: ../src/settings.cpp:107
 msgid "Choose default &language:"
 msgstr ""
 
-#: ../src/settings.cpp:110
+#: ../src/settings.cpp:111
 msgid "Choose default accen&t:"
 msgstr ""
 
-#: ../src/settings.cpp:114
+#: ../src/settings.cpp:115
 msgid "Number of Entries in History Box:"
 msgstr ""
 
-#: ../src/settings.cpp:118
+#: ../src/settings.cpp:119
 msgid "Notification window timeout (Sec):"
 msgstr ""
 
-#: ../src/settings.cpp:122
+#: ../src/settings.cpp:123
 msgid "Leitner box base capacity:"
 msgstr ""
 
-#: ../src/settings.cpp:126
+#: ../src/settings.cpp:127
 msgid "Enable Auto &Select Word After Translation"
 msgstr ""
 
-#: ../src/settings.cpp:127
+#: ../src/settings.cpp:128
 msgid "&Hide On Window Minimize and Close"
 msgstr ""
 
-#: ../src/settings.cpp:128
+#: ../src/settings.cpp:129
 msgid "Enable Inexact &Reverse Searching"
 msgstr ""
 
-#: ../src/settings.cpp:129
+#: ../src/settings.cpp:130
 msgid "Save Program Window P&osition and State"
 msgstr ""
 
-#: ../src/settings.cpp:130
+#: ../src/settings.cpp:131
 msgid "Save Wor&d Cache On Exit"
 msgstr ""
 
-#: ../src/settings.cpp:131
+#: ../src/settings.cpp:132
 msgid "Enable Clipboard &Watcher"
 msgstr ""
 
-#: ../src/settings.cpp:132
+#: ../src/settings.cpp:133
 msgid "Enable Selection Sca&nner"
 msgstr ""
 
-#: ../src/settings.cpp:133
-msgid "Enable Noti&fication Window"
-msgstr ""
-
 #: ../src/settings.cpp:134
-msgid "Spea&k On Translation"
+msgid "Enable Noti&fication Window"
 msgstr ""
 
 #: ../src/settings.cpp:135
@@ -248,101 +245,125 @@ msgstr ""
 msgid "Enable Text to Speech En&gine"
 msgstr ""
 
-#: ../src/settings.cpp:140
-msgid "&Apply"
+#: ../src/settings.cpp:138
+msgid "Spea&k On Translation"
 msgstr ""
 
 #: ../src/settings.cpp:141
+msgid "&Apply"
+msgstr ""
+
+#: ../src/settings.cpp:142
 msgid "&Cancel"
 msgstr ""
 
-#: ../src/settings.cpp:273
+#: ../src/settings.cpp:144
+msgid "Base Pitch:"
+msgstr ""
+
+#: ../src/settings.cpp:147
+msgid "Pitch Range:"
+msgstr ""
+
+#: ../src/settings.cpp:150
+msgid "Speaking Speed (Words/Min):"
+msgstr ""
+
+#: ../src/settings.cpp:153
+msgid "Pronounciation Volume:"
+msgstr ""
+
+#: ../src/settings.cpp:289
 msgid "Add"
 msgstr ""
 
-#: ../src/settings.cpp:274
+#: ../src/settings.cpp:290
 msgid "Delete"
 msgstr ""
 
-#: ../src/settings.cpp:275
+#: ../src/settings.cpp:291
 msgid "DB info"
 msgstr ""
 
-#: ../src/settings.cpp:276
+#: ../src/settings.cpp:292
 msgid "Up"
 msgstr ""
 
-#: ../src/settings.cpp:277
+#: ../src/settings.cpp:293
 msgid "Down"
 msgstr ""
 
-#: ../src/settings.cpp:309
+#: ../src/settings.cpp:314
 msgid "Check/UnCheck to enable or disable available dictionaries."
 msgstr ""
 
-#: ../src/settings.cpp:311
+#: ../src/settings.cpp:316
 msgid "Enabling swap reduces memory usage by 60% and performance by 15%."
 msgstr ""
 
-#: ../src/settings.cpp:317
+#: ../src/settings.cpp:322
 msgid "Options"
 msgstr ""
 
-#: ../src/settings.cpp:318
+#: ../src/settings.cpp:323
 msgid "Dictionaries"
 msgstr ""
 
-#: ../src/settings.cpp:417
+#: ../src/settings.cpp:324
+msgid "Pronounciation"
+msgstr ""
+
+#: ../src/settings.cpp:401
 msgid ""
 "XML DB path is empty.\n"
 "xFarDic will now work without a valid database."
 msgstr ""
 
-#: ../src/settings.cpp:418
+#: ../src/settings.cpp:402
 msgid "Warning"
 msgstr ""
 
-#: ../src/settings.cpp:549
+#: ../src/settings.cpp:531
 msgid "Choose a XML DataBase"
 msgstr ""
 
-#: ../src/settings.cpp:549
+#: ../src/settings.cpp:531
 msgid "XML DataBase files (*.xdb)|*.xdb"
 msgstr ""
 
-#: ../src/settings.cpp:633
+#: ../src/settings.cpp:631
 msgid "DB Name  : "
 msgstr ""
 
-#: ../src/settings.cpp:634
+#: ../src/settings.cpp:632
 msgid "DB Author : "
 msgstr ""
 
-#: ../src/settings.cpp:635
+#: ../src/settings.cpp:633
 msgid "DB Version: "
 msgstr ""
 
-#: ../src/settings.cpp:638 ../src/settings.cpp:640
+#: ../src/settings.cpp:636 ../src/settings.cpp:638
 msgid "Input Lang: "
 msgstr ""
 
-#: ../src/settings.cpp:643
+#: ../src/settings.cpp:641
 msgid "No information found."
 msgstr ""
 
-#: ../src/settings.cpp:647
+#: ../src/settings.cpp:645
 msgid "No information found or no databse is selected."
 msgstr ""
 
-#: ../src/settings.cpp:650
+#: ../src/settings.cpp:648
 msgid "XML Database information"
 msgstr ""
 
-#: ../src/settings.cpp:660
+#: ../src/settings.cpp:669 ../src/settings.cpp:708
 msgid "Please select a dictionary.\n"
 msgstr ""
 
-#: ../src/settings.cpp:705
+#: ../src/settings.cpp:758
 msgid "Parse Error. Invalid Document.\n"
 msgstr ""
 
@@ -654,67 +675,67 @@ msgstr ""
 msgid "Please enter clause.\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1300 ../src/xfardic_app.cpp:1415
+#: ../src/xfardic_app.cpp:1300 ../src/xfardic_app.cpp:1419
 msgid "Please wait..."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1343 ../src/xfardic_app.cpp:1406
-#: ../src/xfardic_app.cpp:1459 ../src/xfardic_app.cpp:1508
+#: ../src/xfardic_app.cpp:1345 ../src/xfardic_app.cpp:1410
+#: ../src/xfardic_app.cpp:1465 ../src/xfardic_app.cpp:1514
 msgid "Phrase not found."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1565
+#: ../src/xfardic_app.cpp:1571
 msgid ""
 "xFarDic spell checker found error(s) on your typed word.\n"
 " Please choose correct word from list and then click OK."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1565
+#: ../src/xfardic_app.cpp:1571
 msgid "xFarDic Spell Checker"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1594
+#: ../src/xfardic_app.cpp:1600
 msgid "xFarDic Preferences"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1617
+#: ../src/xfardic_app.cpp:1623
 msgid "About xFarDic"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1640
+#: ../src/xfardic_app.cpp:1646
 msgid "xFarDic - Leitner Box"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1829
+#: ../src/xfardic_app.cpp:1835
 msgid ""
 "It seems that Aspell is not installed.\n"
 "xFarDic will not work correctly."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:1908
+#: ../src/xfardic_app.cpp:1914
 msgid ""
 "Parse Error. Invalid Document.\n"
 " It is possible that XML-DB is not installed.\n"
 " Set XML DB path in settings window."
 msgstr ""
 
-#: ../src/xfardic_app.cpp:2240
+#: ../src/xfardic_app.cpp:2246
 msgid ""
 "Selected word already exists in the box\n"
 "or not found in the installed database(s).\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:2246
+#: ../src/xfardic_app.cpp:2252
 msgid "The leitner box is full.\n"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:2299
+#: ../src/xfardic_app.cpp:2305
 msgid ""
 "xFarDic should be restarted to work correctly.\n"
 "Would you like to close it now?"
 msgstr ""
 
-#: ../src/xfardic_app.cpp:2356
+#: ../src/xfardic_app.cpp:2362
 msgid ""
 "Creating the swap file. Please wait.\n"
 "This will take a while..."
