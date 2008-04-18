@@ -1,0 +1,162 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(src/xfardic.cpp)
+AM_INIT_AUTOMAKE(xfardic, 0.10.3)
+dnl AM_CONFIG_HEADER(config.h)
+AC_PROG_CXX
+dnl checks for programs
+AC_PROG_CC
+
+dnl checks for libraries
+
+dnl checks for header files
+
+if test "x$prefix" = "xNONE"; then
+	prefix=/usr
+fi
+
+AC_ARG_WITH([speaklib],
+        AC_HELP_STRING([--with-speaklib],
+                [Use speaklib if available (default=yes)]),[
+	with_speaklib=$withval
+],[
+	with_speaklib=yes
+])
+
+AC_TRY_CPP([#include <aspell.h>] ,echo "checking for aspell.h... yes",[AC_MSG_ERROR([You should have aspell header files! Install libaspell-dev])])
+
+LIBGNOME_INCLUDEDIR=""
+for d in 			\
+    /opt/gnome/include/gnome-desktop-2.0/libgnome\
+    /usr/include/gnome-desktop-2.0/libgnome\
+    $prefix/gnome-desktop-2.0/libgnome
+do
+    if test -f "$d/gnome-desktop-item.h" ; then
+	LIBGNOME_INCLUDEDIR="$d"
+	break
+    fi
+done
+
+if test "x$LIBGNOME_INCLUDEDIR" = "x"; then
+    AC_MSG_ERROR([You should have GNOME desktop header files! Install libgnome-desktop-dev])
+else
+    echo "checking for libgnome.h...yes"
+fi
+
+LIBWX_INCLUDEDIR=""
+for d in 			\
+    /usr/include/wx-2.6/wx\
+    $prefix/include/wx-2.6/wx
+do
+    if test -f "$d/wx.h" ; then
+	LIBWX_INCLUDEDIR="$d"
+	break
+    fi
+done
+if test "x$LIBWX_INCLUDEDIR" = "x"; then
+    AC_MSG_ERROR([You should have wxGTK header files! Install libwxgtk2.6-dev])
+else
+    echo "checking for wx.h...yes"
+fi
+
+LIBNOTIFY_INCLUDEDIR=""
+for d in 			\
+    /opt/gnome/include/libnotify\
+    /usr/include/libnotify\
+    $prefix/include/libnotify
+do
+    if test -f "$d/notify.h" ; then
+	LIBNOTIFY_INCLUDEDIR="$d"
+	break
+    fi
+done
+if test "x$LIBNOTIFY_INCLUDEDIR" = "x"; then
+    AC_MSG_ERROR([You should have libnotify header files! Install libnotify-dev])
+else
+    echo "checking for libnotify.h...yes"
+fi
+
+# speaklib configuration
+if test x$with_speaklib != xno; then
+    LIBESPEAK_INCLUDEDIR=""
+    for d in 			\
+        /usr/include/espeak\
+        $prefix/include/espeak\
+        /usr/include
+    do
+        if test -f "$d/speak_lib.h" ; then
+	    LIBESPEAK_INCLUDEDIR="$d"
+	    break
+        fi
+    done
+    if test "x$LIBESPEAK_INCLUDEDIR" = "x"; then
+        AC_MSG_ERROR([You should have Espeak header files! Install libespeak-dev])
+    else
+        echo "checking for speak_lib.h...yes"
+    fi
+    AC_DEFINE(HAVE_SPEAKLIB,1,[Defined when speaklib can be used.])    
+fi
+
+LIBSQLITE3_INCLUDEDIR=""
+for d in 			\
+    /usr/include\
+    $prefix/include
+do
+    if test -f "$d/sqlite3.h" ; then
+	LIBSQLITE3_INCLUDEDIR="$d"
+	break
+    fi
+done
+if test "x$LIBSQLITE3_INCLUDEDIR" = "x"; then
+    AC_MSG_ERROR([You should have libsqlite3 header files! Install libsqlite3-dev])
+else
+    echo "checking for sqlite3.h...yes"
+fi
+
+#--------------------------------------------------------------------
+# libxml2 ----------------------------------------------------------
+#--------------------------------------------------------------------
+# Ask the user where to find the headers and libraries of libxml2.
+# Remember this information for the generated files.
+#--------------------------------------------------------------------
+
+AC_MSG_CHECKING([for libxml2 headers])
+
+with_xml2include=NONE
+AC_ARG_WITH(libxml2-include,
+    [  --with-libxml2-include      directory containing the libxml2 header files],
+    with_xml2include=${withval})
+
+LIBXML2_INCLUDEDIR=""
+for d in 			\
+    $with_xml2include		\
+    $with_xml2include/libxml2	\
+    $prefix/include		\
+    $prefix/include/libxml2	\
+    /usr/include		\
+    /usr/include/libxml2	\
+    /usr/local/include		\
+    /usr/local/include/libxml2
+do
+    if test -f "$d/xpath.h" ; then
+	LIBXML2_INCLUDEDIR="$d"
+	break
+    fi
+    if test -f "$d/libxml/xpath.h" ; then
+	LIBXML2_INCLUDEDIR="$d"
+	break
+    fi
+done
+if test "x$LIBXML2_INCLUDEDIR" = "x"; then
+    AC_MSG_ERROR([not found, please use --with-libxml2-include])
+else
+    AC_MSG_RESULT([${LIBXML2_INCLUDEDIR}])
+fi
+
+AC_OUTPUT(Makefile src/Makefile pixmaps/Makefile man/Makefile data/Makefile locales/fa_IR/Makefile locales/az_AZ/Makefile)
+
+echo ""
+echo "================ Final configuration ==================="
+echo "    Installing into prefix   : $prefix"
+echo "    Enable Espeak TTS engine : $with_speaklib"
+echo ""
+

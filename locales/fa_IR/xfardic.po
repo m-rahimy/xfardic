@@ -1,0 +1,768 @@
+# Copyright (C) 2004-2008 Alan Baghumian, Armen Baghumian
+# This file is distributed under the same license as the xFarDic package.
+# Alan Baghumian <alan@technotux.org>
+# Armen Baghumian <armen@opensourceclub.org>
+msgid ""
+msgstr ""
+"Project-Id-Version: xFarDic 0.10.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-01-16 10:16+0330\n"
+"PO-Revision-Date: 2008-01-16 10:17+0330\n"
+"Last-Translator: Alan Baghumian <alan@technotux.org>\n"
+"Language-Team: fa_IR <alan@technotux.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/about.cpp:76
+msgid "&Close"
+msgstr "بستن"
+
+#: ../src/about.cpp:83
+msgid ""
+"Alan Baghumian <alan@technotux.org>\n"
+"\n"
+"Armen Baghumian <armen@opensourceclub.org>"
+msgstr ""
+"آلن باغومیان <alan@technotux.org>\n"
+"\n"
+"آرمن باغومیان <armen@opensourceclub.org>"
+
+#: ../src/about.cpp:86
+msgid "xFarDic "
+msgstr "ایکس‌فاردیک "
+
+#: ../src/about.cpp:89
+msgid ""
+"Latest News and Updates: http://www.xfardic.org\n"
+"\n"
+"Bug Report/Feature Request: alan@technotux.org\n"
+"\n"
+"IMPORTANT NOTICE:\n"
+"You can get required XDB word databases from project\n"
+"home page at http://sf.net/projects/xfardic. Without word\n"
+"databases, xFarDic *will not* work."
+msgstr ""
+"آخرین اخبار و جدیدترین نسخه‌ها: http://www.xfardic.org\n"
+"\n"
+"گزارش اشکالات و تقاضای قابلیت‌های جدید: alan@technotux.org\n"
+"\n"
+"تذکر مهم:\n"
+"می‌توانید بانک‌ اطلاعاتی واژه‌های مورد نیاز را از: http://sf.net/projects/"
+"xfardic\n"
+"دریافت کنید. بدون بانک اطلاعاتی واژه‌ها، ایکس‌فاردیک کار *نخواهد کرد*."
+
+#: ../src/about.cpp:91
+msgid ""
+"xFarDic is free software; you can redistribute it and/or\n"
+"modify it under the terms of the GNU General Public License\n"
+"as published by the Free Software Foundation; either\n"
+"version 2 of the License, or (at your option) any later\n"
+"version.\n"
+"\n"
+"xFarDic is distributed in the hope that it will be useful, but\n"
+"WITHOUT ANY WARRANTY; without even the implied warranty\n"
+"of MERCHANTABILITY or FITNESS FOR A PARTICULAR\n"
+"PURPOSE. See the GNU General Public License for more\n"
+"details."
+msgstr ""
+"ایکس‌فاردیک یک نرم‌افزار آزاد است. شما می‌توانید آنرا تحت شرایط پروانه  GPL \n"
+"نسخه ۲ یا بالاتر (بنا به انتخاب خودتان) مجددا توزیع کرده و یا تغییر دهید. \n"
+"\n"
+"ایکس‌فاردیک با امید به سودمند بودن و بدون هر گونه ضمانتی منتشر شده است.\n"
+"برای اطلاعات دقیق‌تر می‌توانید متن پروانه GPL را مطالعه نمایید."
+
+#: ../src/about.cpp:105
+msgid "Information"
+msgstr "اطلاعات"
+
+#: ../src/about.cpp:106
+msgid "License"
+msgstr "پروانه"
+
+#: ../src/about.cpp:107
+msgid "Authors"
+msgstr "نویسندگان"
+
+#: ../src/leitner.cpp:114 ../src/settings.cpp:139
+msgid "&OK"
+msgstr "تایید"
+
+#: ../src/leitner.cpp:115
+msgid "&Clear"
+msgstr "پاک کردن"
+
+#: ../src/leitner.cpp:120
+msgid ""
+"Leitner box can be used to support\n"
+"memorization by way of spaced repetition.\n"
+"This is how it works: you try to recall the\n"
+"meaning of a word. If you succeed, you send\n"
+"the word to the next box. But if you fail, you\n"
+"send it back to the first box."
+msgstr ""
+"جعبه لایتنر برای پشتیبانی از یادگیری\n"
+"واژه‌ها بر اساس تکرار با فاصله عمل می‌کند.\n"
+"نحوه کارکرد آن بدین صورت است که شما سعی\n"
+"خواهید کرد تا معنای کلمه‌ای را به خاطر آورید.\n"
+"اگر موفق شدید، کلمه را به جعبه قبلی و در غیر\n"
+"این صورت به جعبه نخست باز خواهید گرداند."
+
+#: ../src/leitner.cpp:135 ../src/leitner.cpp:136 ../src/leitner.cpp:137
+#: ../src/leitner.cpp:138 ../src/leitner.cpp:139 ../src/leitner.cpp:829
+#: ../src/leitner.cpp:830 ../src/leitner.cpp:831 ../src/leitner.cpp:832
+#: ../src/leitner.cpp:833
+msgid "Word Count: "
+msgstr "تعداد کلمات: "
+
+#: ../src/leitner.cpp:212
+msgid "Box A"
+msgstr "جعبه الف"
+
+#: ../src/leitner.cpp:213
+msgid "Box B"
+msgstr "جعبه ب"
+
+#: ../src/leitner.cpp:214
+msgid "Box C"
+msgstr "جعبه پ"
+
+#: ../src/leitner.cpp:215
+msgid "Box D"
+msgstr "جعبه ت"
+
+#: ../src/leitner.cpp:216
+msgid "Box E"
+msgstr "جعبه ث"
+
+#: ../src/leitner.cpp:290 ../src/leitner.cpp:313 ../src/leitner.cpp:336
+#: ../src/leitner.cpp:359 ../src/leitner.cpp:382 ../src/leitner.cpp:403
+#: ../src/leitner.cpp:420 ../src/leitner.cpp:437 ../src/leitner.cpp:454
+#: ../src/leitner.cpp:471 ../src/leitner.cpp:486 ../src/leitner.cpp:517
+#: ../src/leitner.cpp:539 ../src/leitner.cpp:585 ../src/leitner.cpp:615
+#: ../src/leitner.cpp:645 ../src/leitner.cpp:675 ../src/leitner.cpp:705
+#: ../src/leitner.cpp:735 ../src/leitner.cpp:765
+msgid "Please select a word.\n"
+msgstr "لطفا یک واژه را انتخاب نمایید.\n"
+
+#: ../src/leitner.cpp:502
+msgid "Box B is full.\n"
+msgstr "ظرفیت جعبه ب تکمیل است.\n"
+
+#: ../src/leitner.cpp:544
+msgid "Are you sure that you have learnt this word?\n"
+msgstr "آیا اطمینان دارید که این واژه را کاملا فرا گرفته‌اید؟\n"
+
+#: ../src/leitner.cpp:561
+msgid "Are you sure that you want to clear the box contents?\n"
+msgstr "آیا از پاک کردن محتویات جعبه اطمینان دارید؟\n"
+
+#: ../src/leitner.cpp:600 ../src/leitner.cpp:660 ../src/leitner.cpp:720
+#: ../src/leitner.cpp:780
+msgid "Box A is full.\n"
+msgstr "ظرفیت جعبه الف تکمیل است.\n"
+
+#: ../src/leitner.cpp:630
+msgid "Box C is full.\n"
+msgstr "ظرفیت جعبه پ تکمیل است.\n"
+
+#: ../src/leitner.cpp:690
+msgid "Box D is full.\n"
+msgstr "ظرفیت جعبه ت تکمیل است.\n"
+
+#: ../src/leitner.cpp:750
+msgid "Box E is full.\n"
+msgstr "ظرفیت جعبه ث تکمیل است.\n"
+
+#: ../src/settings.cpp:85
+msgid ""
+"Here you can configure your desired options. Changes will take effect after "
+"xFarDic restart."
+msgstr ""
+"در این پنجره می‌توانید گزینه‌های مورد نظرتان را تنظیم کنید. تغییرات پس از "
+"راه‌اندازی مجدد نرم‌افزار اعمال خواهند شد."
+
+#: ../src/settings.cpp:97
+msgid "Persian"
+msgstr "فارسی"
+
+#: ../src/settings.cpp:98
+msgid "English (U.S)"
+msgstr "انگلیسی"
+
+#: ../src/settings.cpp:99
+msgid "System default"
+msgstr "پیش‌گزیده سیستم"
+
+#: ../src/settings.cpp:102
+msgid "American"
+msgstr "آمریکایی"
+
+#: ../src/settings.cpp:103
+msgid "British"
+msgstr "بریتیش"
+
+#: ../src/settings.cpp:105
+msgid "Choose default &language:"
+msgstr "زبان رابط کاربری:"
+
+#: ../src/settings.cpp:109
+msgid "Choose default accen&t:"
+msgstr "لهجه سیستم تلفظ:"
+
+#: ../src/settings.cpp:113
+msgid "Number of Entries in History Box:"
+msgstr "تعداد ورودی‌ها در جعبه تاریخچه:"
+
+#: ../src/settings.cpp:117
+msgid "Notification window timeout (Sec):"
+msgstr "زمان بسته شدن خودکار پنجره اعلان (ثانیه):"
+
+#: ../src/settings.cpp:121
+msgid "Leitner box base capacity:"
+msgstr "طرفیت جعبه لایتنر:"
+
+#: ../src/settings.cpp:125
+msgid "Enable Auto &Select Word After Translation"
+msgstr "انتخاب خودکار واژه پس از برگردان فعال شود"
+
+#: ../src/settings.cpp:126
+msgid "&Hide On Window Minimize and Close"
+msgstr "پنجره هنگام کوچک شدن و بستن مخفی شود"
+
+#: ../src/settings.cpp:127
+msgid "Enable Inexact &Reverse Searching"
+msgstr "جستجوی نادقیق برعکس فعال شود"
+
+#: ../src/settings.cpp:128
+msgid "Save Program Window P&osition and State"
+msgstr "محل قرارگیری و وضعیت پنجره برنامه ذخیره شود"
+
+#: ../src/settings.cpp:129
+msgid "Save Wor&d Cache On Exit"
+msgstr "تاریخچه واژه‌ها هنگام خروج ذخیره شود"
+
+#: ../src/settings.cpp:130
+msgid "Enable Clipboard &Watcher"
+msgstr "حس‌گر حافظه فعال شود"
+
+#: ../src/settings.cpp:131
+msgid "Enable Selection Sca&nner"
+msgstr "حس‌گر انتخاب فعال شود"
+
+#: ../src/settings.cpp:132
+msgid "Enable Noti&fication Window"
+msgstr "نمایش پنجره اعلان فعال شود"
+
+#: ../src/settings.cpp:133
+msgid "Spea&k On Translation"
+msgstr "انجام تلفظ هنگام ترجمه"
+
+#: ../src/settings.cpp:134
+msgid "Return Si&milar Words"
+msgstr "برگردان کلمات مشابه"
+
+#: ../src/settings.cpp:135
+msgid "Enable S&pell Checker"
+msgstr "غلط یاب املایی فعال شود"
+
+#: ../src/settings.cpp:136
+msgid "Enable Swa&p file"
+msgstr "حافظه موقت فعال شود"
+
+#: ../src/settings.cpp:137
+msgid "Enable Text to Speech En&gine"
+msgstr "سیستم تلفظ واژه‌ها فعال شود"
+
+#: ../src/settings.cpp:140
+msgid "&Apply"
+msgstr "اعمال"
+
+#: ../src/settings.cpp:141
+msgid "&Cancel"
+msgstr "انصراف"
+
+#: ../src/settings.cpp:312
+msgid "XML DB Path:"
+msgstr "مسیر بانک:"
+
+#: ../src/settings.cpp:314
+msgid "Add"
+msgstr "اضافه کردن"
+
+#: ../src/settings.cpp:315
+msgid "DB info"
+msgstr "اطلاعات"
+
+#: ../src/settings.cpp:316
+msgid "Up"
+msgstr "صعودی"
+
+#: ../src/settings.cpp:317
+msgid "Down"
+msgstr "نزولی"
+
+#: ../src/settings.cpp:334
+msgid "Ctrl+Click to enable or disable available database(s)."
+msgstr "برای فعال یا غیر فعال کردن بانک‌های موجود از Ctrl+Click استفاده نمایید."
+
+#: ../src/settings.cpp:336
+msgid "Enabling swap reduces memory usage by 60% and performance by 15%."
+msgstr ""
+"فعال کردن swap باعث صرفه‌جویی در مصرف حافظه به میزان ۶۰٪ و کاهش سرعت به میزان "
+"۱۵٪ خواهد شد."
+
+#: ../src/settings.cpp:348
+msgid "Options"
+msgstr "گزینه‌ها"
+
+#: ../src/settings.cpp:349
+msgid "Databases"
+msgstr "بانک‌های اطلاعاتی"
+
+#: ../src/settings.cpp:452
+msgid ""
+"XML DB path is empty.\n"
+"xFarDic will now work without a valid database."
+msgstr ""
+"مسیر بانک اطلاعاای XML خالی است.\n"
+"xFarDic بدون یک بانک اطلاعاتی معتبر کار نخواهد کرد."
+
+#: ../src/settings.cpp:453
+msgid "Warning"
+msgstr "هشدار"
+
+#: ../src/settings.cpp:589
+msgid "Choose a XML DataBase"
+msgstr "انتخاب بانک اطلاعاتی XML"
+
+#: ../src/settings.cpp:589
+msgid "XML DataBase files (*.xdb)|*.xdb"
+msgstr "بانک‌های اطلاعاتی XML (*.xdb)|*.xdb"
+
+#: ../src/settings.cpp:691
+msgid "DB Name  : "
+msgstr "نام بانک اطلاعاتی       :"
+
+#: ../src/settings.cpp:692
+msgid "DB Author : "
+msgstr "نویسنده بانک اطلاعاتی:"
+
+#: ../src/settings.cpp:693
+msgid "DB Version: "
+msgstr "شماره نسخه بانک       :"
+
+#: ../src/settings.cpp:696 ../src/settings.cpp:698
+msgid "Input Lang: "
+msgstr "زبان ورودی بانک            :"
+
+#: ../src/settings.cpp:701
+msgid "No information found."
+msgstr "اطلاعاتی یافت نشد."
+
+#: ../src/settings.cpp:705
+msgid "No information found or no databse is selected."
+msgstr "اطلاعاتی یافت نشد یا هیچ بانک اطلاعاتی انتخاب نشده است."
+
+#: ../src/settings.cpp:708
+msgid "XML Database information"
+msgstr "اطلاعات بانک XML"
+
+#: ../src/settings.cpp:750
+msgid "Parse Error. Invalid Document.\n"
+msgstr "خطا: بانک اطلاعاتی خالی است.\n"
+
+#: ../src/xfardic_app.cpp:169
+msgid "&About...\tF1"
+msgstr "&درباره...\tF1"
+
+#: ../src/xfardic_app.cpp:169
+msgid "Show about dialog"
+msgstr "نمایش پنجره درباره"
+
+#: ../src/xfardic_app.cpp:175
+msgid "Leitner box\tCtrl+B"
+msgstr "جعبه لایتنر\tCtrl+B"
+
+#: ../src/xfardic_app.cpp:175
+msgid "Show Leitner box"
+msgstr "نمایش جعبه لایتنر"
+
+#: ../src/xfardic_app.cpp:180
+msgid "View Toolbar\tCtrl-T"
+msgstr "نمایش نوار ابزار\tCtrl-T"
+
+#: ../src/xfardic_app.cpp:180
+msgid "Toggle toolbar On/Off"
+msgstr "فعال/غیر فعال کردن نوار ابزار"
+
+#: ../src/xfardic_app.cpp:182
+msgid "Translate\tAlt-T"
+msgstr "برگردان\tAlt-T"
+
+#: ../src/xfardic_app.cpp:182
+msgid "Translate word"
+msgstr "برگردان واژه"
+
+#: ../src/xfardic_app.cpp:186
+msgid "Add to leitner box\tAlt-X"
+msgstr "به جعبه لایتنر اضافه شود\tAlt-X"
+
+#: ../src/xfardic_app.cpp:186 ../src/xfardic_app.cpp:190
+msgid "Add word to the leitner box"
+msgstr "اضافه کردن کلمه به جعبه لایتنر"
+
+#: ../src/xfardic_app.cpp:190
+msgid "Pronounce\tAlt-P"
+msgstr "تلفظ\tAlt-P"
+
+#: ../src/xfardic_app.cpp:195
+msgid "For&ward\tAlt-W"
+msgstr "مرور به جلو\tAlt-W"
+
+#: ../src/xfardic_app.cpp:195
+msgid "Next word"
+msgstr "واژه بعدی"
+
+#: ../src/xfardic_app.cpp:199
+msgid "&Back\tAlt-B"
+msgstr "مرور به عقب\tAlt-B"
+
+#: ../src/xfardic_app.cpp:199
+msgid "Previous word"
+msgstr "واژه قبلی"
+
+#: ../src/xfardic_app.cpp:205
+msgid "Fi&rst Word\tAlt+R"
+msgstr "نخستین واژه\tAlt+R"
+
+#: ../src/xfardic_app.cpp:205
+msgid "First word"
+msgstr "نخستین واژه"
+
+#: ../src/xfardic_app.cpp:209
+msgid "&Last Word\tAlt+L"
+msgstr "آخرین واژه\tAlt+L"
+
+#: ../src/xfardic_app.cpp:209
+msgid "Last word"
+msgstr "آخرین واژه"
+
+#: ../src/xfardic_app.cpp:220 ../src/xfardic_app.cpp:1112
+msgid "&Quit\tCtrl+Q"
+msgstr "خروج\tCtrl+Q"
+
+#: ../src/xfardic_app.cpp:220
+msgid "Quit this program"
+msgstr "خروج از برنامه"
+
+#: ../src/xfardic_app.cpp:225
+msgid "Auto &Select\tAlt-S"
+msgstr "انتخاب خودکار\tAlt-S"
+
+#: ../src/xfardic_app.cpp:225
+msgid "Auto select word"
+msgstr "انتخاب خودکار واژه"
+
+#: ../src/xfardic_app.cpp:226
+msgid "Enable Clipboard &Watcher\tCtrl-W"
+msgstr "حس‌گر حافظه فعال شود\tCtrl-W"
+
+#: ../src/xfardic_app.cpp:226
+msgid "Enable clipboard watcher"
+msgstr "حس‌گر حافظه فعال شود\tCtrl-W"
+
+#: ../src/xfardic_app.cpp:227
+msgid "Enable Selection Sca&nner\tCtrl-N"
+msgstr "حس‌گر انتخاب فعال شود\tCtrl-W"
+
+#: ../src/xfardic_app.cpp:227
+msgid "Enable selection scanner"
+msgstr "حس‌گر انتخاب فعال شود\tCtrl-W"
+
+#: ../src/xfardic_app.cpp:228
+msgid "Return Similar Words\tCtrl-S"
+msgstr "برگردان واژه‌های مشابه\tCtrl-S"
+
+#: ../src/xfardic_app.cpp:228 ../src/xfardic_app.cpp:1222
+msgid "Return similar words"
+msgstr "برگردان واژه‌های مشابه"
+
+#: ../src/xfardic_app.cpp:229
+msgid "Enable &Hide On Minimize and Close\tCtrl-H"
+msgstr "مخفی کردن پنجره هنگام کوچک شدن و بسته شدن\tCtrl-H"
+
+#: ../src/xfardic_app.cpp:229
+msgid "Enable hide on minimize and close"
+msgstr "مخفی کردن پنجره هنگام کوچک شدن و بسته شدن"
+
+#: ../src/xfardic_app.cpp:230
+msgid "Enable S&pell Checking\tCtrl-P"
+msgstr "غلط یاب املایی فعال شود\tCtrl-P"
+
+#: ../src/xfardic_app.cpp:230
+msgid "Enable spell checking"
+msgstr "غلط یاب املایی فعال شود"
+
+#: ../src/xfardic_app.cpp:231
+msgid "Enable Inexact &Reverse Searching\tCtrl-R"
+msgstr "جستجوی نادقیق برعکس فعال شود\tCtrl-R"
+
+#: ../src/xfardic_app.cpp:231
+msgid "Enable inexact reverse searchning"
+msgstr "جستجوی نادقیق برعکس فعال شود"
+
+#: ../src/xfardic_app.cpp:232
+msgid "Enable N&otification Window\tCtrl-O"
+msgstr "نمایش پنجره اعلان فعال شود\tCtrl-O"
+
+#: ../src/xfardic_app.cpp:232
+msgid "Enable notification window"
+msgstr "نمایش پنجره اعلان فعال شود"
+
+#: ../src/xfardic_app.cpp:236
+msgid "Set Result Box Font\tCtrl-F"
+msgstr "تنظیم قلم جعبه نتایج\tCtrl+F"
+
+#: ../src/xfardic_app.cpp:236
+msgid "Set result box font"
+msgstr "تنظیم قلم جعبه نتایج"
+
+#: ../src/xfardic_app.cpp:242
+msgid "C&ut\tCtrl-X"
+msgstr "بریدن\tCtrl-X"
+
+#: ../src/xfardic_app.cpp:242
+msgid "Cut input text"
+msgstr "بریدن متن ورودی"
+
+#: ../src/xfardic_app.cpp:246
+msgid "&Copy\tCtrl-C"
+msgstr "کپی\tCtrl-C"
+
+#: ../src/xfardic_app.cpp:246
+msgid "Copy result to clipboard"
+msgstr "کپی نتیجه در حافظه"
+
+#: ../src/xfardic_app.cpp:250 ../src/xfardic_app.cpp:1094
+msgid "&Paste and Translate\tCtrl-V"
+msgstr "چسباندن و برگردان\tCtrl-V"
+
+#: ../src/xfardic_app.cpp:250
+msgid "Paste from clipboard"
+msgstr "چسباندن از حافظه"
+
+#: ../src/xfardic_app.cpp:255
+msgid "Clear History\tCtrl-D"
+msgstr "پاک کردن تاریخچه\tCtrl-D"
+
+#: ../src/xfardic_app.cpp:255
+msgid "Clear history"
+msgstr "پاک کردن تاریخچه"
+
+#: ../src/xfardic_app.cpp:262 ../src/xfardic_app.cpp:1224
+msgid "Preferences"
+msgstr "ترجیحات"
+
+#: ../src/xfardic_app.cpp:262
+msgid "Configure settings"
+msgstr "انجام تنظیمات"
+
+#: ../src/xfardic_app.cpp:269
+msgid "&File"
+msgstr "پرونده"
+
+#: ../src/xfardic_app.cpp:270
+msgid "&Edit"
+msgstr "ویرایش"
+
+#: ../src/xfardic_app.cpp:271
+msgid "&View"
+msgstr "نمایش"
+
+#: ../src/xfardic_app.cpp:272
+msgid "Too&ls"
+msgstr "ابزار"
+
+#: ../src/xfardic_app.cpp:273
+msgid "&Help"
+msgstr "کمک"
+
+#: ../src/xfardic_app.cpp:991
+msgid "Input text is too long.\n"
+msgstr "متن ورودی بیش از حد طولانی است.\n"
+
+#: ../src/xfardic_app.cpp:1098
+msgid "Set Result Box Font\tCtrl+F"
+msgstr "تنظیم قلم جعبه خروجی\tCtrl+F"
+
+#: ../src/xfardic_app.cpp:1102
+msgid "Open Preferences"
+msgstr "باز کردن ترجیحات"
+
+#: ../src/xfardic_app.cpp:1107
+msgid "&About xFarDic\tF1"
+msgstr "درباره xFarDic\tF1"
+
+#: ../src/xfardic_app.cpp:1210
+msgid "Back"
+msgstr "قبلی"
+
+#: ../src/xfardic_app.cpp:1210
+msgid "Previous Word"
+msgstr "واژه قبلی"
+
+#: ../src/xfardic_app.cpp:1211
+msgid "Fwd"
+msgstr "بعدی"
+
+#: ../src/xfardic_app.cpp:1211
+msgid "Next Word"
+msgstr "واژه بعدی"
+
+#: ../src/xfardic_app.cpp:1213
+msgid "Cut"
+msgstr "بریدن"
+
+#: ../src/xfardic_app.cpp:1214
+msgid "Copy"
+msgstr "کپی"
+
+#: ../src/xfardic_app.cpp:1214
+msgid "Copy Result"
+msgstr "کپی نتیجه"
+
+#: ../src/xfardic_app.cpp:1215
+msgid "Paste"
+msgstr "چسباندن"
+
+#: ../src/xfardic_app.cpp:1215
+msgid "Paste and Translate"
+msgstr "چسباندن و برگردان"
+
+#: ../src/xfardic_app.cpp:1216
+msgid "Trash"
+msgstr "پاک کردن تاریخچه"
+
+#: ../src/xfardic_app.cpp:1216
+msgid "Clear History"
+msgstr "پاک کردن تاریخچه"
+
+#: ../src/xfardic_app.cpp:1219
+msgid "Select"
+msgstr "انتخاب"
+
+#: ../src/xfardic_app.cpp:1219
+msgid "Auto Select Text"
+msgstr "انتخاب خودکار متن"
+
+#: ../src/xfardic_app.cpp:1220
+msgid "Spell"
+msgstr "غلط یاب"
+
+#: ../src/xfardic_app.cpp:1220
+msgid "Spell Checking"
+msgstr "غلط یاب املایی"
+
+#: ../src/xfardic_app.cpp:1221
+msgid "Reverse Search"
+msgstr "جستجوی نادقیق برعکس"
+
+#: ../src/xfardic_app.cpp:1222
+msgid "Similar"
+msgstr "مشابه"
+
+#: ../src/xfardic_app.cpp:1225
+msgid "Quit"
+msgstr "خروج"
+
+#: ../src/xfardic_app.cpp:1304
+msgid "Please enter clause.\n"
+msgstr "لطفا یک واژه وارد نمایید.\n"
+
+#: ../src/xfardic_app.cpp:1318 ../src/xfardic_app.cpp:1433
+msgid "Please wait..."
+msgstr "لطفا صبر کنید..."
+
+#: ../src/xfardic_app.cpp:1361 ../src/xfardic_app.cpp:1424
+#: ../src/xfardic_app.cpp:1477 ../src/xfardic_app.cpp:1526
+msgid "Phrase not found."
+msgstr "واژه یافت نشد."
+
+#: ../src/xfardic_app.cpp:1583
+msgid ""
+"xFarDic spell checker found error(s) on your typed word.\n"
+" Please choose correct word from list and then click OK."
+msgstr ""
+"غلط یاب املایی ایکس‌فاردیک خطاهایی را در واژه تایپ شده شما پیدا کرد.\n"
+" لطفا واژه صحیح را از لیست انتخاب کنید."
+
+#: ../src/xfardic_app.cpp:1583
+msgid "xFarDic Spell Checker"
+msgstr "غلط یاب املایی ایکس‌فاردیک"
+
+#: ../src/xfardic_app.cpp:1612
+msgid "xFarDic Preferences"
+msgstr "ترجیحات ایکس‌فاردیک"
+
+#: ../src/xfardic_app.cpp:1635
+msgid "About xFarDic"
+msgstr "درباره ایکس‌فاردیک"
+
+#: ../src/xfardic_app.cpp:1658
+msgid "xFarDic - Leitner Box"
+msgstr "ایکس‌فاردیک - جعبه لایتنر"
+
+#: ../src/xfardic_app.cpp:1847
+msgid ""
+"It seems that Aspell is not installed.\n"
+"xFarDic will not work correctly."
+msgstr ""
+"به نظر می‌رسد که Aspell نصب نشده است.\n"
+"ایکس‌فاردیک درست کار نخواهد کرد."
+
+#: ../src/xfardic_app.cpp:1926
+msgid ""
+"Parse Error. Invalid Document.\n"
+" It is possible that XML-DB is not installed.\n"
+" Set XML DB path in settings window."
+msgstr ""
+"خطا: بانک اطلاعاتی نامعتبر است.\n"
+" ممکن است بانک اطلاعاتی نصب نشده باشد.\n"
+" مسیر بانک اطلاعاتی را از پنجره ترجیحات تعیین کنید."
+
+#: ../src/xfardic_app.cpp:2258
+msgid ""
+"Selected word already exists in the box\n"
+"or not found in the installed database(s).\n"
+msgstr ""
+"کلمه انتخاب شده در حال حاضر موجود است\n"
+"یا در بانک‌های وازه نصب شده یافت نشده است.\n"
+
+#: ../src/xfardic_app.cpp:2264
+msgid "The leitner box is full.\n"
+msgstr "ظرفیت جعبه لایتنر تکمیل است.\n"
+
+#: ../src/xfardic_app.cpp:2317
+msgid ""
+"xFarDic should be restarted to work correctly.\n"
+"Would you like to close it now?"
+msgstr ""
+"برای عملکرد صحیح، ایکس‌فاردیک باید مجددا اجرا شود.\n"
+"اکنون مایل به بستن آن هستید؟"
+
+#: ../src/xfardic_app.cpp:2374
+msgid ""
+"Creating the swap file. Please wait.\n"
+"This will take a while..."
+msgstr ""
+"در حال ایجاد فایل swap. لطفا صبر کنید.\n"
+"این کار ممکن است طول بکشد..."
+
+#: ../src/xfardic.cpp:58
+msgid "displays this help message"
+msgstr "نمایش این پیام راهنما"
+
+#: ../src/xfardic.cpp:81
+msgid "Another program instance is already running, aborting."
+msgstr "نسخه دیگری از برنامه در حال اجراست."
