@@ -299,7 +299,7 @@ Save window size too.
 Fixed a bug related to selection scanner event handler.
 Fixed activation status of accent selector when TTS engine is enabled/disabled.
 //////////////////////////////////////////////////////////////////////////////////////
-0.11.0     -- 2008-04-XX
+0.11.0     -- 2008-04-19
 Use en-rhotic as American accent, suggested by Jonathan Duddington.
 New and better structure in the preferences window.
 Fixed two glitches related to new scanner/speak relationship.
