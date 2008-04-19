@@ -78,6 +78,8 @@ public:
     void MoveItem(bool up=TRUE);
     /// Pitch Scroll event handler
     void OnScroll(wxScrollEvent& event);
+    /// Deactivate TTS stuff
+    void DeactivateTTSStuff(bool disable=TRUE);
     
     bool exist,
          submit,

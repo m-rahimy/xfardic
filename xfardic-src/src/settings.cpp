@@ -201,12 +201,10 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 #ifdef HAVE_SPEAKLIB
     if ( pConfig->Read(_T("TTS"), 0l) != 0 ) {
       chk_tts->SetValue(TRUE);
-      accent->Enable(TRUE);
-      acnttext->Enable(TRUE);
+      DeactivateTTSStuff(FALSE);
     } else {
       chk_tts->SetValue(FALSE);
-      accent->Enable(FALSE);
-      acnttext->Enable(FALSE);
+      DeactivateTTSStuff(TRUE);
     }
 
     if ( pConfig->Read(_T("Speak"), 0l) != 0 ) {
@@ -222,9 +220,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     spk_volume->SetValue(pConfig->Read(_T("Volume"), 100));
 #else
     chk_tts->Enable(FALSE);
-    chk_speak->Enable(FALSE);
-    accent->Enable(FALSE);
-    acnttext->Enable(FALSE);
+    DeactivateTTSStuff(TRUE);
 #endif 
  
     if ( pConfig->Read(_T("Scanner"), 1) != 0 ) {
@@ -571,29 +567,9 @@ void xFarDicSettings::EnableTTS(wxCommandEvent& WXUNUSED(event))
 
 #ifdef HAVE_SPEAKLIB   
     if (chk_tts->GetValue()) {
-        chk_speak->Enable(TRUE);
-        accent->Enable(TRUE);
-        acnttext->Enable(TRUE);
-        spk_pitch->Enable(TRUE);
-        pitchtext->Enable(TRUE);
-        spk_rate->Enable(TRUE);
-        ratetext->Enable(TRUE);
-        spk_range->Enable(TRUE);
-        rangetext->Enable(TRUE);
-        spk_volume->Enable(TRUE);
-        voltext->Enable(TRUE);
+        DeactivateTTSStuff(FALSE);
     }else {
-        chk_speak->Enable(FALSE);
-        accent->Enable(FALSE);
-        acnttext->Enable(FALSE);
-        spk_pitch->Enable(FALSE);
-        pitchtext->Enable(FALSE);
-        spk_rate->Enable(FALSE);
-        ratetext->Enable(FALSE);
-        spk_range->Enable(FALSE);
-        rangetext->Enable(FALSE);
-        spk_volume->Enable(FALSE);
-        voltext->Enable(FALSE);
+        DeactivateTTSStuff(TRUE);
     }
 #endif
 }
@@ -771,6 +747,35 @@ bool xFarDicSettings::CheckPath(wxString dbpath)
         return TRUE;
     } else {
         return FALSE;
+    }
+}
+
+void xFarDicSettings::DeactivateTTSStuff(bool disable)
+{
+    if (!disable) {
+        chk_speak->Enable(TRUE);
+        accent->Enable(TRUE);
+        acnttext->Enable(TRUE);
+        spk_pitch->Enable(TRUE);
+        pitchtext->Enable(TRUE);
+        spk_rate->Enable(TRUE);
+        ratetext->Enable(TRUE);
+        spk_range->Enable(TRUE);
+        rangetext->Enable(TRUE);
+        spk_volume->Enable(TRUE);
+        voltext->Enable(TRUE);
+    } else {
+        chk_speak->Enable(FALSE);
+        accent->Enable(FALSE);
+        acnttext->Enable(FALSE);
+        spk_pitch->Enable(FALSE);
+        pitchtext->Enable(FALSE);
+        spk_rate->Enable(FALSE);
+        ratetext->Enable(FALSE);
+        spk_range->Enable(FALSE);
+        rangetext->Enable(FALSE);
+        spk_volume->Enable(FALSE);
+        voltext->Enable(FALSE);
     }
 }
 
