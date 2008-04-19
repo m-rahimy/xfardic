@@ -21,7 +21,6 @@ AC_CHECK_LIB(notify, notify_init, [], AC_MSG_ERROR([You should have libnotify he
 
 dnl checks for header files
 AC_CHECK_HEADER(sqlite3.h, [echo "checking for sqlite3.h...yes"], AC_MSG_ERROR([You should have libsqlite3 header files! Install libsqlite3-dev]))
-AC_CHECK_HEADER(speak_lib.h)
 
 if test "x$prefix" = "xNONE"; then
 	prefix=/usr
