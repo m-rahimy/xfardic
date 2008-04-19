@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-18 22:24+0200\n"
+"POT-Creation-Date: 2008-04-19 17:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -270,100 +270,100 @@ msgid "Speaking Speed (Words/Min):"
 msgstr ""
 
 #: ../src/settings.cpp:153
-msgid "Pronounciation Volume:"
+msgid "Pronunciation Volume:"
 msgstr ""
 
-#: ../src/settings.cpp:289
+#: ../src/settings.cpp:285
 msgid "Add"
 msgstr ""
 
-#: ../src/settings.cpp:290
+#: ../src/settings.cpp:286
 msgid "Delete"
 msgstr ""
 
-#: ../src/settings.cpp:291
+#: ../src/settings.cpp:287
 msgid "DB info"
 msgstr ""
 
-#: ../src/settings.cpp:292
+#: ../src/settings.cpp:288
 msgid "Up"
 msgstr ""
 
-#: ../src/settings.cpp:293
+#: ../src/settings.cpp:289
 msgid "Down"
 msgstr ""
 
-#: ../src/settings.cpp:314
+#: ../src/settings.cpp:310
 msgid "Check/UnCheck to enable or disable available dictionaries."
 msgstr ""
 
-#: ../src/settings.cpp:316
+#: ../src/settings.cpp:312
 msgid "Enabling swap reduces memory usage by 60% and performance by 15%."
 msgstr ""
 
-#: ../src/settings.cpp:322
+#: ../src/settings.cpp:318
 msgid "Options"
 msgstr ""
 
-#: ../src/settings.cpp:323
+#: ../src/settings.cpp:319
 msgid "Dictionaries"
 msgstr ""
 
-#: ../src/settings.cpp:324
-msgid "Pronounciation"
+#: ../src/settings.cpp:320
+msgid "Pronunciation"
 msgstr ""
 
-#: ../src/settings.cpp:401
+#: ../src/settings.cpp:397
 msgid ""
 "XML DB path is empty.\n"
 "xFarDic will now work without a valid database."
 msgstr ""
 
-#: ../src/settings.cpp:402
+#: ../src/settings.cpp:398
 msgid "Warning"
 msgstr ""
 
-#: ../src/settings.cpp:531
+#: ../src/settings.cpp:527
 msgid "Choose a XML DataBase"
 msgstr ""
 
-#: ../src/settings.cpp:531
+#: ../src/settings.cpp:527
 msgid "XML DataBase files (*.xdb)|*.xdb"
 msgstr ""
 
-#: ../src/settings.cpp:631
+#: ../src/settings.cpp:607
 msgid "DB Name  : "
 msgstr ""
 
-#: ../src/settings.cpp:632
+#: ../src/settings.cpp:608
 msgid "DB Author : "
 msgstr ""
 
-#: ../src/settings.cpp:633
+#: ../src/settings.cpp:609
 msgid "DB Version: "
 msgstr ""
 
-#: ../src/settings.cpp:636 ../src/settings.cpp:638
+#: ../src/settings.cpp:612 ../src/settings.cpp:614
 msgid "Input Lang: "
 msgstr ""
 
-#: ../src/settings.cpp:641
+#: ../src/settings.cpp:617
 msgid "No information found."
 msgstr ""
 
-#: ../src/settings.cpp:645
+#: ../src/settings.cpp:621
 msgid "No information found or no databse is selected."
 msgstr ""
 
-#: ../src/settings.cpp:648
+#: ../src/settings.cpp:624
 msgid "XML Database information"
 msgstr ""
 
-#: ../src/settings.cpp:669 ../src/settings.cpp:708
+#: ../src/settings.cpp:645 ../src/settings.cpp:684
 msgid "Please select a dictionary.\n"
 msgstr ""
 
-#: ../src/settings.cpp:758
+#: ../src/settings.cpp:734
 msgid "Parse Error. Invalid Document.\n"
 msgstr ""
 

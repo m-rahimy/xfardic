@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xFarDic 0.10.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-18 22:24+0200\n"
+"POT-Creation-Date: 2008-04-19 17:43+0200\n"
 "PO-Revision-Date: 2008-04-18 22:25+0200\n"
 "Last-Translator: Alan Baghumian <alan@technotux.org>\n"
 "Language-Team: fa_IR <alan@technotux.org>\n"
@@ -177,10 +177,12 @@ msgstr "ظرفیت جعبه ث تکمیل است.\n"
 #: ../src/settings.cpp:86
 msgid ""
 "Here you can configure your desired options. Changes will take effect after "
-"xFarDic \nrestart."
+"xFarDic \n"
+"restart."
 msgstr ""
 "در این پنجره می‌توانید گزینه‌های مورد نظرتان را تنظیم کنید. تغییرات پس از "
-"راه‌اندازی\n مجدد نرم‌افزار اعمال خواهند شد."
+"راه‌اندازی\n"
+" مجدد نرم‌افزار اعمال خواهند شد."
 
 #: ../src/settings.cpp:99
 msgid "Persian"
@@ -291,52 +293,52 @@ msgid "Speaking Speed (Words/Min):"
 msgstr "سرعت تلفظ (واژه/دقیقه):"
 
 #: ../src/settings.cpp:153
-msgid "Pronounciation Volume:"
+msgid "Pronunciation Volume:"
 msgstr "میزان صدای تلفظ:"
 
-#: ../src/settings.cpp:289
+#: ../src/settings.cpp:285
 msgid "Add"
 msgstr "اضافه کردن"
 
-#: ../src/settings.cpp:290
+#: ../src/settings.cpp:286
 msgid "Delete"
 msgstr "پاک کردن"
 
-#: ../src/settings.cpp:291
+#: ../src/settings.cpp:287
 msgid "DB info"
 msgstr "اطلاعات"
 
-#: ../src/settings.cpp:292
+#: ../src/settings.cpp:288
 msgid "Up"
 msgstr "صعودی"
 
-#: ../src/settings.cpp:293
+#: ../src/settings.cpp:289
 msgid "Down"
 msgstr "نزولی"
 
-#: ../src/settings.cpp:314
+#: ../src/settings.cpp:310
 msgid "Check/UnCheck to enable or disable available dictionaries."
 msgstr "برای فعال یا غیر فعال کردن بانک‌های موجود آنها را تیک بزنید."
 
-#: ../src/settings.cpp:316
+#: ../src/settings.cpp:312
 msgid "Enabling swap reduces memory usage by 60% and performance by 15%."
 msgstr ""
 "فعال کردن swap باعث صرفه‌جویی در مصرف حافظه به میزان ۶۰٪ و کاهش سرعت به میزان "
 "۱۵٪ خواهد شد."
 
-#: ../src/settings.cpp:322
+#: ../src/settings.cpp:318
 msgid "Options"
 msgstr "گزینه‌ها"
 
-#: ../src/settings.cpp:323
+#: ../src/settings.cpp:319
 msgid "Dictionaries"
 msgstr "واژه‌نامه‌ها"
 
-#: ../src/settings.cpp:324
-msgid "Pronounciation"
+#: ../src/settings.cpp:320
+msgid "Pronunciation"
 msgstr "تلفظ"
 
-#: ../src/settings.cpp:401
+#: ../src/settings.cpp:397
 msgid ""
 "XML DB path is empty.\n"
 "xFarDic will now work without a valid database."
@@ -344,51 +346,51 @@ msgstr ""
 "مسیر بانک اطلاعاای XML خالی است.\n"
 "xFarDic بدون یک بانک اطلاعاتی معتبر کار نخواهد کرد."
 
-#: ../src/settings.cpp:402
+#: ../src/settings.cpp:398
 msgid "Warning"
 msgstr "هشدار"
 
-#: ../src/settings.cpp:531
+#: ../src/settings.cpp:527
 msgid "Choose a XML DataBase"
 msgstr "انتخاب بانک اطلاعاتی XML"
 
-#: ../src/settings.cpp:531
+#: ../src/settings.cpp:527
 msgid "XML DataBase files (*.xdb)|*.xdb"
 msgstr "بانک‌های اطلاعاتی XML (*.xdb)|*.xdb"
 
-#: ../src/settings.cpp:631
+#: ../src/settings.cpp:607
 msgid "DB Name  : "
 msgstr "نام بانک اطلاعاتی       :"
 
-#: ../src/settings.cpp:632
+#: ../src/settings.cpp:608
 msgid "DB Author : "
 msgstr "نویسنده بانک اطلاعاتی:"
 
-#: ../src/settings.cpp:633
+#: ../src/settings.cpp:609
 msgid "DB Version: "
 msgstr "شماره نسخه بانک       :"
 
-#: ../src/settings.cpp:636 ../src/settings.cpp:638
+#: ../src/settings.cpp:612 ../src/settings.cpp:614
 msgid "Input Lang: "
 msgstr "زبان ورودی بانک            :"
 
-#: ../src/settings.cpp:641
+#: ../src/settings.cpp:617
 msgid "No information found."
 msgstr "اطلاعاتی یافت نشد."
 
-#: ../src/settings.cpp:645
+#: ../src/settings.cpp:621
 msgid "No information found or no databse is selected."
 msgstr "اطلاعاتی یافت نشد یا هیچ بانک اطلاعاتی انتخاب نشده است."
 
-#: ../src/settings.cpp:648
+#: ../src/settings.cpp:624
 msgid "XML Database information"
 msgstr "اطلاعات بانک XML"
 
-#: ../src/settings.cpp:669 ../src/settings.cpp:708
+#: ../src/settings.cpp:645 ../src/settings.cpp:684
 msgid "Please select a dictionary.\n"
 msgstr "لطفا یک واژه‌نامه انتخاب نمایید.\n"
 
-#: ../src/settings.cpp:758
+#: ../src/settings.cpp:734
 msgid "Parse Error. Invalid Document.\n"
 msgstr "خطا: بانک اطلاعاتی خالی است.\n"
 

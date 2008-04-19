@@ -150,7 +150,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
     ratetext = new wxStaticText(spkpanel, -1, _("Speaking Speed (Words/Min):"));
     spk_rate = new wxSlider(spkpanel, ID_SPK_RATE, 100, 100, 200, wxDefaultPosition, wxSize(150, wxDefaultCoord), wxSL_HORIZONTAL | wxSL_LABELS);
 
-    voltext = new wxStaticText(spkpanel, -1, _("Pronounciation Volume:"));
+    voltext = new wxStaticText(spkpanel, -1, _("Pronunciation Volume:"));
     spk_volume = new wxSlider(spkpanel, ID_SPK_VOLUME, 10, 10, 100, wxDefaultPosition, wxSize(150, wxDefaultCoord), wxSL_HORIZONTAL | wxSL_LABELS);
   
     // Set Default button
@@ -317,7 +317,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
 
     layout->AddPage(setpanel, _("Options"));
     layout->AddPage(dbpanel, _("Dictionaries"));
-    layout->AddPage(spkpanel, _("Pronounciation"));
+    layout->AddPage(spkpanel, _("Pronunciation"));
 
     //if there are changes on DBs, auto-submit changes
     if (submit == TRUE) {
