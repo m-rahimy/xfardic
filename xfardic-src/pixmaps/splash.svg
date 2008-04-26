@@ -776,9 +776,9 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4"
-     inkscape:cx="91.972554"
-     inkscape:cy="151.15322"
+     inkscape:zoom="1"
+     inkscape:cx="185.12485"
+     inkscape:cy="109.43338"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      width="278px"
@@ -1074,7 +1074,7 @@
          y="180.80762">Multilingual Dictionay</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1"
+       style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;stroke:none;stroke-opacity:1;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none"
        x="8.3626852"
        y="24.103104"
        id="text3406"
@@ -1085,6 +1085,6 @@
          x="8.3626852"
          y="24.103104"
          id="tspan3410"
-         style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;font-family:Bitstream Charter">0.11.0</tspan></text>
+         style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;font-family:Bitstream Charter;stroke:none;stroke-opacity:1;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none">0.11.1</tspan></text>
   </g>
 </svg>

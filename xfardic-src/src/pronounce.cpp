@@ -47,11 +47,11 @@ void xFarDicPronounce::Init()
         switch (acnt) {
                case 0:
                    // American Accent
-                   voiceName = wxT("en-rhotic");
+                   voiceName = wxT("en-r");
                    break;
                case 1:
                    // British Accent
-                   voiceName = wxT("english");
+                   voiceName = wxT("en");
                    break;
         }
 
