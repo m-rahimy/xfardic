@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/xfardic.cpp)
-AM_INIT_AUTOMAKE(xfardic, 0.11.1)
+AM_INIT_AUTOMAKE(xfardic, 0.11.0)
 dnl AM_CONFIG_HEADER(config.h)
 AC_PROG_CXX
 dnl checks for programs
@@ -16,8 +16,11 @@ AC_ARG_WITH([speaklib],
 	with_speaklib=yes
 ])
 
-AC_CHECK_LIB(sqlite3, sqlite3_exec, [], AC_MSG_ERROR([You should have libsqlite3 header files! Install libsqlite3-dev]))
+AC_CHECK_LIB(sqlite3, sqlite3_exec)
 AC_CHECK_LIB(notify, notify_init, [], AC_MSG_ERROR([You should have libnotify header files! Install libnotify-dev]))
+
+dnl checks for header files
+AC_CHECK_HEADER(sqlite3.h, [echo "checking for sqlite3.h...yes"], AC_MSG_ERROR([You should have libsqlite3 header files! Install libsqlite3-dev]))
 
 if test "x$prefix" = "xNONE"; then
 	prefix=/usr
@@ -64,8 +67,6 @@ if test x$with_speaklib != xno; then
     fi
     AC_DEFINE(HAVE_SPEAKLIB,1,[Defined when speaklib can be used.])    
 fi
-
-AM_CONDITIONAL([BUILD_WITH_SPEAKLIB], [test $with_speaklib = "yes"])
 
 LIBWX_INCLUDEDIR=""
 for d in 			\

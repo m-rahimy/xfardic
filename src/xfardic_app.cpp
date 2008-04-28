@@ -286,6 +286,7 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
     pConfig->SetPath(wxT("/Options"));
 
+    db_sort_order = pConfig->Read(_T("DB-Sort"), 0l);
     swap = pConfig->Read(_T("Swap"), 0l);
     swapupdate = pConfig->Read(_T("Swap-Update"), 0l); 
 
@@ -376,6 +377,9 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
             path = path.AfterFirst( ArraySeparator );
             status = status.AfterFirst( ArraySeparator );
         }
+
+        // Sort DB list
+        paths.Sort(db_sort_order);
 
         for (int x=0; x < paths.GetCount(); x++) {            
             if (paths.Item(x).Len()!=0) {
@@ -2327,6 +2331,7 @@ bool xFarDicApp::UpdateSwap()
     wxConfigBase *pConfig = wxConfigBase::Get();
     pConfig->SetPath(wxT("/Options"));
     pConfig->Write(wxT("/Options/Swap-Update"), 0);
+    swapupdate = FALSE;
 
     returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);
 
@@ -2395,10 +2400,7 @@ bool xFarDicApp::UpdateSwap()
     returnvalue = sqlite3_exec(Db, (const char *)initsql.mb_str(wxConvUTF8), NULL, NULL, &db_error_msg);  
 
     // DEBUGGING
-    //fprintf(stderr, "Finished swap file update/create\n");
- 
-    // Now disable update-swap variable
-    swapupdate = FALSE;
+    //fprintf(stderr, "Finished swap file update/create\n");  
 
     return TRUE;    
 }
