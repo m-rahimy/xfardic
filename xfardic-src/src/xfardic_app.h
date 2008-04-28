@@ -188,7 +188,6 @@ private:
             aspelli,
             swap,
             update,
-            db_sort_order,
             notification;
 
     size_t  m_rows;
