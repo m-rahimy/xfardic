@@ -786,7 +786,7 @@
      inkscape:window-width="1280"
      inkscape:window-height="728"
      inkscape:window-x="0"
-     inkscape:window-y="46" />
+     inkscape:window-y="25" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -1074,7 +1074,7 @@
          y="180.80762">Multilingual Dictionay</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;stroke:none;stroke-opacity:1;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none"
+       style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        x="8.3626852"
        y="24.103104"
        id="text3406"
@@ -1085,6 +1085,6 @@
          x="8.3626852"
          y="24.103104"
          id="tspan3410"
-         style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;font-family:Bitstream Charter;stroke:none;stroke-opacity:1;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none">0.11.1</tspan></text>
+         style="font-size:19.52488708px;font-weight:bold;fill:#437d42;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;font-family:Bitstream Charter">0.11.2</tspan></text>
   </g>
 </svg>

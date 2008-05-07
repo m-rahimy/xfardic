@@ -315,4 +315,8 @@ Updated NEWS file.
 Updated configure scripts to correctly create Makefiles while libspeak is disabled.
 Use en-r as American accent, it supports recent and older versions too.
 Fixed a bug preventing database order to take effect.
+//////////////////////////////////////////////////////////////////////////////////////
+0.11.2     -- 2008-05-07
+Fixed tray icon transparency display problem.
+Use new trsy icon for the main window too.
 

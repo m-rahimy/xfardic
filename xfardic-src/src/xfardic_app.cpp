@@ -44,6 +44,185 @@ wxMBConv *CharsetConv = &wxConvUTF8;
         index++; \
     }
 
+/* TrayIcon */
+const char * xfardic24x24[] = {
+"24 24 151 2",
+"  	c None",
+". 	c #000000",
+"+ 	c #363636",
+"@ 	c #3C3C3C",
+"# 	c #303030",
+"$ 	c #0C0C0C",
+"% 	c #6F6F6F",
+"& 	c #D3D3D3",
+"* 	c #FFFFFF",
+"= 	c #D8D8D8",
+"- 	c #5C5C5C",
+"; 	c #5A5A5A",
+"> 	c #9C9C9C",
+", 	c #A1A1A1",
+"' 	c #313131",
+") 	c #34342F",
+"! 	c #BDBDBC",
+"~ 	c #EBEAEA",
+"{ 	c #3D3C3A",
+"] 	c #6C6C6C",
+"^ 	c #BBBBBB",
+"/ 	c #F9F9F8",
+"( 	c #AAAAA6",
+"_ 	c #413F22",
+": 	c #929186",
+"< 	c #E9E8E8",
+"[ 	c #F9F9F9",
+"} 	c #B6B6B3",
+"| 	c #343322",
+"1 	c #A8A8A8",
+"2 	c #FDFDFE",
+"3 	c #DDDCD8",
+"4 	c #7B7843",
+"5 	c #827E3B",
+"6 	c #D7D6C9",
+"7 	c #FDFDFF",
+"8 	c #F7F7F7",
+"9 	c #646244",
+"0 	c #AEAEAE",
+"a 	c #E1E0DF",
+"b 	c #7D7A57",
+"c 	c #F2EB5B",
+"d 	c #7C783C",
+"e 	c #E0E0D8",
+"f 	c #858361",
+"g 	c #4D4A21",
+"h 	c #424242",
+"i 	c #A6A6A6",
+"j 	c #D9D8D0",
+"k 	c #817E3F",
+"l 	c #FFF860",
+"m 	c #7D7941",
+"n 	c #E0E0D9",
+"o 	c #CDCDCD",
+"p 	c #BEBEBE",
+"q 	c #828069",
+"r 	c #908D3C",
+"s 	c #585858",
+"t 	c #696969",
+"u 	c #78787B",
+"v 	c #888671",
+"w 	c #C0BA49",
+"x 	c #86833C",
+"y 	c #DBDAD0",
+"z 	c #929292",
+"A 	c #7F7E65",
+"B 	c #E1DA59",
+"C 	c #949135",
+"D 	c #A2A2A4",
+"E 	c #B9B9B7",
+"F 	c #868455",
+"G 	c #FEF65C",
+"H 	c #B3AE43",
+"I 	c #C0BFAC",
+"J 	c #EFEFF4",
+"K 	c #FBFBFB",
+"L 	c #F6F6F6",
+"M 	c #817F61",
+"N 	c #EBE55D",
+"O 	c #999537",
+"P 	c #B1B1B3",
+"Q 	c #D3D3CF",
+"R 	c #8C8953",
+"S 	c #FFFE60",
+"T 	c #EFE857",
+"U 	c #8D8B5F",
+"V 	c #CFCFCE",
+"W 	c #FCFCFC",
+"X 	c #807E58",
+"Y 	c #EBE55B",
+"Z 	c #9E993A",
+"` 	c #858688",
+" .	c #91908D",
+"..	c #95925E",
+"+.	c #FFFE61",
+"@.	c #8F8B3D",
+"#.	c #BDBCAD",
+"$.	c #FBFCFF",
+"%.	c #9D9C8E",
+"&.	c #CCC655",
+"*.	c #FFFA5F",
+"=.	c #9E993B",
+"-.	c #59595A",
+";.	c #A1A07B",
+">.	c #E9E154",
+",.	c #FFF961",
+"'.	c #F6EE59",
+").	c #878446",
+"!.	c #A2A29F",
+"~.	c #E8E8E5",
+"{.	c #7C7947",
+"].	c #F3EC5D",
+"^.	c #FFFF64",
+"/.	c #9D983B",
+"(.	c #474637",
+"_.	c #97933E",
+":.	c #FFF960",
+"<.	c #FFFA61",
+"[.	c #F8F15B",
+"}.	c #A9A449",
+"|.	c #6C6B4E",
+"1.	c #797763",
+"2.	c #75734A",
+"3.	c #E5DE56",
+"4.	c #FEF75F",
+"5.	c #989439",
+"6.	c #47441A",
+"7.	c #EFE859",
+"8.	c #939037",
+"9.	c #5D5A22",
+"0.	c #F3EC5B",
+"a.	c #FFFB61",
+"b.	c #8E8A35",
+"c.	c #646025",
+"d.	c #E3DC55",
+"e.	c #FFFD62",
+"f.	c #FEF65F",
+"g.	c #888332",
+"h.	c #424018",
+"i.	c #C2BD48",
+"j.	c #FFFC61",
+"k.	c #A39E3C",
+"l.	c #2F2F11",
+"m.	c #696626",
+"n.	c #C0BB47",
+"o.	c #D4CE4F",
+"p.	c #5B5A22",
+"q.	c #46451A",
+"r.	c #5F5C23",
+"s.	c #5A5722",
+"t.	c #312F12",
+"                                                ",
+"                .                               ",
+"            .       .                           ",
+"            .               + @ #               ",
+"  . . .     .           $ % & * = -             ",
+"              ; > , '   ) ! * * * ~ {           ",
+"            ] ^ * / ( _ : < * * * [ } |         ",
+"            1 * 2 3 4 5 6 7 * * * * 8 9         ",
+"            0 * a b c d e * * * * * * f g       ",
+"          h i * j k l m n * o p * * * q r       ",
+"          s t u v w l x y * z ] * * * A B C     ",
+"            D E F G l H I J K L * * * M N O     ",
+"            P Q R S l T U V * * * * W X Y Z     ",
+"            `  ...S l +.@.#.$.* * L %.&.*.=.    ",
+"              -.;.>.l ,.'.).!.* * ~.{.].^./.    ",
+"                (._.l :.<.[.}.|.1.2.3.4.^.5.    ",
+"                  6.7.l l l l l l l l l ^.8.    ",
+"                    9.0.a.l l l l l l l ^.b.    ",
+"                      c.d.e.l l l l l :.f.g.    ",
+"                        h.i.j.:.l l l e.k.      ",
+"                          l.m.n.a.:.l o.p.      ",
+"                                q.r.s.t.        ",
+"                                                ",
+"                                                "};
+
 BEGIN_EVENT_TABLE(xFarDicApp, wxFrame)    
     EVT_MENU(xFarDic_Translate,  xFarDicApp::OnTranslate)
     EVT_MENU(xFarDic_AddLeitner, xFarDicApp::OnLeitnerBox)
@@ -100,15 +279,11 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
        : wxFrame(NULL, -1, title, pos, size, style), m_locale(locale), m_timer(this, ID_TIMER)
 {
     // set the frame icon    
-    wxBitmap  micon(wxT("/usr/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
+    SetIcon(wxIcon(xfardic24x24));
 
-    if (!micon.Ok()) {
-        micon.LoadFile(wxT("/usr/local/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
-    }
-
-    wxIcon wicon;
-    wicon.CopyFromBitmap(micon);
-    SetIcon(wicon);
+    // Taskbar Icon
+    wxIcon TrayIcon = wxIcon(xfardic24x24);
+    ticon.SetIcon(TrayIcon, _T("xFarDic Multilingual Dictionary"));   
 
     m_smallToolbar = TRUE;
     m_horzToolbar = TRUE;
@@ -119,45 +294,42 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     // Starting main timer 
     m_timer.Start(500);       
 
-    wxArtClient client;    
-    
+    wxArtClient client;
+
     //Load The leitner box content
     LoadLeitnerBox();
-   
-    wxIcon taskicon = wxArtProvider::GetIcon(wxART_FIND, client, wxDefaultSize);
-    ticon.SetIcon(taskicon, _T("xFarDic Multilingual Dictionary"));    
-     
-    wxBitmap  bcut = wxArtProvider::GetBitmap(wxART_CUT, client, wxDefaultSize);
-    wxBitmap  bcut16 = wxArtProvider::GetBitmap(wxART_CUT, client, wxSize(16,16));
-    wxBitmap  bquit = wxArtProvider::GetBitmap(wxART_QUIT, client, wxDefaultSize);
-    wxBitmap  bquit16 = wxArtProvider::GetBitmap(wxART_QUIT, client, wxSize(16,16));
-    wxBitmap  bpaste = wxArtProvider::GetBitmap(wxART_PASTE, client, wxDefaultSize);
-    wxBitmap  bpaste16 = wxArtProvider::GetBitmap(wxART_PASTE, client, wxSize(16,16));
-    wxBitmap  bcopy = wxArtProvider::GetBitmap(wxART_COPY, client, wxDefaultSize);
-    wxBitmap  bcopy16 = wxArtProvider::GetBitmap(wxART_COPY, client, wxSize(16,16));
-    wxBitmap  bsettings = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxDefaultSize);
-    wxBitmap  bsettings16 = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxSize(16,16));
-    wxBitmap  btrash = wxArtProvider::GetBitmap(wxT("gtk-clear"), client, wxDefaultSize);
-    wxBitmap  btrash16 = wxArtProvider::GetBitmap(wxT("gtk-clear"), client, wxSize(16,16));
-    wxBitmap  bselect = wxArtProvider::GetBitmap(wxART_REDO, client, wxDefaultSize);
-    wxBitmap  btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
-    wxBitmap  btranslate16 = wxArtProvider::GetBitmap(wxART_FIND, client, wxSize(16,16));
-    wxBitmap  bback = wxArtProvider::GetBitmap(wxART_GO_BACK, client, wxDefaultSize);
-    wxBitmap  bback16 = wxArtProvider::GetBitmap(wxART_GO_BACK, client, wxSize(16,16));
-    wxBitmap  bforward = wxArtProvider::GetBitmap(wxART_GO_FORWARD, client, wxDefaultSize);
-    wxBitmap  bforward16 = wxArtProvider::GetBitmap(wxART_GO_FORWARD, client, wxSize(16,16));
-    wxBitmap  spellb = wxArtProvider::GetBitmap(wxT("gtk-spell-check"), client, wxDefaultSize);
-    wxBitmap  bfont = wxArtProvider::GetBitmap(wxT("gtk-select-font"), client, wxSize(16,16));
-    wxBitmap  babout = wxArtProvider::GetBitmap(wxT("gtk-about"), client, wxSize(16,16));
-    wxBitmap  bleitner = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxSize(16,16));
-    wxBitmap  bfirst = wxArtProvider::GetBitmap(wxT("gtk-goto-first"), client, wxSize(16,16));
-    wxBitmap  blast = wxArtProvider::GetBitmap(wxT("gtk-goto-last"), client, wxSize(16,16));
-    wxBitmap  bttos = wxArtProvider::GetBitmap(wxT("sound"), client, wxSize(16,16));
-    wxBitmap  bsplash(wxT("/usr/share/xfardic/pixmaps/splash.png"), wxBITMAP_TYPE_PNG);
+
+    wxBitmap bcut = wxArtProvider::GetBitmap(wxART_CUT, client, wxDefaultSize);
+    wxBitmap bcut16 = wxArtProvider::GetBitmap(wxART_CUT, client, wxSize(16,16));
+    wxBitmap bquit = wxArtProvider::GetBitmap(wxART_QUIT, client, wxDefaultSize);
+    wxBitmap bquit16 = wxArtProvider::GetBitmap(wxART_QUIT, client, wxSize(16,16));
+    wxBitmap bpaste = wxArtProvider::GetBitmap(wxART_PASTE, client, wxDefaultSize);
+    wxBitmap bpaste16 = wxArtProvider::GetBitmap(wxART_PASTE, client, wxSize(16,16));
+    wxBitmap bcopy = wxArtProvider::GetBitmap(wxART_COPY, client, wxDefaultSize);
+    wxBitmap bcopy16 = wxArtProvider::GetBitmap(wxART_COPY, client, wxSize(16,16));
+    wxBitmap bsettings = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxDefaultSize);
+    wxBitmap bsettings16 = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxSize(16,16));
+    wxBitmap btrash = wxArtProvider::GetBitmap(wxT("gtk-clear"), client, wxDefaultSize);
+    wxBitmap btrash16 = wxArtProvider::GetBitmap(wxT("gtk-clear"), client, wxSize(16,16));
+    wxBitmap bselect = wxArtProvider::GetBitmap(wxART_REDO, client, wxDefaultSize);
+    wxBitmap btranslate = wxArtProvider::GetBitmap(wxART_FIND, client, wxDefaultSize);
+    wxBitmap btranslate16 = wxArtProvider::GetBitmap(wxART_FIND, client, wxSize(16,16));
+    wxBitmap bback = wxArtProvider::GetBitmap(wxART_GO_BACK, client, wxDefaultSize);
+    wxBitmap bback16 = wxArtProvider::GetBitmap(wxART_GO_BACK, client, wxSize(16,16));
+    wxBitmap bforward = wxArtProvider::GetBitmap(wxART_GO_FORWARD, client, wxDefaultSize);
+    wxBitmap bforward16 = wxArtProvider::GetBitmap(wxART_GO_FORWARD, client, wxSize(16,16));
+    wxBitmap spellb = wxArtProvider::GetBitmap(wxT("gtk-spell-check"), client, wxDefaultSize);
+    wxBitmap bfont = wxArtProvider::GetBitmap(wxT("gtk-select-font"), client, wxSize(16,16));
+    wxBitmap babout = wxArtProvider::GetBitmap(wxT("gtk-about"), client, wxSize(16,16));
+    wxBitmap bleitner = wxArtProvider::GetBitmap(wxT("gnome-devel"), client, wxSize(16,16));
+    wxBitmap bfirst = wxArtProvider::GetBitmap(wxT("gtk-goto-first"), client, wxSize(16,16));
+    wxBitmap blast = wxArtProvider::GetBitmap(wxT("gtk-goto-last"), client, wxSize(16,16));
+    wxBitmap bttos = wxArtProvider::GetBitmap(wxT("sound"), client, wxSize(16,16));
+    wxBitmap bsplash(wxT("/usr/share/xfardic/pixmaps/splash.png"), wxBITMAP_TYPE_PNG);
 
     if (!bsplash.Ok()) {
         bsplash.LoadFile(wxT("/usr/local/share/xfardic/pixmaps/splash.png"), wxBITMAP_TYPE_PNG);
-    }
+    }     
         
 #if wxUSE_MENUS
     // create a menu bar
