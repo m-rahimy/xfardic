@@ -213,6 +213,7 @@ private:
                      wordList,
                      meanList,
                      paths,
+                     statuses,
                      ltbox;
     wxString         watcher_now, 
                      watcher_last,

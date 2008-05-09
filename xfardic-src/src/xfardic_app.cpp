@@ -557,17 +557,17 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
       
         delete splash;
         wxYield();       
-        // if there is no defined xdb, Database Auto-Load system
+    // if there is no defined xdb, Database Auto-Load system
     } else {
         wxFileSystem fs;
-        wxString tmpstr, att, longpath, tmpfname;
+        wxString tmpstr, att, longpath, longstatus, tmpfname;
         wxArrayString filenames;
 
-        splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN,0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
+        splash = new wxSplashScreen(bsplash,wxSPLASH_CENTRE_ON_SCREEN, 0, this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
         
         fs.ChangePathTo(wxGetHomeDir(), TRUE);
 
-        tmpstr = fs.FindFirst(_T("*.xdb"),wxFILE);
+        tmpstr = fs.FindFirst(_T("*.xdb"), wxFILE);
         tmpfname = tmpstr;
         tmpfname.Replace(wxGetHomeDir()+wxT("/"), _T(""));
         //DEBUGGING
@@ -575,25 +575,27 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
         if (tmpstr.Len() > 0) {        
             if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
-                if (tmpfname.Len()>0) {    
+                if (tmpfname.Len() > 0) {    
                     filenames.Add(tmpfname);            
                 }
                 paths.Add(tmpstr);
+                statuses.Add(wxT("1"));
             }
             
-            while (tmpstr.Len() >0) {
+            while (tmpstr.Len() > 0) {
                 tmpstr = fs.FindNext();
-                       tmpfname = tmpstr;
-                       tmpfname.Replace(wxGetHomeDir()+wxT("/"), _T(""));
-                      //DEBUGGING
-                       //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
+                tmpfname = tmpstr;
+                tmpfname.Replace(wxGetHomeDir()+wxT("/"), _T(""));
+                //DEBUGGING
+                //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
                 if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
                     if (tmpstr.Len() > 0) {    
-                        if (tmpfname.Len()>0) {    
+                        if (tmpfname.Len() > 0) {    
                             filenames.Add(tmpfname);            
                         }
                         paths.Add(tmpstr);
+                        statuses.Add(wxT("1"));
                     }
                 }
             }
@@ -609,24 +611,26 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
         if (tmpstr.Len() > 0) {        
             if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
-                if (tmpfname.Len()>0) {    
+                if (tmpfname.Len() > 0) {    
                     filenames.Add(tmpfname);            
                 }
                 paths.Add(tmpstr);
+                statuses.Add(wxT("1"));
             }
-            while (tmpstr.Len() >0) {
+            while (tmpstr.Len() > 0) {
                 tmpstr = fs.FindNext();
-                       tmpfname = tmpstr;
-                       tmpfname.Replace(wxT("/usr/share/xfardic-xdb/"), _T(""));
+                tmpfname = tmpstr;
+                tmpfname.Replace(wxT("/usr/share/xfardic-xdb/"), _T(""));
                 //DEBUGGING
                 //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
                 if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
                     if (tmpstr.Len() > 0) {    
-                        if (tmpfname.Len()>0) {    
+                        if (tmpfname.Len() > 0) {    
                             filenames.Add(tmpfname);            
                         }
                         paths.Add(tmpstr);
+                        statuses.Add(wxT("1"));
                     }
                 }
             }
@@ -642,24 +646,26 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
 
         if (tmpstr.Len() > 0) {        
             if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
-                if (tmpfname.Len()>0) {    
+                if (tmpfname.Len() > 0) {    
                     filenames.Add(tmpfname);            
                 }
                 paths.Add(tmpstr);
+                statuses.Add(wxT("1"));
             }
-            while (tmpstr.Len() >0) {
+            while (tmpstr.Len() > 0) {
                 tmpstr = fs.FindNext();
-                       tmpfname = tmpstr;
-                       tmpfname.Replace(wxT("/usr/local/share/xfardic-xdb/"), _T(""));
+                tmpfname = tmpstr;
+                tmpfname.Replace(wxT("/usr/local/share/xfardic-xdb/"), _T(""));
                 //DEBUGGING
                 //fprintf(stderr, "%s\n", (const char *)tmpfname.mb_str(wxConvUTF8));
 
                 if (filenames.Index(tmpfname,FALSE) == wxNOT_FOUND) {
                     if (tmpstr.Len() > 0) {
-                        if (tmpfname.Len()>0) {    
+                        if (tmpfname.Len() > 0) {    
                             filenames.Add(tmpfname);            
                         }
                         paths.Add(tmpstr);
+                        statuses.Add(wxT("1"));
                     }
                 }
             }
@@ -670,17 +676,20 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
                 initDB((const char *)paths.Item(x).mb_str(wxConvUTF8));                
             }
 
-            att = _T(";");
+            att = wxT(";");
             if (x+1 < paths.GetCount()) {
-                    longpath += paths.Item(x) + att;
+                longpath += paths.Item(x) + att;
+                longstatus += statuses.Item(x) + att;                    
             } else {
-                    longpath += paths.Item(x);
+                longpath += paths.Item(x);
+                longstatus += statuses.Item(x);
             }        
         }
         
         // Write detected path to config file
         pConfig->SetPath(wxT("/"));
         pConfig->Write(wxT("/Options/DB-Path"), longpath);              
+        pConfig->Write(wxT("/Options/DB-Status"), longstatus);
        
         delete splash;
         wxYield();               
@@ -813,15 +822,15 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
      
     pConfig->SetPath(wxT("/"));
     
-    //Init swap
-    initSwap();
-
     //Init layout
     if (fit) {
         CreateLayout(TRUE);
     } else {
         CreateLayout(FALSE);
     }
+
+    //Init swap
+    initSwap();
 }
 
 void xFarDicApp::OnFocus(wxFocusEvent& event)
@@ -2602,41 +2611,6 @@ void xFarDicApp::LoadLeitnerBoxContents()
             ltboxstr = ltboxstr.AfterFirst( ArraySeparator );
         }  
     }    
- 
-    /*if (ltboxstr.Len() > 0) {
-        for (int x=1; x <= ltboxstr.Len(); x++) {    
-            Part = ltboxstr.GetChar(x);
-            if (Part.CmpNoCase(_T(";"))==0) {
-                position.Add(x);        
-            }
-        } // End For
-    }
-
-    ltbox.Empty();
-
-    if (position.GetCount()>0) {    
-        
-        for (int x=0; x <= position.GetCount(); x++) {
-            if (x == 0) {
-                tmpstr = ltboxstr.Mid(0,position[x]);
-                if (tmpstr.Len()!=0) {
-                    ltbox.Add(ltboxstr.Mid(0,position[x]));
-                }
-            } else if (x == position.GetCount()) {
-                tmpstr = ltboxstr.Mid(position[x-1]+1,ltboxstr.Len());
-                if (tmpstr.Len()!=0) {
-                    ltbox.Add(ltboxstr.Mid(position[x-1]+1,ltboxstr.Len()));
-                }
-            } else {
-                tmpstr = ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1);
-                if (tmpstr.Len()!=0) {
-                    ltbox.Add(ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1));
-                }
-            }
-        }         
-    } else if (ltboxstr.Len() > 0) {
-        ltbox.Add(ltboxstr);
-    }*/
 }
 
 void xFarDicApp::CreateLayout(bool fit) {
