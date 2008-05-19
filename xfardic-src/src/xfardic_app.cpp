@@ -44,185 +44,6 @@ wxMBConv *CharsetConv = &wxConvUTF8;
         index++; \
     }
 
-/* TrayIcon */
-const char * xfardic24x24[] = {
-"24 24 151 2",
-"  	c None",
-". 	c #000000",
-"+ 	c #363636",
-"@ 	c #3C3C3C",
-"# 	c #303030",
-"$ 	c #0C0C0C",
-"% 	c #6F6F6F",
-"& 	c #D3D3D3",
-"* 	c #FFFFFF",
-"= 	c #D8D8D8",
-"- 	c #5C5C5C",
-"; 	c #5A5A5A",
-"> 	c #9C9C9C",
-", 	c #A1A1A1",
-"' 	c #313131",
-") 	c #34342F",
-"! 	c #BDBDBC",
-"~ 	c #EBEAEA",
-"{ 	c #3D3C3A",
-"] 	c #6C6C6C",
-"^ 	c #BBBBBB",
-"/ 	c #F9F9F8",
-"( 	c #AAAAA6",
-"_ 	c #413F22",
-": 	c #929186",
-"< 	c #E9E8E8",
-"[ 	c #F9F9F9",
-"} 	c #B6B6B3",
-"| 	c #343322",
-"1 	c #A8A8A8",
-"2 	c #FDFDFE",
-"3 	c #DDDCD8",
-"4 	c #7B7843",
-"5 	c #827E3B",
-"6 	c #D7D6C9",
-"7 	c #FDFDFF",
-"8 	c #F7F7F7",
-"9 	c #646244",
-"0 	c #AEAEAE",
-"a 	c #E1E0DF",
-"b 	c #7D7A57",
-"c 	c #F2EB5B",
-"d 	c #7C783C",
-"e 	c #E0E0D8",
-"f 	c #858361",
-"g 	c #4D4A21",
-"h 	c #424242",
-"i 	c #A6A6A6",
-"j 	c #D9D8D0",
-"k 	c #817E3F",
-"l 	c #FFF860",
-"m 	c #7D7941",
-"n 	c #E0E0D9",
-"o 	c #CDCDCD",
-"p 	c #BEBEBE",
-"q 	c #828069",
-"r 	c #908D3C",
-"s 	c #585858",
-"t 	c #696969",
-"u 	c #78787B",
-"v 	c #888671",
-"w 	c #C0BA49",
-"x 	c #86833C",
-"y 	c #DBDAD0",
-"z 	c #929292",
-"A 	c #7F7E65",
-"B 	c #E1DA59",
-"C 	c #949135",
-"D 	c #A2A2A4",
-"E 	c #B9B9B7",
-"F 	c #868455",
-"G 	c #FEF65C",
-"H 	c #B3AE43",
-"I 	c #C0BFAC",
-"J 	c #EFEFF4",
-"K 	c #FBFBFB",
-"L 	c #F6F6F6",
-"M 	c #817F61",
-"N 	c #EBE55D",
-"O 	c #999537",
-"P 	c #B1B1B3",
-"Q 	c #D3D3CF",
-"R 	c #8C8953",
-"S 	c #FFFE60",
-"T 	c #EFE857",
-"U 	c #8D8B5F",
-"V 	c #CFCFCE",
-"W 	c #FCFCFC",
-"X 	c #807E58",
-"Y 	c #EBE55B",
-"Z 	c #9E993A",
-"` 	c #858688",
-" .	c #91908D",
-"..	c #95925E",
-"+.	c #FFFE61",
-"@.	c #8F8B3D",
-"#.	c #BDBCAD",
-"$.	c #FBFCFF",
-"%.	c #9D9C8E",
-"&.	c #CCC655",
-"*.	c #FFFA5F",
-"=.	c #9E993B",
-"-.	c #59595A",
-";.	c #A1A07B",
-">.	c #E9E154",
-",.	c #FFF961",
-"'.	c #F6EE59",
-").	c #878446",
-"!.	c #A2A29F",
-"~.	c #E8E8E5",
-"{.	c #7C7947",
-"].	c #F3EC5D",
-"^.	c #FFFF64",
-"/.	c #9D983B",
-"(.	c #474637",
-"_.	c #97933E",
-":.	c #FFF960",
-"<.	c #FFFA61",
-"[.	c #F8F15B",
-"}.	c #A9A449",
-"|.	c #6C6B4E",
-"1.	c #797763",
-"2.	c #75734A",
-"3.	c #E5DE56",
-"4.	c #FEF75F",
-"5.	c #989439",
-"6.	c #47441A",
-"7.	c #EFE859",
-"8.	c #939037",
-"9.	c #5D5A22",
-"0.	c #F3EC5B",
-"a.	c #FFFB61",
-"b.	c #8E8A35",
-"c.	c #646025",
-"d.	c #E3DC55",
-"e.	c #FFFD62",
-"f.	c #FEF65F",
-"g.	c #888332",
-"h.	c #424018",
-"i.	c #C2BD48",
-"j.	c #FFFC61",
-"k.	c #A39E3C",
-"l.	c #2F2F11",
-"m.	c #696626",
-"n.	c #C0BB47",
-"o.	c #D4CE4F",
-"p.	c #5B5A22",
-"q.	c #46451A",
-"r.	c #5F5C23",
-"s.	c #5A5722",
-"t.	c #312F12",
-"                                                ",
-"                .                               ",
-"            .       .                           ",
-"            .               + @ #               ",
-"  . . .     .           $ % & * = -             ",
-"              ; > , '   ) ! * * * ~ {           ",
-"            ] ^ * / ( _ : < * * * [ } |         ",
-"            1 * 2 3 4 5 6 7 * * * * 8 9         ",
-"            0 * a b c d e * * * * * * f g       ",
-"          h i * j k l m n * o p * * * q r       ",
-"          s t u v w l x y * z ] * * * A B C     ",
-"            D E F G l H I J K L * * * M N O     ",
-"            P Q R S l T U V * * * * W X Y Z     ",
-"            `  ...S l +.@.#.$.* * L %.&.*.=.    ",
-"              -.;.>.l ,.'.).!.* * ~.{.].^./.    ",
-"                (._.l :.<.[.}.|.1.2.3.4.^.5.    ",
-"                  6.7.l l l l l l l l l ^.8.    ",
-"                    9.0.a.l l l l l l l ^.b.    ",
-"                      c.d.e.l l l l l :.f.g.    ",
-"                        h.i.j.:.l l l e.k.      ",
-"                          l.m.n.a.:.l o.p.      ",
-"                                q.r.s.t.        ",
-"                                                ",
-"                                                "};
-
 BEGIN_EVENT_TABLE(xFarDicApp, wxFrame)    
     EVT_MENU(xFarDic_Translate,  xFarDicApp::OnTranslate)
     EVT_MENU(xFarDic_AddLeitner, xFarDicApp::OnLeitnerBox)
@@ -297,7 +118,11 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     wxArtClient client;
 
     //Load The leitner box content
-    LoadLeitnerBox();
+    LoadLeitnerBoxContents(wxT("LTBOX-A"));
+    LoadLeitnerBoxContents(wxT("LTBOX-B"));
+    LoadLeitnerBoxContents(wxT("LTBOX-C"));
+    LoadLeitnerBoxContents(wxT("LTBOX-D"));
+    LoadLeitnerBoxContents(wxT("LTBOX-E"));
 
     wxBitmap bcut = wxArtProvider::GetBitmap(wxART_CUT, client, wxDefaultSize);
     wxBitmap bcut16 = wxArtProvider::GetBitmap(wxART_CUT, client, wxSize(16,16));
@@ -1163,7 +988,12 @@ void xFarDicApp::DoPaste()
 void xFarDicApp::Watcher(wxTimerEvent& event)
 {
     // Update ltbox contents from config file
-    LoadLeitnerBoxContents();
+    ltbox.Empty();
+    LoadLeitnerBoxContents(wxT("LTBOX-A"));
+    LoadLeitnerBoxContents(wxT("LTBOX-B"));
+    LoadLeitnerBoxContents(wxT("LTBOX-C"));
+    LoadLeitnerBoxContents(wxT("LTBOX-D"));
+    LoadLeitnerBoxContents(wxT("LTBOX-E"));
 
     if (watcher && !swapupdate) {         
         watcher_last = watcher_now.MakeLower();
@@ -2349,56 +2179,6 @@ wxString xFarDicApp::ProcessWord(wxString word) {
     return word;
 }
 
-void xFarDicApp::LoadLeitnerBox()
-{
-    wxString tmpstr, ltboxstr; 
-    wxArrayInt position;
-
-    //Get Configuration From Config File
-    wxConfigBase *pConfig = wxConfigBase::Get();
-
-    pConfig->SetPath(wxT("/Options"));
-
-    ltboxstr = pConfig->Read(_T("LTBOX-A"), _T(""));
-   
-    ltboxstr = ltboxstr.Trim(TRUE);
-    ltboxstr = ltboxstr.Trim(FALSE);  
-
-    position.Empty();
- 
-    if (ltboxstr.Len() > 0) {
-        for (int x=1; x <= ltboxstr.Len(); x++) {    
-            Part = ltboxstr.GetChar(x);
-            if (Part.CmpNoCase(_T(";"))==0) {
-                position.Add(x);        
-            }
-        } // End For
-    }
-
-    if (position.GetCount()>0) {    
-        for (int x=0; x <= position.GetCount(); x++) {
-            if (x == 0) {
-                tmpstr = ltboxstr.Mid(0,position[x]);
-                if (tmpstr.Len()!=0) {
-                    ltbox.Add(ltboxstr.Mid(0,position[x]));
-                }
-            } else if (x == position.GetCount()) {
-                tmpstr = ltboxstr.Mid(position[x-1]+1,ltboxstr.Len());
-                if (tmpstr.Len()!=0) {
-                    ltbox.Add(ltboxstr.Mid(position[x-1]+1,ltboxstr.Len()));
-                }
-            } else {
-                tmpstr = ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1);
-                if (tmpstr.Len()!=0) {
-                    ltbox.Add(ltboxstr.Mid(position[x-1]+1,position[x]-position[x-1]-1));
-                }
-            }
-        }         
-    } else if (ltboxstr.Len() > 0) {
-        ltbox.Add(ltboxstr);
-    }
-}
-
 void xFarDicApp::OnLeitnerBox(wxCommandEvent& event)
 {
     AddToLeitnerBox();
@@ -2415,10 +2195,11 @@ void xFarDicApp::AddToLeitnerBox()
 
     ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
 
-    if (ltbox.GetCount() < ltbaselimit) {
+    if (ltboxa.GetCount() < ltbaselimit) {
+        // Check the whole leitner box before adding words
         if (ltbox.Index(m_text->GetValue(),FALSE) == wxNOT_FOUND && 
             wordList.Index(m_text->GetValue(),FALSE) != wxNOT_FOUND) {
-            ltbox.Add(m_text->GetValue());
+            ltboxa.Add(m_text->GetValue());
         } else {
             msg.Printf( _("Selected word already exists in the box\nor not found in the installed database(s).\n"));
             wxMessageBox(msg, _T("xFarDic"), wxOK | wxICON_INFORMATION, this);
@@ -2432,15 +2213,16 @@ void xFarDicApp::AddToLeitnerBox()
         return;
     }
     
-    if (ltbox.GetCount()>0) {          
-        for (int x=0; x < ltbox.GetCount(); x++) {
-            if (tmpstr.Len()==0) {
+    // Apply Changes to Box-A
+    if (ltboxa.GetCount() > 0) {          
+        for (int x=0; x < ltboxa.GetCount(); x++) {
+            if (tmpstr.Len() == 0) {
                 att = _T(";");
             }
-            if (x+1 < ltbox.GetCount()) {
-                tmpstr = tmpstr + ltbox[x] + att;
+            if (x+1 < ltboxa.GetCount()) {
+                tmpstr = tmpstr + ltboxa[x] + att;
             } else {
-                tmpstr = tmpstr + ltbox[x];
+                tmpstr = tmpstr + ltboxa[x];
             }
         }
     }
@@ -2584,7 +2366,7 @@ bool xFarDicApp::UpdateSwap()
     return TRUE;    
 }
 
-void xFarDicApp::LoadLeitnerBoxContents()
+void xFarDicApp::LoadLeitnerBoxContents(wxString configpath)
 {
     wxString ItemString, ltboxstr;    
    
@@ -2593,13 +2375,16 @@ void xFarDicApp::LoadLeitnerBoxContents()
 
     pConfig->SetPath(wxT("/Options"));
 
-    ltboxstr = pConfig->Read(_T("LTBOX-A"), _T(""));
+    ltboxstr = pConfig->Read(configpath, _T(""));
    
     ltboxstr = ltboxstr.Trim(TRUE);
     ltboxstr = ltboxstr.Trim(FALSE);
 
-    ltbox.Empty();
+    if (configpath == wxT("LTBOX-A")) {
+        ltboxa.Empty();
+    }
  
+    // Keep track of Box-A separately to avoid overload
     if (ltboxstr.Len() > 0) {
         // Get number of array items, by number of delimiters + 1
         int array_items = ltboxstr.Freq( ArraySeparator ) + 1;
@@ -2607,6 +2392,12 @@ void xFarDicApp::LoadLeitnerBoxContents()
         // Loop through the string parsing
         for ( int i = 0; i < array_items; i++ ) {
             ItemString = ltboxstr.BeforeFirst( ArraySeparator );
+           
+            // Keep track of Box-A separately to avoid overload
+            if (configpath == wxT("LTBOX-A")) {
+                ltboxa.Add( ItemString );
+            }
+
             ltbox.Add( ItemString );
             ltboxstr = ltboxstr.AfterFirst( ArraySeparator );
         }  

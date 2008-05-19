@@ -322,5 +322,9 @@ Fixed tray icon transparency display problem.
 Use new tray icon for the main window too.
 Several code clean-ups.
 Updated NEWS file.
-
+//////////////////////////////////////////////////////////////////////////////////////
+0.11.3     -- 2008-05-20
+Applied new tray icon to all windows.
+Fixed a problem that let adding duplicate words to the leitner box.
+Updated NEWS file.
 

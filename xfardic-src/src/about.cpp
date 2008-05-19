@@ -48,15 +48,7 @@ xFarDicAbout::xFarDicAbout(wxWindow *parent, const wxString& title, const wxPoin
        : wxFrame(parent, -1, title, pos, size, style|wxMAXIMIZE_BOX), m_locale(locale)
 {    
     // set the frame icon    
-    wxBitmap  micon(_T("/usr/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
-
-    if (!micon.Ok()) {
-        micon.LoadFile(_T("/usr/local/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
-    }
-
-    wxIcon wicon;
-    wicon.CopyFromBitmap(micon);
-    SetIcon(wicon);  
+    SetIcon(wxIcon(xfardic24x24));
 
     //xFarDic Logo
     wxBitmap logo(_T("/usr/share/xfardic/pixmaps/xfardic-logo.png"), wxBITMAP_TYPE_PNG);   

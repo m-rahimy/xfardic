@@ -111,3 +111,10 @@ working with the recent versions of espeak while remains compatible
 with older versions, fixes a bug preventing database order to take 
 effect and updates configure scripts to correctly create Makefiles 
 while building with libspeak is disabled.
+------------------------------------------------------------------
+2008-05-10                                                   NEWS
+------------------------------------------------------------------
+xFarDic 0.11.1. This version mainly fixes reported problems. 
+Highlights: Fixed database automatic detection system to activate 
+detected databases, fixed tray icon transparency display problem, 
+uses the new tray icon for the main window and several code clean-ups.

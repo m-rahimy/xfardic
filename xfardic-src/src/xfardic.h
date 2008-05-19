@@ -85,6 +85,7 @@ using namespace std;
 
 #define ArraySeparator            ';'
 
+extern const char* xfardic24x24[];
 extern bool showAspell;
 extern bool showAbout;
 extern bool showLeitner;

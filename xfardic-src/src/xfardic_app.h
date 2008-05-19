@@ -149,10 +149,8 @@ public:
     bool ShowNotification(wxString word, wxString meaning);
     /// Processes input word and returned pure word
     wxString ProcessWord(wxString word);
-    /// Loads Leinter box A contents
-    void LoadLeitnerBox();
     /// Updates ltbox contents from config file
-    void LoadLeitnerBoxContents();
+    void LoadLeitnerBoxContents(wxString configpath);
     /// Add word to the leitner box
     void AddToLeitnerBox();
 
@@ -214,7 +212,8 @@ private:
                      meanList,
                      paths,
                      statuses,
-                     ltbox;
+                     ltbox,
+                     ltboxa;
     wxString         watcher_now, 
                      watcher_last,
                      scanner_now,

@@ -63,15 +63,7 @@ xFarDicLeitner::xFarDicLeitner(wxWindow *parent, const wxString& title, const wx
        : wxFrame(parent, -1, title, pos, size, style), m_locale(locale)
 {    
     // set the frame icon    
-    wxBitmap  micon(_T("/usr/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
-
-    if (!micon.Ok()) {
-        micon.LoadFile(_T("/usr/local/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
-    }
-
-    wxIcon wicon;
-    wicon.CopyFromBitmap(micon);
-    SetIcon(wicon);
+    SetIcon(wxIcon(xfardic24x24));
 
     wxConfigBase *pConfig = wxConfigBase::Get();
     pConfig->SetPath(_T("/Options"));

@@ -66,16 +66,7 @@ xFarDicSettings::xFarDicSettings(wxWindow *parent, const wxString& title, const 
        : wxFrame(parent, -1, title, pos, size, style), m_locale(locale)
 {
     // set the frame icon    
-    wxBitmap  micon(wxT("/usr/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
-
-    if (!micon.Ok()) {
-        micon.LoadFile(wxT("/usr/local/share/xfardic/pixmaps/xfardic32.png"), wxBITMAP_TYPE_PNG);
-    }
-
-    wxIcon wicon;
-    wicon.CopyFromBitmap(micon);
-    SetIcon(wicon);     
-
+    SetIcon(wxIcon(xfardic24x24));
     wxArtClient client;
 
     wxBitmap  logo = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxSize(32,35));
