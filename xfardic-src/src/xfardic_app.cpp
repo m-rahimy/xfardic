@@ -986,15 +986,7 @@ void xFarDicApp::DoPaste()
 }
 
 void xFarDicApp::Watcher(wxTimerEvent& event)
-{
-    // Update ltbox contents from config file
-    ltbox.Empty();
-    LoadLeitnerBoxContents(wxT("LTBOX-A"));
-    LoadLeitnerBoxContents(wxT("LTBOX-B"));
-    LoadLeitnerBoxContents(wxT("LTBOX-C"));
-    LoadLeitnerBoxContents(wxT("LTBOX-D"));
-    LoadLeitnerBoxContents(wxT("LTBOX-E"));
-
+{    
     if (watcher && !swapupdate) {         
         watcher_last = watcher_now.MakeLower();
         wxTextDataObject data;
@@ -2187,6 +2179,15 @@ void xFarDicApp::OnLeitnerBox(wxCommandEvent& event)
 void xFarDicApp::AddToLeitnerBox()
 {
     wxString tmpstr, att, msg;    
+
+    // Update ltbox and ltboxa contents from config file
+    // to keep avoiding duplicate word additions
+    ltbox.Empty();
+    LoadLeitnerBoxContents(wxT("LTBOX-A"));
+    LoadLeitnerBoxContents(wxT("LTBOX-B"));
+    LoadLeitnerBoxContents(wxT("LTBOX-C"));
+    LoadLeitnerBoxContents(wxT("LTBOX-D"));
+    LoadLeitnerBoxContents(wxT("LTBOX-E"));
 
     //Get Configuration From Config File
     wxConfigBase *pConfig = wxConfigBase::Get();

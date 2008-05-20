@@ -326,5 +326,11 @@ Updated NEWS file.
 0.11.3     -- 2008-05-20
 Applied new tray icon to all windows.
 Fixed a problem that let adding duplicate words to the leitner box.
+Improved initial and interval leitner box contents loading system.
+Several code clean-ups.
 Updated NEWS file.
+//////////////////////////////////////////////////////////////////////////////////////
+0.11.4     -- 2008-05-21
+Fixed a bug causing unusual cpu usage in the watcher function.
+
 
