@@ -332,5 +332,6 @@ Updated NEWS file.
 //////////////////////////////////////////////////////////////////////////////////////
 0.11.4     -- 2008-05-21
 Fixed a bug causing unusual cpu usage in the watcher function.
+Several code clean-ups.
 
 

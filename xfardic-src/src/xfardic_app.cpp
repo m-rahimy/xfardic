@@ -260,7 +260,6 @@ xFarDicApp::xFarDicApp(const wxString& title, const wxPoint& pos, const wxSize& 
     settings->SetBitmap(bsettings16);
     edmenu->Append(settings);
   
-
     // now append the freshly created menu to the menu bar...
     menuBar = new wxMenuBar();
     menuBar->Append(menuFile, _("&File"));
@@ -726,7 +725,7 @@ void xFarDicApp::DoAutoTrans()
 
 void xFarDicApp::OnSelect(wxCommandEvent& WXUNUSED(event))
 {
-  wxConfigBase *pConfig = wxConfigBase::Get();
+    wxConfigBase *pConfig = wxConfigBase::Get();
     if ( pConfig == NULL ) {
         return;
     }
@@ -991,7 +990,7 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
         watcher_last = watcher_now.MakeLower();
         wxTextDataObject data;
 
-        // read from clipboard
+        // Read from clipboard
         if (wxTheClipboard->Open()) {
             wxTheClipboard->GetData(data);
             wxTheClipboard->Close();
@@ -999,6 +998,8 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
 
         watcher_now = data.GetText();
 
+        // New clipboard entry too long? 
+        // Restore last entry
         if (watcher_now.Len() > 40) {
             watcher_now = watcher_last;
         }
@@ -1069,8 +1070,7 @@ void xFarDicApp::PopMenu()
     wxBitmap  bpaste = wxArtProvider::GetBitmap(wxART_PASTE, client, wxSize(16,16));
     wxBitmap  bsettings = wxArtProvider::GetBitmap(wxT("gtk-preferences"), client, wxSize(16,16));
     wxBitmap  bfont = wxArtProvider::GetBitmap(wxART_HELP_SETTINGS, client, wxSize(16,16));
-    wxBitmap  babout = wxArtProvider::GetBitmap(wxT("gtk-about"), client, wxSize(16,16));
-    
+    wxBitmap  babout = wxArtProvider::GetBitmap(wxT("gtk-about"), client, wxSize(16,16));    
     
     wxMenuItem *paste = new wxMenuItem(menuFileT,xFarDic_Paste, _("&Paste and Translate\tCtrl-V"));
     paste->SetBitmap(bpaste);
@@ -2180,15 +2180,6 @@ void xFarDicApp::AddToLeitnerBox()
 {
     wxString tmpstr, att, msg;    
 
-    // Update ltbox and ltboxa contents from config file
-    // to keep avoiding duplicate word additions
-    ltbox.Empty();
-    LoadLeitnerBoxContents(wxT("LTBOX-A"));
-    LoadLeitnerBoxContents(wxT("LTBOX-B"));
-    LoadLeitnerBoxContents(wxT("LTBOX-C"));
-    LoadLeitnerBoxContents(wxT("LTBOX-D"));
-    LoadLeitnerBoxContents(wxT("LTBOX-E"));
-
     //Get Configuration From Config File
     wxConfigBase *pConfig = wxConfigBase::Get();
 
@@ -2234,7 +2225,17 @@ void xFarDicApp::AddToLeitnerBox()
 
     if (!showLeitner) {
          ltframe->UpdateBoxes(TRUE);
+         ltframe->SubmitChanges();
     }
+
+    // Update ltbox and ltboxa contents from config file
+    // to keep avoiding duplicate word additions
+    ltbox.Empty();
+    LoadLeitnerBoxContents(wxT("LTBOX-A"));
+    LoadLeitnerBoxContents(wxT("LTBOX-B"));
+    LoadLeitnerBoxContents(wxT("LTBOX-C"));
+    LoadLeitnerBoxContents(wxT("LTBOX-D"));
+    LoadLeitnerBoxContents(wxT("LTBOX-E"));
 }
 
 bool xFarDicApp::initSwap()
