@@ -205,6 +205,10 @@ const char* xfardic24x24[] = {
 "                                                ",
 "                                                "};
 
+// This is a global wxString which is used as watcher/scanner
+// system entry. 
+wxString GlobalStr;
+
 // Create a new application object: this macro will allow wxWindows to create
 // the application object during program execution (it's better than using a
 // static object for many reasons) and also declares the accessor function
@@ -342,7 +346,7 @@ bool MyApp::OnInit()
     int saved = pConfig->Read(_T("Save-Cache"), 1);
 
     if (Param.Len() != 0 && frame->CheckSpell(Param,0)) {
-        pConfig->Write(wxT("/Options/Temp-String"), Param);
+        GlobalStr = Param;
     } else {
         if (saved != 0) {
             wxString str;

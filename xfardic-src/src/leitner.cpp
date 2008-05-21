@@ -264,8 +264,7 @@ void xFarDicLeitner::OnTranslateA(wxCommandEvent& event)
     }
 
     if (tmpStr.Len()>0) {                  
-        pConfig->SetPath(_T("/"));
-        pConfig->Write(_T("/Options/Temp-String"), tmpStr);        
+        GlobalStr = tmpStr;
     }
 }
 
@@ -287,8 +286,7 @@ void xFarDicLeitner::OnTranslateB(wxCommandEvent& event)
     }
 
     if (tmpStr.Len()>0) {                  
-        pConfig->SetPath(_T("/"));
-        pConfig->Write(_T("/Options/Temp-String"), tmpStr);        
+        GlobalStr = tmpStr;
     }
 }
 
@@ -310,8 +308,7 @@ void xFarDicLeitner::OnTranslateC(wxCommandEvent& event)
     }
 
     if (tmpStr.Len()>0) {                  
-        pConfig->SetPath(_T("/"));
-        pConfig->Write(_T("/Options/Temp-String"), tmpStr);        
+        GlobalStr = tmpStr;
     }
 }
 
@@ -333,8 +330,7 @@ void xFarDicLeitner::OnTranslateD(wxCommandEvent& event)
     }
 
     if (tmpStr.Len()>0) {                  
-        pConfig->SetPath(_T("/"));
-        pConfig->Write(_T("/Options/Temp-String"), tmpStr);        
+        GlobalStr = tmpStr;
     }
 }
 
@@ -356,8 +352,7 @@ void xFarDicLeitner::OnTranslateE(wxCommandEvent& event)
     }
 
     if (tmpStr.Len()>0) {                  
-        pConfig->SetPath(_T("/"));
-        pConfig->Write(_T("/Options/Temp-String"), tmpStr);        
+        GlobalStr = tmpStr;
     }
 }
 

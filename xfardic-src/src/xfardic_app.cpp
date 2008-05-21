@@ -1013,10 +1013,10 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
     }
 
     if (scanner && !swapupdate) {
-        wxConfigBase *pConfig = wxConfigBase::Get();
         scanner_last = scanner_now.MakeLower();
-        scanner_now = pConfig->Read(wxT("/Options/Temp-String"), _T(""));
 
+        // Get the latest updates from the GlobalStr string
+        scanner_now = GlobalStr;
         scanner_now.MakeLower();
         scanner_now.Trim(TRUE);
         scanner_now.Trim(FALSE);
@@ -1031,7 +1031,7 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
     if (watcher && !swapupdate) {
         if (watcher_now.Len() > 0) {
             if (!watcher_now.IsSameAs(watcher_last, FALSE) && !watcher_now.IsSameAs(scanner_last, FALSE) && 
-               CheckSpell(watcher_now,0) && watcher_now.IsAscii() && watcher_now.IsWord()) {        
+               CheckSpell(watcher_now,0) && watcher_now.IsAscii()) { // is broken? && watcher_now.IsWord()) {        
                 m_text->SetValue(watcher_now);
                 if (!notification) {           
                     Translate(watcher_now);
@@ -1047,7 +1047,7 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
     if (scanner && !swapupdate) {
         if (scanner_now.Len() > 0 && scanner_now != m_text->GetValue()) {
             if (!scanner_now.IsSameAs(scanner_last, FALSE) && !scanner_now.IsSameAs(watcher_last, FALSE) && 
-               CheckSpell(scanner_now,0) && scanner_now.IsAscii() && scanner_now.IsWord()) {        
+               CheckSpell(scanner_now,0) && scanner_now.IsAscii()) { // is broken? && scanner_now.IsWord()) {        
                 m_text->SetValue(scanner_now);
                 if (!notification) {           
                     Translate(scanner_now);
@@ -2187,6 +2187,10 @@ void xFarDicApp::AddToLeitnerBox()
 
     ltbaselimit = pConfig->Read(_T("Leitner-Base"), 10);
 
+    // Refresh ltboxa contents, it's needed before checking
+    // its recent status
+    LoadLeitnerBoxContents(wxT("LTBOX-A"));
+
     if (ltboxa.GetCount() < ltbaselimit) {
         // Check the whole leitner box before adding words
         if (ltbox.Index(m_text->GetValue(),FALSE) == wxNOT_FOUND && 
@@ -2219,23 +2223,22 @@ void xFarDicApp::AddToLeitnerBox()
         }
     }
 
-    pConfig->Write(wxT("/Options/LTBOX-A"), tmpstr);
+    pConfig->Write(wxT("/Options/LTBOX-A"), tmpstr);       
 
     m_text->SetFocus();
 
     if (!showLeitner) {
          ltframe->UpdateBoxes(TRUE);
          ltframe->SubmitChanges();
-    }
 
-    // Update ltbox and ltboxa contents from config file
-    // to keep avoiding duplicate word additions
-    ltbox.Empty();
-    LoadLeitnerBoxContents(wxT("LTBOX-A"));
-    LoadLeitnerBoxContents(wxT("LTBOX-B"));
-    LoadLeitnerBoxContents(wxT("LTBOX-C"));
-    LoadLeitnerBoxContents(wxT("LTBOX-D"));
-    LoadLeitnerBoxContents(wxT("LTBOX-E"));
+         // If the box is open, update ltbox contents from the config file
+         // to keep avoiding duplicate word additions
+         ltbox.Empty();    
+         LoadLeitnerBoxContents(wxT("LTBOX-B"));
+         LoadLeitnerBoxContents(wxT("LTBOX-C"));
+         LoadLeitnerBoxContents(wxT("LTBOX-D"));
+         LoadLeitnerBoxContents(wxT("LTBOX-E"));
+    }
 }
 
 bool xFarDicApp::initSwap()

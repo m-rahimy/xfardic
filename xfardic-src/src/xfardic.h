@@ -90,5 +90,6 @@ extern bool showAspell;
 extern bool showAbout;
 extern bool showLeitner;
 extern bool showSettings;
+extern wxString GlobalStr;
 
 #endif
