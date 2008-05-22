@@ -78,8 +78,20 @@ enum
 // ----------------------------------------------------------------------------
 
 const int ID_TOOLBAR = 500;
+const int SELECTION_INTERVAL = 1000;     // check selection interval.
 
 static const long TOOLBAR_STYLE = wxTB_FLAT | wxTB_DOCKABLE;
+
+#define ArraySeparator            ';'
+#define SpaceSeparator            ' '
+#define MaxValidLength            25
+
+extern const char* xfardic24x24[];
+extern bool showAspell;
+extern bool showAbout;
+extern bool showLeitner;
+extern bool showSettings;
+extern wxString GlobalStr;
 
 // ----------------------------------------------------------------------------
 // event tables and other macros for wxWindows

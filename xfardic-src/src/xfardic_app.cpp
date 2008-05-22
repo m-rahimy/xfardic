@@ -1000,7 +1000,7 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
 
         // New clipboard entry too long? 
         // Restore last entry
-        if (watcher_now.Len() > 40) {
+        if (watcher_now.Len() > MaxValidLength ) {
             watcher_now = watcher_last;
         }
 
@@ -1031,14 +1031,17 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
     if (watcher && !swapupdate) {
         if (watcher_now.Len() > 0) {
             if (!watcher_now.IsSameAs(watcher_last, FALSE) && !watcher_now.IsSameAs(scanner_last, FALSE) && 
-               CheckSpell(watcher_now,0) && watcher_now.IsAscii()) { // is broken? && watcher_now.IsWord()) {        
-                m_text->SetValue(watcher_now);
-                if (!notification) {           
-                    Translate(watcher_now);
-                    this->Raise();
-                    this->SetFocus();
-                }else {
-                    Translate(watcher_now,FALSE,TRUE);
+               CheckSpell(watcher_now,0) && watcher_now.IsAscii()) { // is broken? && watcher_now.IsWord()) {
+                // Words with more than one space character are not accepted
+                if (watcher_now.Freq( SpaceSeparator ) <= 1) {
+                    m_text->SetValue(watcher_now);
+                    if (!notification) {           
+                        Translate(watcher_now);
+                        this->Raise();
+                        this->SetFocus();
+                    }else {
+                        Translate(watcher_now,FALSE,TRUE);
+                    }
                 }
             }
         }
@@ -1047,14 +1050,17 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
     if (scanner && !swapupdate) {
         if (scanner_now.Len() > 0 && scanner_now != m_text->GetValue()) {
             if (!scanner_now.IsSameAs(scanner_last, FALSE) && !scanner_now.IsSameAs(watcher_last, FALSE) && 
-               CheckSpell(scanner_now,0) && scanner_now.IsAscii()) { // is broken? && scanner_now.IsWord()) {        
-                m_text->SetValue(scanner_now);
-                if (!notification) {           
-                    Translate(scanner_now);
-                    this->Raise();
-                    this->SetFocus();
-                }else {
-                    Translate(scanner_now,FALSE,TRUE);
+               CheckSpell(scanner_now,0) && scanner_now.IsAscii()) { // is broken? && scanner_now.IsWord()) { 
+                // Words with more than one space character are not accepted
+                if (watcher_now.Freq( SpaceSeparator ) <= 1) {       
+                    m_text->SetValue(scanner_now);
+                    if (!notification) {           
+                        Translate(scanner_now);
+                        this->Raise();
+                        this->SetFocus();
+                    }else {
+                        Translate(scanner_now,FALSE,TRUE);
+                    }
                 }
             }
         }
@@ -1511,21 +1517,17 @@ bool xFarDicApp::Translate(wxString m_textVal, bool atrans, bool notify)
 
     if (!found) {
         m_label->SetValue(_("Phrase not found."));    
-    } else {
-        if (ltbox.GetCount() < ltbaselimit) {
-            m_leitnerbox->Enable(TRUE);
+    } else {       
+        if (notify && notification) {
+            ShowNotification(m_textVal, m_label->GetValue());
         }
-    }
-
-    if (notify && notification) {
-        ShowNotification(m_textVal, m_label->GetValue());
-    }
 
 #ifdef HAVE_SPEAKLIB
-    if (speak) {
-        pron->Pronounce(m_text->GetValue());
-    }
+        if (speak) {
+            pron->Pronounce(m_text->GetValue());
+        }
 #endif
+    }
 
     return found;
 }
@@ -2253,7 +2255,7 @@ bool xFarDicApp::initSwap()
     swappath = wxGetHomeDir()+wxT("/.xfardic.swap");
 
     if (!swapfile.Exists(swappath) && swap) {
-            update = TRUE;
+        update = TRUE;
     }   
 
     returnvalue = sqlite3_open((const char *)swappath.mb_str(wxConvUTF8),&Db);

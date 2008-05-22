@@ -330,11 +330,10 @@ Improved initial and interval leitner box contents loading system.
 Several code clean-ups.
 Updated NEWS file.
 //////////////////////////////////////////////////////////////////////////////////////
-0.11.4     -- 2008-05-21
+0.11.4     -- 2008-05-22
 Fixed a bug causing unusual cpu usage in the watcher function.
 Fixed an old bug preventing translation of words containing space from the leitner box.
 Make the scanner system to use a variable located in memory rather than in the config file.
-Several code clean-ups.
+Several code clean-ups ans minor improvements.
 Updated NEWS file.
-
 

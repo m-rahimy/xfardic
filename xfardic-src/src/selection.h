@@ -30,8 +30,6 @@
 
 #include "xfardic.h"
 
-const int SELECTION_INTERVAL=1000; 		    // check selection interval.
-
 class Selection {
 private:    	
 

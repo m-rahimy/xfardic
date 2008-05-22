@@ -146,7 +146,7 @@ void Selection::SelectionReceived(char* sToken)
 
     gint len = 0;
     gchar *a = sToken;
-    while ((*a) && len < 256) {
+    while ((*a) && len < MaxValidLength ) {
         a = g_utf8_next_char (a);
         ++len;
     }
