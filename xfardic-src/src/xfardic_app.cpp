@@ -1052,7 +1052,7 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
             if (!scanner_now.IsSameAs(scanner_last, FALSE) && !scanner_now.IsSameAs(watcher_last, FALSE) && 
                CheckSpell(scanner_now,0) && scanner_now.IsAscii()) { // is broken? && scanner_now.IsWord()) { 
                 // Words with more than one space character are not accepted
-                if (watcher_now.Freq( SpaceSeparator ) <= 1) {       
+                if (scanner_now.Freq( SpaceSeparator ) <= 1) {       
                     m_text->SetValue(scanner_now);
                     if (!notification) {           
                         Translate(scanner_now);
