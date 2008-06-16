@@ -227,6 +227,7 @@ wxArrayString xFarDicLeitner::LoadLeitnerBoxContents(wxString configpath)
     pConfig->SetPath(_T("/Options"));
 
     ltboxstr = pConfig->Read(configpath, _T(""));
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
    
     ltboxstr = ltboxstr.Trim(TRUE);
     ltboxstr = ltboxstr.Trim(FALSE);
@@ -878,6 +879,7 @@ void xFarDicLeitner::SubmitChanges()
     }
 
     pConfig->Write(_T("/Options/LTBOX-D"), tmpStr);
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
 
 void xFarDicLeitner::CreateLayout() {

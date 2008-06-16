@@ -221,7 +221,6 @@ private:
                      inputlang, 
                      path,
                      status,
-                     Part,
                      tmppath,
                      tmpstr;
 

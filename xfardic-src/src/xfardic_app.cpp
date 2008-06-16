@@ -986,6 +986,8 @@ void xFarDicApp::DoPaste()
 
 void xFarDicApp::Watcher(wxTimerEvent& event)
 {    
+    wxString partOne, partTwo;
+
     if (watcher && !swapupdate) {         
         watcher_last = watcher_now.MakeLower();
         wxTextDataObject data;
@@ -1031,18 +1033,38 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
     if (watcher && !swapupdate) {
         if (watcher_now.Len() > 0) {
             if (!watcher_now.IsSameAs(watcher_last, FALSE) && !watcher_now.IsSameAs(scanner_last, FALSE) && 
-               CheckSpell(watcher_now,0) && watcher_now.IsAscii()) { // is broken? && watcher_now.IsWord()) {
-                // Words with more than one space character are not accepted
-                if (watcher_now.Freq( SpaceSeparator ) <= 1) {
-                    m_text->SetValue(watcher_now);
-                    if (!notification) {           
-                        Translate(watcher_now);
-                        this->Raise();
-                        this->SetFocus();
-                    }else {
-                        Translate(watcher_now,FALSE,TRUE);
+               CheckSpell(watcher_now,0) && watcher_now.IsAscii()) {
+                // Words with one or zero space character are not accepted
+                if (watcher_now.Freq( SpaceSeparator ) == 0) {
+                    if (watcher_now.IsWord()) {
+                       m_text->SetValue(watcher_now);
+                       if (!notification) {           
+                           Translate(watcher_now);
+                           this->Raise();
+                           this->SetFocus();
+                       }else {
+                           Translate(watcher_now,FALSE,TRUE);
+                       }
                     }
-                }
+                } else if (watcher_now.Freq( SpaceSeparator ) == 1) {
+                    partOne = watcher_now.BeforeFirst( SpaceSeparator );
+                    partTwo = watcher_now.AfterFirst( SpaceSeparator );
+
+                    //DEBUGGING
+                    // fprintf(stderr, "Checking Scanner-Now:%s\n", (const char *)partOne.mb_str(wxConvUTF8));
+                    // fprintf(stderr, "Checking Scanner-Last:%s\n", (const char *)partTwo.mb_str(wxConvUTF8));       
+ 
+                    if (partOne.IsWord() && partTwo.IsWord()){
+                        m_text->SetValue(watcher_now);
+                        if (!notification) {           
+                           Translate(watcher_now);
+                           this->Raise();
+                           this->SetFocus();
+                        }else {
+                           Translate(watcher_now,FALSE,TRUE);
+                        }
+                    }
+                }  
             }
         }
     }
@@ -1051,17 +1073,37 @@ void xFarDicApp::Watcher(wxTimerEvent& event)
         if (scanner_now.Len() > 0 && scanner_now != m_text->GetValue()) {
             if (!scanner_now.IsSameAs(scanner_last, FALSE) && !scanner_now.IsSameAs(watcher_last, FALSE) && 
                CheckSpell(scanner_now,0) && scanner_now.IsAscii()) { // is broken? && scanner_now.IsWord()) { 
-                // Words with more than one space character are not accepted
-                if (scanner_now.Freq( SpaceSeparator ) <= 1) {       
-                    m_text->SetValue(scanner_now);
-                    if (!notification) {           
-                        Translate(scanner_now);
-                        this->Raise();
-                        this->SetFocus();
-                    }else {
-                        Translate(scanner_now,FALSE,TRUE);
+                // Words with one or zero space character are not accepted
+                if (scanner_now.Freq( SpaceSeparator ) == 0) {
+                    if (scanner_now.IsWord()) {
+                       m_text->SetValue(scanner_now);
+                       if (!notification) {           
+                           Translate(scanner_now);
+                           this->Raise();
+                           this->SetFocus();
+                       }else {
+                           Translate(scanner_now,FALSE,TRUE);
+                       }
                     }
-                }
+                } else if (scanner_now.Freq( SpaceSeparator ) == 1) {
+                    partOne = scanner_now.BeforeFirst( SpaceSeparator );
+                    partTwo = scanner_now.AfterFirst( SpaceSeparator );
+
+                    //DEBUGGING
+                    // fprintf(stderr, "Checking Scanner-Now:%s\n", (const char *)partOne.mb_str(wxConvUTF8));
+                    // fprintf(stderr, "Checking Scanner-Last:%s\n", (const char *)partTwo.mb_str(wxConvUTF8));        
+
+                    if (partOne.IsWord() && partTwo.IsWord() && CheckSpell(scanner_now,0)){
+                        m_text->SetValue(scanner_now);
+                        if (!notification) {           
+                           Translate(scanner_now);
+                           this->Raise();
+                           this->SetFocus();
+                        }else {
+                           Translate(scanner_now,FALSE,TRUE);
+                        }
+                    }
+                }  
             }
         }
     }
@@ -1820,11 +1862,6 @@ bool xFarDicApp::CheckSpell(wxString chkStr, bool suggest)
     aspell_config_replace(spell_config, "lang","en");
     //}
 
-    // Small hack for two part words to ignore aspell
-    if (chkStr.Contains(_T(" "))) { 
-        return 1;
-    }
-
     AspellCanHaveError * possible_err = new_aspell_speller(spell_config);
     AspellSpeller * spell_checker = 0;
 
@@ -2226,6 +2263,7 @@ void xFarDicApp::AddToLeitnerBox()
     }
 
     pConfig->Write(wxT("/Options/LTBOX-A"), tmpstr);       
+    delete wxConfigBase::Set((wxConfigBase *) NULL);
 
     m_text->SetFocus();
 

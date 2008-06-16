@@ -84,7 +84,7 @@ static const long TOOLBAR_STYLE = wxTB_FLAT | wxTB_DOCKABLE;
 
 #define ArraySeparator            ';'
 #define SpaceSeparator            ' '
-#define MaxValidLength            25
+#define MaxValidLength            20
 
 extern const char* xfardic24x24[];
 extern bool showAspell;

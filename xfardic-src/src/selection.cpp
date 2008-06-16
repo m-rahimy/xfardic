@@ -96,9 +96,7 @@ gint Selection::TimeOutCallback(gpointer data)
             //during this perioed,if you call gtk_selection_convert(),the "selection_received" signal will not be received also,
             //and at last these signals are received at almost the same time...BAD.
             //so here create a new selection_widget, then call gtk_selection_convert(). this should can throw that 
-            //error selection.
-            //!!!:
-            //But this seems(i am not sure) will make the widgets in StarDict become unselectable! see BUGS.
+            //error selection.            
             g_warning("Error, selection data didn't received, retring!\n");
             oSelection->create_selection_widget();
             oSelection->IsBusy = 0;
