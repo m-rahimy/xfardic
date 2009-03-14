@@ -337,4 +337,11 @@ Fixed an old bug preventing translation of words containing space from the leitn
 Make the scanner system to use a variable located in memory rather than in the config file.
 Several code clean-ups and minor improvements.
 Updated NEWS file.
+//////////////////////////////////////////////////////////////////////////////////////
+0.11.5     -- 2008-03-14
+Fixed a bug in leitner box SubmitChanges() function.
+Adds support to be compiled against wxGTK 2.8 series.
+Updated files for 2009 copyright note.
+Updated NEWS file.
+//////////////////////////////////////////////////////////////////////////////////////
 

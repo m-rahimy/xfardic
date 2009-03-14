@@ -1,6 +1,6 @@
 // +-------------------------------------------------------------------------+
 // | xFarDic Multilingual Dictionary                                         |
-// | Copyright (C) 2004-2008 by the xFarDic Development Team.                |
+// | Copyright (C) 2004-2009 by the xFarDic Development Team.                |
 // | http://www.xfardic.org/                                                 |
 // +-------------------------------------------------------------------------+
 // | License:                                                                |
@@ -879,6 +879,24 @@ void xFarDicLeitner::SubmitChanges()
     }
 
     pConfig->Write(_T("/Options/LTBOX-D"), tmpStr);
+    
+    tmpStr = wxT("");
+
+    if (boxecontents.GetCount()>0) {          
+        for (int x=0; x < boxecontents.GetCount(); x++) {
+            if (tmpStr.Len()==0) {
+                att = _T(";");
+            }
+            if (x+1 < boxecontents.GetCount()) {
+                tmpStr = tmpStr + boxecontents[x] + att;
+            } else {
+                tmpStr = tmpStr + boxecontents[x];
+            }
+        }
+    }
+
+    pConfig->Write(_T("/Options/LTBOX-E"), tmpStr);
+
     delete wxConfigBase::Set((wxConfigBase *) NULL);
 }
 

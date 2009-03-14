@@ -125,3 +125,18 @@ xFarDic 0.11.3 released. Applied new tray icon to all windows, fixed a
 problem that lets adding duplicate words to the leitner box, improved
 initial and interval leitner box contents loading system and several 
 code clean-ups.
+------------------------------------------------------------------
+2008-06-16
+------------------------------------------------------------------
+xFarDic 0.11.5 released. This is a bux fix release that fixes 
+several bugs like a bug causing unusual CPU usage in the watcher 
+function, a bug causing loosing the recent leitner box changes on
+application crashes or so, an old bug preventing translation of words
+containing space from the leitner box. The scanner system is using
+a variable located in memory rather than in the config file.
+------------------------------------------------------------------
+2009-03-14
+------------------------------------------------------------------
+xFarDic 0.11.5 released. This is a bug fix relese that fixes a 
+bug in leitner box and adds support for compilation against wx-2.8.
+------------------------------------------------------------------
