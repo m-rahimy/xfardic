@@ -140,3 +140,8 @@ a variable located in memory rather than in the config file.
 xFarDic 0.11.5 released. This is a bug fix relese that fixes a 
 bug in leitner box and adds support for compilation against wx-2.8.
 ------------------------------------------------------------------
+2009-07-06
+------------------------------------------------------------------
+xFarDic 0.11.6 release. This is another bug fix release that fixes
+an old bug related to ProcessWord function.
+------------------------------------------------------------------
