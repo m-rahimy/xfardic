@@ -31,7 +31,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-#define XVERSION  _T("0.11.5")
+#define XVERSION  _T("0.11.6")
 
 // IDs for the controls and the menu commands
 enum

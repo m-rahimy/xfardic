@@ -2130,17 +2130,17 @@ wxString xFarDicApp::ProcessWord(wxString word) {
     }
     
     // Check for Last ied
-    if (word.Right(3) == _T("ied")) {
+    if (word.Right(3) == _T("ied") && (wordList.Index(word,FALSE) == wxNOT_FOUND)) {
         return word.Left(word.Len()-3)+_T("y");
     }
 
     // Check for Last ies
-    if (word.Right(3) == _T("ies")) {
+    if (word.Right(3) == _T("ies") && (wordList.Index(word,FALSE) == wxNOT_FOUND)) {
         return word.Left(word.Len()-3)+_T("y");
     }
 
     // Check for Last ying
-    if (word.Right(4) == _T("ying")) {
+    if (word.Right(4) == _T("ying") && (wordList.Index(word,FALSE) == wxNOT_FOUND)) {
         return word.Left(word.Len()-3);
     }
 
@@ -2187,7 +2187,7 @@ wxString xFarDicApp::ProcessWord(wxString word) {
     }
 
     // Check for Last ed
-    if (word.Right(2) == _T("ed")) {
+    if (word.Right(2) == _T("ed") && (wordList.Index(word,FALSE) == wxNOT_FOUND)) {
         if (wordList.Index(word.Left(word.Len()-2),FALSE) != wxNOT_FOUND) {
             return word.Left(word.Len()-2);
         } else {
