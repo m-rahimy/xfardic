@@ -6,21 +6,20 @@ Uploaders: Alan Baghumian <alan@technotux.org>, Lior Kaplan <kaplan@debian.org>
 Build-Depends: debhelper (>= 5.0.0),
                autotools-dev,
                libxml2-dev,
-               libwxgtk2.6-dev,
+               libwxgtk2.6-dev | libwxgtk2.8-dev,
                libgnome-desktop-dev,
                libnotify-dev,
                libaspell-dev (>= 0.60.4),
                libsqlite3-dev, 
                libespeak-dev (>= 1.29),
                quilt
-Standards-Version: 3.7.3
+Standards-Version: 3.8.3
 Homepage: http://www.xfardic.org
 
 Package: xfardic
 Architecture: any
 Depends: ${shlibs:Depends}, 
          aspell-en,
-         xfardic-xdb,
          notification-daemon
 Description: Multilingual Dictionary
  xFarDic is a Multilingual dictionary based on wxGTK, 
