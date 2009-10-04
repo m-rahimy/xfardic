@@ -619,9 +619,11 @@ void xFarDicSettings::OnDelete(wxCommandEvent& WXUNUSED(event))
 {
     wxString msg;
 
-    if (dbpath->GetSelection() >= 0) {
-       dbpath->Delete(dbpath->GetSelection());
-       if (dbpath->IsChecked(dbpath->GetSelection())) {
+    dbpath->GetSelections(selpos);
+
+    if (selpos[0] >= 0) {
+       dbpath->Delete(selpos[0]);
+       if (dbpath->IsChecked(selpos[0])) {
            swapupdate = TRUE;
        }
 
@@ -645,8 +647,9 @@ void xFarDicSettings::MoveItem(bool up)
     int pos, destpos, cnt;
     bool checked;
 
-    pos = dbpath->GetSelection();
-    cnt = dbpath->GetCount() - 1;
+    dbpath->GetSelections(selpos);
+    pos = selpos[0];
+    cnt = dbpath->GetCount() - 1;       
 
     if (up) {
        destpos = pos - 1;

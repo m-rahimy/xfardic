@@ -163,7 +163,7 @@ private:
                   ItemString;
 
     xmlTextReaderPtr reader;
-    wxArrayInt       seppos;
+    wxArrayInt       selpos;
     wxNotebook       *layout;
 
     DECLARE_EVENT_TABLE()

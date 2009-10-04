@@ -1851,7 +1851,9 @@ void xFarDicApp::Hide(wxIconizeEvent& event)
 /// returns 1 if correct.
 /// returns 2 if Aspell is not installed.
 bool xFarDicApp::CheckSpell(wxString chkStr, bool suggest)
-{
+{   
+    bool multiPart;
+
     //spell checking goes here
     AspellConfig * spell_config = new_aspell_config();
 
@@ -1880,26 +1882,70 @@ bool xFarDicApp::CheckSpell(wxString chkStr, bool suggest)
         spell_checker = to_aspell_speller(possible_err); 
     }
 
-    if (suggest) {
-        const AspellWordList * suggestions = aspell_speller_suggest(spell_checker, (const char *)chkStr.mb_str(wxConvUTF8),
-                                                                    chkStr.Len());
-        AspellStringEnumeration * elements = aspell_word_list_elements(suggestions);
-        const char * word;
+    // Aspell looks for single word per time, so we cant send two part
+    // words to it, so here comes tokenizing the string useful.
+    if (chkStr.Find(wxT(" ")) != wxNOT_FOUND) {         
+         multiPart = TRUE;
+    } else {
+         multiPart = FALSE;
+    }    
 
+    if (suggest) {
         // clear array
         sugList.Empty();
+
+        if (multiPart) {
+             wxStringTokenizer tkz(chkStr, wxT(" "));
+             while ( tkz.HasMoreTokens() )
+             {                  
+                  wxString token = tkz.GetNextToken();
+
+                  const AspellWordList * suggestions = aspell_speller_suggest(spell_checker, (const char *)token.mb_str(wxConvUTF8),
+                                                                    token.Len());
+                  AspellStringEnumeration * elements = aspell_word_list_elements(suggestions);
+                  const char * word;        
     
-        while ((word = aspell_string_enumeration_next(elements)) != NULL ) {
-            // add words to suggestion list         
-            size_t copies =1;
-            if (wordList.Index(UTF8_STR(word),FALSE) != wxNOT_FOUND) {
-                sugList.Add(UTF8_STR(word),copies);    
-            }
+                  while ((word = aspell_string_enumeration_next(elements)) != NULL ) {
+                      // add words to suggestion list         
+                      size_t copies =1;
+                      if (wordList.Index(UTF8_STR(word),FALSE) != wxNOT_FOUND) {
+                          sugList.Add(UTF8_STR(word),copies);
+                          
+                      }
+                  }
+             }
+        } else {
+             const AspellWordList * suggestions = aspell_speller_suggest(spell_checker, (const char *)chkStr.mb_str(wxConvUTF8),
+                                                                    chkStr.Len());
+             AspellStringEnumeration * elements = aspell_word_list_elements(suggestions);
+             const char * word;        
+    
+             while ((word = aspell_string_enumeration_next(elements)) != NULL ) {
+                 // add words to suggestion list         
+                 size_t copies =1;
+                 if (wordList.Index(UTF8_STR(word),FALSE) != wxNOT_FOUND) {
+                     sugList.Add(UTF8_STR(word),copies);    
+                 }
+             }
         }
     }
 
     // resturns 1 if correct
-    return aspell_speller_check(spell_checker, (const char *)chkStr.mb_str(wxConvUTF8), chkStr.Len());
+    if (multiPart) {
+            bool retVal = FALSE;
+            wxStringTokenizer tkz(chkStr, wxT(" "));
+            while ( tkz.HasMoreTokens() )
+            {
+                  wxString token = tkz.GetNextToken();
+                  retVal = aspell_speller_check(spell_checker, (const char *)token.mb_str(wxConvUTF8), token.Len());
+                  if (retVal == FALSE) {
+                       return FALSE;
+                  }
+            }
+            return retVal;
+    } else {
+         return aspell_speller_check(spell_checker, (const char *)chkStr.mb_str(wxConvUTF8), chkStr.Len());
+    }
 }
 
 bool xFarDicApp::initDB(const char *filename) {    

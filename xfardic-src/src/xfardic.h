@@ -73,6 +73,7 @@ using namespace std;
 #include "wx/snglinst.h"
 #include "wx/filesys.h"
 #include "wx/cmdline.h"
+#include "wx/tokenzr.h"
 #include <libnotify/notify.h>
 #include <gtk/gtk.h>
 #include <cstring>
