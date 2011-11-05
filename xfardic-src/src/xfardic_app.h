@@ -1,6 +1,6 @@
 // +-------------------------------------------------------------------------+
 // | xFarDic Multilingual Dictionary                                         |
-// | Copyright (C) 2004-2009 by the xFarDic Development Team.                |
+// | Copyright (C) 2004-2011 by the xFarDic Development Team.                |
 // | http://www.xfardic.org/                                                 |
 // +-------------------------------------------------------------------------+
 // | License:                                                                |

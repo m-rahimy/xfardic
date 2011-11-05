@@ -16,7 +16,7 @@ The simplest way to compile xFarDic is:
   
 Build Requirements
 =====================
-You should have wxGTK 2.6.x/2.8.x devel files installed before
+You should have wxGTK 2.8.x devel files installed before
 compiling xFarDic. Get it from http://www.wxwidgets.org.
 
 Other needed packages are:
@@ -30,7 +30,7 @@ Other needed packages are:
 
 On Debian/Ubuntu issue following command to install required libs:
 
-# apt-get install libwxgtk2.6-dev libaspell-dev libxml2-dev libgnome-desktop-dev libnotify-dev libsqlite3-dev
+# apt-get install libwxgtk2.8-dev libaspell-dev libxml2-dev libgnome-desktop-dev libnotify-dev libsqlite3-dev
 
 ESpeak Build Note
 =====================

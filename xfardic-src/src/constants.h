@@ -1,6 +1,6 @@
 // +-------------------------------------------------------------------------+
 // | xFarDic Multilingual Dictionary                                         |
-// | Copyright (C) 2004-2009 by the xFarDic Development Team.                |
+// | Copyright (C) 2004-2011 by the xFarDic Development Team.                |
 // | http://www.xfardic.org/                                                 |
 // +-------------------------------------------------------------------------+
 // | License:                                                                |
@@ -31,7 +31,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-#define XVERSION  _T("0.11.7")
+#define XVERSION  _T("0.11.8")
 
 // IDs for the controls and the menu commands
 enum

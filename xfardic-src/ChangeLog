@@ -351,3 +351,6 @@ Fixed an old bug related to ProcessWord function.
 Fixed settings box issues with wxGTK 2.8 series
 Tokenize multipart strings to make them work with Aspell
 Don't link to whatever is not needed
+//////////////////////////////////////////////////////////////////////////////////////
+0.11.8     -- 2011-11-04
+Minor Makefile update to force wx2.8
