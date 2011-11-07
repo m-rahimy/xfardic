@@ -24,7 +24,7 @@ Other needed packages are:
 1. aspell-dev
 2. libxml2-dev
 3. libgnome-desktop-dev
-4. libnotify-dev
+4. libnotify-dev (0.7.0 minimum)
 5. libsqlite3-dev
 6. libespeak-dev
 
