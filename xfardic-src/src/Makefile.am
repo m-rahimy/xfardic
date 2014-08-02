@@ -10,7 +10,8 @@ AM_CPPFLAGS = 	\
 
 bin_PROGRAMS = xfardic
 xfardic_SOURCES= xfardic.cpp xfardic_app.cpp about.cpp settings.cpp selection.cpp leitner.cpp pronounce.cpp
-xfardic_ldflags = xfardic_ldflags = -lxml2 -laspell -pthread -lSM -lICE -lz `pkg-config --libs gtk+-2.0` -lXext -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXfixes -lX11 -lm -lgmodule-2.0 -ldl -lgthread-2.0 -lnotify -lz `wx-config --libs` -lsqlite3
+xfardic_ldflags = lxml2 -laspell -pthread -lSM -lICE -lz `pkg-config --libs gtk+-2.0` -lXext -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXfixes -lX11 -lm -lgmodule-2.0 -ldl -lgthread-2.0 -lnotify -lz `wx-config --libs` -lsqlite3
+
 if BUILD_WITH_SPEAKLIB
 xfardic_ldflags_extra = -lespeak
 endif
