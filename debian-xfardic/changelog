@@ -1,6 +1,221 @@
-xfardic (0.11.9) unstable; urgency=low
+xfardic (0.11.9-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Alan Baghumian <alan@technotux.org>  Sat, 02 Aug 2014 14:53:57 -0700
+
+xfardic (0.11.7-1) unstable; urgency=low
+
+  * New upstream stable release
+  * Bump standards version to 3.8.3, no extra change is needed
+
+ -- Alan Baghumian <alan@technotux.org>  Sun, 04 Oct 2009 14:37:32 -0700
+
+xfardic (0.11.6-1) unstable; urgency=low
+
+  * New upstream bugfix release
+
+ -- Alan Baghumian <alan@technotux.org>  Sun, 12 Jul 2009 10:24:21 -0700
+
+xfardic (0.11.5a-2) unstable; urgency=low
+
+  * Build using wxGTK 2.8
+  * Bump standards version to 3.8.2, no extra change is needed
+
+ -- Alan Baghumian <alan@technotux.org>  Fri, 26 Jun 2009 19:32:45 -0700
+
+xfardic (0.11.5a-1) unstable; urgency=low
+
+  * New bugfix that fixes wrong version number in splash
+    screen.
+
+ -- Alan Baghumian <alan@technotux.org>  Sun, 15 Mar 2009 18:42:41 -0700
+
+xfardic (0.11.5-1) unstable; urgency=low
+
+  * New upstream bugfix release
+
+ -- Alan Baghumian <alan@technotux.org>  Sat, 14 Mar 2009 15:58:39 -0700
+
+xfardic (0.11.4-1) unstable; urgency=low
+
+  * New upstream bugfix release
+
+ -- Alan Baghumian <alan@technotux.org>  Mon, 16 Jun 2008 14:22:05 +0200
+
+xfardic (0.11.3-1) unstable; urgency=low
+
+  * New upstream bugfix release
+
+ -- Alan Baghumian <alan@technotux.org>  Mon, 19 May 2008 23:46:50 +0200
+
+xfardic (0.11.2-1) unstable; urgency=low
+
+  * New upstream bugfix release
+
+ -- Alan Baghumian <alan@technotux.org>  Fri, 09 May 2008 23:39:44 +0200
+
+xfardic (0.11.1-1) unstable; urgency=low
+
+  * New upstream bugfix release
+    - Moved Homepage tag to the proper location
+
+ -- Alan Baghumian <alan@technotux.org>  Sun, 27 Apr 2008 16:32:20 +0200
+
+xfardic (0.11.0-1) unstable; urgency=low
+
+  * New upstream stable release
+    - drop 99_fix-american-pronounce, merged upstream
+
+ -- Alan Baghumian <alan@technotux.org>  Sat, 19 Apr 2008 21:18:57 +0200
+
+xfardic (0.10.3-3) unstable; urgency=low
+
+  * Fixed rules file to work correctly 
+
+ -- Alan Baghumian <alan@technotux.org>  Wed, 30 Jan 2008 19:10:24 +0330
+
+xfardic (0.10.3-2) unstable; urgency=low
+
+  * Wrapped deps abd build-deps
+  * Added quilt to build-deps
+  * Modified debian/rules to support quilt
+  * Added 99_fix-american-pronounce.patch from SVN to fix
+    American English pronounciation
+
+ -- Alan Baghumian <alan@technotux.org>  Thu, 24 Jan 2008 14:02:59 +0330
+
+xfardic (0.10.3-1) unstable; urgency=low
+
+  * New upstream bugfix release
+
+ -- Alan Baghumian <alan@technotux.org>  Tue, 22 Jan 2008 19:06:24 +0330
+
+xfardic (0.10.2-1) unstable; urgency=low
+
+  * New upstream stable version
+  * Bump standards to 3.7.3
+
+ -- Alan Baghumian <alan@technotux.org>  Wed, 16 Jan 2008 10:31:08 +0330
+
+xfardic (0.10.1-1) unstable; urgency=low
+
+  * New upstream stable release
+
+ -- Alan Baghumian <alan@technotux.org>  Sat, 12 Jan 2008 14:35:31 +0330
+
+xfardic (0.10.0.1-2) unstable; urgency=low
+
+  * Rebuild with a fixed source 
+
+ -- Alan Baghumian <alan@technotux.org>  Mon, 24 Dec 2007 19:18:17 +0330
+
+xfardic (0.10.0.1-1) unstable; urgency=low
+
+  * New upstream stable release
+
+ -- Alan Baghumian <alan@technotux.org>  Mon, 24 Dec 2007 16:32:42 +0330
+
+xfardic (0.10.0-1) unstable; urgency=low
+
+  * New upstream stable release
+
+ -- Alan Baghumian <alan@technotux.org>  Sat, 22 Dec 2007 21:48:01 +0330
+
+xfardic (0.9.99.12-1) unstable; urgency=low
+
+  * Updated to new experimental upstream release 
+
+ -- Alan Baghumian <alan@technotux.org>  Wed, 19 Dec 2007 12:26:31 +0330
+
+xfardic (0.9.99.11-1) unstable; urgency=low
+
+  * Updated to new experimental upstream release
+
+ -- Alan Baghumian <alan@technotux.org>  Sat, 08 Dec 2007 20:32:33 +0330
+
+xfardic (0.9.99.10-1) unstable; urgency=low
+
+  * Updated to new experimental upstream release 
+
+ -- Alan Baghumian <alan@technotux.org>  Fri, 07 Dec 2007 22:17:09 +0330
+
+xfardic (0.9.99.9-1) unstable; urgency=low
+
+  * Updated to new experimental upstream release  
+
+ -- Alan Baghumian <alan@technotux.org>  Fri, 07 Dec 2007 10:52:16 +0330
+
+xfardic (0.9.99.8-1) unstable; urgency=low
+
+  * Updated to new experimental upstream release 
+
+ -- Alan Baghumian <alan@technotux.org>  Thu, 06 Dec 2007 09:50:08 +0330
+
+xfardic (0.9.99.7-1) unstable; urgency=low
+
+  * Updated to new experimental upstream release
+
+ -- Alan Baghumian <alan@technotux.org>  Wed, 05 Dec 2007 12:39:20 +0330
+
+xfardic (0.9.99.6-1) unstable; urgency=low
+
+  * Updated to new experimental upstream release
+
+ -- Alan Baghumian <alan@technotux.org>  Tue, 04 Dec 2007 12:51:01 +0330
+
+xfardic (0.9.99.5-1) unstable; urgency=low
+
+  * Updated to new experimental upstream release
+
+ -- Alan Baghumian <alan@technotux.org>  Tue, 27 Nov 2007 10:37:25 +0330
+
+>>>>>>> .r2629
+xfardic (0.9.99.4-1) unstable; urgency=low
+
+  * Updated to new experimental upstream release 
+
+ -- Alan Baghumian <alan@technotux.org>  Fri, 23 Nov 2007 12:33:31 +0330
+
+xfardic (0.9.99.3-1) unstable; urgency=low
+
+  * Updated to new experimental upstream release
+
+ -- Alan Baghumian <alan@technotux.org>  Thu, 15 Nov 2007 14:01:11 +0330
+
+xfardic (0.9.1a-2) barry; urgency=low
+
+  * Biarch build 
+
+ -- Alan Baghumian <alan@technotux.org>  Sat, 30 Jun 2007 12:25:24 +0330
+
+xfardic (0.9.1a-1) barry; urgency=low
+
+  * New upstream release, bug fixes 
+
+ -- Alan Baghumian <alan@technotux.org>  Sat, 16 Jun 2007 12:50:32 +0330
+
+xfardic (0.9.1-1) barry; urgency=low
+
+  * New upstream release, bug fixes
+
+ -- Alan Baghumian <alan@technotux.org>  Sat, 16 Jun 2007 11:43:48 +0330
+
+xfardic (0.9.0-1) barry; urgency=low
+
+  * New upstream release
+
+ -- Alan Baghumian <alan@technotux.org>  Thu, 31 May 2007 13:06:07 +0330
+
+xfardic (0.8.99.2+svn20070417-2) barry; urgency=low
+
+  * Rebuild against SVN
+
+ -- Alan Baghumian <alan@technotux.org>  Tue, 17 Apr 2007 14:23:13 +0330
+
+xfardic (0.8.99.2+svn20070417-1) barry; urgency=low
 
   * Initial Release (Closes: #282457).
 
- -- Alan Baghumian <alan@technotux.org>  Sun, 04 Oct 2009 13:30:49 -0700
+ -- Alan Baghumian <alan@technotux.org>  Tue, 17 Apr 2007 13:49:03 +0330
 
